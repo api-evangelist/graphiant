@@ -1,0 +1,30 @@
+generated: '2026-08-01'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.graphiant.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 28 11:44:30 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: portal.graphiant.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 19 23:59:59 2027 GMT
+  hsts: false
+- host: docs.graphiant.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  5 18:34:09 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: graphiant.com
+  dnssec: false
+  caa:
+  - 0 issue "digicert.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

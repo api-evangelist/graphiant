@@ -1,0 +1,116 @@
+generated: '2026-08-01'
+method: generated
+source: openapi/graphiant-portal-openapi-original.json + https://docs.graphiant.com/docs/graphiant-portal-rest-api
+notes: >-
+  Graphiant publishes no AGENTS.md, no skill files and no agent operating guidance —
+  searched the 80KB documentation index, the marketing llms.txt and all three public
+  GitHub repositories. These skills are GENERATED from the published OpenAPI bundle and
+  the REST API guide. Every path and method named in every skill was verified to exist
+  in openapi/graphiant-portal-openapi-original.json. The bundle declares no
+  operationIds, so skills reference operations as METHOD + path, which is the only
+  stable identifier the contract provides.
+api: openapi/graphiant-portal-openapi-original.json
+base_url: https://api.graphiant.com
+prerequisite: graphiant-authenticate-and-scope.md
+skills:
+- file: graphiant-authenticate-and-scope.md
+  name: Authenticate against the Graphiant Portal API and establish tenant scope
+  api: openapi/graphiant-portal-openapi-original.json
+  risk: low
+  operations:
+  - POST /v1/auth/login
+  - GET /v1/auth/user
+  - GET /v1/enterprises
+  - GET /v1/users/{id}/enterprises
+  - GET /v1/auth/session
+  - GET /v1/auth/session/root
+  - GET /v1/auth/refresh
+- file: graphiant-inventory-network.md
+  name: Inventory a Graphiant network
+  api: openapi/graphiant-portal-openapi-original.json
+  risk: low
+  read_only: true
+  operations:
+  - GET /v1/edges-summary
+  - GET /v1/devices/{deviceId}
+  - GET /v1/devices/{deviceId}/interfaces
+  - GET /v1/sites
+  - GET /v1/sites/map/details
+  - GET /v1/regions
+  - GET /v1/lan-segments
+  - GET /v1/gateways/summary
+  - POST /v1/backbone-health/overview
+- file: graphiant-push-device-config.md
+  name: Push a Graphiant device configuration safely
+  api: openapi/graphiant-portal-openapi-original.json
+  risk: high
+  human_approval_required: true
+  operations:
+  - GET /v1/edges-summary
+  - GET /v1/devices/{deviceId}/interfaces
+  - PUT /v1/devices/{deviceId}/config
+  - GET /v1/devices/{deviceId}/jobs/{jobId}
+  - GET /v1/devices/{deviceId}/draft
+  - POST /v1/devices/{deviceId}/draft
+  - DELETE /v1/devices/{deviceId}/draft
+- file: graphiant-triage-alarms.md
+  name: Triage Graphiant alarms and route notifications
+  api: openapi/graphiant-portal-openapi-original.json
+  risk: medium
+  operations:
+  - POST /v2/parentalertlist
+  - POST /v2/childalertlist
+  - POST /v2/ack/createupdate
+  - POST /v2/rulelist
+  - POST /v2/rule/enabledisable
+  - POST /v2/allowlist/create
+  - GET /v2/allowlist-by-enterprise
+  - POST /v2/notificationmutelist/create
+  - POST /v2/notification/create
+  - POST /v2/notificationlist
+  - POST /v2/notification/enabledisable
+  - POST /v2/integration/
+  - GET /v2/integration/getall/{enterpriseId}
+  - GET /v2/integration/test/{enterpriseId}/{integrationId}
+- file: graphiant-plan-software-rollout.md
+  name: Plan and schedule a Graphiant software rollout
+  api: openapi/graphiant-portal-openapi-original.json
+  risk: high
+  human_approval_required: true
+  operations:
+  - GET /v1/edges-summary
+  - GET /v1/software/rollouts
+  - POST /v1/software/rollouts
+  - PUT /v1/software/rollouts
+  - GET /v1/software/rollouts/{id}
+  - DELETE /v1/software/rollouts/{id}
+  - POST /v1/software/rollouts/schedule
+  - GET /v1/software/auto-upgrade/default
+  - PUT /v1/software/auto-upgrade/default
+  - GET /v1/software/releases/download
+cross_cutting_rules:
+- 'Send exactly one authorization Bearer header — duplicated auth headers are rejected
+  with 400 by some upstream gateways.'
+- Tokens expire after 30 minutes. Refresh proactively via GET /v1/auth/refresh rather
+  than reacting to a 403.
+- There is no idempotency contract. Never blind-retry an unsafe method; poll for an
+  already-created job first.
+- There is no pagination. List operations return the full collection.
+- Several reads are POST operations (`*list`, `*summary`, `*overview`) because the filter
+  travels in the body — a POST to those paths is a query, not a mutation.
+- HTTP 200 on a configuration PUT means accepted, not applied. Resolve the returned
+  jobId.
+- In a device config document, an omitted key means "leave unchanged" and a null value
+  means "delete".
+- Timestamps are protobuf `{seconds, nanos}` objects in UTC, not RFC 3339 strings.
+- Errors are `{errorCode, displayError, detailedError}`, not RFC 9457 problem+json.
+- Identifiers are unprefixed 64-bit integers; never infer entity type from an id.
+verification:
+  method: every path and HTTP method named across all five skills was checked against
+    openapi/graphiant-portal-openapi-original.json
+  paths_verified: 47
+  paths_missing: 0
+  note: >-
+    POST /v1/auth/logout is documented in the Graphiant REST API guide but is NOT
+    present in the published OpenAPI bundle, so no skill depends on it. Revocation is
+    described in authentication/graphiant-authentication.yml with that caveat.

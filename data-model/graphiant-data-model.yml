@@ -1,0 +1,246 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/graphiant-portal-openapi-original.json
+docs: https://docs.graphiant.com/docs/graphiant-solution-components
+notes: >-
+  Derived from the 1,568 component schemas and 460 paths of the Graphiant Portal
+  OpenAPI bundle, plus the id-reference fields that appear across those schemas. The
+  model is a network-management hierarchy, not a business-object graph: an Enterprise
+  (tenant) owns Sites, a Site hosts Devices, a Device carries Interfaces bound to
+  Circuits and LAN Segments, and Global objects (policies, filters, lists, exporters)
+  are defined once per enterprise and attached to devices or sites. Identifiers are
+  opaque 64-bit integers with no type prefix, so an id alone does not tell an agent
+  which entity it addresses — the path does.
+identifiers:
+  style: opaque 64-bit integers
+  prefixed: false
+  examples:
+    deviceId: 30000051803
+    enterpriseId: 10000000999
+    siteId: 4716
+    jobId: 1552067
+  caution: >-
+    deviceId, enterpriseId and siteId occupy visibly different numeric ranges but
+    Graphiant publishes no id-prefix or checksum scheme. Never infer entity type from
+    an id value.
+  most_referenced:
+  - {field: deviceId, schema_count: 77}
+  - {field: siteId, schema_count: 36}
+  - {field: regionId, schema_count: 30}
+  - {field: enterpriseId, schema_count: 26}
+  - {field: globalId, schema_count: 16}
+  - {field: vrfId, schema_count: 15}
+  - {field: bucketId, schema_count: 12}
+  - {field: matchId, schema_count: 11}
+  - {field: activityId, schema_count: 10}
+  - {field: customerId, schema_count: 9}
+  - {field: conversationId, schema_count: 8}
+  - {field: userId, schema_count: 8}
+  - {field: serviceId, schema_count: 8}
+entities:
+- name: Enterprise
+  aka: [tenant, customer]
+  id: enterpriseId
+  domain: tenancy
+  paths: [/v1/enterprises, /v1/enterprise, /v1/account]
+  description: The tenant boundary. Every other object is scoped to an enterprise. An
+    MSP enterprise parents child enterprises via parentEnterpriseId.
+- name: User
+  id: userId
+  domain: tenancy
+  paths: [/v1/users, /v1/auth/user, /v1/groups]
+  description: Portal identity carrying a permission matrix of 18 domains, each graded
+    read or read_write.
+- name: Group
+  domain: tenancy
+  paths: [/v1/groups]
+  description: Permission group that binds users to enterprises and permission grades.
+- name: Site
+  id: siteId
+  domain: topology
+  paths: [/v1/sites, /v1/site, /v1/sites/map/details]
+  description: Physical or logical location. Devices are attached to sites; sites are
+    placed in regions.
+- name: Region
+  id: regionId
+  domain: topology
+  paths: [/v1/regions, '/v1/regions/{regionId}/gateways']
+  description: Graphiant backbone region (for example us-west-2 San Jose, eu-west-1
+    London) that a device or gateway homes to.
+- name: Device
+  aka: [edge, CPE, gateway, core]
+  id: deviceId
+  domain: infrastructure
+  paths: [/v1/devices, /v1/device, /v1/edges-summary]
+  key_fields: [hostname, serialNum, model, role, status, portalStatus, ttConnCount,
+    swVersion, swName, region, site]
+  description: The managed appliance. portalStatus must be "Ready" and ttConnCount
+    must be 2 before a configuration push will land.
+- name: DeviceConfig
+  domain: infrastructure
+  paths: ['/v1/devices/{deviceId}/config']
+  description: The declarative desired-state document for a device — circuits,
+    interfaces, subinterfaces and segments. PUT returns a jobId, not the applied state.
+- name: Job
+  id: jobId
+  domain: infrastructure
+  description: Asynchronous configuration-push record returned by a config PUT; the
+    only way to learn whether a change actually applied.
+- name: Circuit
+  domain: connectivity
+  description: WAN transport definition (connectionType, linkUpSpeedMbps,
+    linkDownSpeedMbps, qosProfile, label, diaEnabled, lastResort) referenced by name
+    from an interface.
+- name: Interface
+  id: interfaceId
+  domain: connectivity
+  paths: ['/v1/lldp/{interfaceId}/neighbors']
+  description: Physical port, LAG or subinterface. Binds to a circuit (WAN side) or a
+    LAN segment (LAN side) and carries ipv4/ipv6 address or DHCP client config.
+- name: LanSegment
+  id: lanSegmentId
+  domain: connectivity
+  paths: [/v1/lan-segments, /v1/lan-segments/interfaces/public]
+  description: Named L3 segment (VRF-like) carrying networks, static routes, BGP
+    neighbours and redistribution, DHCP subnets, syslog targets and IPFIX exporters.
+- name: Vrf
+  id: vrfId
+  domain: connectivity
+  description: Routing instance the LAN segment maps onto in the data plane.
+- name: Gateway
+  domain: connectivity
+  paths: [/v1/gateways, '/v1/regions/{regionId}/gateways', /v1/pvif]
+  description: Cloud and on-premises interconnect service, including Public VIF (PVIF)
+    gateways with centralized or decentralized NAT.
+- name: GlobalObject
+  id: globalId
+  domain: policy
+  paths: [/v1/global]
+  members: [prefix-lists, site-lists, port-lists, bgp-filters, graphiant-filters,
+    vpn-profiles, content-filters, domain-categories, snmps, syslogs, ipfix, ntp,
+    security-policies, traffic-policies, nat-policies]
+  description: Enterprise-scoped reusable policy and service objects, defined once and
+    attached to devices or sites. 43 paths, the largest single family in the API.
+- name: Policy
+  domain: policy
+  paths: [/v1/policy, /v1/apps]
+  description: Security, traffic and NAT policies plus custom application definitions
+    used by deep packet inspection.
+- name: Extranet
+  aka: [Data Exchange, B2B]
+  id: exchangeServiceId
+  domain: b2b
+  paths: [/v1/extranet, /v1/extranets, /v1/extranets-b2b, /v1/extranets-b2b-peering,
+    /v1/extranet-public-vif, /v2/extranet]
+  members: [producer, consumer, customer, match, service]
+  description: Partner-to-partner connectivity. A Producer publishes a Service, a
+    Customer subscribes as a Consumer, and a Match is the accepted binding between them.
+- name: ExtranetMatch
+  id: matchId
+  domain: b2b
+  paths: ['/v1/extranet/b2b/matches/{matchId}']
+  description: The reviewed and accepted binding between a producer service and a
+    consumer, carrying NAT translation mode and prefix policy.
+- name: Alert
+  id: alertId
+  domain: observability
+  paths: [/v2/parentalertlist, /v2/childalertlist, /v2/allowlist, /v2/rulelist]
+  description: Alarm instance raised by the platform; parent alerts aggregate child
+    alerts. Allowlists and mute lists suppress them.
+- name: Notification
+  id: ruleId
+  domain: observability
+  paths: [/v2/notification, /v2/notificationlist, /v2/aggregated-notification,
+    /v2/notificationmutelist]
+  description: Delivery rule that routes an alarm to email or to a configured
+    integration.
+- name: Integration
+  id: integrationId
+  domain: observability
+  paths: [/v2/integration, '/v2/integration/getall/{enterpriseId}', '/v2/integration/test/{enterpriseId}/{integrationId}']
+  description: Outbound destination for notifications — Microsoft Teams, Atlassian
+    OpsGenie, PagerDuty, OpsRamp, or a generic webhook. See
+    asyncapi/graphiant-notifications-webhooks.yml.
+- name: AssuranceReport
+  id: reportId
+  domain: analytics
+  paths: [/v2/assurance, /v1/data-assurance]
+  description: Application, client-session, AI-adoption and DNS-proxy analytics,
+    including token-usage accounting for AI application adoption.
+- name: Bucket
+  id: bucketId
+  domain: analytics
+  paths: [/v2/assurance/bucketdetails, /v2/assurance/bucket-apps, /v2/assurance/bucket-services]
+  description: Time-and-dimension aggregation unit that assurance queries roll up into.
+- name: Conversation
+  id: conversationId
+  domain: assistant
+  paths: [/v2/assistant]
+  description: Gina AI assistant conversation thread with context history and an
+    enable/disable interface state.
+- name: SoftwareRollout
+  domain: lifecycle
+  paths: [/v1/software/rollouts, /v1/software/rollouts/schedule, /v1/software/auto-upgrade/default]
+  description: Scheduled or recurring device upgrade campaign (weekly, monthly, yearly
+    recurrence) targeting a device set.
+- name: ZtAgent
+  domain: zero-trust
+  paths: [/v1/ztagent/agents, /v1/ztagent/bindings]
+  description: Zero Trust Network Access agent and its binding to LAN segments and
+    policy.
+relationships:
+- {from: Enterprise, to: Enterprise, kind: has_many, via: parentEnterpriseId, note: MSP
+    parents its tenant enterprises}
+- {from: Enterprise, to: User, kind: has_many, via: enterpriseId}
+- {from: Enterprise, to: Site, kind: has_many, via: enterpriseId}
+- {from: Enterprise, to: GlobalObject, kind: has_many, via: enterpriseId}
+- {from: User, to: Group, kind: has_many, via: userId}
+- {from: User, to: Enterprise, kind: has_many, via: userId, note: 'GET /v1/users/{userId}/enterprises
+    — the tenants an MSP user may switch into'}
+- {from: Site, to: Device, kind: has_many, via: siteId}
+- {from: Site, to: Region, kind: belongs_to, via: regionId}
+- {from: Device, to: Site, kind: belongs_to, via: siteId}
+- {from: Device, to: Region, kind: belongs_to, via: regionId}
+- {from: Device, to: DeviceConfig, kind: has_one, via: deviceId}
+- {from: Device, to: Interface, kind: has_many, via: deviceId}
+- {from: DeviceConfig, to: Job, kind: has_many, via: jobId, note: each PUT creates a job}
+- {from: Interface, to: Circuit, kind: belongs_to, via: circuit, note: referenced by
+    circuit name, not id}
+- {from: Interface, to: LanSegment, kind: belongs_to, via: lan, note: referenced by
+    segment name, not id}
+- {from: Interface, to: Interface, kind: has_many, via: subinterfaces, note: keyed by
+    VLAN id}
+- {from: LanSegment, to: Vrf, kind: has_one, via: vrfId}
+- {from: Gateway, to: Region, kind: belongs_to, via: regionId}
+- {from: Extranet, to: ExtranetMatch, kind: has_many, via: matchId}
+- {from: ExtranetMatch, to: Enterprise, kind: belongs_to, via: customerId, note: the
+    consuming customer}
+- {from: ExtranetMatch, to: Device, kind: has_many, via: deviceId, note: device-status
+    is resolved per match}
+- {from: Alert, to: Notification, kind: has_many, via: ruleId}
+- {from: Notification, to: Integration, kind: belongs_to, via: integrationId}
+- {from: Integration, to: Enterprise, kind: belongs_to, via: enterpriseId}
+- {from: AssuranceReport, to: Bucket, kind: has_many, via: bucketId}
+- {from: AssuranceReport, to: Device, kind: has_many, via: deviceId}
+- {from: SoftwareRollout, to: Device, kind: has_many, via: deviceIds}
+- {from: ZtAgent, to: LanSegment, kind: has_many, via: bindings}
+domains:
+- {name: tenancy, operations: 46, families: [auth, users, groups, enterprises, enterprise,
+    account, onboarding]}
+- {name: policy, operations: 62, families: [global, policy, apps]}
+- {name: infrastructure, operations: 73, families: [devices, device]}
+- {name: b2b, operations: 76, families: [extranet, extranets, extranets-b2b, extranets-b2b-peering,
+    extranet-public-vif, extranet-b2b-monitoring, pvif]}
+- {name: analytics, operations: 61, families: [assurance, data-assurance, bwtracker,
+    talkers, flows]}
+- {name: observability, operations: 46, families: [monitoring, notification, allowlist,
+    notificationmutelist, integration, backbone-health, troubleshooting, diagnostic]}
+- {name: topology, operations: 12, families: [sites, site, regions, lan-segments]}
+- {name: lifecycle, operations: 13, families: [software]}
+- {name: assistant, operations: 9, families: [assistant]}
+coverage:
+  paths: 460
+  operations: 525
+  component_schemas: 1568
+  entities_modelled: 25
+  relationships_modelled: 28

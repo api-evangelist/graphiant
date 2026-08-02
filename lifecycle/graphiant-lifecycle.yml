@@ -1,0 +1,99 @@
+generated: '2026-08-01'
+method: searched
+source: https://docs.graphiant.com/docs/software-release-information-for-service-upgrades
+versioning:
+  scheme: uri-path
+  versions_in_use: [v1, v2]
+  current: v1 (core network configuration) and v2 (alerting, assurance, assistant,
+    monitoring, integrations) are served concurrently from api.graphiant.com
+  api_bundle_version: 26.7.0
+  api_bundle_file: graphiant_api_docs_v26.7.0.json
+  sdk_version_scheme: CalVer YY.M.patch, matched to the platform release train
+  software_image_scheme: YY.MM.<counter> — two-digit year, month, counter (for example
+    2506.202506021956 / 25.6.1)
+  docs: https://docs.graphiant.com/docs/software-release-information-for-service-upgrades
+release_trains:
+  cadence: rolling continuous delivery, three named trains
+  trains:
+  - name: Latest
+    frequency: monthly
+    support_window: 2.5 months
+    detail: first month critical bug fixes, following 45 days spot fixes; in QA only
+      while supported
+    ideal_use: newest features
+  - name: Recommended
+    frequency: every 3 months (every 3rd Latest release)
+    support_window: 6.5 months
+    detail: first 3 months active critical fixes, following 3.5 months spot fixes
+    ideal_use: prolonged use
+  - name: Stable
+    frequency: every 12 months (every 4th Recommended release)
+    support_window: 12 months
+    detail: first 6 months active critical fixes, following 6 months spot fixes
+    ideal_use: long-term deployments
+  maintenance_releases: >-
+    Out-of-band maintenance releases are deployed when a fix cannot wait for the next
+    scheduled release. Within a deployed release, images continue to change but only
+    with critical bug fixes; non-critical fixes and new features land in the next release.
+deprecation:
+  policy_url: https://docs.graphiant.com/docs/software-release-information-for-service-upgrades
+  model: support-overlap on the release train
+  statement: >-
+    "Support overlap of the preceding release is maintained, to ensure that you may
+    upgrade at your convenience." Deprecation is expressed as the end of a release
+    train's support window (2.5 / 6.5 / 12 months by train) rather than as per-endpoint
+    deprecation notices.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  api_endpoint_deprecation_policy: >-
+    Graphiant publishes no per-operation API deprecation policy. Removals are visible
+    only through the SDK changelog — for example the 26.7.0 release added a parallel
+    /v1/extranet/b2b/... path family alongside the existing /v1/extranets/b2b/... paths
+    without marking either deprecated, and superseded OpenAPI bundles are deleted from
+    the SDK repository rather than archived.
+deprecated_operations:
+  count: 0
+  note: 'no operation in openapi/graphiant-portal-openapi-original.json carries the
+    deprecated flag'
+sla:
+  url: https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla
+  uptime_target: '>99.99%'
+  credit_schedule:
+  - {service_level: at or above 99.99%, credit: 0%}
+  - {service_level: 99.90-99.98%, credit: 2%}
+  - {service_level: 98.00-99.89%, credit: 5%}
+  - {service_level: 96.00-97.99%, credit: 10%}
+  - {service_level: 94.00-95.99%, credit: 25%}
+  - {service_level: 92.00-93.99%, credit: 50%}
+  - {service_level: below 92%, credit: 100%}
+  severity_response:
+  - {level: P1, description: critical business impact — service unavailable or materially
+      degraded, acknowledge: 15 minutes, effort: 24/7/365, updates: hourly, resolution: 1 hour}
+  - {level: P2, description: severe business impact with a workaround, or non-critical
+      failure without one, acknowledge: 1 hour, effort: 24/7/365, updates: every 2 hours,
+     resolution: 4 hours}
+  - {level: P3, description: minimal business impact, workaround exists, acknowledge: 2 hours,
+     effort: business hours, updates: every 24 hours, resolution: 72 hours}
+  - {level: P4, description: informational, no service impact, acknowledge: 4 hours,
+     effort: business hours, updates: every 48 hours, resolution: 1 week}
+  maintenance:
+    scheduled: every fourth Friday of the month, 14:00-16:00 ET — counted as Available
+    emergency: notified as soon as reasonably practicable — counted as Not Available
+status_page: https://status.graphiant.io/
+status_page_note: the service-health page is on the graphiant.io domain, not
+  graphiant.com; status.graphiant.com does not resolve
+release_notes:
+- {name: Portal release notes, url: https://docs.graphiant.com/docs/release-notes-in-the-graphiant-portal,
+   note: product release notes are surfaced inside the Graphiant Portal}
+- {name: Python SDK changelog, url: 'https://github.com/Graphiant-Inc/graphiant-sdk-python/blob/main/CHANGELOG.md',
+   note: the only public dated, per-endpoint record of API change}
+support:
+  portal: https://support.graphiant.com/
+  contact: https://www.graphiant.com/contact-us
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs.graphiant.com/docs/software-release-information-for-service-upgrades
+  - https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla
+  - https://status.graphiant.io/

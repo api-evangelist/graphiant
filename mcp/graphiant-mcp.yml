@@ -1,0 +1,168 @@
+generated: '2026-08-01'
+method: derived
+status: candidate
+source: openapi/graphiant-portal-openapi-original.json
+notes: >-
+  Graphiant publishes NO hosted or remote MCP server. Searched the documentation site,
+  the Graphiant-Inc GitHub organization (3 public repositories, none MCP), npm under
+  @modelcontextprotocol and the public MCP registries — nothing. Graphiant does ship an
+  agentic surface, Gina AI, but it is an in-portal assistant reachable only through the
+  authenticated /v2/assistant/* REST operations; it is not an MCP server and exposes no
+  tools/list endpoint. The tool set below is a CANDIDATE derived from real OpenAPI
+  operations so that an agent operator can stand up their own server against the
+  published contract. It is not a Graphiant product and must not be presented as one.
+server:
+  name: graphiant
+  published: false
+  url: null
+  transport: null
+  vendor_hosted: false
+search_evidence:
+- {source: 'https://docs.graphiant.com/llms.txt', result: no MCP page in the 80KB docs index}
+- {source: 'https://github.com/Graphiant-Inc', result: '3 public repos — graphiant-sdk-python,
+    graphiant-sdk-go, graphiant-playbooks; none is an MCP server'}
+- {source: npm registry, result: no @graphiant or graphiant-mcp package}
+- {source: 'https://api.graphiant.com/mcp', result: 403 — every anonymous request to the
+    API host is refused, so no anonymous tools/list probe is possible}
+existing_agent_surface:
+  name: Gina AI
+  kind: in-product assistant, not MCP
+  docs: https://docs.graphiant.com/docs/introducing-gina-ai
+  marketing: https://www.graphiant.com/use-cases/gina-ai
+  api_paths:
+  - POST /v2/assistant/add-to-conversation
+  - POST /v2/assistant/get-conversations
+  - POST /v2/assistant/get-conversation-details
+  - POST /v2/assistant/update-conversation-name
+  - DELETE /v2/assistant/delete-conversation-chat/{conversationId}
+  - POST /v2/assistant/conversation-context-history/
+  - POST /v2/assistant/conversation-interface-enable-disable/
+  - GET /v2/assistant/conversation-interface-state/
+  - GET /v2/assistant/version
+authentication:
+  model: opaque bearer token in the `authorization` header
+  obtain: POST https://api.graphiant.com/v1/auth/login
+  lifetime_minutes: 30
+  refresh: GET https://api.graphiant.com/v1/auth/refresh
+  detail: authentication/graphiant-authentication.yml
+  warning: >-
+    A 30-minute non-renewable-by-default token is a hard constraint on any long-running
+    agent. A server built on this contract must refresh proactively rather than react
+    to the 403 "Token Expired" envelope.
+tools:
+  note: >-
+    Candidate read-first tool set. Every source_operation below is a real path+method in
+    the published bundle. The bundle carries no operationIds, so each tool names the
+    generated SDK method (the de-facto operation identifier that `graphiant invoke`
+    accepts) alongside the raw path.
+  safety: >-
+    Write operations are deliberately excluded from the default set. PUT
+    /v1/devices/{deviceId}/config mutates production network configuration, is
+    asynchronous, has no idempotency key, and interprets a null value as a delete —
+    it should never be an unattended agent tool.
+  items:
+  - name: list_devices
+    description: List every edge device in the current enterprise with status, model,
+      software version, site, region, portal sync state and tunnel-terminator count.
+    sdk_method: v1_edges_summary_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/edges-summary
+    read_only: true
+  - name: get_device
+    description: Fetch one device by id.
+    sdk_method: v1_devices_device_id_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/devices/{deviceId}
+    read_only: true
+  - name: get_config_job
+    description: Resolve the outcome of an asynchronous configuration push by its jobId
+      — the only way to learn whether a config PUT actually applied.
+    sdk_method: v1_devices_device_id_jobs_job_id_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/devices/{deviceId}/jobs/{jobId}
+    read_only: true
+  - name: list_device_interfaces
+    description: List the interfaces configured on a device.
+    sdk_method: v1_devices_device_id_interfaces_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/devices/{deviceId}/interfaces
+    read_only: true
+  - name: list_sites
+    description: List enterprise sites.
+    sdk_method: v1_sites_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/sites
+    read_only: true
+  - name: get_sites_map
+    description: Site map detail including per-site device summaries and LAN segment
+      buckets.
+    sdk_method: v1_sites_map_details_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/sites/map/details
+    read_only: true
+  - name: list_enterprises
+    description: List the enterprises (tenants) visible to the caller — the MSP customer
+      list.
+    sdk_method: v1_enterprises_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/enterprises
+    read_only: true
+  - name: whoami
+    description: Current user id, active enterprise context and the 18-domain permission
+      matrix.
+    sdk_method: v1_auth_user_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/auth/user
+    read_only: true
+  - name: list_regions
+    description: List Graphiant backbone regions.
+    sdk_method: v1_regions_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/regions
+    read_only: true
+  - name: list_gateways
+    description: Summary of the enterprise's gateway services.
+    sdk_method: v1_gateways_summary_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/gateways/summary
+    read_only: true
+  - name: list_lan_segments
+    description: List LAN segments and their public interfaces.
+    sdk_method: v1_lan_segments_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/lan-segments
+    read_only: true
+  - name: list_alerts
+    description: List parent alarms for the enterprise.
+    sdk_method: v2_parentalertlist_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v2/parentalertlist
+    read_only: true
+  - name: list_child_alerts
+    description: List the child alarms aggregated under a parent alert.
+    sdk_method: v2_childalertlist_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v2/childalertlist
+    read_only: true
+  - name: list_notification_rules
+    description: List notification routing rules.
+    sdk_method: v2_notificationlist_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v2/notificationlist
+    read_only: true
+  - name: list_integrations
+    description: List configured outbound notification integrations for an enterprise.
+    sdk_method: v2_integration_getall_enterprise_id_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v2/integration/getall/{enterpriseId}
+    read_only: true
+  - name: get_application_profile_summary
+    description: Assurance summary of application traffic profiles.
+    sdk_method: v2_assurance_applicationprofilesummary_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v2/assurance/applicationprofilesummary
+    read_only: true
+  - name: get_ai_adoption_summary
+    description: AI application adoption summary including token-usage accounting.
+    sdk_method: v2_assurance_ai_adoption_summary_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v2/assurance/ai-adoption-summary
+    read_only: true
+  - name: get_backbone_health_overview
+    description: Graphiant backbone health overview across the enterprise.
+    sdk_method: v1_backbone_health_overview_post
+    source_operation: openapi/graphiant-portal-openapi-original.json#POST /v1/backbone-health/overview
+    read_only: true
+  - name: list_software_rollouts
+    description: List scheduled device software upgrade rollouts.
+    sdk_method: v1_software_rollouts_get
+    source_operation: openapi/graphiant-portal-openapi-original.json#GET /v1/software/rollouts
+    read_only: true
+coverage:
+  rest_operations_total: 525
+  candidate_tools: 19
+  write_tools: 0
+crosswalk: mcp/graphiant-tool-crosswalk.yml

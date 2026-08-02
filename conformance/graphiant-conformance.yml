@@ -1,0 +1,123 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/graphiant-portal-openapi-original.json
+searched: https://trust.graphiant.com/
+notes: >-
+  Graphiant's API conforms to OpenAPI 3.0.0 and little else in the cross-cutting
+  standards space — it is a proprietary JSON-over-HTTP surface fronting a gRPC control
+  plane, with a bespoke bearer token instead of OAuth 2.0/OIDC and a proprietary error
+  envelope instead of RFC 9457. Its real standards story is on the network side
+  (BGP, OSPF, IPsec, MACsec, IPFIX, SNMPv3, SAML 2.0, post-quantum cryptography) and
+  in its published security attestations.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: 'openapi/graphiant-portal-openapi-original.json declares openapi 3.0.0
+    with 460 paths, 525 operations and 1,568 component schemas'
+- id: oauth2
+  conforms: false
+  evidence: 'the only securityScheme is jwtAuth, type apiKey in the authorization
+    header; no oauth2 flows are declared and no OAuth endpoints are documented'
+- id: oidc
+  conforms: false
+  evidence: no openIdConnect securityScheme; /.well-known/openid-configuration returns
+    404 on every Graphiant host
+- id: saml-2.0
+  conforms: true
+  evidence: GET /v1/auth/login/saml and POST /v1/auth/login/callback implement SSO;
+    Okta SAML is the documented reference integration
+    (https://docs.graphiant.com/docs/sso-setup-using-okta-saml)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'errors are returned as application/json with a proprietary
+    errorCode/displayError/detailedError envelope; application/problem+json appears
+    nowhere in the spec'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on graphiant.com, docs.graphiant.com
+    and portal.graphiant.com, and 403 on api.graphiant.com
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation response headers are declared; deprecation is
+    expressed as release-train support windows only
+- id: idempotency-key
+  conforms: false
+  evidence: no Idempotency-Key header, parameter or extension anywhere in the spec or docs
+- id: pagination
+  conforms: false
+  evidence: no limit/offset/cursor/page parameters on any of the 525 operations
+- id: json-api
+  conforms: false
+  evidence: plain JSON resource documents, no JSON:API media type or envelope
+- id: scim
+  conforms: false
+  evidence: user and group management use proprietary /v1/users and /v1/groups paths,
+    not /scim/v2
+- id: llms-txt
+  conforms: true
+  evidence: llms.txt served at https://www.graphiant.com/llms.txt and
+    https://docs.graphiant.com/llms.txt (both HTTP 200)
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 or 403
+    on every Graphiant host
+- id: asyncapi
+  conforms: false
+  evidence: no AsyncAPI document published; the event surface is an outbound webhook
+    and integration catalog only (see asyncapi/graphiant-notifications-webhooks.yml)
+network_standards:
+  note: >-
+    Standards implemented by the Graphiant data plane and exposed as configuration
+    objects in the API, rather than API-protocol standards.
+  values:
+  - id: bgp
+    evidence: 'manaV2BgpInstance, manaV2BgpNeighbor, manaV2BgpAggregation, manaV2BgpMultipath
+      schemas; /v1/device/routing/bgp/nbrs/details and /v1/diagnostic/bgp-reset/{deviceId}'
+  - id: ospf
+    evidence: 'manaV2OspFv2Process, manaV2OspfArea, manaV2OspfInterface, manaV2OspfRedistribute;
+      manaV2OspfAuthentication added in 26.7.0'
+  - id: ipsec
+    evidence: 'manaV2IpsecConnection, manaV2InterfaceIPsec, manaV2SiteToSiteIPsec;
+      /v1/diagnostic/reset-ipsec-session/{deviceId}'
+  - id: macsec
+    evidence: 'manaV2MaCsecConfiguration and manaV2InterfaceMaCsec schemas;
+      GET /v2/monitoring/macsec/{deviceId}/status; sample_macsec.yaml playbook'
+  - id: ipfix
+    evidence: '/v1/global/ipfix, /v1/global/ipfix/device, /v1/global/ipfix/site;
+      https://docs.graphiant.com/docs/system-objects-ipfix'
+  - id: snmpv3
+    evidence: 'manaV2Snmp, manaV2SnmpEngineEndpoint, manaV2SnmpNotifyFilterProfile;
+      /v1/global/snmps; https://docs.graphiant.com/docs/system-objects-snmpv3'
+  - id: syslog
+    evidence: '/v1/global/syslogs, /v1/global/syslogs/device, /v1/global/syslogs/site'
+  - id: dhcp
+    evidence: DHCP relay and DHCP subnet configuration in the device config model
+  - id: lldp
+    evidence: '/v1/lldp/{interfaceId}/neighbors, /summary and /vendors'
+  - id: post-quantum-cryptography
+    evidence: https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography
+compliance_program:
+  source: https://trust.graphiant.com/
+  platform: Akitra
+  certifications:
+  - {id: soc2, name: SOC 2, year: 2024}
+  - {id: soc2-type2, name: SOC 2 Type 2, year: 2025}
+  - {id: iso27001, name: ISO/IEC 27001:2022, year: 2025}
+  not_claimed: [PCI DSS, HIPAA, FedRAMP, CSA STAR, FIPS 140]
+  privacy: DSAR request form published on the trust center; subprocessor list available
+    on access request
+  detail: security/graphiant-trust-center.yml
+regulatory_alignment:
+  note: alignment claims published in Graphiant's own documentation, not third-party
+    attestations
+  values:
+  - {id: us-zero-trust, evidence: 'https://docs.graphiant.com/docs/graphiant-zero-trust-alignment'}
+  - {id: executive-order-14413, evidence: 'https://docs.graphiant.com/docs/executive-order-14413-ushering-in-the-next-frontier-of-quantum-innovation',
+     topic: post-quantum cryptography for US federal agencies}
+  - {id: data-sovereignty, evidence: 'https://www.graphiant.com/use-cases/data-sovereignty',
+     topic: geographic route enforcement and jurisdictional data controls}
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://trust.graphiant.com/
+  - https://docs.graphiant.com/llms.txt

@@ -1,0 +1,116 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/graphiant-portal-openapi-original.json
+docs: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+format: proprietary
+rfc9457: false
+notes: >-
+  Graphiant does not use RFC 9457 problem+json. Errors come back as a flat JSON object
+  on the ordinary application/json content type. Two envelopes are in use: the general
+  portal envelope {errorCode, displayError, detailedError} documented in the REST API
+  guide, and an auth-specific envelope {auth, token, error} declared in the OpenAPI as
+  v1AuthErrorPostResponse. Error coverage in the spec is thin — 37 declared 4xx/5xx
+  responses across 525 operations, and most of them carry only a description string
+  with no response schema. The status/description pairs below are what the contract
+  actually declares.
+envelopes:
+- name: portal-error
+  source: docs
+  content_type: application/json
+  shape:
+    errorCode: integer — mirrors the HTTP status
+    displayError: string — short human-readable reason shown in the Portal UI
+    detailedError: string — longer detail, frequently an empty string
+  example:
+    errorCode: 403
+    displayError: Token Expired
+    detailedError: ''
+- name: v1AuthErrorPostResponse
+  source: openapi/graphiant-portal-openapi-original.json#/components/schemas/v1AuthErrorPostResponse
+  content_type: application/json
+  shape:
+    auth: boolean — false on failure
+    token: string, nullable — null on failure
+    error: string — reason, e.g. "email not provided"
+  used_by: [POST /v1/auth/login/callback, POST /v1/auth/mfa]
+problems:
+- status: 400
+  title: Bad request
+  envelope: portal-error
+  declared_count: 11
+  meanings: [Invalid input, Invalid email, Missing required fields]
+  remediation: Validate the request body against the operation schema before retrying;
+    a 400 is never transient.
+  source_operations:
+  - PATCH /v1/users/{email}/password
+  - GET /v1/users/{email}/recovery
+  - PATCH /v1/users/{email}/verified
+  - POST /v1/auth/mfa
+- status: 401
+  title: Unauthorized
+  envelope: v1AuthErrorPostResponse
+  declared_count: 4
+  meanings: [Invalid or missing token, Missing email parameter, Authentication failed]
+  remediation: Obtain a token from POST /v1/auth/login and send it as
+    'authorization Bearer <token>'. Send exactly one Authorization header.
+  source_operations:
+  - GET /v1/devices/oauth/authorization
+  - GET /v1/auth/login/saml
+  - POST /v1/auth/login/callback
+  - POST /v1/auth/login
+- status: 403
+  title: Forbidden
+  envelope: portal-error
+  declared_count: 6
+  display_error_values: [Token Expired, Invalid Token, User logged out]
+  meanings: [Invalid token, Could not refresh token, insufficient permission for the
+      requested permission domain]
+  remediation: >-
+    Distinguish by displayError. "Token Expired" — call GET /v1/auth/refresh with the
+    expired token to mint a new one (tokens live 30 minutes). "Invalid Token" or
+    "User logged out" — the session was revoked by POST /v1/auth/logout; log in again.
+    Otherwise check the caller's permission matrix via GET /v1/auth/user.
+  source_operations:
+  - GET /v1/auth/user
+  - GET /v1/auth/refresh
+  - PATCH /v1/users/{email}/password
+  - PATCH /v1/users/{email}/verified
+- status: 422
+  title: Unprocessable Entity
+  envelope: portal-error
+  declared_count: 3
+  meanings: [Unprocessable Entity, 'Unprocessable Entity - GRPC error']
+  remediation: A backend gRPC call failed for a semantically well-formed request —
+    surfaced on the session/tenant-switching endpoints. Retry once, then escalate;
+    it is not fixable by reshaping the request body.
+  source_operations:
+  - GET /v1/auth/refresh
+  - GET /v1/auth/session
+  - GET /v1/auth/session/root
+- status: 500
+  title: Internal server error
+  envelope: portal-error
+  declared_count: 13
+  remediation: Retry with backoff. Configuration pushes are asynchronous, so re-check
+    the returned jobId before resubmitting a device configuration.
+  source_operations:
+  - PATCH /v1/users/{email}/password
+  - GET /v1/users/{email}/recovery
+  - POST /v1/auth/mfa
+async_job_errors:
+  note: >-
+    Device configuration is asynchronous. PUT /v1/devices/{deviceId}/config returns
+    HTTP 200 with a {"jobId": <int>} body even when the configuration is later rejected
+    on the device. A 2xx from the config endpoints means "accepted", not "applied" —
+    poll the jobs API for the real outcome.
+  submit_operation: PUT /v1/devices/{deviceId}/config
+  response: {jobId: integer}
+coverage:
+  operations_total: 525
+  operations_with_any_4xx_or_5xx: 24
+  declared_error_responses: 37
+  operations_with_error_schema: 4
+  gap: >-
+    501 of 525 operations declare only a 2xx/204 response. Error behaviour for the
+    overwhelming majority of the surface is undocumented in the machine-readable
+    contract and must be discovered at runtime.

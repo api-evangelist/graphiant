@@ -1,0 +1,105 @@
+generated: '2026-08-01'
+method: searched
+source: https://docs.graphiant.com/docs/alarms-and-notifications
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Graphiant publishes no AsyncAPI document. Its event surface is real but outbound-only
+  and configuration-driven: alarms raised by the platform are routed by notification
+  rules to email or to a configured integration, one of which is a generic webhook.
+  The integration and notification objects are themselves managed through the REST API
+  under /v2/integration, /v2/notification and /v2/rule, but Graphiant publishes no
+  schema for the payload it POSTs to a webhook destination and no signing, retry or
+  replay contract. This catalog records what the documentation states; it does not
+  reconstruct an event schema that Graphiant has not published.
+surface:
+  direction: outbound
+  trigger: alarm raised by the Graphiant platform against a monitored entity
+  routing: notification rule (recipients, message, integration) evaluated per alarm
+  docs: https://docs.graphiant.com/docs/alarms-and-notifications
+delivery_channels:
+- channel: email
+  type: builtin
+  configuration: recipient email address(es) plus a free-form message appended to the
+    alarm notification
+  docs: https://docs.graphiant.com/docs/alarms-and-notifications
+- channel: microsoft-teams
+  type: integration
+  configuration: named integration selected on the notification rule; created on the
+    Portal Integrations page
+- channel: atlassian-opsgenie
+  type: integration
+  configuration: requires an incoming webhook created in OpsGenie first; Graphiant
+    stores an integration nickname and API key
+  test: Send Test Notification button; API equivalent GET /v2/integration/test/{enterpriseId}/{integrationId}
+- channel: pagerduty
+  type: integration
+  configuration: named integration selected on the notification rule
+- channel: opsramp
+  type: integration
+  configuration: named integration selected on the notification rule
+- channel: generic-webhook
+  type: integration
+  configuration:
+    integration_nickname: display name, pre-filled with the integration id
+    routing_key: the incoming API key of the destination application
+  purpose: >-
+    catch-all destination for applications Graphiant does not integrate with directly
+    — the documentation names Slack and Rootly as examples
+  payload_schema: not published
+  signing: not documented
+  retry_policy: not documented
+  replay: not documented
+management_api:
+  note: >-
+    The event-routing configuration is itself a REST resource set. These are the real
+    operations in openapi/graphiant-portal-openapi-original.json.
+  integrations:
+  - POST /v2/integration/
+  - GET /v2/integration/{integrationId}
+  - PUT /v2/integration/{integrationId}
+  - DELETE /v2/integration/{integrationId}
+  - GET /v2/integration/getall/{enterpriseId}
+  - GET /v2/integration/test/{enterpriseId}/{integrationId}
+  notifications:
+  - POST /v2/notification/create
+  - POST /v2/notification/update
+  - POST /v2/notification/delete
+  - POST /v2/notification/enabledisable
+  - POST /v2/notificationlist
+  - POST /v2/aggregated-notification/enable-disable
+  - GET /v2/aggregated-notification/get-state
+  rules_and_suppression:
+  - POST /v2/rulelist
+  - POST /v2/rule/enabledisable
+  - POST /v2/allowlist/create
+  - GET /v2/allowlist/{ruleId}
+  - GET /v2/allowlist-by-enterprise
+  - DELETE /v2/allowlist/deletebyalertid/{alertId}
+  - DELETE /v2/allowlist/deletebyentityid/{entityId}
+  - POST /v2/notificationmutelist/create
+  - GET /v2/notificationmutelist/{ruleId}
+  - DELETE /v2/notificationmutelist/deletebyalertid/{alertId}
+  - DELETE /v2/notificationmutelist/deletebyentityid/{entityId}
+  alerts:
+  - POST /v2/parentalertlist
+  - POST /v2/childalertlist
+  - POST /v2/ack/createupdate
+gaps:
+- Graphiant publishes no AsyncAPI or event-schema document for the webhook payload
+- no webhook signature, timestamp or replay-protection scheme is documented
+- no retry, backoff or dead-letter policy is documented
+- there is no inbound event stream, SSE or WebSocket surface — consumers poll the REST
+  alert lists or receive pushed notifications through a configured integration
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs.graphiant.com/docs/alarms-and-notifications
+  - https://docs.graphiant.com/llms.txt
+  probed:
+  - url: https://docs.graphiant.com/asyncapi.yaml
+    status: 200
+    result: rejected — body is the Document360 single-page-app HTML shell, not an
+      AsyncAPI document
+  - url: https://api.graphiant.com/asyncapi.yaml
+    status: 403

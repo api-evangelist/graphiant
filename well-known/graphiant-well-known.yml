@@ -1,0 +1,56 @@
+generated: '2026-08-01'
+method: probed
+source: live HTTP probe of every Graphiant host in apis.yml
+summary: >-
+  Graphiant publishes no /.well-known/ discovery surface. No security.txt, no OIDC or
+  OAuth authorization-server metadata (consistent with its bespoke bearer-token login
+  at POST /v1/auth/login rather than OAuth 2.0), no api-catalog, no ai-plugin and no
+  A2A agent card. The API host api.graphiant.com answers every unauthenticated request
+  — including /.well-known/* — with HTTP 403 Forbidden, so nothing is discoverable
+  there anonymously. Graphiant DOES publish llms.txt on both the marketing site and
+  the documentation host (captured in llms/).
+hosts:
+- host: https://www.graphiant.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/graphiant-site-llms.txt}
+- host: https://api.graphiant.com
+  note: all anonymous requests return 403 Forbidden
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  - {path: /.well-known/agent-card.json, status: 403}
+  - {path: /.well-known/agent.json, status: 403}
+- host: https://docs.graphiant.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/graphiant-llms.txt}
+- host: https://portal.graphiant.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+x-evidence:
+  fetched: '2026-08-01'
+  method: HTTP GET, follow redirects, 15s timeout
+  a2a_agent_card: not found on any host
+  security_txt: not found on any host

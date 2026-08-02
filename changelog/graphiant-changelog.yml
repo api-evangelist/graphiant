@@ -1,0 +1,132 @@
+generated: '2026-08-01'
+method: searched
+source: https://github.com/Graphiant-Inc/graphiant-sdk-python/blob/main/CHANGELOG.md
+notes: >-
+  Graphiant publishes no dated API changelog on docs.graphiant.com — product release
+  notes are surfaced inside the authenticated Graphiant Portal. The only public dated,
+  per-endpoint record of API change is the Python SDK changelog, which is written in
+  Keep a Changelog format and enumerates every added path, model and schema per release
+  because the SDK is regenerated from the OpenAPI bundle. It is therefore the de-facto
+  API changelog and is treated as such here. The Go SDK repository carries an equivalent
+  changelog for the same release train.
+scheme: keep-a-changelog
+versioning: CalVer YY.M.patch, matched to the platform release train
+current_version: 26.7.0
+current_version_date: '2026-07-27'
+current_spec_bundle: graphiant_api_docs_v26.7.0.json
+cadence: monthly, tracking the Latest release train (see lifecycle/graphiant-lifecycle.yml)
+history_span: 25.6.1 (2025-06-02) through 26.7.0 (2026-07-27) — 20 published releases
+breaking_change_policy: >-
+  No release in the captured window declares a breaking change. Superseded OpenAPI
+  bundles are deleted from the repository rather than archived (each release "Removed"
+  section drops the previous graphiant_api_docs_vNN.json), so historical contract diffs
+  are only recoverable from git history. New capability is added as parallel path
+  families rather than versioned in place — 26.7.0 introduced /v1/extranet/b2b/... next
+  to the existing /v1/extranets/b2b/... without deprecating either.
+entries:
+- version: 26.7.0
+  date: '2026-07-27'
+  spec_bundle: graphiant_api_docs_v26.7.0.json
+  breaking: false
+  additions:
+  - B2B extranet — a new /v1/extranet/b2b/... path family covering consumers, customers,
+    matches, producer and services, alongside the pre-existing /v1/extranets/b2b/... paths
+  - OSPF interface authentication (ManaV2OspfAuthentication, ManaV2NullableOspfAuthenticationConfig)
+  - Auth error response models for login callback, SAML login, refresh and session
+  changes:
+  - AssuranceKpiMetric gained token_usage; AssuranceUserDefinition gained tokens_usage
+    and tokens_usage_days (AI adoption token accounting)
+  - ManaV2GatewayDetails gained ipsec_gateway_peers
+  - V1InvitationEmailPostRequest gained service_type
+- version: 26.6.0
+  date: '2026-07-08'
+  spec_bundle: graphiant_api_docs_v26.6.0.json
+  breaking: false
+  additions:
+  - Public VIF (PVIF) gateway CRUD under /v1/pvif with centralized/decentralized NAT
+    and consumer LAN device models
+  - Assurance AI adoption — /v2/assurance/ai-adoption-summary plus approve-entry
+    create/read/update/delete and /v2/assurance/get-app-names
+  - GET /v1/lan-segments/interfaces/public
+  - GET /v1/regions/{regionId}/gateways
+  - GET /v1/ztagent/agents
+- version: 26.5.0
+  date: '2026-06-10'
+  spec_bundle: graphiant_api_docs_v26.5.0.json
+  breaking: false
+  additions:
+  - Extranet public VIF CRUD under /v1/extranet-public-vif plus a /check operation
+  - GET /v1/msp/managed-enterprise-contract-info (MSP billing)
+  - GET /v1/sites/map/details
+  - CommonBillingContract and CommonBillingTimePeriod models
+  changes:
+  - generated Pydantic fields now carry OpenAPI example metadata
+  security:
+  - urllib3 pinned to 2.7.0 for decompression-bomb and cross-origin header-forwarding fixes
+- version: 26.4.0
+  date: '2026-04-30'
+  spec_bundle: graphiant_api_docs_v26.4.0.json
+  breaking: false
+  additions:
+  - Global content filters CRUD under /v1/global/content-filters and domain categories
+    at /v1/global/domain-categories
+  - Software upgrade rollouts — /v1/software/rollouts CRUD plus /schedule, with
+    weekly/monthly/yearly recurrence models
+  - ZTAgent bindings at /v1/ztagent/bindings
+  - MACsec status at /v2/monitoring/macsec/{deviceId}/status
+  security:
+  - pytest raised to >= 9.0.3 for CVE-2025-71176
+- version: 26.3.3
+  date: '2026-04-10'
+  breaking: false
+- version: 26.3.2
+  date: '2026-03-27'
+  breaking: false
+- version: 26.3.1
+  date: '2026-03-26'
+  breaking: false
+- version: 26.2.1
+  date: '2026-02-26'
+  breaking: false
+- version: 26.1.1
+  date: '2026-02-03'
+  breaking: false
+- version: 25.12.1
+  date: '2025-12-17'
+  breaking: false
+- version: 25.11.1
+  date: '2025-11-11'
+  breaking: false
+- version: 25.10.2
+  date: '2025-10-13'
+  breaking: false
+- version: 25.10.1
+  date: '2025-10-08'
+  breaking: false
+- version: 25.9.2
+  date: '2025-09-25'
+  breaking: false
+- version: 25.9.1
+  date: '2025-09-23'
+  breaking: false
+- version: 25.8.1
+  date: '2025-08-22'
+  breaking: false
+- version: 25.7.1
+  date: '2025-07-18'
+  breaking: false
+- version: 25.6.2
+  date: '2025-06-13'
+  breaking: false
+- version: 25.6.1
+  date: '2025-06-02'
+  breaking: false
+  note: earliest public release in the changelog
+other_sources:
+- {name: Go SDK changelog, url: 'https://github.com/Graphiant-Inc/graphiant-sdk-go/blob/main/CHANGELOG.md'}
+- {name: Ansible collection changelog, url: 'https://github.com/Graphiant-Inc/graphiant-playbooks/blob/main/ansible_collections/graphiant/naas/changelogs/changelog.yaml'}
+- {name: Portal release notes (authenticated), url: 'https://docs.graphiant.com/docs/release-notes-in-the-graphiant-portal'}
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://raw.githubusercontent.com/Graphiant-Inc/graphiant-sdk-python/main/CHANGELOG.md
+  http_status: 200

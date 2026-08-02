@@ -1,0 +1,57 @@
+generated: '2026-08-01'
+method: searched
+source: https://github.com/Graphiant-Inc
+notes: >-
+  All three Graphiant client libraries are auto-generated from the Graphiant Portal
+  OpenAPI bundle (api/graphiant_api_docs_v26.7.0.json) with openapi-generator and are
+  published from the Graphiant-Inc GitHub organization. Versions track the platform
+  release train (CalVer YY.M.patch). npm, Maven Central, NuGet, RubyGems, Packagist
+  and crates.io were probed and carry no first-party Graphiant package.
+packages:
+- language: python
+  registry: pypi
+  name: graphiant-sdk
+  version: 26.7.0
+  url: https://pypi.org/project/graphiant-sdk/
+  source: https://github.com/Graphiant-Inc/graphiant-sdk-python
+  docs: https://docs.graphiant.com/docs/graphiant-sdk-python
+  install: pip install graphiant-sdk
+  official: true
+  license: MIT
+  generated_from: openapi/graphiant-portal-openapi-original.json
+  provides:
+  - graphiant_sdk (Python client, Pydantic models, DefaultApi)
+  - graphiant (CLI executable — see cli/graphiant-cli.yml)
+- language: go
+  registry: go-modules
+  name: github.com/Graphiant-Inc/graphiant-sdk-go
+  url: https://pkg.go.dev/github.com/Graphiant-Inc/graphiant-sdk-go
+  source: https://github.com/Graphiant-Inc/graphiant-sdk-go
+  docs: https://docs.graphiant.com/docs/graphiant-sdk-go
+  install: go get github.com/Graphiant-Inc/graphiant-sdk-go
+  official: true
+  go_version: '1.25'
+  generated_from: openapi/graphiant-portal-openapi-original.json
+- language: yaml
+  registry: ansible-galaxy
+  name: graphiant.naas
+  version: 26.6.0
+  url: https://galaxy.ansible.com/ui/repo/published/graphiant/naas/
+  source: https://github.com/Graphiant-Inc/graphiant-playbooks
+  install: ansible-galaxy collection install graphiant.naas
+  official: true
+  kind: ansible-collection
+  description: Ansible collection of Graphiant NaaS playbooks, roles and modules for
+    device config, LAN segments, BGP, circuits, security/traffic policies, gateways
+    and Data Exchange workflows.
+registries_probed:
+- {registry: pypi, package: graphiant-sdk, status: 200}
+- {registry: pypi, package: graphiant, status: 404}
+- {registry: npm, package: graphiant, status: 404}
+- {registry: pkg.go.dev, package: github.com/Graphiant-Inc/graphiant-sdk-go, status: 200}
+- {registry: ansible-galaxy, package: graphiant.naas, status: 200}
+- {registry: maven-central, package: graphiant, status: none}
+- {registry: nuget, package: graphiant, status: none}
+- {registry: rubygems, package: graphiant, status: none}
+- {registry: packagist, package: graphiant, status: none}
+- {registry: crates.io, package: graphiant, status: none}

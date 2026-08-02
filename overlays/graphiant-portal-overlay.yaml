@@ -1,0 +1,98 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Graphiant Portal REST API
+  version: 1.0.0
+extends: openapi/graphiant-portal-openapi-original.json
+x-provenance:
+  generated: '2026-08-01'
+  method: generated
+  source: openapi/graphiant-portal-openapi-original.json
+  note: >-
+    Captures the API Evangelist enrichment pass over the harvested Graphiant bundle
+    without mutating it. The harvested spec is verbatim from
+    Graphiant-Inc/graphiant-sdk-python@main api/graphiant_api_docs_v26.7.0.json. This
+    overlay records catalog metadata, the runtime semantics Graphiant documents in prose
+    but does not encode in the contract, and the three structural gaps the enrichment
+    pass found — no operationIds, no tags, no operation summaries. It deliberately does
+    NOT synthesise 525 operationIds or tag every operation: those are provider decisions,
+    and inventing them here would create identifiers the provider does not honour.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: graphiant
+    x-apievangelist-enriched: '2026-08-01'
+    x-apievangelist-source: https://github.com/Graphiant-Inc/graphiant-sdk-python/blob/main/api/graphiant_api_docs_v26.7.0.json
+    x-api-bundle-version: 26.7.0
+    x-contact-docs: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+    x-api-reference: https://docs.graphiant.com/apidocs
+    x-status-page: https://status.graphiant.io/
+    x-sla: https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla
+    x-trust-center: https://trust.graphiant.com/
+    x-changelog: https://github.com/Graphiant-Inc/graphiant-sdk-python/blob/main/CHANGELOG.md
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/graphiant-authentication.yml
+      conventions: conventions/graphiant-conventions.yml
+      errors: errors/graphiant-problem-types.yml
+      lifecycle: lifecycle/graphiant-lifecycle.yml
+      changelog: changelog/graphiant-changelog.yml
+      data_model: data-model/graphiant-data-model.yml
+      conformance: conformance/graphiant-conformance.yml
+      packages: packages/graphiant-packages.yml
+      cli: cli/graphiant-cli.yml
+      webhooks: asyncapi/graphiant-notifications-webhooks.yml
+      mcp: mcp/graphiant-mcp.yml
+      tool_crosswalk: mcp/graphiant-tool-crosswalk.yml
+      skills: skills/_index.yml
+- target: $.info
+  update:
+    x-runtime-semantics:
+      auth_model: opaque bearer token in the `authorization` header
+      token_endpoint: POST /v1/auth/login
+      token_lifetime_seconds: 1800
+      token_refresh_endpoint: GET /v1/auth/refresh
+      token_revocation_endpoint: POST /v1/auth/logout
+      idempotency: none — no Idempotency-Key contract on any unsafe method
+      pagination: none — list operations return the full collection
+      rate_limit_signalling: none documented
+      request_id_header: none
+      error_envelope: 'proprietary: {errorCode, displayError, detailedError}'
+      timestamp_encoding: protobuf Timestamp objects {seconds, nanos}, UTC — not RFC 3339
+      async_writes: device configuration returns {jobId}; HTTP 200 means accepted, not
+        applied
+      tenancy: session-scoped enterprise context switched via GET /v1/auth/session
+- target: $.info
+  update:
+    x-contract-gaps:
+      operation_ids: 0 of 525 operations declare an operationId
+      tags: 0 of 525 operations declare a tag; the document declares an empty tags array
+      summaries: 0 of 525 operations declare a summary
+      descriptions: 340 of 525 operations declare a description
+      error_responses: only 24 of 525 operations declare any 4xx or 5xx response
+      error_schemas: only 4 error responses reference a schema
+      examples: no request or response examples at the operation level
+      impact: >-
+        Without operationIds the generated SDKs fall back to path-derived method names
+        (v1_edges_summary_get), which become the de-facto operation identifiers used by
+        the CLI, the SDKs, this catalog and any tool layer built on top. They are stable
+        only while the path and method are stable.
+      remediation_for_graphiant: >-
+        Adding operationId, tags and summary to the source bundle would improve every
+        downstream generated artifact at once — SDK method names, docs navigation, MCP
+        tool naming — without any behavioural change to the API.
+- target: $.servers[0]
+  update:
+    description: Graphiant Portal production API. Returns 403 to every anonymous
+      request, including /.well-known/* paths.
+- target: $.components.securitySchemes.jwtAuth
+  update:
+    x-token-endpoint: POST /v1/auth/login
+    x-token-lifetime-seconds: 1800
+    x-token-refresh: GET /v1/auth/refresh
+    x-token-revocation: POST /v1/auth/logout
+    x-token-format: opaque, `gr-auth-` prefix followed by two UUIDs
+    x-single-header-warning: >-
+      send exactly one Authorization header; the generated clients warn that setting
+      both Configuration.api_key and the per-call authorization argument produces
+      duplicate headers that some gateways reject with 400

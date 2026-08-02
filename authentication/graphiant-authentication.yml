@@ -1,0 +1,77 @@
+generated: '2026-08-01'
+method: searched
+source: openapi/graphiant-portal-openapi-original.json
+docs: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  model: opaque bearer token issued by a username/password (or SAML SSO) login endpoint
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+schemes:
+- name: jwtAuth
+  type: apiKey
+  in: header
+  parameter: authorization
+  value_format: Bearer <token>
+  description: Use `Bearer <token>` — the token returned by POST /v1/auth/login.
+  sources: [openapi/graphiant-portal-openapi-original.json]
+  applied: 'global root security [{jwtAuth: []}]; 512 of 525 operations also declare
+    an explicit Authorization header parameter'
+token:
+  issuer_endpoint: POST https://api.graphiant.com/v1/auth/login
+  request_body: {username: string, password: string}
+  response_body: {auth: boolean, accountType: msp | enterprise | graphiant, token: string}
+  token_format: opaque, prefixed `gr-auth-` followed by two UUIDs
+  lifetime_minutes: 30
+  refresh_endpoint: GET https://api.graphiant.com/v1/auth/refresh
+  refresh_note: accepts the current OR the just-expired token and returns a new one
+  revocation_endpoint: POST https://api.graphiant.com/v1/auth/logout
+  revocation_note: logout immediately invalidates the token; subsequent calls return
+    errorCode 403 "Invalid Token"
+  header: 'authorization: Bearer <token>'
+login_methods:
+- method: local password
+  endpoint: POST /v1/auth/login
+- method: SAML SSO
+  endpoint: GET /v1/auth/login/saml
+  docs: https://docs.graphiant.com/docs/sso-setup-using-okta-saml
+  note: Okta SAML documented as the reference identity provider
+- method: MFA
+  endpoint: POST /v1/auth/mfa
+  docs: https://docs.graphiant.com/docs/multi-factor-authentification-mfa
+  note: SMS or Google Authenticator, configured per user in the Graphiant Portal
+multi_tenancy:
+  model: MSP over enterprise tenants
+  account_types: [msp, enterprise, graphiant]
+  whoami_endpoint: GET /v1/auth/user
+  list_tenants_endpoint: GET /v1/enterprises
+  user_tenants_endpoint: GET /v1/users/{userId}/enterprises
+  impersonate_endpoint: GET /v1/auth/session?enterpriseId={id}
+  return_to_root_endpoint: GET /v1/auth/session/root
+  note: an MSP user must be explicitly associated with a tenant enterprise; MSP admin
+    status alone does not grant tenant context switching
+permission_domains:
+  note: >-
+    Graphiant does not implement OAuth scopes. Authorization is a per-user permission
+    matrix returned by GET /v1/auth/user, each domain carrying a read or read_write
+    grade. These are the documented domains.
+  values: [assetManager, networkConfiguration, servicePolicies, safetyAndSecurity,
+    globalServices, userAndTenantManagement, insights, reports, monitoringAndTroubleshooting,
+    compliance, logs, developerTools, licensing, billingAndInvoicing, orderStatus,
+    support, gateway, b2b]
+sdk_support:
+  environment_variable: GRAPHIANT_ACCESS_TOKEN
+  cli_login: graphiant login (Playwright portal capture) then `source ~/.graphiant/env.sh`
+  credential_store: ~/.graphiant/credentials.json (named profiles)
+  caveat: >-
+    the generated clients warn against setting both Configuration.api_key for jwtAuth
+    and the per-call `authorization` argument — two Authorization headers cause some
+    gateways (for example Azure Application Gateway) to return 400.
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - https://github.com/Graphiant-Inc/graphiant-sdk-python

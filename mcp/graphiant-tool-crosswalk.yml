@@ -1,0 +1,228 @@
+generated: '2026-08-01'
+method: derived
+source: mcp/graphiant-mcp.yml + openapi/graphiant-portal-openapi-original.json
+notes: >-
+  Graphiant ships no MCP server and no GraphQL endpoint, so this crosswalk binds the
+  CANDIDATE tool set in mcp/graphiant-mcp.yml to the REST operations that back it, and
+  records how much of the 525-operation surface an agent-facing tool layer would leave
+  unreached. Confidence is high throughout because every tool was derived FROM an
+  operation rather than reconciled against a vendor-published tool list — there is no
+  independent tool surface to diverge from. When Graphiant does publish an MCP server,
+  this file is the reconciliation target: re-derive it from the real tools/list and the
+  mcp_only[] section will become meaningful.
+surfaces:
+  openapi:
+    file: openapi/graphiant-portal-openapi-original.json
+    version: OpenAPI 3.0.0
+    server: https://api.graphiant.com
+    operations: 525
+    paths: 460
+    gated: true
+    gate_note: the API host returns 403 to every anonymous request, including
+      /.well-known/* — the contract is public only because Graphiant ships it inside
+      its SDK repositories
+    operation_ids: absent — the bundle declares no operationId and no tags, so the
+      generated SDK method name is used as the operation identifier throughout
+  graphql:
+    endpoint: null
+    present: false
+  mcp:
+    url: null
+    published: false
+    gated: n/a
+    tools_list_probe: not possible — no server exists; https://api.graphiant.com/mcp
+      returns 403 like every other anonymous path
+crosswalk:
+- tool: list_devices
+  category: infrastructure
+  rest: [v1_edges_summary_get]
+  rest_path: GET /v1/edges-summary
+  binding: rest
+  confidence: high
+  note: the canonical entry point — returns portalStatus and ttConnCount, the two
+    preconditions for any configuration change
+- tool: get_device
+  category: infrastructure
+  rest: [v1_devices_device_id_get]
+  rest_path: GET /v1/devices/{deviceId}
+  binding: rest
+  confidence: high
+- tool: get_config_job
+  category: infrastructure
+  rest: [v1_devices_device_id_jobs_job_id_get]
+  rest_path: GET /v1/devices/{deviceId}/jobs/{jobId}
+  binding: rest
+  confidence: high
+  note: mandatory companion to any write tool — a config PUT returns 200 with a jobId
+    whether or not the change lands
+- tool: list_device_interfaces
+  category: infrastructure
+  rest: [v1_devices_device_id_interfaces_get]
+  rest_path: GET /v1/devices/{deviceId}/interfaces
+  binding: rest
+  confidence: high
+- tool: list_sites
+  category: topology
+  rest: [v1_sites_get]
+  rest_path: GET /v1/sites
+  binding: rest
+  confidence: high
+- tool: get_sites_map
+  category: topology
+  rest: [v1_sites_map_details_get]
+  rest_path: GET /v1/sites/map/details
+  binding: rest
+  confidence: high
+- tool: list_regions
+  category: topology
+  rest: [v1_regions_get]
+  rest_path: GET /v1/regions
+  binding: rest
+  confidence: high
+- tool: list_lan_segments
+  category: connectivity
+  rest: [v1_lan_segments_get]
+  rest_path: GET /v1/lan-segments
+  binding: rest
+  confidence: high
+- tool: list_gateways
+  category: connectivity
+  rest: [v1_gateways_summary_get]
+  rest_path: GET /v1/gateways/summary
+  binding: rest
+  confidence: high
+  note: /v1/gateways itself exposes only POST, DELETE and PUT — the read is on /summary
+- tool: list_enterprises
+  category: tenancy
+  rest: [v1_enterprises_get]
+  rest_path: GET /v1/enterprises
+  binding: rest
+  confidence: high
+- tool: whoami
+  category: tenancy
+  rest: [v1_auth_user_get]
+  rest_path: GET /v1/auth/user
+  binding: rest
+  confidence: high
+  note: returns the 18-domain permission matrix — an agent should gate its own tool
+    exposure on this before attempting anything
+- tool: list_alerts
+  category: observability
+  rest: [v2_parentalertlist_post]
+  rest_path: POST /v2/parentalertlist
+  binding: rest
+  confidence: high
+  note: a read expressed as POST because the filter travels in the body
+- tool: list_child_alerts
+  category: observability
+  rest: [v2_childalertlist_post]
+  rest_path: POST /v2/childalertlist
+  binding: rest
+  confidence: high
+- tool: list_notification_rules
+  category: observability
+  rest: [v2_notificationlist_post]
+  rest_path: POST /v2/notificationlist
+  binding: rest
+  confidence: high
+- tool: list_integrations
+  category: observability
+  rest: [v2_integration_getall_enterprise_id_get]
+  rest_path: GET /v2/integration/getall/{enterpriseId}
+  binding: rest
+  confidence: high
+- tool: get_backbone_health_overview
+  category: observability
+  rest: [v1_backbone_health_overview_post]
+  rest_path: POST /v1/backbone-health/overview
+  binding: rest
+  confidence: high
+- tool: get_application_profile_summary
+  category: analytics
+  rest: [v2_assurance_applicationprofilesummary_post]
+  rest_path: POST /v2/assurance/applicationprofilesummary
+  binding: rest
+  confidence: high
+- tool: get_ai_adoption_summary
+  category: analytics
+  rest: [v2_assurance_ai_adoption_summary_post]
+  rest_path: POST /v2/assurance/ai-adoption-summary
+  binding: rest
+  confidence: high
+- tool: list_software_rollouts
+  category: lifecycle
+  rest: [v1_software_rollouts_get]
+  rest_path: GET /v1/software/rollouts
+  binding: rest
+  confidence: high
+mcp_only: []
+mcp_only_note: >-
+  Empty by construction — Graphiant publishes no MCP tool surface, so nothing can
+  diverge from REST. Gina AI is the one capability with no REST-tool equivalent in this
+  crosswalk, but it is reached through ordinary /v2/assistant/* operations rather than
+  through a distinct protocol, so it is a rest_only capability rather than an mcp_only one.
+rest_only:
+- capability: device configuration writes
+  operations: 45
+  paths: [/v1/devices, '/v1/devices/{deviceId}/config', '/v1/devices/{deviceId}/draft']
+  reason: >-
+    deliberately excluded from the candidate tool set — PUT /v1/devices/{deviceId}/config
+    mutates production network state, is asynchronous, carries no idempotency key, and
+    treats a null value as a delete instruction
+- capability: global policy and service objects
+  operations: 56
+  paths: [/v1/global]
+  reason: 43 distinct paths covering prefix/site/port lists, BGP and Graphiant filters,
+    VPN profiles, content filters, SNMP, syslog, IPFIX, NTP and security/traffic/NAT
+    policy — a large, mostly write-shaped surface with no read-only summary
+- capability: B2B extranet and Data Exchange
+  operations: 76
+  paths: [/v1/extranet, /v1/extranets, /v1/extranets-b2b, /v1/extranets-b2b-peering,
+    /v1/extranet-public-vif, /v2/extranet, /v1/pvif]
+  reason: multi-party workflow (producer publishes, customer subscribes, match is
+    reviewed and accepted) whose steps commit partner-visible state
+- capability: diagnostics and remediation
+  operations: 21
+  paths: [/v1/diagnostic, /v1/troubleshooting]
+  reason: 'includes disruptive PUT actions such as /v1/diagnostic/bgp-reset/{deviceId}
+    and /v1/diagnostic/reset-ipsec-session/{deviceId} that tear down live sessions'
+- capability: assurance and bandwidth analytics detail
+  operations: 61
+  paths: [/v2/assurance, /v1/data-assurance, /v1/bwtracker, /v1/talkers, /v1/flows]
+  reason: only two summary operations are surfaced as tools; the remaining bucket,
+    topology, session and per-app breakdowns are left unbound
+- capability: Gina AI assistant
+  operations: 9
+  paths: [/v2/assistant]
+  reason: an assistant-to-assistant surface; wrapping Graphiant's own LLM assistant as
+    a tool for another agent is a product decision, not a mechanical binding
+- capability: user, group and tenant administration
+  operations: 24
+  paths: [/v1/users, /v1/groups, /v1/account, /v1/onboarding]
+  reason: identity mutation, excluded from a read-first tool set
+- capability: monitoring detail
+  operations: 23
+  paths: [/v2/monitoring]
+  reason: per-device protocol status reads (MACsec, IKE, tunnels) not yet bound
+coverage:
+  tools_named: 19
+  tools_bound_to_rest: 19
+  tools_unbound: 0
+  mcp_only: 0
+  graphql_only: 0
+  rest_operations_total: 525
+  rest_operations_with_a_tool: 19
+  rest_operations_without_a_tool: 506
+  rest_coverage_percent: 3.6
+  read_only_tools: 19
+  write_tools: 0
+gaps:
+- The published bundle declares no operationId, so no stable machine identifier exists
+  to bind a tool to. This crosswalk uses the openapi-generator-derived SDK method name,
+  which is stable only as long as the path and method are stable — a path rename
+  silently renames the identifier.
+- The bundle declares no tags, so operations cannot be grouped by the contract itself;
+  the categories above are derived from path prefixes.
+- 96.4% of the REST surface has no candidate tool. That is a deliberate read-first,
+  safety-first choice given the absence of an idempotency contract, not a coverage
+  failure to be closed mechanically.

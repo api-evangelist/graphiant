@@ -1,23 +1,188 @@
 aid: graphiant
 name: Graphiant
-description: 'Graphiant is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Graphiant is a Network-as-a-Service (NaaS) provider that replaces fragmented
+  SD-WAN, MPLS and cloud-networking stacks with a single cloud-native subscription
+  service built on a stateless core architecture. Founded by former Viptela CTO Khalid
+  Raza, the platform connects branches, data centers, public and neo-cloud environments,
+  remote users, AI agents, applications, customers and business partners, delivering
+  private connectivity, end-to-end and post-quantum encryption, data-sovereignty routing
+  controls, Zero Trust Network Access, data loss prevention, deep packet inspection
+  and real-time observability. Everything the Graphiant Portal can do is exposed through
+  a token-authenticated REST/JSON API at api.graphiant.com covering device and edge
+  configuration, sites, circuits and interfaces, LAN segments, BGP and routing policy,
+  gateways, B2B extranet and Data Exchange, assurance and AI-adoption analytics, alarms,
+  notifications and third-party integrations, users, tenants and MSP account switching.
+  Graphiant publishes the OpenAPI bundle that generates its open-source Python and
+  Go SDKs, ships a graphiant CLI, and maintains an Ansible collection of NaaS playbooks.'
 url: https://raw.githubusercontent.com/api-evangelist/graphiant/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
+image: https://cdn.prod.website-files.com/67d32c440becfce0b9a701db/67dd287e7799445a06559bab_favicon.svg
 tags:
-- Company
-apis: []
+- Networking
+- Network as a Service
+- NaaS
+- Connectivity
+- SD-WAN
+- Cloud Networking
+- Zero Trust
+- Network Security
+- Data Sovereignty
+- Observability
+- Infrastructure
+- Automation
+apis:
+- aid: graphiant:graphiant-portal-api
+  name: Graphiant Portal REST API
+  description: 'The Graphiant Portal REST API is the machine-readable surface of the
+    Graphiant NaaS platform. It exposes 525 operations across 460 paths on api.graphiant.com
+    covering authentication and MSP tenant switching, enterprises and users, edges,
+    devices and device configuration jobs, sites, circuits, interfaces and LAG, LAN
+    segments and prefixes, BGP peering and routing filters, gateways and public VIF,
+    B2B extranet and Data Exchange, assurance/AI-adoption analytics, alarms, notifications,
+    allowlists and integrations, licensing and billing. Requests carry a bearer token
+    obtained from POST /v1/auth/login; tokens live 30 minutes and are renewed at /v1/auth/refresh.'
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Networking
+  - Network as a Service
+  - Connectivity
+  - Zero Trust
+  - Automation
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-portal-openapi-original.json
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: Overlay
+    url: overlays/graphiant-portal-overlay.yaml
+  - type: MCPServer
+    url: mcp/graphiant-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/graphiant-trust-center.yml
+- type: DomainSecurity
+  url: security/graphiant-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/graphiant_stock/
+  url: https://www.graphiant.com/
+- type: DeveloperPortal
+  url: https://docs.graphiant.com/
+- type: Portal
+  url: https://portal.graphiant.com/
+- type: Documentation
+  url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+- type: APIReference
+  url: https://docs.graphiant.com/apidocs
+- type: GettingStarted
+  url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+- type: Support
+  url: https://support.graphiant.com/
+- type: Blog
+  url: https://www.graphiant.com/blog
+- type: GitHubOrganization
+  url: https://github.com/Graphiant-Inc
+- type: SignUp
+  url: https://portal.graphiant.com/
+- type: PrivacyPolicy
+  url: https://www.graphiant.com/privacy-policy
+- type: Compliance
+  url: https://trust.graphiant.com/
+- type: StatusPage
+  url: https://status.graphiant.io/
+- type: SLA
+  url: https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla
+- type: ChangeLog
+  url: https://github.com/Graphiant-Inc/graphiant-sdk-python/blob/main/CHANGELOG.md
+- type: LinkedIn
+  url: https://www.linkedin.com/company/graphiant/
+- type: YouTube
+  url: https://www.youtube.com/@Graphiant
+- type: X
+  url: https://x.com/graphiant
+- type: OpenAPI
+  url: openapi/graphiant-portal-openapi-original.json
+- type: Packages
+  url: packages/graphiant-packages.yml
+- type: SDKs
+  url: packages/graphiant-packages.yml
+- type: CLI
+  url: cli/graphiant-cli.yml
+- type: Authentication
+  url: authentication/graphiant-authentication.yml
+- type: Conventions
+  url: conventions/graphiant-conventions.yml
+- type: ErrorCatalog
+  url: errors/graphiant-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/graphiant-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/graphiant-lifecycle.yml
+- type: Conformance
+  url: conformance/graphiant-conformance.yml
+- type: DataModel
+  url: data-model/graphiant-data-model.yml
+- type: Webhooks
+  url: asyncapi/graphiant-notifications-webhooks.yml
+- type: LLMsTxt
+  url: llms/graphiant-llms.txt
+- type: WellKnown
+  url: well-known/graphiant-well-known.yml
+- type: Overlay
+  url: overlays/graphiant-portal-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/graphiant-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/graphiant-tool-crosswalk.yml
+- type: ChangeLog
+  url: changelog/graphiant-changelog.yml
+- type: AgentSkill
+  name: Authenticate against the Graphiant Portal API and establish tenant scope
+  url: skills/graphiant-authenticate-and-scope.md
+- type: AgentSkill
+  name: Inventory a Graphiant network
+  url: skills/graphiant-inventory-network.md
+- type: AgentSkill
+  name: Push a Graphiant device configuration safely
+  url: skills/graphiant-push-device-config.md
+- type: AgentSkill
+  name: Triage Graphiant alarms and route notifications
+  url: skills/graphiant-triage-alarms.md
+- type: AgentSkill
+  name: Plan and schedule a Graphiant software rollout
+  url: skills/graphiant-plan-software-rollout.md
+- type: SourceCode
+  url: https://github.com/Graphiant-Inc/graphiant-sdk-python
+- type: PythonSDK
+  url: https://pypi.org/project/graphiant-sdk/
+- type: GoSDK
+  url: https://pkg.go.dev/github.com/Graphiant-Inc/graphiant-sdk-go
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v1

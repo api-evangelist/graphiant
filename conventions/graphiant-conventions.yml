@@ -1,0 +1,132 @@
+generated: '2026-08-01'
+method: searched
+source: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+derived_from: openapi/graphiant-portal-openapi-original.json
+summary: >-
+  The Graphiant Portal REST API is a single-host, path-versioned JSON API fronting a
+  gRPC control plane. It is not a hypermedia or JSON:API-style surface: there is no
+  pagination contract, no idempotency-key contract, no request-id header and no
+  documented rate-limit signalling. Its distinguishing convention is the declarative
+  device-configuration model — a PUT of a partial desired-state document that returns
+  an async jobId, where null-valued keys mean "delete this element".
+base_url: https://api.graphiant.com
+media_type: application/json
+authentication:
+  style: opaque bearer token in the `authorization` header
+  header: 'authorization: Bearer <token>'
+  obtain: POST /v1/auth/login
+  lifetime_minutes: 30
+  refresh: GET /v1/auth/refresh
+  detail: authentication/graphiant-authentication.yml
+  caution: send exactly one Authorization header — duplicated headers are rejected by
+    some upstream gateways with a 400
+versioning:
+  scheme: uri-path
+  versions_in_use: [v1, v2]
+  current: v1 and v2 coexist; newer alerting, assurance, assistant, monitoring and
+    integration surfaces are published under /v2 while the core network-configuration
+    surface remains under /v1
+  operations_v1: 420
+  operations_v2: 105
+  platform_release_scheme: CalVer YY.M.patch (software images YY.MM.<counter>)
+  detail: lifecycle/graphiant-lifecycle.yml
+idempotency:
+  supported: false
+  idempotency_key_header: null
+  evidence: >-
+    No Idempotency-Key header, parameter or extension appears anywhere in the OpenAPI
+    bundle or the published documentation. Graphiant does not offer a retry-safety
+    contract for unsafe methods.
+  mitigating_pattern: >-
+    Configuration writes are declarative rather than incremental — PUT
+    /v1/devices/{deviceId}/config submits a desired-state fragment, so replaying the
+    same document converges to the same state. This is natural convergence, not a
+    provider-guaranteed idempotency contract, and it does not deduplicate the jobs
+    that each submission creates.
+pagination:
+  supported: false
+  evidence: no limit/offset/cursor/page parameters are declared on any of the 525
+    operations; list endpoints return the full collection in one response
+  filtering:
+    style: bracketed query parameters
+    example: GET /v1/edges-summary?filter[role]=UnknownDeviceRole&filter[status]=active
+    note: several list surfaces instead accept a POST body containing a `filter` object
+      (for example POST /v1/edges-summary)
+  time_windowed_reads:
+    note: monitoring and assurance reads scope by a statsmonV2TimeWindow object in the
+      POST body rather than by page
+request_tracing:
+  request_id_header: null
+  supported: false
+async_operations:
+  model: submit-and-poll
+  trigger: PUT /v1/devices/{deviceId}/config
+  response: {jobId: integer}
+  semantics: >-
+    HTTP 200 means the configuration was accepted for delivery, not applied. The device
+    must additionally be reachable — validate portalStatus == "Ready" and ttConnCount
+    == 2 from GET /v1/edges-summary before submitting, then resolve the jobId through
+    the jobs surface to learn the real outcome.
+  preflight_check: GET /v1/edges-summary
+declarative_config:
+  method: PUT
+  path: /v1/devices/{deviceId}/config
+  body_shape:
+    edge: partial desired-state tree (circuits, interfaces, subinterfaces, segments)
+    segments: LAN segment definitions referenced by the interfaces
+    description: free-text change description recorded against the job
+    configurationMetadata: {name: optional named configuration}
+  deletion_semantics: >-
+    Setting a nested element to null deletes it. For example
+    {"interfaces":{"GigabitEthernet8/0/0":{"interface":{"subinterfaces":{"18":{"interface":null}}}}}}
+    removes subinterface 18. Omitting a key leaves the existing value untouched.
+  caution: >-
+    Because omission means "leave alone" and null means "delete", a naive round-trip
+    of a full config document with dropped keys will not remove anything, while a
+    document that serialises absent fields as null will silently delete them.
+multi_tenancy:
+  model: MSP users switch enterprise context server-side, not per request
+  switch: GET /v1/auth/session?enterpriseId={id}
+  reset: GET /v1/auth/session/root
+  whoami: GET /v1/auth/user
+  caution: >-
+    Context is a property of the session token, so concurrent work against two tenants
+    with a single token is unsafe — use one token per tenant context.
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  shape: {errorCode: integer, displayError: string, detailedError: string}
+  auth_variant: {auth: boolean, token: 'string|null', error: string}
+  detail: errors/graphiant-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: none documented
+  evidence: no rate-limit headers, quotas or throttling policy appear in the OpenAPI
+    bundle or the documentation site
+naming:
+  wire_format: lowerCamelCase JSON fields (enterpriseId, deviceId, portalStatus)
+  sdk_format: snake_case in the generated Python client (enterprise_id, device_id)
+  path_style: mixed — kebab-case (/v1/edges-summary, /v2/aggregated-notification) and
+    flat lowercase (/v2/notificationmutelist, /v2/assurance/getclassifiedapplicationlist)
+    both appear
+  identifiers: opaque 64-bit integers, not prefixed strings (deviceId 30000051803,
+    enterpriseId 10000000999, siteId 4716)
+timestamps:
+  format: protobuf Timestamp objects {seconds, nanos}, not RFC 3339 strings
+  example: {seconds: 1750202669, nanos: 537864000}
+  timezone: UTC
+  caution: >-
+    This leaks the gRPC control plane through the REST surface. Clients must convert
+    {seconds, nanos} themselves; the Graphiant CLI renders these fields in UTC and
+    labels them "(UTC)".
+spec_quality:
+  operation_summaries: 0 of 525
+  operation_descriptions: 340 of 525
+  operation_ids: 0 of 525
+  tags: 0 of 525
+  note: >-
+    The published bundle carries neither operationIds nor tags, so the generated SDKs
+    fall back to path-derived method names (v1_edges_summary_get). Those derived names
+    are the de-facto operation identifiers and are what the CLI's `invoke` command
+    accepts. overlays/graphiant-portal-overlay.yaml records this as an enhancement
+    target rather than mutating the harvested spec.

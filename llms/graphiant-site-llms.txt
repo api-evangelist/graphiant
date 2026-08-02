@@ -1,0 +1,79 @@
+# Graphiant
+
+> Graphiant is a value-driven Network-as-a-Service platform for secure AI, cloud, and distributed environments.
+
+Graphiant helps enterprises, service providers, and public-sector organizations replace fragmented networking and security tools with one unified, AI-powered platform. The service delivers connectivity, security, visibility, policy control, and AI-driven operations through a single subscription.
+
+Graphiant connects branches, data centers, public clouds, neo-clouds, remote users, AI agents, applications, customers, suppliers, and business partners. Its cloud-native architecture is designed to reduce infrastructure cost and complexity while providing private connectivity, end-to-end encryption, real-time visibility, policy enforcement, data sovereignty controls, and scalable performance.
+
+Use the pages below as the primary public sources for current information about Graphiant, its platform, capabilities, use cases, technical documentation, customer outcomes, and company news.
+
+## Overview
+
+- [Graphiant](https://www.graphiant.com/): Current company and platform overview, including Graphiant's positioning, core value proposition, supported environments, customer examples, and infrastructure cost benefits.
+- [Network-as-a-Service](https://www.graphiant.com/business-transformation/network-as-a-service): Overview of Graphiant's unified, cloud-native NaaS platform, consumption-based service model, single-SKU packaging, connectivity options, and deployment approach.
+- [Technical Documentation](https://docs.graphiant.com/): Official product documentation, architecture, deployment, configuration, automation, monitoring, security, and operational guidance.
+- [Technical Documentation Index](https://docs.graphiant.com/llms.txt): Machine-readable Markdown index of Graphiant's technical documentation.
+
+## Business Transformation
+
+- [Agentic Infrastructure](https://www.graphiant.com/business-transformation/agentic-infrastructure): Graphiant's approach to AI-driven infrastructure and operations, including intelligent monitoring, troubleshooting, reporting, optimization, and policy assistance.
+- [Sovereign Data Infrastructure](https://www.graphiant.com/business-transformation/sovereign-data-infrastructure): Infrastructure for controlling where sensitive data travels, how it is protected, and which jurisdictions and entities may access it.
+- [Network-as-a-Service](https://www.graphiant.com/business-transformation/network-as-a-service): A unified networking service for distributed AI enterprises across cloud, edge, branch, data center, user, and partner environments.
+
+## Use Cases
+
+- [Multi-Cloud Networking](https://www.graphiant.com/use-cases/cloud-networking): Managed, usage-based connectivity across AWS, Microsoft Azure, Google Cloud, Oracle Cloud, data centers, and edge locations.
+- [Data Loss Prevention](https://www.graphiant.com/use-cases/dlp): Policy-based protection for sensitive, regulated, and proprietary information, including inspection without decrypting traffic in the network core.
+- [Data Sovereignty](https://www.graphiant.com/use-cases/data-sovereignty): Geographic route enforcement, end-to-end encryption, stateless forwarding, and real-time verification designed to keep data within approved regions.
+- [Financial Payments Network](https://www.graphiant.com/use-cases/payments): Secure, policy-driven connectivity for payment ecosystems, financial institutions, merchants, applications, clouds, and business partners.
+- [Gina AI](https://www.graphiant.com/use-cases/gina-ai): Graphiant's AI assistant for network operations, visibility, policy guidance, reporting, troubleshooting, and actionable insights.
+- [Neo-Cloud Connectivity](https://www.graphiant.com/use-cases/neo-cloud): Connectivity between enterprise data, public clouds, AI clouds, GPU infrastructure, and neo-cloud providers.
+- [Zero Trust Network Access](https://www.graphiant.com/use-cases/ztna): Identity- and policy-based access for users, AI agents, applications, and private enterprise resources.
+
+## Architecture and Product Documentation
+
+- [Graphiant Solution Components](https://docs.graphiant.com/docs/graphiant-solution-components.md): Overview of the major components of the Graphiant service.
+- [Stateless Core Architecture](https://docs.graphiant.com/docs/graphiant-stateless-core-architecture.md): Technical explanation of Graphiant's stateless core architecture.
+- [Post-Quantum Cryptography](https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography.md): Information about Graphiant's post-quantum cryptography capabilities and approach.
+- [Graphiant Cryptography](https://docs.graphiant.com/docs/graphiant-cryptography.md): Technical information about encryption and cryptographic protections used by the service.
+- [Use Cases](https://docs.graphiant.com/docs/use-cases.md): Technical documentation for supported Graphiant deployment and connectivity use cases.
+- [Service Level Agreements](https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla.md): Official service-level information.
+- [Graphiant Gateway Service](https://docs.graphiant.com/docs/graphiant-gateway-service.md): Documentation for connecting on-premises and cloud environments through Graphiant.
+- [Data Exchange](https://docs.graphiant.com/docs/data-exchange-1.md): Documentation for Graphiant Data Exchange services.
+- [Graphiant Observability](https://docs.graphiant.com/docs/graphiant-observability.md): Monitoring, alarms, network health, visibility, and operational insights.
+- [Graphiant REST API](https://docs.graphiant.com/docs/graphiant-portal-rest-api.md): Documentation for Graphiant's automation and API capabilities.
+- [Frequently Asked Questions](https://docs.graphiant.com/docs/faq.md): Answers to common questions about Graphiant and its services.
+
+## Resources
+
+- [Case Studies](https://www.graphiant.com/case-study): Customer deployments, use cases, infrastructure outcomes, and measurable business results.
+- [White Papers](https://www.graphiant.com/white-papers): In-depth technical and business analysis of networking, security, cloud, AI, and data infrastructure topics.
+- [Solution Briefs](https://www.graphiant.com/solution-brief): Concise descriptions of Graphiant products, architectures, use cases, and joint solutions.
+- [Videos](https://www.graphiant.com/video): Product demonstrations, technical discussions, interviews, and event recordings.
+- [Blog](https://www.graphiant.com/blog): Graphiant perspectives on AI infrastructure, networking, security, cloud connectivity, data sovereignty, and industry developments.
+
+## Trust, Support, and Service Information
+
+- [Graphiant Trust Center](https://trust.graphiant.com/): Security, privacy, compliance, and assurance information.
+- [Service Health](https://status.graphiant.io/): Current and historical Graphiant service status.
+- [Support](https://support.graphiant.com/): Customer support portal.
+- [Graphiant Portal](https://portal.graphiant.com/): Customer portal for managing Graphiant services.
+
+## Company
+
+- [About Graphiant](https://www.graphiant.com/about-us): Company background, mission, leadership, and global presence.
+- [Partners](https://www.graphiant.com/partners): Information for channel, technology, service-provider, and solution partners.
+- [Careers](https://www.graphiant.com/careers): Company culture and open positions.
+- [Contact Graphiant](https://www.graphiant.com/contact-us): Sales and general contact information.
+
+## News
+
+- [Press Releases](https://www.graphiant.com/press-releases): Official Graphiant announcements.
+- [Media Coverage](https://www.graphiant.com/media-coverage): Third-party reporting, interviews, awards, and industry coverage.
+
+## Optional
+
+- [LinkedIn](https://www.linkedin.com/company/graphiant/): Company announcements and professional content.
+- [YouTube](https://www.youtube.com/@Graphiant): Product videos, presentations, interviews, and demonstrations.
+- [X](https://x.com/graphiant): Company news and updates.

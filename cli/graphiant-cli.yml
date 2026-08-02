@@ -1,0 +1,116 @@
+generated: '2026-08-01'
+method: searched
+source: https://github.com/Graphiant-Inc/graphiant-sdk-python#graphiant-cli
+docs: https://docs.graphiant.com/docs/graphiant-cli
+name: graphiant
+description: >-
+  First-party CLI that ships inside the graphiant-sdk PyPI package. It logs in through
+  the Graphiant Portal, stores a bearer token in a named profile, and calls the Portal
+  REST API either through the generated SDK method surface (`invoke`) or as raw HTTP
+  (`rest`). There is no separate CLI distribution — installing the Python SDK installs
+  the binary.
+install:
+- {method: pip, command: pip install graphiant-sdk, note: installs both the graphiant_sdk
+    library and the `graphiant` executable}
+version_scheme: matches graphiant_sdk.__version__ (CalVer YY.M.patch)
+current_version: 26.7.0
+framework: Typer / Click, with Rich output and Playwright for browser login
+shell_completion:
+  command: graphiant --install-completion
+  shells: [bash, zsh, fish]
+  inspect: graphiant --show-completion
+  manual_zsh: eval "$(_GRAPHIANT_COMPLETE=zsh_source graphiant)"
+  note: provided by Typer/Click but not active until installed once; depends on shellingham
+    for shell detection
+commands:
+- group: login
+  purpose: authenticate against the Graphiant Portal and persist a bearer token
+  commands:
+  - {command: graphiant login, description: opens Chromium via Playwright, watches /v1/…,
+     /v2/… and …/auth/refresh traffic and captures the Authorization Bearer header}
+  - {command: graphiant login env-export, description: print a single `export GRAPHIANT_ACCESS_TOKEN=…`
+     line without opening a browser; use with eval}
+  - {command: graphiant logout, description: clear the stored profile — note the shell
+     may still export GRAPHIANT_ACCESS_TOKEN}
+  options:
+  - {flag: --portal-url, description: portal base URL for this run (default https://portal.graphiant.com/)}
+  - {flag: -t/--timeout, description: seconds to wait for token capture, default 90}
+  - {flag: --no-capture, description: skip Playwright, open the portal and paste the token}
+  - {flag: --no-browser, description: print the portal URL only, then prompt for paste}
+  - {flag: --profile, description: store the token under a named profile (default `default`)}
+  - {flag: --export/--no-export, description: also print the export line to stdout (default off)}
+  - {flag: -v/--verbose, description: debug logging on stderr}
+- group: configure
+  purpose: persist default hosts and inspect the stored session
+  commands:
+  - {command: graphiant configure set-host <url>, description: default API base URL,
+     e.g. https://api.graphiant.com}
+  - {command: graphiant configure set-portal-url <url>, description: default portal URL
+     for future logins}
+  - {command: graphiant configure show, description: show host, portal, profile and
+     token presence}
+- group: api
+  purpose: discover and call generated SDK methods
+  commands:
+  - {command: graphiant api list --prefix <p>, description: table of SDK method, HTTP
+     verb and path}
+  - {command: graphiant apis --plain --prefix <p>, description: one SDK method name per line}
+  - {command: graphiant invoke <method>, description: call a DefaultApi method by its
+     generated name, e.g. v1_edges_summary_get}
+  - {command: graphiant api invoke <method>, description: same as invoke}
+  options:
+  - {flag: --kwargs, description: JSON object of keyword arguments; query parameters use
+     the snake_case SDK names (OpenAPI enterpriseId becomes enterprise_id)}
+  - {flag: --args, description: JSON array of positional parameters, in signature order}
+  note: >-
+    `invoke` sends exactly one Authorization header (the generated client's `authorization`
+    argument) and deliberately does not also apply jwtAuth from Configuration, so gateways
+    that reject duplicate auth headers accept the request.
+- group: rest
+  purpose: raw HTTP against the configured API host
+  commands:
+  - {command: graphiant rest GET /v1/edges-summary, description: raw GET}
+  - {command: 'graphiant rest GET /v1/edges-summary --query ''enterpriseId=123&isRequested=true''',
+     description: query string as a single key=value& string}
+  - {command: 'graphiant rest POST /v1/global/summary --body ''{"ntpType": true}''',
+     description: raw POST with a JSON body}
+- group: session
+  commands:
+  - {command: graphiant whoami, description: 'calls GET /v1/auth/user and GET /v1/users?id=…
+      and renders session, permissions and profile as Rich tables; protobuf timestamps
+      shown in UTC'}
+  - {command: graphiant version, description: print CLI and package version}
+key_flows:
+- name: log in and call an API
+  steps:
+  - graphiant login
+  - source ~/.graphiant/env.sh
+  - graphiant whoami
+  - graphiant invoke v1_edges_summary_get
+- name: non-interactive token load
+  steps:
+  - eval "$(graphiant login env-export)"
+- name: discover the method surface
+  steps:
+  - graphiant api list --prefix v1_auth_
+  - graphiant apis --plain --prefix v1_edges_
+environment:
+- {variable: GRAPHIANT_ACCESS_TOKEN, role: bearer token; preferred over the on-disk token}
+- {variable: GRAPHIANT_API_HOST, role: fallback API host when not in config}
+- {variable: GRAPHIANT_CONFIG_DIR, role: override the config directory (default ~/.graphiant)}
+- {variable: GRAPHIANT_PROFILE, role: active profile name (default `default`)}
+- {variable: GRAPHIANT_LOG, role: 'login log level: debug, info, warning'}
+files:
+- {path: ~/.graphiant/config.json, role: default API host and portal URL}
+- {path: ~/.graphiant/credentials.json, role: profiles and stored access tokens}
+- {path: ~/.graphiant/env.sh, role: export GRAPHIANT_ACCESS_TOKEN written after each
+    successful login}
+dependencies: [typer, rich, playwright]
+playwright_note: Chromium is installed on first use via `playwright install chromium`
+    if missing
+package: packages/graphiant-packages.yml
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://raw.githubusercontent.com/Graphiant-Inc/graphiant-sdk-python/main/README.md
+  - https://docs.graphiant.com/docs/graphiant-cli
