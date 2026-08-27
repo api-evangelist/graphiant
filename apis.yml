@@ -37,27 +37,16 @@ tags:
 - Infrastructure
 - Automation
 apis:
-- aid: graphiant:graphiant-portal-api
-  name: Graphiant Portal REST API
-  description: 'The Graphiant Portal REST API is the machine-readable surface of the
-    Graphiant NaaS platform. It exposes 525 operations across 460 paths on api.graphiant.com
-    covering authentication and MSP tenant switching, enterprises and users, edges,
-    devices and device configuration jobs, sites, circuits, interfaces and LAG, LAN
-    segments and prefixes, BGP peering and routing filters, gateways and public VIF,
-    B2B extranet and Data Exchange, assurance/AI-adoption analytics, alarms, notifications,
-    allowlists and integrations, licensing and billing. Requests carry a bearer token
-    obtained from POST /v1/auth/login; tokens live 30 minutes and are renewed at /v1/auth/refresh.'
+- aid: graphiant:graphiant-account-api
+  name: Graphiant Account API
+  description: The Account API from Graphiant — 5 operation(s) for account.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
-  - Networking
-  - Network as a Service
-  - Connectivity
-  - Zero Trust
-  - Automation
+  - Account
   properties:
   - type: OpenAPI
-    url: openapi/graphiant-portal-openapi-original.json
+    url: openapi/graphiant-account-api-openapi.yml
   - type: Documentation
     url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   - type: APIReference
@@ -70,10 +59,1570 @@ apis:
     url: conventions/graphiant-conventions.yml
   - type: DataModel
     url: data-model/graphiant-data-model.yml
-  - type: Overlay
-    url: overlays/graphiant-portal-overlay.yaml
-  - type: MCPServer
-    url: mcp/graphiant-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-ack-api
+  name: Graphiant Ack API
+  description: The Ack API from Graphiant — 1 operation(s) for ack.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Ack
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-ack-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-activity-api
+  name: Graphiant Activity API
+  description: The Activity API from Graphiant — 1 operation(s) for activity.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Activity
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-activity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-aggregated-notification-api
+  name: Graphiant Aggregated Notification API
+  description: >-
+    The Aggregated Notification API from Graphiant — 2 operation(s) for aggregated notification.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Aggregated Notification
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-aggregated-notification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-allowlist-api
+  name: Graphiant Allowlist API
+  description: The Allowlist API from Graphiant — 4 operation(s) for allowlist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Allowlist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-allowlist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-allowlist-by-enterprise-api
+  name: Graphiant Allowlist By Enterprise API
+  description: >-
+    The Allowlist By Enterprise API from Graphiant — 1 operation(s) for allowlist by enterprise.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Allowlist By Enterprise
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-allowlist-by-enterprise-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-apps-api
+  name: Graphiant Apps API
+  description: The Apps API from Graphiant — 5 operation(s) for apps.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-apps-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-assistant-api
+  name: Graphiant Assistant API
+  description: The Assistant API from Graphiant — 9 operation(s) for assistant.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Assistant
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-assistant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-assurance-api
+  name: Graphiant Assurance API
+  description: The Assurance API from Graphiant — 35 operation(s) for assurance.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Assurance
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-assurance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-audit-api
+  name: Graphiant Audit API
+  description: The Audit API from Graphiant — 2 operation(s) for audit.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Audit
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-audit-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-auth-api
+  name: Graphiant Auth API
+  description: The Auth API from Graphiant — 13 operation(s) for auth.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-backbone-health-api
+  name: Graphiant Backbone Health API
+  description: The Backbone Health API from Graphiant — 6 operation(s) for backbone health.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Backbone Health
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-backbone-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-bwtracker-api
+  name: Graphiant Bwtracker API
+  description: The Bwtracker API from Graphiant — 19 operation(s) for bwtracker.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Bwtracker
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-bwtracker-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-childalertlist-api
+  name: Graphiant Childalertlist API
+  description: The Childalertlist API from Graphiant — 1 operation(s) for childalertlist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Childalertlist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-childalertlist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-data-assurance-api
+  name: Graphiant Data Assurance API
+  description: The Data Assurance API from Graphiant — 4 operation(s) for data assurance.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Data Assurance
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-data-assurance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-device-api
+  name: Graphiant Device API
+  description: The Device API from Graphiant — 28 operation(s) for device.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Device
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-device-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-device-status-api
+  name: Graphiant Device Status API
+  description: The Device Status API from Graphiant — 2 operation(s) for device status.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Device Status
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-device-status-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-devices-api
+  name: Graphiant Devices API
+  description: The Devices API from Graphiant — 40 operation(s) for devices.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-devices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-devices-summary-api
+  name: Graphiant Devices Summary API
+  description: The Devices Summary API from Graphiant — 1 operation(s) for devices summary.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Devices Summary
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-devices-summary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-diagnostic-api
+  name: Graphiant Diagnostic API
+  description: The Diagnostic API from Graphiant — 21 operation(s) for diagnostic.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Diagnostic
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-diagnostic-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-edges-hardware-api
+  name: Graphiant Edges Hardware API
+  description: The Edges Hardware API from Graphiant — 2 operation(s) for edges hardware.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Edges Hardware
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-edges-hardware-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-edges-summary-api
+  name: Graphiant Edges Summary API
+  description: The Edges Summary API from Graphiant — 1 operation(s) for edges summary.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Edges Summary
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-edges-summary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-enterprise-api
+  name: Graphiant Enterprise API
+  description: The Enterprise API from Graphiant — 4 operation(s) for enterprise.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Enterprise
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-enterprise-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-enterprises-api
+  name: Graphiant Enterprises API
+  description: The Enterprises API from Graphiant — 6 operation(s) for enterprises.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Enterprises
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-enterprises-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranet-api
+  name: Graphiant Extranet API
+  description: The Extranet API from Graphiant — 33 operation(s) for extranet.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranet
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranet-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranet-b2b-monitoring-api
+  name: Graphiant Extranet B2b Monitoring API
+  description: >-
+    The Extranet B2b Monitoring API from Graphiant — 6 operation(s) for extranet b2b monitoring.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranet B2b Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranet-b2b-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranets-api
+  name: Graphiant Extranets API
+  description: The Extranets API from Graphiant — 6 operation(s) for extranets.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranets
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranets-b2b-api
+  name: Graphiant Extranets B2b API
+  description: The Extranets B2b API from Graphiant — 13 operation(s) for extranets b2b.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranets B2b
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranets-b2b-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranets-b2b-general-api
+  name: Graphiant Extranets B2b General API
+  description: The Extranets B2b General API from Graphiant — 2 operation(s) for extranets b2b general.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranets B2b General
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranets-b2b-general-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranets-b2b-peering-api
+  name: Graphiant Extranets B2b Peering API
+  description: >-
+    The Extranets B2b Peering API from Graphiant — 13 operation(s) for extranets b2b peering.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranets B2b Peering
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranets-b2b-peering-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-extranets-monitoring-api
+  name: Graphiant Extranets Monitoring API
+  description: The Extranets Monitoring API from Graphiant — 4 operation(s) for extranets monitoring.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Extranets Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-extranets-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-flows-api
+  name: Graphiant Flows API
+  description: The Flows API from Graphiant — 2 operation(s) for flows.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Flows
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-flows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-gateways-api
+  name: Graphiant Gateways API
+  description: The Gateways API from Graphiant — 8 operation(s) for gateways.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Gateways
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-gateways-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-global-api
+  name: Graphiant Global API
+  description: The Global API from Graphiant — 43 operation(s) for global.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Global
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-global-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-groups-api
+  name: Graphiant Groups API
+  description: The Groups API from Graphiant — 9 operation(s) for groups.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-integration-api
+  name: Graphiant Integration API
+  description: The Integration API from Graphiant — 4 operation(s) for integration.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Integration
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-integration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-invitation-api
+  name: Graphiant Invitation API
+  description: The Invitation API from Graphiant — 1 operation(s) for invitation.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Invitation
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-invitation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-lan-segments-api
+  name: Graphiant Lan Segments API
+  description: The Lan Segments API from Graphiant — 2 operation(s) for lan segments.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Lan Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-lan-segments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-lldp-api
+  name: Graphiant Lldp API
+  description: The Lldp API from Graphiant — 3 operation(s) for lldp.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Lldp
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-lldp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-logs-api
+  name: Graphiant Logs API
+  description: The Logs API from Graphiant — 1 operation(s) for logs.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-monitoring-api
+  name: Graphiant Monitoring API
+  description: The Monitoring API from Graphiant — 23 operation(s) for monitoring.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-msp-api
+  name: Graphiant Msp API
+  description: The Msp API from Graphiant — 1 operation(s) for msp.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Msp
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-msp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-nat-api
+  name: Graphiant Nat API
+  description: The Nat API from Graphiant — 2 operation(s) for nat.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Nat
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-nat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-notification-api
+  name: Graphiant Notification API
+  description: The Notification API from Graphiant — 4 operation(s) for notification.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Notification
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-notification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-notificationlist-api
+  name: Graphiant Notificationlist API
+  description: The Notificationlist API from Graphiant — 1 operation(s) for notificationlist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Notificationlist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-notificationlist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-notificationmutelist-api
+  name: Graphiant Notificationmutelist API
+  description: The Notificationmutelist API from Graphiant — 4 operation(s) for notificationmutelist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Notificationmutelist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-notificationmutelist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-onboarding-api
+  name: Graphiant Onboarding API
+  description: The Onboarding API from Graphiant — 1 operation(s) for onboarding.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-onboarding-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-parentalertlist-api
+  name: Graphiant Parentalertlist API
+  description: The Parentalertlist API from Graphiant — 1 operation(s) for parentalertlist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Parentalertlist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-parentalertlist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-policy-api
+  name: Graphiant Policy API
+  description: The Policy API from Graphiant — 6 operation(s) for policy.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-policy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-presharedkey-api
+  name: Graphiant Presharedkey API
+  description: The Presharedkey API from Graphiant — 1 operation(s) for presharedkey.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Presharedkey
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-presharedkey-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-pvif-api
+  name: Graphiant Pvif API
+  description: The Pvif API from Graphiant — 4 operation(s) for pvif.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Pvif
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-pvif-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-qos-api
+  name: Graphiant Qos API
+  description: The Qos API from Graphiant — 1 operation(s) for qos.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Qos
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-qos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-regions-api
+  name: Graphiant Regions API
+  description: The Regions API from Graphiant — 2 operation(s) for regions.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Regions
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-regions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-rule-api
+  name: Graphiant Rule API
+  description: The Rule API from Graphiant — 1 operation(s) for rule.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-rule-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-rulelist-api
+  name: Graphiant Rulelist API
+  description: The Rulelist API from Graphiant — 1 operation(s) for rulelist.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Rulelist
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-rulelist-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-search-api
+  name: Graphiant Search API
+  description: The Search API from Graphiant — 1 operation(s) for search.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-site-api
+  name: Graphiant Site API
+  description: The Site API from Graphiant — 4 operation(s) for site.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Site
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-site-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-sites-api
+  name: Graphiant Sites API
+  description: The Sites API from Graphiant — 6 operation(s) for sites.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-sites-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-software-api
+  name: Graphiant Software API
+  description: The Software API from Graphiant — 9 operation(s) for software.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Software
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-software-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-talkers-api
+  name: Graphiant Talkers API
+  description: The Talkers API from Graphiant — 2 operation(s) for talkers.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Talkers
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-talkers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-temp-api
+  name: Graphiant Temp API
+  description: The Temp API from Graphiant — 1 operation(s) for temp.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Temp
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-temp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-troubleshooting-api
+  name: Graphiant Troubleshooting API
+  description: The Troubleshooting API from Graphiant — 6 operation(s) for troubleshooting.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Troubleshooting
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-troubleshooting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-users-api
+  name: Graphiant Users API
+  description: The Users API from Graphiant — 11 operation(s) for users.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-version-api
+  name: Graphiant Version API
+  description: The Version API from Graphiant — 1 operation(s) for version.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-version-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-zones-api
+  name: Graphiant Zones API
+  description: The Zones API from Graphiant — 1 operation(s) for zones.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Zones
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-zones-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-ztagent-api
+  name: Graphiant Ztagent API
+  description: The Ztagent API from Graphiant — 2 operation(s) for ztagent.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Ztagent
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-ztagent-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
   - type: ToolCrosswalk
     url: mcp/graphiant-tool-crosswalk.yml
 maintainers:
