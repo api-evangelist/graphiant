@@ -19,6 +19,20 @@ x-type: company
 x-source: harvest:secondary-market
 x-tier: profiled
 x-tier-reason: enrichment-pipeline
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
@@ -1631,6 +1645,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/graphiant-capability-edges.yml
+  name: Graphiant Business Capability Map
 - type: IssueTracker
   url: https://github.com/Graphiant-Inc/graphiant-sdk-python/issues
 - type: Releases
