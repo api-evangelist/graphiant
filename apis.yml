@@ -203,6 +203,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -299,6 +301,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -877,6 +881,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -1045,6 +1051,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - MSP
+  tags_raw:
   - Msp
   properties:
   - type: OpenAPI
@@ -1069,6 +1077,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - NAT
+  tags_raw:
   - Nat
   properties:
   - type: OpenAPI
@@ -1117,6 +1127,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Notification List
+  tags_raw:
   - Notificationlist
   properties:
   - type: OpenAPI
@@ -1285,6 +1297,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - QoS
+  tags_raw:
   - Qos
   properties:
   - type: OpenAPI
@@ -1333,6 +1347,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - rule
+  tags_raw:
   - Rule
   properties:
   - type: OpenAPI
@@ -1549,6 +1565,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
