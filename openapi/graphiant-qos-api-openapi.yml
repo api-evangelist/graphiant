@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Qos API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Qos
+paths:
+  /v1/qos/circuit-profiles:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1QosCircuitProfilesGetResponse'
+      description: Returns a list of QoS profiles for circuits with associated queues & attributes
+      tags:
+      - Qos
+components:
+  schemas:
+    manaV2QoSProfileQueue:
+      type: object
+      properties:
+        bandwidthPercent:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        defaultQueue:
+          type: boolean
+          example: true
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1QosCircuitProfilesGetResponse:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfile'
+      additionalProperties: false
+    manaV2QoSProfile:
+      type: object
+      properties:
+        kind:
+          type: string
+          example: ENUM_VALUE
+        profile:
+          type: string
+          example: ENUM_VALUE
+        queues:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfileQueue'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

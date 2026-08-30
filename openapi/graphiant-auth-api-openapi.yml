@@ -1,0 +1,972 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Auth API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Auth
+paths:
+  /v1/auth:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Configure Identity Provider (SAML) for enterprise. Creates IDP configuration affecting all users in the enterprise.
+      tags:
+      - Auth
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '204':
+          description: No Content
+      description: Remove Identity Provider configuration and revert to default authentication.
+      tags:
+      - Auth
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthGetResponse'
+      description: Get current Identity Provider configuration for enterprise.
+      tags:
+      - Auth
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Update Identity Provider configuration (certificates, endpoints, etc.).
+      tags:
+      - Auth
+  /v1/auth/mfa:
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthMfaPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Enroll tenant in Multi-Factor Authentication (SMS, GoogleAuth).
+      tags:
+      - Auth
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '204':
+          description: No Content
+      description: Remove Multi-Factor Authentication enrollment for the tenant.
+      tags:
+      - Auth
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthMfaPostRequest'
+      responses:
+        '200':
+          description: MFA verification successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthLoginPostResponse'
+        '400':
+          description: Bad request - Missing required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthErrorPostResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal error
+      tags:
+      - Auth
+  /v1/auth/mfa/types:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthMfaTypesGetResponse'
+      description: Get MFA types allowed by enterprise policy.
+      tags:
+      - Auth
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthMfaTypesPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Update enterprise MFA policy to allow/disallow specific MFA types.
+      tags:
+      - Auth
+  /v1/auth/login/pre:
+    get:
+      parameters:
+      - in: query
+        name: email
+        required: true
+        schema:
+          type: string
+          example: user@example.com
+        description: User email address
+      - in: query
+        name: relayState
+        required: false
+        schema:
+          type: string
+          example: information-to-relay
+        description: State to relay after authentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthLoginPreGetResponse'
+        '400':
+          description: Bad request
+      tags:
+      - Auth
+  /v1/auth/login/saml:
+    get:
+      parameters:
+      - in: query
+        name: email
+        required: true
+        schema:
+          type: string
+          example: user@example.com
+        description: User email address
+      - in: query
+        name: relayState
+        required: false
+        schema:
+          type: string
+          example: information-to-relay
+        description: State to relay after authentication
+      responses:
+        '200':
+          description: Redirects to SAML identity provider
+        '401':
+          description: Missing email parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing email query parameter
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid email
+      tags:
+      - Auth
+  /v1/auth/login/callback:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/v1AuthLoginCallbackPostRequest'
+      responses:
+        '302':
+          description: Redirects to portal with SSO token
+        '401':
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthErrorPostResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid saml response
+      tags:
+      - Auth
+  /v1/auth/user:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthUserGetResponse'
+        '403':
+          description: Forbidden
+      tags:
+      - Auth
+  /v1/auth/login:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthLoginPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthLoginPostResponse'
+        '400':
+          description: Not Authenticated
+        '401':
+          description: Authenticated Failed
+      tags:
+      - Auth
+  /v1/auth/login/temp:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthLoginTempPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthLoginPostResponse'
+        '400':
+          description: Not Authenticated
+      tags:
+      - Auth
+  /v1/auth/gcs:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuthGcsPostRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthLoginPostResponse'
+        '400':
+          description: Bad request - Missing required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthErrorPostResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal error
+      tags:
+      - Auth
+  /v1/auth/refresh:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - in: query
+        name: currentPath
+        required: false
+        schema:
+          type: string
+          example: /dashboard
+        description: Current path to redirect to after refresh
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/v1AuthLoginPostResponse'
+                - $ref: '#/components/schemas/v1AuthRefreshGetEntryPointResponse'
+        '403':
+          description: Forbidden - Could not refresh token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Could not refresh token
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: error details
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal error
+      tags:
+      - Auth
+  /v1/auth/session:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - in: query
+        name: enterpriseId
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        description: Enterprise ID to get permissions for
+      responses:
+        '200':
+          description: Session updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '403':
+          description: Forbidden - Token expired
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Token expired
+        '422':
+          description: Unprocessable Entity - GRPC error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: GRPC error details
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal error
+      tags:
+      - Auth
+  /v1/auth/session/root:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: Session updated with root permissions successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '403':
+          description: Forbidden - Token expired
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Token expired
+        '422':
+          description: Unprocessable Entity - GRPC error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: GRPC error details
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal error
+      tags:
+      - Auth
+components:
+  schemas:
+    v1AuthUserGetResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: user-12345
+          description: User identifier
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Enterprise identifier
+        permissions:
+          $ref: '#/components/schemas/authPermissions'
+        timeZone:
+          type: string
+          example: America/New_York
+          description: User timezone
+      required:
+      - userId
+      - enterpriseId
+      - permissions
+      - timeZone
+    v1AuthLoginCallbackPostRequest:
+      type: object
+      properties:
+        SAMLResponse:
+          type: string
+          example: PHNhbWxwOlJlc3BvbnNl...
+        RelayState:
+          type: string
+          example: information-to-relay
+      required:
+      - SAMLResponse
+    v1AuthMfaPostRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        mfaType:
+          type: string
+          example: TOTP
+        code:
+          type: string
+          example: 123456
+        stateToken:
+          type: string
+          example: state-token-12345
+      required:
+      - email
+      - mfaType
+      - code
+    v1AuthErrorPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: false
+        token:
+          type:
+          - string
+          - 'null'
+          example: null
+        error:
+          type: string
+          example: email not provided
+      required:
+      - auth
+      - token
+      - error
+    v1AuthMfaTypesGetResponse:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    v1AuthLoginPostRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@example.com
+        password:
+          type: string
+          example: password123
+      required:
+      - username
+      - password
+    v1AuthPutRequest:
+      type: object
+      properties:
+        cert:
+          type: string
+          example: example string
+          description: ' (required)'
+        entryPoint:
+          type: string
+          example: example string
+          description: ' (required)'
+        iamType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        issuer:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - cert
+      - entryPoint
+      - iamType
+      - issuer
+    v1AuthLoginTempPostRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        tempPassword:
+          type: string
+          example: temp123456
+        matchId:
+          type: number
+          example: 12345
+      required:
+      - email
+      - tempPassword
+      - matchId
+    v1AuthGetResponse:
+      type: object
+      properties:
+        cert:
+          type: string
+          example: example string
+        entryPoint:
+          type: string
+          example: example string
+        iamType:
+          type: string
+          example: ENUM_VALUE
+        issuer:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AuthMfaTypesPutRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - allowedMfaTypes
+    authPermissions:
+      type: object
+      properties:
+        billingAndInvoicing:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        licensing:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        orderStatus:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+        support:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+        userAndTenantManagement:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        assetManager:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        globalServices:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+        networkConfigurations:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        safetyAndSecurity:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        servicePolicies:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        compliance:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+        developerTools:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+        insights:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        logs:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        monitoringAndTroubleshooting:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read_write
+        reports:
+          type: string
+          enum:
+          - none
+          - read
+          - read_write
+          example: read
+    v1AuthGcsPostRequest:
+      type: object
+      properties:
+        gcsName:
+          type: string
+          example: my-gcs-instance
+        apiKey:
+          type: string
+          example: api-key-12345
+      required:
+      - gcsName
+      - apiKey
+    v1AuthMfaPatchRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - allowedMfaTypes
+    v1AuthPatchRequest:
+      type: object
+      properties:
+        cert:
+          type: string
+          example: example string
+          description: ' (required)'
+        entryPoint:
+          type: string
+          example: example string
+          description: ' (required)'
+        iamType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        issuer:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - cert
+      - entryPoint
+      - iamType
+      - issuer
+    v1AuthLoginPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: true
+        token:
+          type: string
+          example: gr-auth-12345678-1234-1234-1234-123456789012-87654321-4321-4321-4321-210987654321
+        accountType:
+          type: string
+          enum:
+          - no_account
+          - enterprise
+          - provider
+          - msp
+          - graphiant
+          example: enterprise
+        email:
+          type: string
+          example: user@example.com
+          description: User email address (returned for MFA users)
+        mfaType:
+          type: string
+          example: TOTP
+          description: MFA type (returned for MFA users)
+        stateToken:
+          type: string
+          example: state-token-12345
+          description: State token for MFA verification (returned for MFA users)
+        status:
+          type: string
+          example: AwaitingMfa
+          description: Authentication status (returned for MFA users)
+    v1AuthLoginPreGetResponse:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - SSO
+          - PASSWORD
+          example: PASSWORD
+          description: Authentication method to use
+        email:
+          type: string
+          example: user@example.com
+          description: User email address
+        iam:
+          type: string
+          example: Azure
+          description: Identity provider name (Azure/Okta)
+        relayState:
+          type: string
+          example: information-to-relay
+          description: State to relay after authentication
+        entryPoint:
+          type: string
+          example: https://saml.example.com/sso
+          description: SSO entry point URL
+      required:
+      - method
+      - email
+    v1AuthRefreshGetEntryPointResponse:
+      type: object
+      properties:
+        entryPoint:
+          type: string
+          example: https://saml.example.com/sso
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

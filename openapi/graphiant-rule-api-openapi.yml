@@ -1,0 +1,67 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Rule API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Rule
+paths:
+  /v2/rule/enabledisable:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2RuleEnabledisablePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2RuleEnabledisablePostResponse'
+      tags:
+      - Rule
+components:
+  schemas:
+    v2RuleEnabledisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+          description: Enable or disable. True means enable (required)
+        ruleIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of rule ids to enable/disable (required)
+      additionalProperties: false
+      required:
+      - enable
+      - ruleIdList
+    v2RuleEnabledisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

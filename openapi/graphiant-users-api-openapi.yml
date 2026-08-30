@@ -1,0 +1,765 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Users API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Users
+paths:
+  /v1/users/{email}/password:
+    patch:
+      description: Change password for a user using email and token
+      parameters:
+      - in: path
+        name: email
+        required: true
+        schema:
+          type: string
+          example: user@example.com
+        description: User email address
+      - in: query
+        name: token
+        required: true
+        schema:
+          type: string
+          example: verification-token-12345
+        description: Password reset token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1UsersEmailPasswordPatchRequest'
+      responses:
+        '204':
+          description: Password changed successfully
+        '400':
+          description: Bad request - Invalid input
+        '403':
+          description: Forbidden - Invalid token
+        '500':
+          description: Internal server error
+      tags:
+      - Users
+  /v1/users/{email}/recovery:
+    get:
+      description: Send password recovery email to user
+      parameters:
+      - in: path
+        name: email
+        required: true
+        schema:
+          type: string
+          example: user@example.com
+        description: User email address
+      responses:
+        '200':
+          description: Recovery email sent successfully
+        '400':
+          description: Bad request - Invalid email
+        '500':
+          description: Internal server error
+      tags:
+      - Users
+  /v1/users/{email}/verified:
+    patch:
+      description: Verify user email using verification token
+      parameters:
+      - in: path
+        name: email
+        required: true
+        schema:
+          type: string
+          example: user@example.com
+        description: User email address
+      - in: query
+        name: token
+        required: true
+        schema:
+          type: string
+          example: verification-token-12345
+        description: Email verification token
+      responses:
+        '204':
+          description: User email verified successfully
+        '400':
+          description: Bad request - Invalid input
+        '403':
+          description: Forbidden - Invalid token
+        '500':
+          description: Internal server error
+      tags:
+      - Users
+  /v1/users:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1UsersPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Create a new user account with profile information. Assigns to specified group or default read-only group. Handles both IDP and non-IDP configured enterprises.
+      tags:
+      - Users
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersGetResponse'
+      description: Get user information by user IDs with detailed profile data.
+      tags:
+      - Users
+  /v1/users/{id}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '204':
+          description: No Content
+      description: Delete user account.
+      tags:
+      - Users
+  /v1/users/passwords/expire:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1UsersPasswordsExpirePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersPasswordsExpirePostResponse'
+      description: Expire passwords for multiple users and send password reset emails (Graphiant cloud only).
+      tags:
+      - Users
+  /v1/users/{id}/groups/enterprises:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: userId
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersIdGroupsEnterprisesGetResponse'
+      description: Get enterprise-specific groups for a user.
+      tags:
+      - Users
+  /v1/users/{id}/enterprises:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: userId
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersIdEnterprisesGetResponse'
+      description: Get all enterprises a specific user can access.
+      tags:
+      - Users
+  /v1/users/{id}/groups:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: userId
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersIdGroupsGetResponse'
+      description: Get all groups that a specific user belongs to.
+      tags:
+      - Users
+  /v1/users/{id}/groups/root:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: userId
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UsersIdGroupsRootGetResponse'
+      description: Get root-level groups for a user.
+      tags:
+      - Users
+  /v1/users/{id}/verify:
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1UsersIdVerifyPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Resend account verification email to user.
+      tags:
+      - Users
+components:
+  schemas:
+    v1UsersIdGroupsGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1UsersIdGroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    iamGroup:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        enterpriseIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        enterprisePermissions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/iamEnterprisePermissions'
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1UsersIdVerifyPatchRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    iamEnterprise:
+      type: object
+      properties:
+        acceptEula:
+          type: boolean
+          example: true
+        accountType:
+          type: string
+          example: ENUM_VALUE
+        adminEmail:
+          type: string
+          example: example string
+        cloudProvider:
+          type: string
+          example: ENUM_VALUE
+        companyName:
+          type: string
+          example: example string
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        creditLimit:
+          type: integer
+          format: int32
+          example: 123
+        customers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/iamCustomer'
+        description:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        eulaAgreementDate:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        impersonationEnabled:
+          type: boolean
+          example: true
+        logo:
+          type: string
+          example: example string
+        marketplaceId:
+          type: string
+          example: example string
+        parentCompanyName:
+          type: string
+          example: example string
+        parentEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        portalBanner:
+          type: string
+          example: example string
+        proxyTenantId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        smallLogo:
+          type: string
+          example: example string
+        tokenExpiry:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1UsersEmailPasswordPatchRequest:
+      type: object
+      properties:
+        password:
+          type: string
+          example: newPassword123
+          description: New password for the user
+      required:
+      - password
+    v1UsersPasswordsExpirePostRequest:
+      type: object
+      properties:
+        userIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - userIds
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
+          type: string
+          example: ENUM_VALUE
+        b2b:
+          type: string
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
+          type: string
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1UsersGetResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonUser'
+      additionalProperties: false
+    commonUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        firstName:
+          type: string
+          example: example string
+        lastActiveAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastName:
+          type: string
+          example: example string
+        mfaFactor:
+          type: string
+          example: example string
+        phoneNumber:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+        verified:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1UsersPasswordsExpirePostResponse:
+      type: object
+      properties:
+        failedCount:
+          type: integer
+          format: int32
+          example: 123
+        failedUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamFailedUser'
+        successCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1UsersIdEnterprisesGetResponse:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamEnterprise'
+      additionalProperties: false
+    v1UsersIdGroupsEnterprisesGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    iamFailedUser:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    iamCounts:
+      type: object
+      properties:
+        activeDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        activeUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deactivatedDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emptySitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impairedSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalEdges:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalMsps:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalSites:
+          type: integer
+          format: int64
+          example: 1234567891011
+        upSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    iamEnterprisePermissions:
+      type: object
+      properties:
+        groupType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+      additionalProperties: false
+    iamCustomer:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        companyName:
+          type: string
+          example: example string
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        description:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impersonationEnabled:
+          type: boolean
+          example: true
+        marketplaceId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1UsersPutRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+          description: ' (required)'
+        firstName:
+          type: string
+          example: example string
+          description: ' (required)'
+        groupId:
+          type: string
+          example: example string
+        lastName:
+          type: string
+          example: example string
+          description: ' (required)'
+        timeZone:
+          type: string
+          example: example string
+      additionalProperties: false
+      required:
+      - email
+      - firstName
+      - lastName
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

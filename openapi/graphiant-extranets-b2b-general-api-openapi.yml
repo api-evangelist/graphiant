@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Extranets B2b General API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Extranets B2b General
+paths:
+  /v1/extranets-b2b-general/customers-summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ExtranetsB2bGeneralCustomersSummaryGetResponse'
+      description: Get summary for a B2B extranet peering services customers
+      tags:
+      - Extranets B2b General
+  /v1/extranets-b2b-general/services-summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ExtranetsB2bGeneralServicesSummaryGetResponse'
+      description: Get a summary for all the B2B extranet services
+      tags:
+      - Extranets B2b General
+components:
+  schemas:
+    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
+      type: object
+      properties:
+        info:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
+      additionalProperties: false
+    manaV2B2bExtranetApplication:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isPublisher:
+          type: boolean
+          example: true
+        lanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedCustomers:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        serverIpAddress:
+          type: array
+          items:
+            type: string
+            example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        totalCustomers:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        totalSites:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1ExtranetsB2bGeneralCustomersSummaryGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
+      additionalProperties: false
+    manaV2B2bExtranetCustomerServicesSummary:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedServices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

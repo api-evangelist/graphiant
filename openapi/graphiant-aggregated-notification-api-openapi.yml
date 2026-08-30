@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Aggregated Notification API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Aggregated Notification
+paths:
+  /v2/aggregated-notification/enable-disable:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AggregatedNotificationEnableDisablePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AggregatedNotificationEnableDisablePostResponse'
+      tags:
+      - Aggregated Notification
+  /v2/aggregated-notification/get-state:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AggregatedNotificationGetStateGetResponse'
+      tags:
+      - Aggregated Notification
+components:
+  schemas:
+    v2AggregatedNotificationEnableDisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+          description: Enable or disable aggregated notifications. True means enabled (required)
+      additionalProperties: false
+      required:
+      - enable
+    v2AggregatedNotificationEnableDisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AggregatedNotificationGetStateGetResponse:
+      type: object
+      properties:
+        state:
+          type: boolean
+          example: true
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

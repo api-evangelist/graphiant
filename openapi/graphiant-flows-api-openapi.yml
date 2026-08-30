@@ -1,0 +1,386 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Flows API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Flows
+paths:
+  /v1/flows/flow-table:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1FlowsFlowTablePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1FlowsFlowTablePostResponse'
+      description: Get flow table for the app on the device
+      tags:
+      - Flows
+  /v1/flows/topology:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1FlowsTopologyPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1FlowsTopologyPostResponse'
+      description: Get flow based node and circuit topology for the device
+      tags:
+      - Flows
+components:
+  schemas:
+    ipfixAppFlowTableSelector:
+      type: object
+      properties:
+        circuitName:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Filter by circuit name(s)
+        slaClass:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: Filter by SLA class(es)
+      additionalProperties: false
+    v1FlowsFlowTablePostResponse:
+      type: object
+      properties:
+        cursorRef:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        flowTable:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixAppFlowTable'
+      additionalProperties: false
+    ipfixNetworkTopologyDelta:
+      type: object
+      properties:
+        edgesAdded:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
+        edgesDeleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
+        nodesAdded:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
+        nodesDeleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2ConnectivityGraphNode:
+      type: object
+      properties:
+        connections:
+          $ref: '#/components/schemas/manaV2GraphiantConnections'
+        id:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        overrideRegion:
+          type: string
+          example: example string
+        region:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1FlowsFlowTablePostRequest:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: the app ID in the question from overall visuals view
+        appName:
+          type: string
+          example: example string
+        cursorRef:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDia:
+          type: boolean
+          example: true
+        numFlowRecords:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Number of app flow records requested by UI.
+        selector:
+          $ref: '#/components/schemas/ipfixAppFlowTableSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    ipfixNetworkTopology:
+      type: object
+      properties:
+        circuitStatus:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+            example: 123
+            minimum: 0
+        delta:
+          $ref: '#/components/schemas/ipfixNetworkTopologyDelta'
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
+        flows:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Application flow count
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    ipfixAppTopologySelector:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Filter by app ID
+        appName:
+          type: string
+          example: example string
+          description: Filter by application name
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+          description: Filter by SLA class
+      additionalProperties: false
+    manaV2ConnectivityGraphEdge:
+      type: object
+      properties:
+        a:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        b:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        connections:
+          $ref: '#/components/schemas/manaV2GraphiantConnections'
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1FlowsTopologyPostRequest:
+      type: object
+      properties:
+        appSelector:
+          $ref: '#/components/schemas/ipfixAppTopologySelector'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    v1FlowsTopologyPostResponse:
+      type: object
+      properties:
+        networkTopology:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixNetworkTopology'
+      additionalProperties: false
+    manaV2IpsecConnection:
+      type: object
+      properties:
+        destIp:
+          type: string
+          example: example string
+        destPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    ipfixAppFlowTable:
+      type: object
+      properties:
+        destIp:
+          type: string
+          example: example string
+        destPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        dlCircuitName:
+          type: string
+          example: example string
+        dlUsage:
+          type: number
+          format: double
+          example: 123.45
+          description: Down link application usage in MB
+        egressLocalCoreRegion:
+          type: string
+          example: example string
+        ingressLocalCoreRegion:
+          type: string
+          example: example string
+        lanSegment:
+          type: string
+          example: example string
+        protocol:
+          type: string
+          example: example string
+        remoteCoreRegion:
+          type: string
+          example: example string
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+        srcIp:
+          type: string
+          example: example string
+        srcPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ulCircuitName:
+          type: string
+          example: example string
+        ulUsage:
+          type: number
+          format: double
+          example: 123.45
+          description: Up link application usage in MB
+      additionalProperties: false
+    statsmonTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 300
+          minimum: 0
+          description: the size of the time window in seconds (required)
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+      required:
+      - bucketSizeSec
+    manaV2GraphiantConnections:
+      type: object
+      properties:
+        controlConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+        coreConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+        managementConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

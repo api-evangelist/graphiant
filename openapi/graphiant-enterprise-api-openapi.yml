@@ -1,0 +1,666 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Enterprise API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Enterprise
+paths:
+  /v1/enterprise/snapshot:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnterpriseSnapshotGetResponse'
+      description: Get a all of the device snapshots for every device in an enterprise
+      tags:
+      - Enterprise
+  /v1/enterprise/allocation:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnterpriseAllocationGetResponse'
+      description: Get all allocation for the given enterprise on a given month
+      tags:
+      - Enterprise
+  /v1/enterprise/configuration:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnterpriseConfigurationGetResponse'
+      description: Get enterprise-level information relevant to device configuration
+      tags:
+      - Enterprise
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EnterpriseConfigurationPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnterpriseConfigurationPutResponse'
+      description: Update enterprise-level information relevant to device configuration
+      tags:
+      - Enterprise
+  /v1/enterprise/contract:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EnterpriseContractPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnterpriseContractPutResponse'
+      description: Update an enterprise (or MSP tenant) to use a new monthly or term-based contract. For MSPs, sets total pool credits and contract shape; per-managed-enterprise allocations are set via IAM CreateEnterprise / UpdateEnterprise.
+      tags:
+      - Enterprise
+components:
+  schemas:
+    manaV2ZeroTrustConsumptionSummary:
+      type: object
+      properties:
+        userAgentCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of devices that have been installed with the zero trust agent
+      additionalProperties: false
+    manaV2GlobalBandwidthConsumptionSummary:
+      type: object
+      properties:
+        allocatedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits allocated for the current month
+        consumedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits billed for the current month. It equals the the higher value between the credits allocated and used for the month
+        priorAllocatedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits allocated for the prior month
+        priorConsumedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits billed for the prior month.
+        recommendedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Expected amount of credits to allocate for the month to match the overall contracted amount. For monthly-contracted enterprises, this is equivalent to the monthly number of credits being billed while for term-based-contracted enterprises, this is equivalent to the number of credits to use up in this and the following months to use up exactly the number of credits remaining in the contract.
+      additionalProperties: false
+    manaV2deviceSnapshotRow:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        region:
+          type: string
+          example: example string
+        site:
+          type: string
+          example: example string
+        snapshotCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DeviceSnapshot'
+        uptime:
+          $ref: '#/components/schemas/googleProtobufDuration'
+      additionalProperties: false
+    manaV2RegionalBandwidthConsumptionSummary:
+      type: object
+      properties:
+        allocation:
+          $ref: '#/components/schemas/manaV2BandwidthInfo'
+        consumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits billed for the region. It equals the higher value between total credits allocated and used plus any additional dia consumption
+        coreConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits used for calculating credits on core networks for this region
+        gwConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits used for calculating credits on core networks for this region
+        internetConsumption:
+          $ref: '#/components/schemas/manaV2InternetAccessBandwidthInfo'
+        usage:
+          $ref: '#/components/schemas/manaV2BandwidthInfo'
+      additionalProperties: false
+    manaV2DeviceSnapshot:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/commonUserInfo'
+        category:
+          type: string
+          example: ENUM_VALUE
+        createdOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        data:
+          $ref: '#/components/schemas/manaV2DeviceSnapshotData'
+        golden:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: 6-1-24-status-check
+          description: name for the snapshot
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2TimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
+          type: string
+          example: ENUM_VALUE
+        b2b:
+          type: string
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
+          type: string
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    commonUserInfo:
+      type: object
+      properties:
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        exp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        originalEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeZone:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2DeviceSnapshotData:
+      type: object
+      properties:
+        OSPFInstalledRouteCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        T2SessionCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        TWAMPSessionCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bfdSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        bgpNeighborIpList:
+          type: array
+          items:
+            type: string
+            example: example string
+        bgpSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        deviceRole:
+          type: string
+          example: ENUM_VALUE
+        failedServicesCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        graphnosVersion:
+          type: string
+          example: example string
+        installedLabels:
+          type: integer
+          format: int32
+          example: 123
+        ipsecSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        ongoingAlerts:
+          type: integer
+          format: int32
+          example: 123
+        ospfNeighborIpList:
+          type: array
+          items:
+            type: string
+            example: example string
+        ospfSessionCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    manaV2InternetAccessBandwidthInfo:
+      type: object
+      properties:
+        internetBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Bandwidth value associated with dia gateways. This should either be 0, 10, or 100.
+        internetCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Additional credits to support the provided DIA bandwidth
+      additionalProperties: false
+    manaV2BandwidthInfo:
+      type: object
+      properties:
+        combinedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Sum of the credits associated with cloud and gateway networks
+        coreBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Soft-upper-bounded max speed in gigabytes per second associated with core network connections
+        coreCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits derived from bandwidth on core network connections
+        gwBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Soft-upper-bounded max speed in gigabytes per second associated with gateway connections
+        gwCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits derived from bandwidth on gateway network connections
+      additionalProperties: false
+    v1EnterpriseContractPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1EnterpriseConfigurationGetResponse:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
+      additionalProperties: false
+    v1EnterpriseAllocationGetResponse:
+      type: object
+      properties:
+        consumptionSummary:
+          $ref: '#/components/schemas/manaV2BandwidthConsumptionSummary'
+        conversionHolders:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2AllocationConversionHolder'
+        regionalAllocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RegionalAllocation'
+        zeroTrustSummary:
+          $ref: '#/components/schemas/manaV2ZeroTrustConsumptionSummary'
+      additionalProperties: false
+    manaV2AllocationConversionHolderBin:
+      type: object
+      properties:
+        allocationUpperBound:
+          type: number
+          format: float
+          example: 12.34
+          description: Int32 value indicating the conversion rates apply from the prior highest upper bound to this upper bound
+        coreConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits for connections to core devices
+        coreConversionRate:
+          type: integer
+          format: int32
+          example: 123
+        gwConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits for connections to gateway devices
+        gwConversionRate:
+          type: integer
+          format: int32
+          example: 123
+        isPrivate:
+          type: boolean
+          example: true
+          description: True-only flag indicating the conversion rates apply within a private context such as in-country
+      additionalProperties: false
+    manaV2ContractualBandwidthConsumptionSummary:
+      type: object
+      properties:
+        expirationDate:
+          $ref: '#/components/schemas/manaV2TimePeriod'
+        totalConsumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed over the entirety the enterprise's contracts
+        totalContractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        totalRemainingCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of unused credits remaining under the current contract
+      additionalProperties: false
+    manaV2DeviceSnapshotList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DeviceSnapshot'
+      additionalProperties: false
+    v1EnterpriseContractPutRequest:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Amount of credits billed for a contract term or per month when no expiration is provided. For an MSP tenant, this is the total credits in the MSP billing pool (from which credits are allocated to managed enterprises).
+        expirationDate:
+          $ref: '#/components/schemas/manaV2TimePeriod'
+      additionalProperties: false
+    manaV2AllocationConversionHolder:
+      type: object
+      properties:
+        bins:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AllocationConversionHolderBin'
+      additionalProperties: false
+    v1EnterpriseConfigurationPutRequest:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
+      additionalProperties: false
+    manaV2RegionalAllocation:
+      type: object
+      properties:
+        allocationCore:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for core network connections on this region
+        allocationGw:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for gateway connections on this region
+        allocationInternet:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for dia gateway internet access on this region. Must be 0, 10, or 100
+        creditCore:
+          type: number
+          format: float
+          example: 12.34
+        creditGw:
+          type: number
+          format: float
+          example: 12.34
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        regionName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1EnterpriseSnapshotGetResponse:
+      type: object
+      properties:
+        deviceSnapshotRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2deviceSnapshotRow'
+        deviceSnapshotMap:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2DeviceSnapshotList'
+      additionalProperties: false
+    v1EnterpriseConfigurationPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2EnterpriseConfiguration:
+      type: object
+      properties:
+        encryption:
+          type: string
+          example: ENUM_VALUE
+        useEncryption:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2BandwidthConsumptionSummary:
+      type: object
+      properties:
+        contractualSummary:
+          $ref: '#/components/schemas/manaV2ContractualBandwidthConsumptionSummary'
+        globalSummary:
+          $ref: '#/components/schemas/manaV2GlobalBandwidthConsumptionSummary'
+        regionalSummaries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2RegionalBandwidthConsumptionSummary'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

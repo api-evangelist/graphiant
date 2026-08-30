@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Notificationmutelist API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Notificationmutelist
+paths:
+  /v2/notificationmutelist/create:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2NotificationmutelistCreatePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationmutelistCreatePostResponse'
+      tags:
+      - Notificationmutelist
+  /v2/notificationmutelist/deletebyalertid/{alertId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: alertId
+        in: path
+        required: true
+        description: Alert id of the alert to delete allowlist/mutelist for
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse'
+      tags:
+      - Notificationmutelist
+  /v2/notificationmutelist/deletebyentityid/{entityId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: entityId
+        in: path
+        required: true
+        description: Entity id of the alert to delete allowlist/mutelist for
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse'
+      tags:
+      - Notificationmutelist
+  /v2/notificationmutelist/{ruleId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: ruleId
+        in: path
+        required: true
+        description: Alert id of the alert to retrieve allowlist/mutelist for
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationmutelistRuleIdGetResponse'
+      tags:
+      - Notificationmutelist
+components:
+  schemas:
+    v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    alertserviceAllowAlertNotifcationListRecord:
+      type: object
+      properties:
+        createTime:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceInterface:
+          type: string
+          example: example string
+        deviceName:
+          type: string
+          example: example string
+        enterpriseName:
+          type: string
+          example: example string
+        entityId:
+          type: string
+          example: example string
+        isWanCircuit:
+          type: boolean
+          example: true
+        noteText:
+          type: string
+          example: example string
+        peerDeviceInterface:
+          type: string
+          example: example string
+        peerDeviceName:
+          type: string
+          example: example string
+        ruleId:
+          type: string
+          example: example string
+        ruleName:
+          type: string
+          example: example string
+        siteName:
+          type: string
+          example: example string
+        vrfId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationmutelistCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationmutelistCreatePostRequest:
+      type: object
+      properties:
+        alertId:
+          type: string
+          example: example string
+          description: Alert id of the alert to create allowlist/mutelist for (required)
+        noteText:
+          type: string
+          example: example string
+          description: Optional note
+      additionalProperties: false
+      required:
+      - alertId
+    v2NotificationmutelistRuleIdGetResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

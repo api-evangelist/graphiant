@@ -1,0 +1,202 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Childalertlist API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Childalertlist
+paths:
+  /v2/childalertlist:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2ChildalertlistPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2ChildalertlistPostResponse'
+      tags:
+      - Childalertlist
+components:
+  schemas:
+    alertserviceChildrenAlertListResponse:
+      type: object
+      properties:
+        alertList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAlertRecord'
+      additionalProperties: false
+    v2ChildalertlistPostResponse:
+      type: object
+      properties:
+        alertList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAlertRecord'
+      additionalProperties: false
+    alertserviceAlertRecord:
+      type: object
+      properties:
+        acknowledgedList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of users that have acknowledged the alert
+        acknowledgementReason:
+          type: string
+          example: example string
+          description: Reason put by users when acknowledged
+        alertBody:
+          type: string
+          example: example string
+          description: Latest event(s) behind the alert (required)
+        alertId:
+          type: string
+          example: example string
+          description: Unique id of the alert (required)
+        allowListed:
+          type: boolean
+          example: true
+          description: whether entity in alert is put in allowlist/excludelist, disabling alert (required)
+        childrenAlertList:
+          $ref: '#/components/schemas/alertserviceChildrenAlertListResponse'
+        descendantPresent:
+          type: boolean
+          example: true
+          description: Whether or not descendants are present (required)
+        deviceId:
+          type: string
+          example: example string
+          description: Internal device id to navigate to troubleshooting
+        endTime:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+          description: When this alert was last seen as a continuation (required)
+        enterpriseId:
+          type: string
+          example: example string
+          description: Internal enterprise id to navigate to troubleshooting (required)
+        entity:
+          type: string
+          example: example string
+          description: Entity that triggered the alert. Edge, core, etc. (required)
+        interfaceName:
+          type: string
+          example: example string
+          description: Device Interface Name
+        muteListed:
+          type: boolean
+          example: true
+          description: whether entity in alert is put in notification mutelist (required)
+        notificationCreated:
+          type: boolean
+          example: true
+          description: whether notification exists for this rule (required)
+        occurrences:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+          description: Number of times alert was raised as a continuation (required)
+        peerDeviceId:
+          type: string
+          example: example string
+          description: peer device id
+        peerInterfaceName:
+          type: string
+          example: example string
+          description: Peer Interface Name
+        peerName:
+          type: string
+          example: example string
+          description: Peer Name
+        plane:
+          type: string
+          example: ENUM_VALUE
+          description: Plane of the rule generating the alert (required)
+        reason:
+          type: string
+          example: example string
+          description: Reason why alert was generated (required)
+        recommendation:
+          type: string
+          example: example string
+          description: Recommendation to recover from alert (required)
+        ruleId:
+          type: string
+          example: example string
+          description: Unique id of the rule generating the alert (required)
+        severity:
+          type: string
+          example: Low
+          description: Severity of the rule behind the alert (required)
+        siteId:
+          type: string
+          example: example string
+          description: Internal site id to navigate to troubleshooting
+        startTime:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+          description: When this alert was first triggered (required)
+        status:
+          type: string
+          example: ENUM_VALUE
+          description: Status of the alert whether active or inactive (required)
+        troubleshootingDisabledReason:
+          type: string
+          example: example string
+          description: Reason to not navigate to troubleshooting
+        troubleshootingEnabled:
+          type: boolean
+          example: true
+          description: Navigate or not navigate to troubleshooting dashboard (required)
+        tunnelInterfaceName:
+          type: string
+          example: example string
+          description: Tunnel Interface Name
+        type:
+          type: string
+          example: example string
+          description: Type of alert (required)
+      additionalProperties: false
+    v2ChildalertlistPostRequest:
+      type: object
+      properties:
+        alertId:
+          type: string
+          example: example string
+          description: Alert id of the parent alert (required)
+      additionalProperties: false
+      required:
+      - alertId
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

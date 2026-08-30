@@ -1,0 +1,172 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Lldp API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Lldp
+paths:
+  /v1/lldp/{interfaceId}/neighbors:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: interfaceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LldpInterfaceIdNeighborsGetResponse'
+      description: Get the LLDP neighbors for an interface and optionally for a specific vendor
+      tags:
+      - Lldp
+  /v1/lldp/{interfaceId}/summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: interfaceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LldpInterfaceIdSummaryGetResponse'
+      description: Get the summary of LLDP neighbors for an interface
+      tags:
+      - Lldp
+  /v1/lldp/{interfaceId}/vendors:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: interfaceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LldpInterfaceIdVendorsGetResponse'
+      description: Get the list LLDP vendors for an interface
+      tags:
+      - Lldp
+components:
+  schemas:
+    manaV2VendorDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        neighborCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1LldpInterfaceIdVendorsGetResponse:
+      type: object
+      properties:
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2VendorDetail'
+      additionalProperties: false
+    manaV2LldpNeighbor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interface:
+          type: string
+          example: example string
+        ipAddress:
+          type: string
+          example: example string
+        macAddress:
+          type: string
+          example: example string
+        port:
+          type: string
+          example: example string
+        systemName:
+          type: string
+          example: example string
+        vendor:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1LldpInterfaceIdSummaryGetResponse:
+      type: object
+      properties:
+        numNeighbors:
+          type: integer
+          format: int64
+          example: 1234567891011
+        numVendors:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1LldpInterfaceIdNeighborsGetResponse:
+      type: object
+      properties:
+        neighbors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2LldpNeighbor'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

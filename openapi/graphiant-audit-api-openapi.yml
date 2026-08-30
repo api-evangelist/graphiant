@@ -1,0 +1,315 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Audit API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Audit
+paths:
+  /v1/audit/logs:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuditLogsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuditLogsPostResponse'
+      tags:
+      - Audit
+  /v2/audit/logs:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AuditLogsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AuditLogsPostResponse'
+      tags:
+      - Audit
+components:
+  schemas:
+    auditTarget:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AuditLogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonAuditLog'
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    auditActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1AuditLogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        histogram:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonHistogram'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditAuditEntry'
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    auditmonAuditLog:
+      type: object
+      properties:
+        action:
+          type: string
+          example: example string
+        activityId:
+          type: string
+          example: example string
+        category:
+          type: string
+          example: ENUM_VALUE
+        entity:
+          $ref: '#/components/schemas/auditActivityItem'
+        jobType:
+          type: string
+          example: ENUM_VALUE
+        target:
+          $ref: '#/components/schemas/auditActivityItem'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        user:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AuditLogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        histogramBucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonSelector'
+      additionalProperties: false
+    auditAuditEntry:
+      type: object
+      properties:
+        activity:
+          type: string
+          example: example string
+        actor:
+          type: string
+          example: example string
+        category:
+          type: string
+          example: ENUM_VALUE
+        end:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        failedTargetResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditTargetResult'
+        info:
+          type: string
+          example: example string
+        reason:
+          type: string
+          example: example string
+        service:
+          type: string
+          example: ENUM_VALUE
+        start:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        status:
+          type: string
+          example: ENUM_VALUE
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditTargetResult'
+      additionalProperties: false
+    v2AuditLogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selector:
+          $ref: '#/components/schemas/auditmonAuditLogsV2Selector'
+      additionalProperties: false
+    auditmonAuditLogsV2Selector:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        jobTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        users:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    auditmonHistogram:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    auditTargetResult:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        target:
+          $ref: '#/components/schemas/auditTarget'
+      additionalProperties: false
+    auditmonSelector:
+      type: object
+      properties:
+        field:
+          type: string
+          example: AuditFieldId
+          description: Field to search
+        values:
+          type: array
+          items:
+            type: string
+            example: xyz
+            description: Multiple values are treated as OR
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

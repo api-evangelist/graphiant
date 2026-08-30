@@ -1,0 +1,92 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Allowlist By Enterprise API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Allowlist By Enterprise
+paths:
+  /v2/allowlist-by-enterprise:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AllowlistByEnterpriseGetResponse'
+      tags:
+      - Allowlist By Enterprise
+components:
+  schemas:
+    alertserviceAllowAlertNotifcationListRecord:
+      type: object
+      properties:
+        createTime:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceInterface:
+          type: string
+          example: example string
+        deviceName:
+          type: string
+          example: example string
+        enterpriseName:
+          type: string
+          example: example string
+        entityId:
+          type: string
+          example: example string
+        isWanCircuit:
+          type: boolean
+          example: true
+        noteText:
+          type: string
+          example: example string
+        peerDeviceInterface:
+          type: string
+          example: example string
+        peerDeviceName:
+          type: string
+          example: example string
+        ruleId:
+          type: string
+          example: example string
+        ruleName:
+          type: string
+          example: example string
+        siteName:
+          type: string
+          example: example string
+        vrfId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AllowlistByEnterpriseGetResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

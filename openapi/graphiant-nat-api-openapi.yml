@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Nat API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Nat
+paths:
+  /v1/nat/entries/{deviceId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1NatEntriesDeviceIdGetResponse'
+      description: Get the NAT entries for the device
+      tags:
+      - Nat
+  /v1/nat/utilization/{deviceId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1NatUtilizationDeviceIdGetResponse'
+      description: Get the NAT usage for the device
+      tags:
+      - Nat
+components:
+  schemas:
+    ipfixNatEntry:
+      type: object
+      properties:
+        destinationIpAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        insideGlobalIpAddress:
+          type: string
+          example: example string
+        insideGlobalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        insideLocalIpAddress:
+          type: string
+          example: example string
+        insideLocalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        natType:
+          type: string
+          example: ENUM_VALUE
+        outsideGlobalIpAddress:
+          type: string
+          example: example string
+        outsideGlobalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        preDestinationIpAddress:
+          type: string
+          example: example string
+        preDestinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        vrfId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    v1NatUtilizationDeviceIdGetResponse:
+      type: object
+      properties:
+        natUsage:
+          $ref: '#/components/schemas/ipfixNatUsage'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1NatEntriesDeviceIdGetResponse:
+      type: object
+      properties:
+        natEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixNatEntry'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    ipfixNatUsage:
+      type: object
+      properties:
+        currentCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountExtranet:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountPat:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountStatic:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        maxCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    commonPageInfo:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+          description: The page number we are currently on (required)
+        endCursor:
+          type: string
+          example: xxxxxxy
+          description: Cursor pointing to the last record on the current page
+        hasNextPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page after this one in the resultset based on current position
+        hasPrevPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page before this one in the resultset based on current position
+        startCursor:
+          type: string
+          example: xxxxxx
+          description: Cursor pointing to the first record on the current page
+        totalPages:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: The number of pages in the complete resultset based on the current length of the page (required)
+        totalRecords:
+          type: integer
+          format: int32
+          example: 400
+          minimum: 0
+          description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

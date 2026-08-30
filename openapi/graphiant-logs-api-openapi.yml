@@ -1,0 +1,159 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Logs API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Logs
+paths:
+  /v1/logs:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1LogsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LogsPostResponse'
+      tags:
+      - Logs
+components:
+  schemas:
+    syslogmonHistogram:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    syslogmonSyslogsSelector:
+      type: object
+      properties:
+        field:
+          type: string
+          example: ENUM_VALUE
+        values:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    syslogmonLog:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        facility:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        level:
+          type: string
+          example: ENUM_VALUE
+        message:
+          type: string
+          example: example string
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1LogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        customerView:
+          type: boolean
+          example: true
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        histogramBucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonSyslogsSelector'
+      additionalProperties: false
+    v1LogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        histogram:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonHistogram'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonLog'
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

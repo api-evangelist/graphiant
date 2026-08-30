@@ -1,0 +1,1038 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Lan Segments API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Lan Segments
+paths:
+  /v1/lan-segments/interfaces/public:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: device id
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LanSegmentsInterfacesPublicGetResponse'
+      description: 'Per LAN segment (VRF) on a device: interfaces split by globally routable IPv4 (for Public VIF / BGP)'
+      tags:
+      - Lan Segments
+  /v1/lan-segments:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: deviceIds
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+          example:
+          - 0
+        style: form
+        explode: true
+      - name: filter
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: gatewayCloudProvider
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: ENUM_VALUE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1LanSegmentsGetResponse'
+      description: Get LAN Segments for the current enterprise
+      tags:
+      - Lan Segments
+components:
+  schemas:
+    manaV2OverlayFilters:
+      type: object
+      properties:
+        inboundFilter:
+          type: string
+          example: example string
+        outboundFilter:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BgpMultipath:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2OspfInterface:
+      type: object
+      properties:
+        authentication:
+          $ref: '#/components/schemas/manaV2OspfAuthentication'
+        bfd:
+          $ref: '#/components/schemas/manaV2BfdInstance'
+        bfdNeighbors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BfdNeighbor'
+        cost:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        deadInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        deadIntervalValue:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        drPriority:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        helloInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        helloIntervalValue:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ifIndex:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        interface:
+          type: string
+          example: example string
+        maxTransmissionUnit:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        mtuIgnore:
+          type: boolean
+          example: true
+        prefixSid:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        retransmitInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        retransmitIntervalValue:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2IpfixExporter:
+      type: object
+      properties:
+        destinationAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        errorMessage:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        monitoredSegments:
+          type: array
+          items:
+            type: string
+            example: example string
+        name:
+          type: string
+          example: example string
+        sampleMode:
+          type: string
+          example: example string
+        sampleRate:
+          type: integer
+          format: int64
+          example: 1234567891011
+        sourceAddress:
+          type: string
+          example: example string
+        sourceInterface:
+          type: string
+          example: example string
+        sourceSegment:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BfdNeighbor:
+      type: object
+      properties:
+        desiredMinimumTxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ifIndex:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        interface:
+          type: string
+          example: example string
+        lastUpdated:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localDiag:
+          type: string
+          example: ENUM_VALUE
+        peerAddress:
+          type: string
+          example: example string
+        remoteDiag:
+          type: string
+          example: ENUM_VALUE
+        requiredMinimumRxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        segmentName:
+          type: string
+          example: example string
+        sourceAddress:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        timeInState:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        up:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2StaticRouteNexthop:
+      type: object
+      properties:
+        circuit:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        metric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        nextHopAddress:
+          type: string
+          example: example string
+        nexthop:
+          type: string
+          example: example string
+        outgoingInterface:
+          type: string
+          example: example string
+        thirdPartyIpsecTunnel:
+          type: string
+          example: example string
+      additionalProperties: false
+    commonPageInfo:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+          description: The page number we are currently on (required)
+        endCursor:
+          type: string
+          example: xxxxxxy
+          description: Cursor pointing to the last record on the current page
+        hasNextPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page after this one in the resultset based on current position
+        hasPrevPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page before this one in the resultset based on current position
+        startCursor:
+          type: string
+          example: xxxxxx
+          description: Cursor pointing to the first record on the current page
+        totalPages:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: The number of pages in the complete resultset based on the current length of the page (required)
+        totalRecords:
+          type: integer
+          format: int32
+          example: 400
+          minimum: 0
+          description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+    manaV2OspfArea:
+      type: object
+      properties:
+        areaId:
+          type: string
+          example: example string
+        bfd:
+          $ref: '#/components/schemas/manaV2BfdInstance'
+        bfdNeighbors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BfdNeighbor'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2OspfInterface'
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2BgpAggregation:
+      type: object
+      properties:
+        asSet:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        prefix:
+          type: string
+          example: example string
+        summaryOnly:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2OspfRedistribute:
+      type: object
+      properties:
+        metric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        metricType:
+          type: string
+          example: ENUM_VALUE
+        redistType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2OspFv2Process:
+      type: object
+      properties:
+        adminDistance:
+          type: integer
+          format: int32
+          example: 100
+          minimum: 0
+          description: Administrative Distance for routes installed
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2OspfArea'
+        autoRouterId:
+          type: boolean
+          example: true
+        defaultOriginate:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        redistributedProtocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2OspfRedistribute'
+        routerId:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2DhcpServerIpRange:
+      type: object
+      properties:
+        end:
+          type: string
+          example: example string
+        start:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2DhcpLease:
+      type: object
+      properties:
+        endsAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipAddress:
+          type: string
+          example: example string
+        macAddress:
+          type: string
+          example: example string
+        vrf:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2OspFv3Process:
+      type: object
+      properties:
+        adminDistance:
+          type: integer
+          format: int32
+          example: 100
+          minimum: 0
+          description: Administrative Distance for routes installed
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2OspfArea'
+        defaultOriginate:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        redistributedProtocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2OspfRedistribute'
+        routerId:
+          type: string
+          example: example string
+        version:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2BgpDynamicNeighborOperPeer:
+      type: object
+      properties:
+        lastOperStatusChange:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localAddress:
+          type: string
+          example: example string
+          description: Local address used for this peer session, if known from oper
+        operStatus:
+          type: boolean
+          example: true
+          description: True when the BGP session to this peer is operationally up (e.g. established)
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Peer ASN from oper, if reported
+        remoteAddress:
+          type: string
+          example: example string
+          description: Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)
+        state:
+          type: string
+          example: ENUM_VALUE
+          description: BGP FSM state for this peer session
+      additionalProperties: false
+    manaV2OspfAuthentication:
+      type: object
+      properties:
+        key:
+          type: string
+          example: example string
+          description: Shared secret for OSPFv2 MD5 authentication on this interface
+        keyId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Identifier of the OSPFv2 MD5 authentication key configured on this interface
+      additionalProperties: false
+    manaV2BgpNeighborAddressFamily:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        inboundPolicy:
+          type: string
+          example: example string
+        outboundPolicy:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1LanSegmentsGetResponse:
+      type: object
+      properties:
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Vrf'
+      additionalProperties: false
+    manaV2LanSegmentPublicInterfacesLists:
+      type: object
+      properties:
+        privateInterfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2LanSegmentPublicInterfaceEntry'
+        publicInterfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2LanSegmentPublicInterfaceEntry'
+      additionalProperties: false
+    manaV2BgpNeighbor:
+      type: object
+      properties:
+        addressFamilies:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpNeighborAddressFamily'
+        allowAsIn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        asOverride:
+          type: boolean
+          example: true
+        bfd:
+          $ref: '#/components/schemas/manaV2BfdInstance'
+        bfdNeighbor:
+          $ref: '#/components/schemas/manaV2BfdNeighbor'
+        bgpType:
+          type: string
+          example: ENUM_VALUE
+        defaultOriginate:
+          type: string
+          example: ENUM_VALUE
+          description: Set when default route needs to be advertised in BGP domain
+        dynamicNeighborPeers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpDynamicNeighborOperPeer'
+        enabled:
+          type: boolean
+          example: true
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        localAddress:
+          type: string
+          example: example string
+        localInterface:
+          type: string
+          example: example string
+        maxPrefix:
+          type: integer
+          format: int32
+          example: 10000
+          minimum: 0
+          description: Maximum number of prefixes that can be received from neighbor
+        md5Password:
+          type: string
+          example: example string
+        multiHop:
+          type: integer
+          format: int32
+          example: 5
+          minimum: 0
+          description: Set when EBGP multi-hop functionality is enabled
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        remoteAddress:
+          type: string
+          example: example string
+        removePrivateAs:
+          type: boolean
+          example: true
+        sendCommunity:
+          type: boolean
+          example: true
+          description: Flag for sending standard, extended, and large communities
+        state:
+          type: string
+          example: ENUM_VALUE
+        timeSinceLastOperChange:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        up:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2DnsServers:
+      type: object
+      properties:
+        primary:
+          type: string
+          example: example string
+        secondary:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BgpRedistribute:
+      type: object
+      properties:
+        bgp:
+          type: boolean
+          example: true
+        connected:
+          type: boolean
+          example: true
+        dia:
+          type: boolean
+          example: true
+        ospfv2:
+          type: boolean
+          example: true
+        static:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2StaticRoute:
+      type: object
+      properties:
+        administrativeDistance:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        description:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        nextHop:
+          $ref: '#/components/schemas/manaV2StaticRouteNexthop'
+        nextHops:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2StaticRouteNexthop'
+        prefix:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2Vrf:
+      type: object
+      properties:
+        bgpAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpAggregation'
+        bgpMultipath:
+          $ref: '#/components/schemas/manaV2BgpMultipath'
+        bgpNeighbors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpNeighbor'
+        bgpRedistributions:
+          $ref: '#/components/schemas/manaV2BgpRedistribute'
+        description:
+          type: string
+          example: example string
+        dhcpSubnets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DhcpServerPool'
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        function:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipfixExporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpfixExporter'
+        name:
+          type: string
+          example: example string
+        natRuleset:
+          type: string
+          example: example string
+        networks:
+          type: array
+          items:
+            type: string
+            example: example string
+        ospfv2Process:
+          $ref: '#/components/schemas/manaV2OspFv2Process'
+        ospfv3Process:
+          $ref: '#/components/schemas/manaV2OspFv3Process'
+        overlayFilters:
+          $ref: '#/components/schemas/manaV2OverlayFilters'
+        routable:
+          type: boolean
+          example: true
+        routeDistinguisher:
+          type: string
+          example: example string
+        staticRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2StaticRoute'
+        syslogTargets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SyslogCollector'
+        trafficRuleset:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2DhcpServerPool:
+      type: object
+      properties:
+        defaultLeaseTimeSecs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        description:
+          type: string
+          example: example string
+        domainName:
+          type: string
+          example: example string
+        gateway:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interface:
+          type: string
+          example: example string
+        ipPrefix:
+          type: string
+          example: example string
+        ipVersion:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        leases:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DhcpLease'
+        maxLeaseTimeSecs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        minLeaseTimeSecs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        nameservers:
+          $ref: '#/components/schemas/manaV2DnsServers'
+        ranges:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DhcpServerIpRange'
+        staticLeases:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DhcpStaticLease'
+        totalAddresses:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        utilization:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2DhcpStaticLease:
+      type: object
+      properties:
+        hostname:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipAddress:
+          type: string
+          example: example string
+        macAddress:
+          type: string
+          example: example string
+        vrf:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2SyslogCollector:
+      type: object
+      properties:
+        destinationHost:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        enabled:
+          type: boolean
+          example: true
+        errorMessage:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        severity:
+          type: string
+          example: ENUM_VALUE
+        sourceInterface:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        transport:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1LanSegmentsInterfacesPublicGetResponse:
+      type: object
+      properties:
+        lanSegmentIds:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2LanSegmentPublicInterfacesLists'
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2BfdInstance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        minimumInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        multiplier:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2LanSegmentPublicInterfaceEntry:
+      type: object
+      properties:
+        interfaceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: network.interface id (required)
+        ipv4Addresses:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: IPv4 host/prefix strings from interface_ip_address (non-stale rows)
+        name:
+          type: string
+          example: example string
+          description: Device interface name (BGP local_interface uses this) (required)
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Interface storage provider (cloud provider for gateway LAN interfaces)
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

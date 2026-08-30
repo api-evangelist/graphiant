@@ -1,0 +1,82 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Search API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Search
+paths:
+  /v1/search:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: maxResults
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      - name: search
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SearchGetResponse'
+      tags:
+      - Search
+components:
+  schemas:
+    searchSearchResult:
+      type: object
+      properties:
+        context:
+          type: string
+          example: 1
+          description: A search context from the SearchContext enum (required)
+        id:
+          type: integer
+          format: int64
+          example: 1234
+          minimum: 0
+          description: A search context from the SearchContext enum (required)
+        result:
+          type: string
+          example: example string
+          description: A search result (required)
+      additionalProperties: false
+    v1SearchGetResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchSearchResult'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

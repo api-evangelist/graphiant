@@ -1,0 +1,240 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Ztagent API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Ztagent
+paths:
+  /v1/ztagent/agents:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: createdDateEnd
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: createdDateStart
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: endpoints
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            example: example string
+          example:
+          - example
+        style: form
+        explode: true
+      - name: hostname
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: limit
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 123
+      - name: machineId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: page
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 123
+      - name: tenantId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: updatedDateEnd
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: updatedDateStart
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ZtagentAgentsGetResponse'
+      description: List Conceal agents (devices) with pagination and filters.
+      tags:
+      - Ztagent
+  /v1/ztagent/bindings:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: enterpriseId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ZtagentBindingsGetResponse'
+      description: Return the ZTAgent integration binding for an enterprise.
+      tags:
+      - Ztagent
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ZtagentBindingsPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ZtagentBindingsPutResponse'
+      description: Create or replace the ZTAgent integration binding for an enterprise (site and customer identifiers).
+      tags:
+      - Ztagent
+components:
+  schemas:
+    v1ZtagentAgentsGetResponse:
+      type: object
+      properties:
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/concealAgent'
+        count:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1ZtagentBindingsPutRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: string
+          example: example string
+      additionalProperties: false
+    concealAgent:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          example: example string
+        disabled:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: example string
+        identifier:
+          type: string
+          example: example string
+        lastCheckin:
+          type: string
+          example: example string
+        machine:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ZtagentBindingsGetResponse:
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ZtagentBindingsPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

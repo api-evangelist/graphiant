@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Rulelist API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Rulelist
+paths:
+  /v2/rulelist:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2RulelistPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2RulelistPostResponse'
+      tags:
+      - Rulelist
+components:
+  schemas:
+    alertserviceRuleRecord:
+      type: object
+      properties:
+        alarmClear:
+          type: string
+          example: example string
+          description: Condition for triggering recovery
+        alarmSet:
+          type: string
+          example: example string
+          description: Condition for triggering alert (required)
+        allowCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Number of entities  allowed/excluded (required)
+        category:
+          type: string
+          example: example string
+          description: Category of the rule (required)
+        enabled:
+          type: boolean
+          example: true
+          description: Whether the rule is enabled or disabled (required)
+        plane:
+          type: string
+          example: ENUM_VALUE
+          description: Plane of the rule (required)
+        priority:
+          type: string
+          example: 10000000
+          description: Priority of taking action against the rule (required)
+        ruleId:
+          type: string
+          example: example string
+          description: Unique id of the rule (required)
+        ruleName:
+          type: string
+          example: example string
+          description: Name of the rule (required)
+      additionalProperties: false
+    v2RulelistPostResponse:
+      type: object
+      properties:
+        ruleList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceRuleRecord'
+      additionalProperties: false
+    v2RulelistPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

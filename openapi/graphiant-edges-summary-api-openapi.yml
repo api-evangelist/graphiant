@@ -1,0 +1,358 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Edges Summary API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Edges Summary
+paths:
+  /v1/edges-summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: enterpriseId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: isRequested
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: boolean
+          example: true
+        example: true
+      - name: upgradeSummary
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: boolean
+          example: true
+        example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EdgesSummaryGetResponse'
+      tags:
+      - Edges Summary
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EdgesSummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EdgesSummaryPostResponse'
+      tags:
+      - Edges Summary
+components:
+  schemas:
+    upgradeSchedule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downloadProgress:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        failureReason:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        version:
+          $ref: '#/components/schemas/upgradeSwVersion'
+      additionalProperties: false
+    v1EdgesSummaryPostRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1EdgesSummaryPostRequestFilter'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2Location:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          example: example string
+        addressLine2:
+          type: string
+          example: example string
+        city:
+          type: string
+          example: example string
+        country:
+          type: string
+          example: example string
+        countryCode:
+          type: string
+          example: example string
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+        notes:
+          type: string
+          example: example string
+        provinceCode:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: example string
+        stateCode:
+          type: string
+          example: example string
+      additionalProperties: false
+    upgradeSwVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        release:
+          type: string
+          example: ENUM_VALUE
+        version:
+          type: string
+          example: example string
+      additionalProperties: false
+    upgradeUpgradeSummary:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        endOfLife:
+          type: boolean
+          example: true
+        lastDiscoveredTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastRunningVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        lastUpgradeTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        readyForActivationVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        rolloutId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        rolloutName:
+          type: string
+          example: example string
+        runningVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        schedule:
+          $ref: '#/components/schemas/upgradeSchedule'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1EdgesSummaryPostResponse:
+      type: object
+      properties:
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+      additionalProperties: false
+    v1EdgesSummaryGetResponse:
+      type: object
+      properties:
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+        isNewCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1EdgesSummaryPostRequestFilter:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        roles:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        statuses:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    searchEdgeSummary:
+      type: object
+      properties:
+        assignedOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        canaryMode:
+          type: string
+          example: ENUM_VALUE
+        connectedRegions:
+          type: array
+          items:
+            type: string
+            example: example string
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        discoveredLocation:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enterpriseName:
+          type: string
+          example: example string
+        firstAppearedOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        hostname:
+          type: string
+          example: example string
+        ipDetected:
+          type: string
+          example: example string
+        isHardware:
+          type: boolean
+          example: true
+        isNew:
+          type: boolean
+          example: true
+        isRequested:
+          type: boolean
+          example: true
+        isRequestedStatus:
+          type: string
+          example: ENUM_VALUE
+        lastBootedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        location:
+          $ref: '#/components/schemas/manaV2Location'
+        model:
+          type: string
+          example: example string
+        overrideRegion:
+          type: string
+          example: example string
+        parentEnterpriseName:
+          type: string
+          example: example string
+        portalStatus:
+          type: string
+          example: ENUM_VALUE
+        region:
+          type: string
+          example: example string
+        role:
+          type: string
+          example: ENUM_VALUE
+        serialNum:
+          type: string
+          example: example string
+        site:
+          type: string
+          example: example string
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stale:
+          type: boolean
+          example: true
+        status:
+          type: string
+          example: ENUM_VALUE
+        swName:
+          type: string
+          example: example string
+        swVersion:
+          type: string
+          example: example string
+        ttConnCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        upgradeSummary:
+          $ref: '#/components/schemas/upgradeUpgradeSummary'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

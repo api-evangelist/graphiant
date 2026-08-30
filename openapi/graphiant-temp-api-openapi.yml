@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Temp API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Temp
+paths:
+  /v1/temp/password:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TempPasswordPutRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TempPasswordPutResponse'
+      description: Generate and send temporary passwords to multiple emails for B2B service access.
+      tags:
+      - Temp
+components:
+  schemas:
+    v1TempPasswordPutRequest:
+      type: object
+      properties:
+        customerName:
+          type: string
+          example: example string
+        emails:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+        matchId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        serviceName:
+          type: string
+          example: example string
+      additionalProperties: false
+      required:
+      - emails
+    v1TempPasswordPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

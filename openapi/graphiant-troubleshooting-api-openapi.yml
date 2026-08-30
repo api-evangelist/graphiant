@@ -1,0 +1,739 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Troubleshooting API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Troubleshooting
+paths:
+  /v1/troubleshooting/site-connectivity-status:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingSiteConnectivityStatusGetResponse'
+      tags:
+      - Troubleshooting
+  /v1/troubleshooting/device/{deviceId}:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TroubleshootingDeviceDeviceIdPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingDeviceDeviceIdPostResponse'
+      tags:
+      - Troubleshooting
+  /v1/troubleshooting/enterprise:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TroubleshootingEnterprisePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingEnterprisePostResponse'
+      tags:
+      - Troubleshooting
+  /v1/troubleshooting/filter:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingFilterGetResponse'
+      tags:
+      - Troubleshooting
+  /v1/troubleshooting/site/{siteId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: siteId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingSiteSiteIdGetResponse'
+      tags:
+      - Troubleshooting
+  /v1/troubleshooting/top-sites-by-alerts:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponse'
+      tags:
+      - Troubleshooting
+components:
+  schemas:
+    statsmonTroubleshootingSiteFilter:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingLanSegmentFilter:
+      type: object
+      properties:
+        lanSegment:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingControlPlane:
+      type: object
+      properties:
+        controlTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingTransitions'
+        managementTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingTransitions'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonTroubleshootingDataPlane:
+      type: object
+      properties:
+        downTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingTransitions'
+        sessionSlas:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSessionSla'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1TroubleshootingEnterprisePostRequest:
+      type: object
+      properties:
+        dimensions:
+          $ref: '#/components/schemas/v1TroubleshootingEnterprisePostRequestDimensions'
+        filter:
+          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
+      additionalProperties: false
+    statsmonTroubleshootingLastCrash:
+      type: object
+      properties:
+        crashDetails:
+          type: string
+          example: example string
+        reason:
+          type: string
+          example: example string
+        upSinceTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonTroubleshootingOverheating:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
+      additionalProperties: false
+    v1TroubleshootingSiteConnectivityStatusGetResponseSiteStatus:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonTroubleshootingEdgeStatus:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
+          type: string
+          example: example string
+        deviceStatus:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonTroubleshootingSystemPlane:
+      type: object
+      properties:
+        cpu:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        crashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingCrash'
+        disk:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        lastCrash:
+          $ref: '#/components/schemas/statsmonTroubleshootingLastCrash'
+        maintenanceWindows:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingMaintenanceWindow'
+        memory:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        status:
+          type: string
+          example: ENUM_VALUE
+        temperature:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingOverheating'
+        temperatureSeries:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+      additionalProperties: false
+    v1TroubleshootingDeviceDeviceIdPostResponse:
+      type: object
+      properties:
+        MaintenanceMode:
+          type: boolean
+          example: true
+        colrActive:
+          type: boolean
+          example: true
+        controlPlane:
+          $ref: '#/components/schemas/statsmonTroubleshootingControlPlane'
+        dataPlane:
+          $ref: '#/components/schemas/statsmonTroubleshootingDataPlane'
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingIssue'
+        lifecycleStatus:
+          type: string
+          example: ENUM_VALUE
+        status:
+          type: string
+          example: ENUM_VALUE
+        swVersion:
+          type: string
+          example: example string
+        swVersionV2:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        systemPlane:
+          $ref: '#/components/schemas/statsmonTroubleshootingSystemPlane'
+        upSinceTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonTroubleshootingSlaValue:
+      type: object
+      properties:
+        delayValue:
+          type: number
+          format: double
+          example: 123.45
+        jitterValue:
+          type: number
+          format: double
+          example: 123.45
+        lossValue:
+          type: number
+          format: double
+          example: 123.45
+        status:
+          type: string
+          example: ENUM_VALUE
+        time:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        value:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1TroubleshootingDeviceDeviceIdPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
+      additionalProperties: false
+    v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts:
+      type: object
+      properties:
+        siteCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponseSiteCountsSiteCount'
+      additionalProperties: false
+    v1TroubleshootingTopSitesByAlertsPostRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
+      additionalProperties: false
+    statsmonTroubleshootingFilter:
+      type: object
+      properties:
+        circuitNames:
+          type: array
+          items:
+            type: string
+            example: example string
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        lanSegments:
+          type: array
+          items:
+            type: string
+            example: example string
+        regionIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        siteIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    v1TroubleshootingEnterprisePostRequestDimensions:
+      type: object
+      properties:
+        certificateExpiry:
+          type: boolean
+          example: true
+        coreConnectivity:
+          type: boolean
+          example: true
+        coreTransitions:
+          type: boolean
+          example: true
+        cpu:
+          type: boolean
+          example: true
+        crashes:
+          type: boolean
+          example: true
+        creditExpiry:
+          type: boolean
+          example: true
+        disk:
+          type: boolean
+          example: true
+        fanSpeed:
+          type: boolean
+          example: true
+        licenseExpiry:
+          type: boolean
+          example: true
+        memory:
+          type: boolean
+          example: true
+        odpConnectivity:
+          type: boolean
+          example: true
+        odpTransitions:
+          type: boolean
+          example: true
+        slaPerformance:
+          type: boolean
+          example: true
+        t2Connectivity:
+          type: boolean
+          example: true
+        t2Transitions:
+          type: boolean
+          example: true
+        temperature:
+          type: boolean
+          example: true
+      additionalProperties: false
+    statsmonTroubleshootingIssue:
+      type: object
+      properties:
+        alertId:
+          type: string
+          example: example string
+        allowListed:
+          type: boolean
+          example: true
+        component:
+          type: string
+          example: example string
+        endTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        entity:
+          type: string
+          example: example string
+        issue:
+          type: string
+          example: example string
+        muteListed:
+          type: boolean
+          example: true
+        notificationCreated:
+          type: boolean
+          example: true
+        plane:
+          type: string
+          example: example string
+        reason:
+          type: string
+          example: example string
+        severity:
+          type: string
+          example: ENUM_VALUE
+        startTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1TroubleshootingEnterprisePostResponse:
+      type: object
+      properties:
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1TroubleshootingEnterprisePostResponseSiteSummary'
+      additionalProperties: false
+    v1TroubleshootingSiteSiteIdGetResponse:
+      type: object
+      properties:
+        edgeStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingEdgeStatus'
+        siteName:
+          type: string
+          example: example string
+        siteStatus:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonTroubleshootingRegion:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        regionName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonTroubleshootingCrash:
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1TroubleshootingTopSitesByAlertsPostResponseSiteCountsSiteCount:
+      type: object
+      properties:
+        numAlerts:
+          type: integer
+          format: int32
+          example: 123
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingTransitions:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        transitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+      additionalProperties: false
+    statsmonTroubleshootingRegionFilter:
+      type: object
+      properties:
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+      additionalProperties: false
+    v1TroubleshootingFilterGetResponse:
+      type: object
+      properties:
+        circuits:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingCircuitFilter'
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingDeviceFilter'
+        lanSegments:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingLanSegmentFilter'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingRegionFilter'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSiteFilter'
+      additionalProperties: false
+    statsmonTroubleshootingCircuitFilter:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1TroubleshootingEnterprisePostResponseSiteSummary:
+      type: object
+      properties:
+        controlStatus:
+          type: string
+          example: ENUM_VALUE
+        dataStatus:
+          type: string
+          example: ENUM_VALUE
+        overallStatus:
+          type: string
+          example: ENUM_VALUE
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        selectedStatus:
+          type: string
+          example: ENUM_VALUE
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+        systemStatus:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    upgradeSwVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        release:
+          type: string
+          example: ENUM_VALUE
+        version:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingMaintenanceWindow:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
+      additionalProperties: false
+    statsmonTroubleshootingSessionSla:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSlaValue'
+      additionalProperties: false
+    statsmonTroubleshootingDeviceFilter:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonTroubleshootingSystemStat:
+      type: object
+      properties:
+        interfaceName:
+          type: string
+          example: example string
+        peerName:
+          type: string
+          example: example string
+        time:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        value:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1TroubleshootingTopSitesByAlertsPostResponse:
+      type: object
+      properties:
+        controlPlane:
+          $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts'
+        dataPlane:
+          $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts'
+        systemPlane:
+          $ref: '#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts'
+      additionalProperties: false
+    v1TroubleshootingSiteConnectivityStatusGetResponse:
+      type: object
+      properties:
+        connectivityStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1TroubleshootingSiteConnectivityStatusGetResponseSiteStatus'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

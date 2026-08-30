@@ -1,0 +1,1430 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Diagnostic API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Diagnostic
+paths:
+  /v1/diagnostic/clear-arp/{deviceId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Unique identifier for a specific device
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticClearArpDeviceIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Clear arp entries
+      tags:
+      - Diagnostic
+  /v1/diagnostic/archive-create/{deviceId}:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Valid Provisioned device ID
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticArchiveCreateDeviceIdPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticArchiveCreateDeviceIdPostResponse'
+      description: Create a device debug archive
+      tags:
+      - Diagnostic
+  /v1/diagnostic/archive-delete/{archiveId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: archiveId
+        in: path
+        required: true
+        description: Unique identifier for a specific archive
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      responses:
+        '204':
+          description: No Content
+      description: Delete a device debug archive
+      tags:
+      - Diagnostic
+  /v1/diagnostic/archive-edit/{archiveId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: archiveId
+        in: path
+        required: true
+        description: Unique identifier for a specific archive
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticArchiveEditArchiveIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Edit metadata for a previously generated device debug archive
+      tags:
+      - Diagnostic
+  /v1/diagnostic/gnmi-ping:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        example: 30000022569
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticGnmiPingGetResponse'
+      description: perform GNMI ping test
+      tags:
+      - Diagnostic
+  /v1/diagnostic/archives/{deviceId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Valid Provisioned device ID
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticArchivesDeviceIdGetResponse'
+      description: Get a list of device debug archive collections
+      tags:
+      - Diagnostic
+  /v1/diagnostic/otp/{deviceId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Unique identifier for a specific device
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticOtpDeviceIdGetResponse'
+      description: Get a one-time passcode to access a device
+      tags:
+      - Diagnostic
+  /v1/diagnostic/packetcapture/{pcapId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: pcapId
+        in: path
+        required: true
+        description: Unique identifier for a specific packet capture
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticPacketcapturePcapIdGetResponse'
+      description: get a packet capture
+      tags:
+      - Diagnostic
+  /v1/diagnostic/speedtest-providers:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticSpeedtestProvidersGetResponse'
+      description: Get list of supported speedtest service providers
+      tags:
+      - Diagnostic
+  /v1/diagnostic/speedtest-servers:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Unique identifier for a specific device
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        example: 30000000555
+      - name: provider
+        in: query
+        description: supported provider for speedtest utility
+        required: true
+        schema:
+          type: string
+          example: ENUM_VALUE
+        example: ookla
+      - name: vrfName
+        in: query
+        description: Configured Wan Circuit Name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: c-gigabitethernet1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticSpeedtestServersGetResponse'
+      description: Get list of servers for a provider
+      tags:
+      - Diagnostic
+  /v1/diagnostic/packetcapture-start:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticPacketcaptureStartPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticPacketcaptureStartPostResponse'
+      description: Start packet capture
+      tags:
+      - Diagnostic
+  /v1/diagnostic/packetcapture-stop:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticPacketcaptureStopPostRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Stop packet capture
+      tags:
+      - Diagnostic
+  /v1/diagnostic/reboot/{deviceId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Valid Provisioned device ID
+        schema:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticRebootDeviceIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Trigger a device reboot
+      tags:
+      - Diagnostic
+  /v1/diagnostic/bgp-reset/{deviceId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Unique identifier for a specific device
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticBgpResetDeviceIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Reset a BGP neighbor
+      tags:
+      - Diagnostic
+  /v1/diagnostic/reset-ipsec-session/{deviceId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Unique identifier for a specific device
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticResetIpsecSessionDeviceIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Reset IPSec sessions
+      tags:
+      - Diagnostic
+  /v1/diagnostic/interface-reset/{deviceId}:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: Unique identifier for a specific device
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticInterfaceResetDeviceIdPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Reset an interface
+      tags:
+      - Diagnostic
+  /v1/diagnostic/speedtest-report:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticSpeedtestReportPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticSpeedtestReportPutResponse'
+      description: Generate a speedtest history report
+      tags:
+      - Diagnostic
+  /v1/diagnostic/ping:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticPingPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticPingPostResponse'
+      description: Trigger a diagnostic test
+      tags:
+      - Diagnostic
+  /v1/diagnostic/traceroute:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticTraceroutePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticTraceroutePostResponse'
+      description: Trigger a diagnostic test
+      tags:
+      - Diagnostic
+  /v1/diagnostic/speedtest:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticSpeedtestPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DiagnosticSpeedtestPostResponse'
+      description: Trigger Speedtest utility
+      tags:
+      - Diagnostic
+  /v1/diagnostic/ping-stop/{token}:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: token
+        in: path
+        required: true
+        description: Identifier which was received in initial response
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DiagnosticPingStopTokenPostRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Stop ping session
+      tags:
+      - Diagnostic
+components:
+  schemas:
+    diagnosticToolsSpeedtestResult:
+      type: object
+      properties:
+        avgPingTime:
+          type: number
+          format: double
+          example: 3
+          description: Avg Ping Time in milli seconds (required)
+        dateTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        downloadSpeed:
+          type: number
+          format: double
+          example: 30.1
+          description: Download speed in Mbps (required)
+        isp:
+          type: string
+          example: Google Fiber
+          description: ISP details (required)
+        maxPingTime:
+          type: number
+          format: double
+          example: 5
+          description: Max PingTime in milli seconds (required)
+        minPingTime:
+          type: number
+          format: double
+          example: 10
+          description: Min Ping Time in milli seconds (required)
+        result:
+          type: string
+          example: Failed
+          description: Status of the speedtest operation (required)
+        serverDetails:
+          $ref: '#/components/schemas/diagnosticToolsSpeedtestServer'
+        uploadSpeed:
+          type: number
+          format: double
+          example: 21
+          description: Upload speed in Mbps (required)
+      additionalProperties: false
+    v1DiagnosticOtpDeviceIdGetResponse:
+      type: object
+      properties:
+        passCode:
+          type: string
+          example: 123456
+          description: six digit one-time passcode to access the device
+      additionalProperties: false
+    v1DiagnosticSpeedtestPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 30000000555
+          minimum: 0
+          description: Unique identifier for a specific device (required)
+        params:
+          $ref: '#/components/schemas/diagnosticToolsSpeedtestParams'
+      additionalProperties: false
+      required:
+      - deviceId
+    v1DiagnosticPacketcaptureStopPostRequest:
+      type: object
+      properties:
+        pcapId:
+          type: integer
+          format: int64
+          example: 1000000
+          description: Unique identifier for a specific packet capture
+      additionalProperties: false
+    diagnosticToolsDiagnosticParams:
+      type: object
+      properties:
+        destAddress:
+          type: string
+          example: 172.1.1.1
+          description: IPv4 or IPv6 Destination address (required)
+        hopStatsCount:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: Per hop probes needed for traceroute hop stats
+        interface:
+          type: string
+          example: ethernet1/0
+          description: Source Interface name
+        payloadSize:
+          type: integer
+          format: int32
+          example: 64
+          minimum: 0
+          description: Size of  packet to be sent
+        port:
+          type: integer
+          format: int32
+          example: 443
+          minimum: 0
+          description: Valid in case of TCP ping (required)
+        probeCount:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: Number of probes to send
+        srcAddress:
+          type: string
+          example: 10.1.1.1
+          description: IPv4 or IPv6 address (required)
+        tos:
+          type: integer
+          format: int32
+          example: 0 - 7
+          minimum: 0
+          description: Type of service
+        vrfName:
+          type: string
+          example: finance
+          description: configure VRF Name (required)
+      additionalProperties: false
+      required:
+      - destAddress
+      - port
+      - srcAddress
+      - vrfName
+    diagnosticToolsDiagnosticResult:
+      type: object
+      properties:
+        pingResult:
+          $ref: '#/components/schemas/diagnosticToolsPingResult'
+        routeInfo:
+          $ref: '#/components/schemas/diagnosticToolsRouteLookupResult'
+        traceResult:
+          $ref: '#/components/schemas/diagnosticToolsTracerouteResult'
+      additionalProperties: false
+    diagnosticToolsRouteLookupResult:
+      type: object
+      properties:
+        nexthopAddress:
+          type: string
+          example: 1213:1::6451
+          description: IPv4 or IPv6 gateway address (required)
+        outgoingInterface:
+          type: string
+          example: Ethernet0/1
+          description: Interface name (required)
+        prefix:
+          type: string
+          example: 1213:1::6451
+          description: IPv4 or IPv6 longest matching prefix (required)
+      additionalProperties: false
+    v1DiagnosticBgpResetDeviceIdPutRequest:
+      type: object
+      properties:
+        hard:
+          type: boolean
+          example: true
+          description: BGP process restarts if set to true. if false, BGP route is only relearned
+        lanSegment:
+          type: string
+          example: isp
+          description: The segment over which this route is learned
+        localInterface:
+          type: string
+          example: GigabitEthernet0/0/1
+          description: The local interface over which this route is learned
+        neighbor:
+          type: string
+          example: 1.1.1.1
+          description: The neighbor to reset
+      additionalProperties: false
+    v1DiagnosticInterfaceResetDeviceIdPutRequest:
+      type: object
+      properties:
+        interface:
+          type: string
+          example: GigabitEthernet0/2
+          description: interface name
+      additionalProperties: false
+    v1DiagnosticResetIpsecSessionDeviceIdPutRequest:
+      type: object
+      properties:
+        all3RdParty:
+          type: boolean
+          example: true
+          description: All 3rd Party IPSec sessions
+        allControllers:
+          type: boolean
+          example: true
+          description: All Graphiant controllers IPSec sessions
+        allE2E:
+          type: boolean
+          example: true
+          description: All Edge to Edge sessions
+        vrf:
+          type: array
+          items:
+            type: string
+            example: isp-11, isp-12
+            description: List of circuit VRFs
+      additionalProperties: false
+    diagnosticToolsPingResult:
+      type: object
+      properties:
+        avgLoss:
+          type: number
+          format: float
+          example: 64
+          description: '% loss (required)'
+        avgTime:
+          type: number
+          format: double
+          example: 3
+          description: Time in milli seconds (required)
+        completedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        maxTime:
+          type: number
+          format: double
+          example: 10
+          description: Time in milli seconds (required)
+        minTime:
+          type: number
+          format: double
+          example: 5
+          description: Time in milli seconds (required)
+        result:
+          type: string
+          example: Success
+          description: Success or Failed (required)
+      additionalProperties: false
+    diagnosticToolsHopInfo:
+      type: object
+      properties:
+        hostAddress:
+          type: string
+          example: 1213:1::6451
+          description: IPv4 or IPv6 address (required)
+        pathMtu:
+          type: integer
+          format: int32
+          example: 1500
+          minimum: 0
+          description: Path MTU for this host_address (required)
+        roundTripTime:
+          type: number
+          format: double
+          example: 10
+          description: time in milli seconds (required)
+        stats:
+          $ref: '#/components/schemas/diagnosticToolsHopStats'
+      additionalProperties: false
+    v1DiagnosticPingStopTokenPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1DiagnosticSpeedtestPostResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/diagnosticToolsSpeedtestResult'
+        token:
+          type: string
+          example: example string
+          description: Token to be sent in subsequent lookup (required)
+      additionalProperties: false
+    v1DiagnosticSpeedtestServersGetResponse:
+      type: object
+      properties:
+        server:
+          type: array
+          items:
+            $ref: '#/components/schemas/diagnosticToolsSpeedtestServer'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DiagnosticGnmiPingGetResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DiagnosticGnmiPingGetResponseResult'
+      additionalProperties: false
+    v1DiagnosticTraceroutePostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 10000000
+          minimum: 0
+          description: Valid Provisioned device ID (required)
+        params:
+          $ref: '#/components/schemas/diagnosticToolsDiagnosticParams'
+        token:
+          type: string
+          example: example string
+          description: Identifier which was received in initial response
+        transportType:
+          type: string
+          example: ENUM_VALUE
+          description: ICMP or TCP (required)
+      additionalProperties: false
+      required:
+      - deviceId
+      - transportType
+    v1DiagnosticSpeedtestProvidersGetResponse:
+      type: object
+      properties:
+        provider:
+          type: array
+          items:
+            type: string
+            example: Ookla
+            description: supported provider for speedtest utility
+      additionalProperties: false
+    v1DiagnosticArchivesDeviceIdGetResponse:
+      type: object
+      properties:
+        archives:
+          type: array
+          items:
+            $ref: '#/components/schemas/diagnosticToolsArchive'
+      additionalProperties: false
+    v1DiagnosticArchiveEditArchiveIdPutRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: archive requested to debug tenant A problem in device B
+          description: Description of the requested archive
+      additionalProperties: false
+    v1DiagnosticArchiveCreateDeviceIdPostResponse:
+      type: object
+      properties:
+        archiveId:
+          type: integer
+          format: int64
+          example: 1000000
+          description: Unique identifier for a specific archive
+      additionalProperties: false
+    diagnosticToolsTargetType:
+      type: object
+      properties:
+        interface:
+          type: string
+          example: ethernet1/0
+          description: Source Interface name
+        vrfName:
+          type: string
+          example: isp-red
+          description: Configured VRF Name
+      additionalProperties: false
+    v1DiagnosticPacketcapturePcapIdGetResponse:
+      type: object
+      properties:
+        failureReason:
+          type: string
+          example: failed to access the cloud
+          description: Error message if the packet capture generation/upload failed
+        fileName:
+          type: string
+          example: 12000.tar.zst.gpg
+          description: The PCap file name.
+        status:
+          type: string
+          example: Uploaded
+          description: The status of the requested packet capture
+        uploadProgress:
+          type: integer
+          format: int32
+          example: 60
+          minimum: 0
+          description: upload progress in percentage
+        url:
+          type: string
+          example: graphiant.com/pcaps/134
+          description: The URL to download this packet capture.
+      additionalProperties: false
+    diagnosticToolsHopStats:
+      type: object
+      properties:
+        avgTime:
+          type: number
+          format: double
+          example: 3
+          description: Time in milli seconds (required)
+        maxTime:
+          type: number
+          format: double
+          example: 10
+          description: Time in milli seconds (required)
+        minTime:
+          type: number
+          format: double
+          example: 5
+          description: Time in milli seconds (required)
+        rxPackets:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: Received packet count (required)
+        stdDevTime:
+          type: number
+          format: double
+          example: 3
+          description: Standard deviation of the round-trip time in milli seconds (required)
+        txPackets:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: Transmitted packet count (required)
+      additionalProperties: false
+    diagnosticToolsArpEntry:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/diagnosticToolsArpEntryAddress'
+        allEntry:
+          type: boolean
+          example: true
+          description: All IPv4 addresses
+        interfaceName:
+          type: string
+          example: GigabitEthernet0/2
+          description: Interface Name
+      additionalProperties: false
+    diagnosticToolsSpeedtestServer:
+      type: object
+      properties:
+        country:
+          type: string
+          example: United Kingdom
+          description: Country of the speedtest server (required)
+        host:
+          type: string
+          example: speedtest.fastmetrics.com
+          description: Hostname of the speedtest server (required)
+        id:
+          type: string
+          example: 29113
+          description: Server Id. Internal mapping to a server.
+        ipAddress:
+          type: string
+          example: 1213:1::6451
+          description: IPv4 or IPv6 address (required)
+        location:
+          type: string
+          example: Sheffield
+          description: Location of the speedtest server (required)
+        name:
+          type: string
+          example: Google Fiber
+          description: Name of the speedtest server (required)
+      additionalProperties: false
+    v1DiagnosticSpeedtestReportPutResponse:
+      type: object
+      properties:
+        report:
+          type: string
+          format: byte
+          example: '[37,80,68,70,45,49,46,52,10,37,211,235,233,225,10,49,32,48,32,111,98,106,10,60,60,47,67,114,101,97,116,111,114,32,40,67,104,114,111,109,105,117,109,41,10,47,80,114,111,100,117,99,101,114,32,40,83,107,105,97,47,80,68,70,32,109,57,56,41,10,47,67,114,101,97,116,105,111,110,68,97,116,101,32,40,68,58,50,48,50,50,48,54,48,57,48,54,52,49,50,55,43,48,48,39,48,48,39,41,10,47,77,111,100,68,97,116,101,32,40,68,58,50,48,50,50,48,54,48,57,48,54,52,49,50,55,43,48,48,39,48,48]'
+          description: The generated report
+        reportId:
+          type: integer
+          format: int64
+          example: 10
+          description: 8 bytes (base32 encoded) identifier for the report
+      additionalProperties: false
+    diagnosticToolsTracerouteResult:
+      type: object
+      properties:
+        hops:
+          type: array
+          items:
+            $ref: '#/components/schemas/diagnosticToolsHopInfo'
+        maxLatency:
+          type: number
+          format: double
+          example: 10
+          description: time in milliseconds (required)
+        maxLatencyHost:
+          type: string
+          example: A123:3242::1111
+          description: IPv4 or IPv6 address (required)
+        maxPathMtu:
+          type: integer
+          format: int32
+          example: 1500
+          minimum: 0
+          description: Path MTU (required)
+        minPathMtu:
+          type: integer
+          format: int32
+          example: 1000
+          minimum: 0
+          description: Path MTU (required)
+        result:
+          type: string
+          example: Failed
+          description: Success or Failed (required)
+        stoppedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    diagnosticToolsArpEntryAddress:
+      type: object
+      properties:
+        address:
+          type: array
+          items:
+            type: string
+            example: 1.1.1.1
+            description: IPv4 addresses
+      additionalProperties: false
+    v1DiagnosticPacketcaptureStartPostResponse:
+      type: object
+      properties:
+        pcapId:
+          type: integer
+          format: int64
+          example: 1000000
+          description: Unique identifier for a specific packet capture
+      additionalProperties: false
+    v1DiagnosticRebootDeviceIdPutRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: User requested reboot
+          description: Reason for reboot (required)
+      additionalProperties: false
+      required:
+      - reason
+    v1DiagnosticGnmiPingGetResponseResult:
+      type: object
+      properties:
+        address:
+          type: string
+          example: 12001:0db8:85a3:0000:0000:8a2e:0370:7334
+          description: Address of the device on which the test was performed
+        error:
+          type: string
+          example: device offline
+          description: If error is empty, the ping is success
+        rtt:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        ttDeviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DiagnosticPacketcaptureStartPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 30000000555
+          description: Unique identifier for a specific device (required)
+        duration:
+          type: integer
+          format: int32
+          example: 30
+          minimum: 0
+          description: Packet capture duration. Accepted values are 30, 60, 180 (required)
+        filter:
+          $ref: '#/components/schemas/diagnosticToolsPCapFilter'
+        maxPacketCounter:
+          type: integer
+          format: int32
+          example: 300
+          minimum: 0
+          description: Packet capture limit.
+        target:
+          $ref: '#/components/schemas/diagnosticToolsTargetType'
+      additionalProperties: false
+      required:
+      - deviceId
+      - duration
+      - target
+    diagnosticToolsArchive:
+      type: object
+      properties:
+        archiveFileName:
+          type: string
+          example: 12000.tar.zst.gpg
+          description: The archive file name
+        archiveId:
+          type: integer
+          format: int64
+          example: 1000000
+          description: Unique identifier for a specific archive
+        archiveUrl:
+          type: string
+          example: graphiant.com/archives/134
+          description: The URL to download this archive
+        created:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        creator:
+          type: string
+          example: 8a2ec658-f25b-11ec-b939-0242ac120002
+          description: The user who requested the generation of this archive
+        description:
+          type: string
+          example: archive requested to debug tenant A problem in device B
+          description: Description of the requested archive
+        progress:
+          type: integer
+          format: int32
+          example: 80
+          description: The upload progress of the requested debug archive in percentage
+        status:
+          type: string
+          example: Uploaded
+          description: The status of the requested debug archive
+        type:
+          type: string
+          example: Debug
+          description: The type of the archive
+      additionalProperties: false
+    v1DiagnosticPingPostResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/diagnosticToolsDiagnosticResult'
+        token:
+          type: string
+          example: example string
+          description: Token to be sent in subsequent lookup (required)
+      additionalProperties: false
+    v1DiagnosticPingPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 10000000
+          minimum: 0
+          description: Valid Provisioned device ID (required)
+        params:
+          $ref: '#/components/schemas/diagnosticToolsDiagnosticParams'
+        token:
+          type: string
+          example: example string
+          description: Identifier which was received in initial response
+        transportType:
+          type: string
+          example: ENUM_VALUE
+          description: ICMP or TCP (required)
+      additionalProperties: false
+      required:
+      - deviceId
+      - transportType
+    diagnosticToolsPrefixPort:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+          example: 80
+          minimum: 0
+          description: Filters the capture for the specified port
+        prefix:
+          type: string
+          example: 1.1.1.0/24
+          description: Filters the capture for the specified prefix
+      additionalProperties: false
+    v1DiagnosticClearArpDeviceIdPutRequest:
+      type: object
+      properties:
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/diagnosticToolsArpEntry'
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DiagnosticArchiveCreateDeviceIdPostRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: archive requested to debug tenant A problem in device B
+          description: Description of the requested archive
+      additionalProperties: false
+    v1DiagnosticSpeedtestReportPutRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 30000000555
+          minimum: 0
+          description: Unique identifier for a specific device (required)
+        historyLength:
+          type: integer
+          format: int64
+          example: 5
+          minimum: 0
+          description: Number of most recent speedtest records to return for a specific device (required)
+      additionalProperties: false
+      required:
+      - deviceId
+      - historyLength
+    v1DiagnosticTraceroutePostResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/diagnosticToolsDiagnosticResult'
+        token:
+          type: string
+          example: example string
+          description: Token to be sent in subsequent lookup (required)
+      additionalProperties: false
+    diagnosticToolsSpeedtestParams:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: ookla
+          description: Speedtest provider name (required)
+        serverId:
+          type: string
+          example: 234123
+          description: This is fetched using GetSpeedtestServers API
+        target:
+          $ref: '#/components/schemas/diagnosticToolsTargetType'
+        token:
+          type: string
+          example: example string
+          description: Token to be sent in subsequent lookup
+      additionalProperties: false
+      required:
+      - provider
+      - target
+    diagnosticToolsPCapFilter:
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/diagnosticToolsPrefixPort'
+        dscp:
+          type: integer
+          format: int32
+          example: 80
+          minimum: 0
+          description: Filters the packet capture for the specified DSCP field
+        protocol:
+          type: string
+          example: Tcp
+          description: Filters the packet capture for the specified protocol
+        source:
+          $ref: '#/components/schemas/diagnosticToolsPrefixPort'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

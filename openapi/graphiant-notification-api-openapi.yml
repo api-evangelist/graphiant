@@ -1,0 +1,265 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Notification API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Notification
+paths:
+  /v2/notification/create:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2NotificationCreatePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationCreatePostResponse'
+      tags:
+      - Notification
+  /v2/notification/delete:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2NotificationDeletePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationDeletePostResponse'
+      tags:
+      - Notification
+  /v2/notification/enabledisable:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2NotificationEnabledisablePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationEnabledisablePostResponse'
+      tags:
+      - Notification
+  /v2/notification/update:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2NotificationUpdatePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2NotificationUpdatePostResponse'
+      tags:
+      - Notification
+components:
+  schemas:
+    v2NotificationCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationEnabledisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    alertserviceNotificationBody:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+          description: Description of notification
+        duration:
+          type: string
+          example: ENUM_VALUE
+          description: Time interval for notification (required)
+        enabled:
+          type: boolean
+          example: true
+          description: Enable or disable notification (required)
+        frequency:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+          description: Frequency of notifying a continuing alert (required)
+        messageBody:
+          type: string
+          example: example string
+          description: Message body to prepend to actual message
+        notificationName:
+          type: string
+          example: example string
+          description: Name of the notification record (required)
+        opsgenieList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of opsgenie recipients
+        opsrampList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of opsramp recipients
+        pagerdutyList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of pagerduty recipients
+        recipientList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Non-empty list of email recipients (required)
+        teamsList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of teams recipients
+        webhookUrlList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of webhook_url recipients
+      additionalProperties: false
+    v2NotificationUpdatePostRequest:
+      type: object
+      properties:
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
+        notificationIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of notification ids to update (required)
+      additionalProperties: false
+      required:
+      - notificationBody
+      - notificationIdList
+    v2NotificationDeletePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationCreatePostRequest:
+      type: object
+      properties:
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
+        ruleIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of rule ids (required)
+      additionalProperties: false
+      required:
+      - notificationBody
+      - ruleIdList
+    v2NotificationDeletePostRequest:
+      type: object
+      properties:
+        notificationIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of notification ids to delete notification records (required)
+      additionalProperties: false
+      required:
+      - notificationIdList
+    v2NotificationEnabledisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+          description: Enable or disable. True means enable (required)
+        notificationIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of notification ids to enable disable (required)
+      additionalProperties: false
+      required:
+      - enable
+      - notificationIdList
+    v2NotificationUpdatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

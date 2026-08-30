@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Talkers API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Talkers
+paths:
+  /v1/talkers/device/{deviceId}/top:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TalkersDeviceDeviceIdTopPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TalkersDeviceDeviceIdTopPostResponse'
+      description: Get top talkers for a device
+      tags:
+      - Talkers
+  /v1/talkers/site/{siteId}/top:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: siteId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1TalkersSiteSiteIdTopPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1TalkersSiteSiteIdTopPostResponse'
+      description: Get top talkers for a site
+      tags:
+      - Talkers
+components:
+  schemas:
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1TalkersSiteSiteIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixClientUsageSummary'
+      additionalProperties: false
+    v1TalkersDeviceDeviceIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixClientUsageSummary'
+      additionalProperties: false
+    ipfixTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1TalkersDeviceDeviceIdTopPostRequest:
+      type: object
+      properties:
+        numClients:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: The maximum number of client usage info to be returned (10 if left empty)
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
+    v1TalkersSiteSiteIdTopPostRequest:
+      type: object
+      properties:
+        numClients:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: The maximum number of apps to return (10 if left empty)
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
+    ipfixClientUsageSummary:
+      type: object
+      properties:
+        clientIpAddress:
+          type: string
+          example: example string
+        usage:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: data used in kilo bytes
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

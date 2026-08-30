@@ -1,0 +1,621 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Groups API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Groups
+paths:
+  /v1/groups/{id}/enterprises:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupsIdEnterprisesPostRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Associate group with additional enterprises to enable cross-enterprise access and management.
+      tags:
+      - Groups
+  /v1/groups/{id}/members:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupsIdMembersPostRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Add multiple users to a group by their global IDs.
+      tags:
+      - Groups
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GroupsIdMembersGetResponse'
+      description: Get all members of a specific group.
+      tags:
+      - Groups
+  /v1/groups:
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupsPutRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Create a new group with and set permissions. Set group's enterprise management capabilities (msp only).
+      tags:
+      - Groups
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GroupsGetResponse'
+      description: Get all groups in the enterprise.
+      tags:
+      - Groups
+  /v1/groups/{id}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '204':
+          description: No Content
+      description: Delete a group and remove all member associations and enterprise relationships. Replace with a different group if specified.
+      tags:
+      - Groups
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupsIdPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Update group information.
+      tags:
+      - Groups
+  /v1/groups/{id}/enterprises/{enterpriseId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: enterpriseId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '204':
+          description: No Content
+      description: Remove group's association with a specific enterprise, revoking cross-enterprise access.
+      tags:
+      - Groups
+  /v1/groups/{id}/members/{memberId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      - name: memberId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '204':
+          description: No Content
+      description: Remove a specific user from a group by member ID.
+      tags:
+      - Groups
+  /v1/groups/{id}/members/delete:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupsIdMembersDeletePostRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Remove multiple users from a group by their member IDs.
+      tags:
+      - Groups
+  /v1/groups/enterprises:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GroupsEnterprisesGetResponse'
+      description: Get all enterprise-level groups.
+      tags:
+      - Groups
+  /v1/groups/root:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GroupsRootGetResponse'
+      description: Get all root-level groups.
+      tags:
+      - Groups
+components:
+  schemas:
+    iamGroup:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        enterpriseIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        enterprisePermissions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/iamEnterprisePermissions'
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GroupsPutRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+          description: ' (required)'
+        groupId:
+          type: string
+          example: example string
+          description: Only supply if enterprise uses an idp
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        managesEnterprises:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+      required:
+      - description
+      - name
+    v1GroupsIdMembersGetResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonUser'
+      additionalProperties: false
+    v1GroupsIdMembersPostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+        replaceExisting:
+          type: boolean
+          example: true
+      additionalProperties: false
+      required:
+      - memberIds
+    v1GroupsIdEnterprisesPostRequest:
+      type: object
+      properties:
+        enterpriseIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - enterpriseIds
+    commonUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        firstName:
+          type: string
+          example: example string
+        lastActiveAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastName:
+          type: string
+          example: example string
+        mfaFactor:
+          type: string
+          example: example string
+        phoneNumber:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+        verified:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GroupsIdPatchRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        displayName:
+          type: string
+          example: example string
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GroupsEnterprisesGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1GroupsIdMembersDeletePostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - memberIds
+    v1GroupsGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    iamEnterprisePermissions:
+      type: object
+      properties:
+        groupType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+      additionalProperties: false
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
+          type: string
+          example: ENUM_VALUE
+        b2b:
+          type: string
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
+          type: string
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

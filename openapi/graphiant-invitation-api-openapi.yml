@@ -1,0 +1,92 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Invitation API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Invitation
+paths:
+  /v1/invitation/email:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1InvitationEmailPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1InvitationEmailPostResponse'
+      description: Send invitation emails for B2B data exchange service connections. For non-Graphiant enterprises, sends invite to all admin users in the proxy tenant desiganted by your msp. For Graphiant, sends to specified admin email.
+      tags:
+      - Invitation
+components:
+  schemas:
+    v1InvitationEmailPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1InvitationEmailPostRequest:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        customerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        customerName:
+          type: string
+          example: example string
+          description: ' (required)'
+        isGraphiant:
+          type: boolean
+          example: true
+        matchId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ' (required)'
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ' (required)'
+        serviceName:
+          type: string
+          example: example string
+          description: ' (required)'
+        serviceType:
+          type: string
+          example: example string
+          description: Extranet service type URL segment (e.g. peering_service, client_to_server)
+      additionalProperties: false
+      required:
+      - customerName
+      - matchId
+      - serviceId
+      - serviceName
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

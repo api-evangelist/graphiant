@@ -1,0 +1,434 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Data Assurance API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Data Assurance
+paths:
+  /v1/data-assurance/assurances/global:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalPostResponse'
+      description: Configure a new assurance under the current enterprise
+      tags:
+      - Data Assurance
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponse'
+      description: Get all assurances under the current enterprise
+      tags:
+      - Data Assurance
+  /v1/data-assurance/assurances/global/{id}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalIdDeleteResponse'
+      description: Delete an assurance under the current enterprise
+      tags:
+      - Data Assurance
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalIdGetResponse'
+      description: Get the config for an assurance under the current enterprise
+      tags:
+      - Data Assurance
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalIdPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalIdPutResponse'
+      description: Overwrite a pre-existing assurance under the current enterprise
+      tags:
+      - Data Assurance
+  /v1/data-assurance/assurances/applications/{bucketAppName}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: bucketAppName
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse'
+      description: Gets the assurance details for all edges under the current enterprise
+      tags:
+      - Data Assurance
+  /v1/data-assurance/flex-algos:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponse'
+      description: Get all configurable flex algos under the current enterprise
+      tags:
+      - Data Assurance
+components:
+  schemas:
+    v1DataAssuranceAssurancesGlobalGetResponseRow:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry'
+        assuranceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        assuranceName:
+          type: string
+          example: example string
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        flexAlgo:
+          type: string
+          example: example string
+        lans:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry'
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdGetResponse:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponse:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRow'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdPutRequest:
+      type: object
+      properties:
+        appRemovalReason:
+          type: string
+          example: example string
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BucketApp:
+      type: object
+      properties:
+        bucketId:
+          type: integer
+          format: int32
+          example: 123
+        builtinAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        customAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDomain:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BucketAppServer'
+        useAllServers:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdPutResponse:
+      type: object
+      properties:
+        unsyncedDeviceNames:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
+      additionalProperties: false
+    manaV2BucketAppServer:
+      type: object
+      properties:
+        ip:
+          type: string
+          example: example string
+        port:
+          type: integer
+          format: int32
+          example: 123
+        protocol:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
+      type: object
+      properties:
+        lanName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance:
+      type: object
+      properties:
+        configs:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
+      type: object
+      properties:
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalPostResponse:
+      type: object
+      properties:
+        assuranceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        unsyncedDeviceNames:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalPostRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    manaV2AssuranceConfig:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BucketApp'
+        flexAlgo:
+          type: string
+          example: example string
+        lanNames:
+          type: array
+          items:
+            type: string
+            example: example string
+        name:
+          type: string
+          example: example string
+        siteListId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        useAllSites:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
+      type: object
+      properties:
+        assurances:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponseEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

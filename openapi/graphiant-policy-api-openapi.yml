@@ -1,0 +1,359 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Policy API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Policy
+paths:
+  /v1/policy/route-tag-sets:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PolicyRouteTagSetsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyRouteTagSetsPostResponse'
+      description: Create a new route tag scoped to the enterprise
+      tags:
+      - Policy
+  /v1/policy/route-tag-sets/{id}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: level
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyRouteTagSetsIdDeleteResponse'
+      description: Create a new route-tag scoped to the enterprise
+      tags:
+      - Policy
+  /v1/policy/applications:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyApplicationsGetResponse'
+      description: Get a list of builtin DPI applications
+      tags:
+      - Policy
+  /v1/policy/route-tag-sets/tag-detail:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyRouteTagSetsTagDetailGetResponse'
+      description: Get all the route tags summary for the the enterprise
+      tags:
+      - Policy
+  /v1/policy/route-tag-sets/tags:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyRouteTagSetsTagsGetResponse'
+      description: Get all the route tags for the enterprise
+      tags:
+      - Policy
+  /v1/policy/route-tag-sets/tags-summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyRouteTagSetsTagsSummaryGetResponse'
+      description: Get all the route tags summary for the the enterprise
+      tags:
+      - Policy
+components:
+  schemas:
+    v1PolicyRouteTagSetsPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsGetResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagElement'
+      additionalProperties: false
+    manaV2RouteTag:
+      type: object
+      properties:
+        levelOne:
+          type: string
+          example: example string
+        levelTwo:
+          type: string
+          example: example string
+        levelZero:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1PolicyApplicationsGetResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1PolicyApplicationsGetResponseApplication'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+      additionalProperties: false
+    manaV2RouteTagDevice:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        locationId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTag'
+      additionalProperties: false
+    manaV2RouteTagSummary:
+      type: object
+      properties:
+        deviceCount:
+          type: integer
+          format: int32
+          example: 123
+        levelOne:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelOneTag:
+          type: string
+          example: example string
+        levelTwo:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelTwoTag:
+          type: string
+          example: example string
+        levelZero:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelZeroTag:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsSummaryGetResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagSummary'
+      additionalProperties: false
+    v1PolicyApplicationsGetResponseApplication:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        description:
+          type: string
+          example: example string
+        kind:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2RouteTagElement:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        nextSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagElement'
+        tag:
+          type: string
+          example: example string
+        tagValue:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1PolicyRouteTagSetsIdDeleteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagDetailGetResponse:
+      type: object
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagDevice'
+      additionalProperties: false
+    commonPageInfo:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+          description: The page number we are currently on (required)
+        endCursor:
+          type: string
+          example: xxxxxxy
+          description: Cursor pointing to the last record on the current page
+        hasNextPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page after this one in the resultset based on current position
+        hasPrevPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page before this one in the resultset based on current position
+        startCursor:
+          type: string
+          example: xxxxxx
+          description: Cursor pointing to the first record on the current page
+        totalPages:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: The number of pages in the complete resultset based on the current length of the page (required)
+        totalRecords:
+          type: integer
+          format: int32
+          example: 400
+          minimum: 0
+          description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+    v1PolicyRouteTagSetsPostRequest:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTag'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

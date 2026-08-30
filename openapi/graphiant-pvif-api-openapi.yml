@@ -1,0 +1,889 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Pvif API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Pvif
+paths:
+  /v1/pvif:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PvifPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PvifPostResponse'
+      description: Create a gateway Public VIF service
+      tags:
+      - Pvif
+  /v1/pvif/{id}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: Producer service id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PvifIdDeleteResponse'
+      description: Delete a gateway Public VIF service
+      tags:
+      - Pvif
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: Producer service id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PvifIdPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PvifIdPutResponse'
+      description: Update a gateway Public VIF service
+      tags:
+      - Pvif
+  /v1/pvif/{id}/details:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: Producer service id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PvifIdDetailsGetResponse'
+      description: Get a gateway Public VIF service
+      tags:
+      - Pvif
+  /v1/pvif/summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PvifSummaryGetResponse'
+      description: List gateway Public VIF services
+      tags:
+      - Pvif
+components:
+  schemas:
+    v1PvifPostRequest:
+      type: object
+      properties:
+        advertisement:
+          $ref: '#/components/schemas/manaV2SiteInformation'
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PublicVifGatewayConsumerLanDevices'
+        coveringPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes monitored for this service; empty means 0.0.0.0/0
+        gatewayBgpNeighbors:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2BgpNeighborConfig'
+        lanSegmentId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer LAN segment (VRF) on gateway appliances (required)
+        natPrefixStrategy:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayNatPrefixStrategy'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+          description: Graphiant region for gateway appliances (required)
+        serviceName:
+          type: string
+          example: example string
+          description: Service display name (required)
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Storage provider; each gateway appliance must match region and provider (required)
+      additionalProperties: false
+      required:
+      - consumerLanSegments
+      - gatewayBgpNeighbors
+      - lanSegmentId
+      - natPrefixStrategy
+      - regionId
+      - serviceName
+      - storageProvider
+    manaV2NullableAllowAsIn:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableMaxPrefix:
+      type: object
+      properties:
+        maxPrefix:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2BfdInstanceConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        localMultiplier:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        minimumInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2BfdNeighbor:
+      type: object
+      properties:
+        desiredMinimumTxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ifIndex:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        interface:
+          type: string
+          example: example string
+        lastUpdated:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localDiag:
+          type: string
+          example: ENUM_VALUE
+        peerAddress:
+          type: string
+          example: example string
+        remoteDiag:
+          type: string
+          example: ENUM_VALUE
+        requiredMinimumRxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        segmentName:
+          type: string
+          example: example string
+        sourceAddress:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        timeInState:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        up:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2NullableHoldTimer:
+      type: object
+      properties:
+        timer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2PublicVifGatewayWriteRequest:
+      type: object
+      properties:
+        advertisement:
+          $ref: '#/components/schemas/manaV2SiteInformation'
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PublicVifGatewayConsumerLanDevices'
+        coveringPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes monitored for this service; empty means 0.0.0.0/0
+        gatewayBgpNeighbors:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2BgpNeighborConfig'
+        lanSegmentId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer LAN segment (VRF) on gateway appliances (required)
+        natPrefixStrategy:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayNatPrefixStrategy'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+          description: Graphiant region for gateway appliances (required)
+        serviceName:
+          type: string
+          example: example string
+          description: Service display name (required)
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Storage provider; each gateway appliance must match region and provider (required)
+      additionalProperties: false
+      required:
+      - consumerLanSegments
+      - gatewayBgpNeighbors
+      - lanSegmentId
+      - natPrefixStrategy
+      - regionId
+      - serviceName
+      - storageProvider
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2PublicVifGatewayCentralizedNat:
+      type: object
+      properties:
+        consumerPrefix:
+          type: object
+          additionalProperties:
+            type: string
+            example: example string
+      additionalProperties: false
+      required:
+      - consumerPrefix
+    manaV2BgpDynamicNeighborOperPeer:
+      type: object
+      properties:
+        lastOperStatusChange:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localAddress:
+          type: string
+          example: example string
+          description: Local address used for this peer session, if known from oper
+        operStatus:
+          type: boolean
+          example: true
+          description: True when the BGP session to this peer is operationally up (e.g. established)
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Peer ASN from oper, if reported
+        remoteAddress:
+          type: string
+          example: example string
+          description: Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)
+        state:
+          type: string
+          example: ENUM_VALUE
+          description: BGP FSM state for this peer session
+      additionalProperties: false
+    manaV2NullableMd5Password:
+      type: object
+      properties:
+        md5Password:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        inboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+        outboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+      additionalProperties: false
+    manaV2BgpNeighborAddressFamily:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        inboundPolicy:
+          type: string
+          example: example string
+        outboundPolicy:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1PvifIdPutRequest:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayWriteRequest'
+      additionalProperties: false
+      required:
+      - configuration
+    v1PvifSummaryGetResponse:
+      type: object
+      properties:
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2PublicVifSummary'
+      additionalProperties: false
+    manaV2SiteInformation:
+      type: object
+      properties:
+        siteLists:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        sites:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2BgpNeighbor:
+      type: object
+      properties:
+        addressFamilies:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpNeighborAddressFamily'
+        allowAsIn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        asOverride:
+          type: boolean
+          example: true
+        bfd:
+          $ref: '#/components/schemas/manaV2BfdInstance'
+        bfdNeighbor:
+          $ref: '#/components/schemas/manaV2BfdNeighbor'
+        bgpType:
+          type: string
+          example: ENUM_VALUE
+        defaultOriginate:
+          type: string
+          example: ENUM_VALUE
+          description: Set when default route needs to be advertised in BGP domain
+        dynamicNeighborPeers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BgpDynamicNeighborOperPeer'
+        enabled:
+          type: boolean
+          example: true
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        localAddress:
+          type: string
+          example: example string
+        localInterface:
+          type: string
+          example: example string
+        maxPrefix:
+          type: integer
+          format: int32
+          example: 10000
+          minimum: 0
+          description: Maximum number of prefixes that can be received from neighbor
+        md5Password:
+          type: string
+          example: example string
+        multiHop:
+          type: integer
+          format: int32
+          example: 5
+          minimum: 0
+          description: Set when EBGP multi-hop functionality is enabled
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        remoteAddress:
+          type: string
+          example: example string
+        removePrivateAs:
+          type: boolean
+          example: true
+        sendCommunity:
+          type: boolean
+          example: true
+          description: Flag for sending standard, extended, and large communities
+        state:
+          type: string
+          example: ENUM_VALUE
+        timeSinceLastOperChange:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        up:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2NullableKeepAliveTimer:
+      type: object
+      properties:
+        timer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2PublicVifGatewayDecentralizedPrefixes:
+      type: object
+      properties:
+        prefixes:
+          type: object
+          additionalProperties:
+            type: string
+            example: example string
+      additionalProperties: false
+      required:
+      - prefixes
+    v1PvifIdPutResponse:
+      type: object
+      properties:
+        advertiseAllSites:
+          type: boolean
+          example: true
+          description: True when consumer scope is all symmetric sites (snapshotted on create and update); false when advertisement lists explicit sites or site lists
+        advertisement:
+          $ref: '#/components/schemas/manaV2SiteInformation'
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PublicVifGatewayConsumerLanDevices'
+        coveringPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes monitored for this service
+        gatewayBgpNeighbors:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2BgpNeighbor'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id
+        lanSegmentId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer LAN segment (VRF) id
+        natPrefixStrategy:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayNatPrefixStrategy'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+          description: Graphiant region for gateway appliances
+        serviceName:
+          type: string
+          example: example string
+          description: Service display name
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Storage provider for gateway appliances
+      additionalProperties: false
+    manaV2NullableBfdInstanceConfig:
+      type: object
+      properties:
+        bfd:
+          $ref: '#/components/schemas/manaV2BfdInstanceConfig'
+      additionalProperties: false
+    manaV2PublicVifGatewayConsumerLanDevices:
+      type: object
+      properties:
+        consumerPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Allow prefixes for this consumer LAN; empty means 0.0.0.0/0
+      additionalProperties: false
+    v1PvifIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2NullableInterfaceName:
+      type: object
+      properties:
+        interface:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2PublicVifSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: id of this Public VIF
+        serviceName:
+          type: string
+          example: example string
+          description: name of this Public VIF
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        userName:
+          type: string
+          example: example string
+          description: creator of this Public VIF
+      additionalProperties: false
+    manaV2PublicVifGatewayNatPrefixStrategy:
+      type: object
+      properties:
+        centralized:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayCentralizedNat'
+        decentralized:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayDecentralizedPrefixes'
+      additionalProperties: false
+    manaV2BgpNeighborConfig:
+      type: object
+      properties:
+        addressFamilies:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
+        allowAsIn:
+          $ref: '#/components/schemas/manaV2NullableAllowAsIn'
+        asOverride:
+          type: boolean
+          example: true
+        bfd:
+          $ref: '#/components/schemas/manaV2NullableBfdInstanceConfig'
+        defaultOriginate:
+          type: string
+          example: ENUM_VALUE
+        ebgpMultihopTtl:
+          $ref: '#/components/schemas/manaV2NullableEbgpConfig'
+        enabled:
+          type: boolean
+          example: true
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        holdTimerValue:
+          $ref: '#/components/schemas/manaV2NullableHoldTimer'
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        keepaliveTimerValue:
+          $ref: '#/components/schemas/manaV2NullableKeepAliveTimer'
+        localAddress:
+          type: string
+          example: example string
+        localInterface:
+          $ref: '#/components/schemas/manaV2NullableInterfaceName'
+        maxPrefixValue:
+          $ref: '#/components/schemas/manaV2NullableMaxPrefix'
+        md5Password:
+          $ref: '#/components/schemas/manaV2NullableMd5Password'
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        remoteAddress:
+          type: string
+          example: example string
+        removePrivateAs:
+          type: boolean
+          example: true
+        sendCommunity:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1PvifPostResponse:
+      type: object
+      properties:
+        advertiseAllSites:
+          type: boolean
+          example: true
+          description: True when consumer scope is all symmetric sites (snapshotted on create and update); false when advertisement lists explicit sites or site lists
+        advertisement:
+          $ref: '#/components/schemas/manaV2SiteInformation'
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PublicVifGatewayConsumerLanDevices'
+        coveringPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes monitored for this service
+        gatewayBgpNeighbors:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2BgpNeighbor'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id
+        lanSegmentId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer LAN segment (VRF) id
+        natPrefixStrategy:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayNatPrefixStrategy'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+          description: Graphiant region for gateway appliances
+        serviceName:
+          type: string
+          example: example string
+          description: Service display name
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Storage provider for gateway appliances
+      additionalProperties: false
+    v1PvifIdDetailsGetResponse:
+      type: object
+      properties:
+        advertiseAllSites:
+          type: boolean
+          example: true
+          description: True when consumer scope is all symmetric sites (snapshotted on create and update); false when advertisement lists explicit sites or site lists
+        advertisement:
+          $ref: '#/components/schemas/manaV2SiteInformation'
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PublicVifGatewayConsumerLanDevices'
+        coveringPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes monitored for this service
+        gatewayBgpNeighbors:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2BgpNeighbor'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id
+        lanSegmentId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer LAN segment (VRF) id
+        natPrefixStrategy:
+          $ref: '#/components/schemas/manaV2PublicVifGatewayNatPrefixStrategy'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+          description: Graphiant region for gateway appliances
+        serviceName:
+          type: string
+          example: example string
+          description: Service display name
+        storageProvider:
+          type: string
+          example: ENUM_VALUE
+          description: Storage provider for gateway appliances
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2BfdInstance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        minimumInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        multiplier:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableBgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        family:
+          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
+      additionalProperties: false
+    manaV2NullableEbgpConfig:
+      type: object
+      properties:
+        multiHop:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullablePolicyName:
+      type: object
+      properties:
+        policy:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

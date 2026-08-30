@@ -1,0 +1,287 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Account API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Account
+paths:
+  /v1/account/mfa/confirmation:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AccountMfaConfirmationPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AccountMfaConfirmationPostResponse'
+      description: Confirm MFA type change with verification code.
+      tags:
+      - Account
+  /v1/account/mfa:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '204':
+          description: No Content
+      description: Remove user's MFA enrollment.
+      tags:
+      - Account
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AccountMfaGetResponse'
+      description: Get user's current MFA type and enrollment status.
+      tags:
+      - Account
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AccountMfaPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AccountMfaPutResponse'
+      description: Update user's MFA type (SMS, GoogleAuth) with verification.
+      tags:
+      - Account
+  /v1/account/email:
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AccountEmailPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Update user's email address with verification.
+      tags:
+      - Account
+  /v1/account/info:
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AccountInfoPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Update current user's profile information.
+      tags:
+      - Account
+  /v1/account/password:
+    patch:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AccountPasswordPatchRequest'
+      responses:
+        '204':
+          description: No Content
+      description: Change user password with current password verification (Graphiant cloud only).
+      tags:
+      - Account
+components:
+  schemas:
+    v1AccountMfaConfirmationPostRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example string
+          description: ' (required)'
+        confirmed:
+          type: boolean
+          example: true
+          description: ' (required)'
+        id:
+          type: string
+          example: example string
+          description: ' (required)'
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - code
+      - confirmed
+      - id
+      - type
+    v1AccountMfaGetResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1AccountMfaPutResponse:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: example string
+        qrCode:
+          type: string
+          example: example string
+        sharedSecret:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AccountMfaPutRequest:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - type
+    v1AccountPasswordPatchRequest:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: example string
+          description: ' (required)'
+        password:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - oldPassword
+      - password
+    v1AccountInfoPatchRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: example string
+        lastName:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AccountEmailPatchRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - email
+    v1AccountMfaConfirmationPostResponse:
+      type: object
+      properties:
+        affectedUsers:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

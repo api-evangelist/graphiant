@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Onboarding API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Onboarding
+paths:
+  /v1/onboarding/cloudinit:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1OnboardingCloudinitPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OnboardingCloudinitPostResponse'
+      description: Create a onboarding token
+      tags:
+      - Onboarding
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '204':
+          description: No Content
+      description: Delete the onboarding token
+      tags:
+      - Onboarding
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OnboardingCloudinitGetResponse'
+      description: Get all the onboarding tokens
+      tags:
+      - Onboarding
+components:
+  schemas:
+    v1OnboardingCloudinitPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    onboardingInterface:
+      type: object
+      properties:
+        ipv4:
+          $ref: '#/components/schemas/onboardingIp'
+        ipv6:
+          $ref: '#/components/schemas/onboardingIp'
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: example string
+      additionalProperties: false
+    onboardingCloudInitToken:
+      type: object
+      properties:
+        cloudinitConfig:
+          $ref: '#/components/schemas/onboardingCloudInitConfiguration'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceSerial:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        role:
+          type: string
+          example: ENUM_VALUE
+        token:
+          $ref: '#/components/schemas/onboardingCloudInitTokenToken'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1OnboardingCloudinitPostRequest:
+      type: object
+      properties:
+        cloudinitTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingCloudInitToken'
+      additionalProperties: false
+    v1OnboardingCloudinitGetResponse:
+      type: object
+      properties:
+        cloudinitTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingCloudInitToken'
+      additionalProperties: false
+    onboardingCloudInitTokenToken:
+      type: object
+      properties:
+        createdByTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        expiryByTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        token:
+          type: string
+          example: example string
+      additionalProperties: false
+    onboardingIp:
+      type: object
+      properties:
+        gatewayAddr:
+          type: string
+          example: example string
+        ipAddr:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: example string
+      additionalProperties: false
+    onboardingCloudInitConfiguration:
+      type: object
+      properties:
+        deviceType:
+          type: string
+          example: example string
+        dnsServers:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingInterface'
+        localWebPassword:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

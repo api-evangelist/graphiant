@@ -1,0 +1,1218 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Bwtracker API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Bwtracker
+paths:
+  /v1/bwtracker/enterprise/csv:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerEnterpriseCsvPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerEnterpriseCsvPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/enterprise/details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerEnterpriseDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerEnterpriseDetailsPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/enterprise/summary:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerEnterpriseSummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerEnterpriseSummaryPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/edge/chart:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionEdgeChartPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionEdgeChartPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/edge/csv:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionEdgeCsvPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionEdgeCsvPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/edge/details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionEdgeDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionEdgeDetailsPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/edge/summary:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionEdgeSummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionEdgeSummaryPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/gateway/chart:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionGatewayChartPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionGatewayChartPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/gateway/csv:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionGatewayCsvPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionGatewayCsvPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/gateway/details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionGatewayDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionGatewayDetailsPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/gateway/summary:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionGatewaySummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionGatewaySummaryPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/chart:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteChartPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteChartPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/site/csv:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerSiteCsvPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerSiteCsvPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteDetailsPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/gateway/chart:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewayChartPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewayChartPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/site/gateway/csv:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerSiteGatewayCsvPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerSiteGatewayCsvPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/gateway/details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewayDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewayDetailsPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/gateway/summary:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewaySummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteGatewaySummaryPostResponse'
+      tags:
+      - Bwtracker
+  /v1/bwtracker/region/site/summary:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1BwtrackerRegionSiteSummaryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BwtrackerRegionSiteSummaryPostResponse'
+      tags:
+      - Bwtracker
+components:
+  schemas:
+    v1BwtrackerRegionSiteGatewayChartPostResponse:
+      type: object
+      properties:
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewaySummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteProvider:
+      type: object
+      properties:
+        providerId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        providerName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteEdgeProvider:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        deviceName:
+          type: string
+          example: example string
+        providerId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        providerName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageCsvDetails:
+      type: object
+      properties:
+        bwusageCsvRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvRecord'
+      additionalProperties: false
+    v1BwtrackerSiteGatewayCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionGatewaySummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeSummary'
+      additionalProperties: false
+    v1BwtrackerEnterpriseSummaryPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerSiteCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByEnterpriseSummary:
+      type: object
+      properties:
+        bwusageRoleSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRoleSummary'
+        bwusageTopRegions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByTopRegions'
+        minTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        percentChanged:
+          type: number
+          format: double
+          example: 123.45
+        providerCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRegionEdgeDetails:
+      type: object
+      properties:
+        bwuageSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+      additionalProperties: false
+    v1BwtrackerSiteCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewayChartPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByTopRegions:
+      type: object
+      properties:
+        bwusageRoleSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRoleSummary'
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1BwtrackerSiteGatewayCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1BwtrackerRegionGatewayCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
+      additionalProperties: false
+    statsmonBandwidthtrackerTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1BwtrackerRegionSiteSummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteDetails'
+      additionalProperties: false
+    v1BwtrackerEnterpriseCsvPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewayDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteDetails'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayChartPostResponse:
+      type: object
+      properties:
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    v1BwtrackerEnterpriseCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewayDetailsPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySite:
+      type: object
+      properties:
+        edgeCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        locationId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        locationName:
+          type: string
+          example: example string
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionGatewayDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayChartPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeChartPostResponse:
+      type: object
+      properties:
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByTopSites:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageChartValue:
+      type: object
+      properties:
+        avgValue:
+          type: number
+          format: double
+          example: 123.45
+        duration:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        maxValue:
+          type: number
+          format: double
+          example: 123.45
+        startTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1BwtrackerEnterpriseSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseSummary'
+      additionalProperties: false
+    v1BwtrackerEnterpriseDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseDetails'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByEnterpriseDetails:
+      type: object
+      properties:
+        bwusageRegion:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
+        bwusageSite:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+        bwusageSiteGateway:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+      additionalProperties: false
+    v1BwtrackerRegionSiteDetailsPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteChartPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRegionEdgeSummary:
+      type: object
+      properties:
+        bwusageTopSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByTopSites'
+        edgeusageKbps:
+          type: number
+          format: double
+          example: 123.45
+        percentChanged:
+          type: number
+          format: double
+          example: 123.45
+        siteCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        totusageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionEdgeDetailsPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRoleSummary:
+      type: object
+      properties:
+        roleId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        roleName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionEdgeSummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayDetailsPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRegion:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionName:
+          type: string
+          example: example string
+        siteCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionSiteChartPostResponse:
+      type: object
+      properties:
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    v1BwtrackerRegionGatewaySummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerEnterpriseDetailsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteSummary:
+      type: object
+      properties:
+        bwuageRegion:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
+        edgeCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        providerCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewaySummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageCsvRecord:
+      type: object
+      properties:
+        cloudProviderName:
+          type: string
+          example: example string
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionName:
+          type: string
+          example: example string
+        serviceType:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionEdgeSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeSummary'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeChartPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteDetails:
+      type: object
+      properties:
+        bwuageEdgeProvider:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteEdgeProvider'
+        bwuageProvider:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteProvider'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageChart:
+      type: object
+      properties:
+        bwusageChart:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChartValue'
+        percentileUsageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

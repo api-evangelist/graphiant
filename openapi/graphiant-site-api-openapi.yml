@@ -1,0 +1,593 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Site API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Site
+paths:
+  /v1/site/{id}/details/interfaces:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SiteIdDetailsInterfacesGetResponse'
+      description: Get a list of a site's interfaces, loopback listed first
+      tags:
+      - Site
+  /v1/site/details/sitelists:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1SiteDetailsSitelistsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SiteDetailsSitelistsPostResponse'
+      description: Get a list of site list references for a site
+      tags:
+      - Site
+  /v2/site/{siteId}/topology:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: siteId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2SiteSiteIdTopologyPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2SiteSiteIdTopologyPostResponse'
+      description: Get the site topology
+      tags:
+      - Site
+  /v2/site/{siteId}/lan-segments:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: siteId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2SiteSiteIdLanSegmentsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2SiteSiteIdLanSegmentsPostResponse'
+      description: Get route count for all the LAN Segments in a site
+      tags:
+      - Site
+components:
+  schemas:
+    statsmonV2DeviceSegments:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoutes'
+      additionalProperties: false
+    v1SiteDetailsSitelistsPostResponse:
+      type: object
+      properties:
+        siteLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteList'
+      additionalProperties: false
+    statsmonV2EdgeedgeCircuitInfo:
+      type: object
+      properties:
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        deviceHostname:
+          type: string
+          example: example string
+        interfaceName:
+          type: string
+          example: example string
+        label:
+          type: string
+          example: ENUM_VALUE
+        lastResortCircuit:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+        uptime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1SiteDetailsSitelistsPostRequest:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonV2NodeDeviceInfo:
+      type: object
+      properties:
+        controlQuality:
+          type: string
+          example: ENUM_VALUE
+        cpu:
+          type: number
+          format: float
+          example: 12.34
+        dataQuality:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        location:
+          type: string
+          example: example string
+        maintenanceMode:
+          type: boolean
+          example: true
+        memory:
+          type: number
+          format: float
+          example: 12.34
+        mgmtIp:
+          type: string
+          example: example string
+        model:
+          type: string
+          example: example string
+        portalQuality:
+          type: string
+          example: ENUM_VALUE
+        serialNumber:
+          type: string
+          example: example string
+        softwareVersion:
+          type: string
+          example: example string
+        stagingMode:
+          type: boolean
+          example: true
+        temperature:
+          type: number
+          format: float
+          example: 12.34
+        uptime:
+          $ref: '#/components/schemas/googleProtobufDuration'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonV2TimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2SiteSiteIdLanSegmentsPostResponse:
+      type: object
+      properties:
+        deviceSegments:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2DeviceSegments'
+      additionalProperties: false
+    v2SiteSiteIdTopologyPostResponseSnapshot:
+      type: object
+      properties:
+        quality:
+          type: string
+          example: ENUM_VALUE
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1SiteIdDetailsInterfacesGetResponse:
+      type: object
+      properties:
+        interfaces:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    statsmonV2NodeCircuitInfo:
+      type: object
+      properties:
+        averageDownlinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        averageUplinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        connectedRegionName:
+          type: string
+          example: example string
+        currentDownlinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        currentUplinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaceName:
+          type: string
+          example: example string
+        jitter:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        label:
+          type: string
+          example: ENUM_VALUE
+        lastResort:
+          type: boolean
+          example: true
+        latency:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        loss:
+          type: number
+          format: float
+          example: 12.34
+        qoe:
+          type: number
+          format: float
+          example: 12.34
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonV2NodeConnection:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        destinationIp:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastResort:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Edge:
+      type: object
+      properties:
+        a:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        b:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        circuitsInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2EdgeedgeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Connection'
+        name:
+          type: string
+          example: example string
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonV2VrfRoute:
+      type: object
+      properties:
+        ipv4Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipv6Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalRoutes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Connection:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        destinationIp:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastResort:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Node:
+      type: object
+      properties:
+        circuitInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeConnection'
+        id:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        nodeInfo:
+          $ref: '#/components/schemas/statsmonV2NodeDeviceInfo'
+        preferredRegionName:
+          type: string
+          example: example string
+        quality:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2SiteSiteIdTopologyPostRequest:
+      type: object
+      properties:
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2SiteSiteIdTopologyPostResponse:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Edge'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Node'
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2SiteSiteIdTopologyPostResponseSnapshot'
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2SiteSiteIdLanSegmentsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    manaV2SiteList:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        policyCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        siteCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        siteListId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonV2VrfRoutes:
+      type: object
+      properties:
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        vrfRoute:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoute'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

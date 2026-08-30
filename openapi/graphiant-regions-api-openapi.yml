@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Regions API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Regions
+paths:
+  /v1/regions/{regionId}/gateways:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: regionId
+        in: path
+        required: true
+        description: Graphiant region id
+        schema:
+          type: integer
+          format: int32
+          example: 123
+      - name: storageProvider
+        in: query
+        description: Storage provider; only gateways with a LAN interface for this provider are returned
+        required: true
+        schema:
+          type: string
+          example: ENUM_VALUE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponse'
+      description: List gateway appliances in a region with at least one LAN interface for the given storage provider
+      tags:
+      - Regions
+  /v1/regions:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1RegionsGetResponse'
+      description: Get regions used for the current enterprise
+      tags:
+      - Regions
+components:
+  schemas:
+    v1RegionsGetResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Region'
+      additionalProperties: false
+    v1RegionsRegionIdGatewaysGetResponseGateway:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2RegionCoordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1RegionsRegionIdGatewaysGetResponse:
+      type: object
+      properties:
+        gateways:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

@@ -1,0 +1,1010 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Gateways API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Gateways
+paths:
+  /v1/gateways:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GatewaysPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysPostResponse'
+      tags:
+      - Gateways
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysDeleteResponse'
+      tags:
+      - Gateways
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GatewaysPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysPutResponse'
+      tags:
+      - Gateways
+  /v1/gateways/{id}/details:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysIdDetailsGetResponse'
+      tags:
+      - Gateways
+  /v1/gateways/regions:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysRegionsGetResponse'
+      tags:
+      - Gateways
+  /v1/gateways/summary:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysSummaryGetResponse'
+      tags:
+      - Gateways
+  /v1/gateways/guest-consumer/{matchId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: matchId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: email
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysGuestConsumerMatchIdGetResponse'
+      description: Get Site to Site VPN information for a non-Graphiant guest consumer by their email
+      tags:
+      - Gateways
+  /v1/gateways/ipsec/regions/{regionId}/vrfs/{vrfId}/inside-subnet:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: regionId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int32
+          example: 123
+      - name: vrfId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: addressFamily
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysIpsecRegionsRegionIdVrfsVrfIdInsideSubnetGetResponse'
+      description: Get the IPv4/Ipv6 Overlay Subnet for an ipsec gateway
+      tags:
+      - Gateways
+  /v1/gateways/reference-consumer:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysReferenceConsumerGetResponse'
+      description: Get the priorly-configured IPSec gateway details for a customer, lan segment, region combination to be re-used for any new service matches for that customer with the given lan segment and region
+      tags:
+      - Gateways
+  /v1/gateways/status:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GatewaysStatusPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GatewaysStatusPostResponse'
+      tags:
+      - Gateways
+components:
+  schemas:
+    manaV2IPsecGatewayPeersConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+          description: Name of the IPsec gateway service
+        remotePeers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IPsecGatewayRemotePeer'
+        routing:
+          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
+      additionalProperties: false
+    v1GatewaysStatusPostRequestDeviceInfo:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GatewaysPostRequest:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
+      additionalProperties: false
+    manaV2GatewayDetails:
+      type: object
+      properties:
+        aws:
+          $ref: '#/components/schemas/manaV2AwsGatewayDetails'
+        azure:
+          $ref: '#/components/schemas/manaV2AzureGatewayDetails'
+        description:
+          type: string
+          example: example string
+        gcp:
+          $ref: '#/components/schemas/manaV2GcpGatewayDetails'
+        ipsecGateway:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+        oci:
+          $ref: '#/components/schemas/manaV2OciGatewayDetails'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        speed:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2AwsDirectConnectGateway:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        transitGateways:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AwsTransitGateway'
+      additionalProperties: false
+    manaV2AzureGatewayDetails:
+      type: object
+      properties:
+        msPeeringVlanId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        routingPolicy:
+          type: string
+          example: example string
+        serviceKey:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GatewaysSummaryGetResponse:
+      type: object
+      properties:
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GatewaySummary'
+      additionalProperties: false
+    v1GatewaysReferenceConsumerGetResponse:
+      type: object
+      properties:
+        ipsecGatewayDetails:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+      additionalProperties: false
+    manaV2IpsecRoutingConfig:
+      type: object
+      properties:
+        bgp:
+          $ref: '#/components/schemas/manaV2IPsecBgpRouteConfig'
+        static:
+          $ref: '#/components/schemas/manaV2IPsecStaticRouteConfig'
+      additionalProperties: false
+    manaV2AwsAdvanceSettings:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        allowedPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        amazonBgpRouterIp:
+          type: string
+          example: example string
+        bgpAuthKey:
+          type: string
+          example: example string
+        customerBgpRouterIp:
+          type: string
+          example: example string
+        isJumbo:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2AWSTransitGatewayVpc:
+      type: object
+      properties:
+        id:
+          type: string
+          example: example string
+        subnets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Subnet'
+      additionalProperties: false
+    v1GatewaysPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2IPsecBgpRouteConfig:
+      type: object
+      properties:
+        addressFamilies:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        md5Password:
+          $ref: '#/components/schemas/manaV2NullableMd5Password'
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sendCommunity:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2AwsCredentials:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+          example: example string
+        secretAccessKey:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2IPsecStaticRouteConfig:
+      type: object
+      properties:
+        destinationPrefix:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v1GatewaysStatusPostRequest:
+      type: object
+      properties:
+        deviceInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GatewaysStatusPostRequestDeviceInfo'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+        supportStatus:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GatewaysIpsecRegionsRegionIdVrfsVrfIdInsideSubnetGetResponse:
+      type: object
+      properties:
+        ipv4Subnet:
+          type: string
+          example: example string
+        ipv6Subnet:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableMd5Password:
+      type: object
+      properties:
+        md5Password:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2AwsTransitGateway:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: string
+          example: example string
+        vpcs:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AWSTransitGatewayVpc'
+      additionalProperties: false
+    manaV2AwsGatewayDetails:
+      type: object
+      properties:
+        accountId:
+          type: string
+          example: example string
+        advanceSettings:
+          $ref: '#/components/schemas/manaV2AwsAdvanceSettings'
+        transitConnection:
+          $ref: '#/components/schemas/manaV2AWSGatewayDetailsTransitConnection'
+      additionalProperties: false
+    manaV2BgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        inboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+        outboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+      additionalProperties: false
+    manaV2IPsecGatewayRemotePeer:
+      type: object
+      properties:
+        destinationAddress:
+          type: string
+          example: example string
+        ikeInitiator:
+          type: boolean
+          example: true
+          description: When true, Graphiant initiates IKE for this peer
+        mtu:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+          description: Optional display name or label for this peer; used when generating tunnel names
+        remoteIkePeerIdentity:
+          type: string
+          example: example string
+          description: IKE identity of the remote peer
+        tcpMss:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tunnel1:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        tunnel2:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        vpnProfile:
+          type: string
+          example: example string
+          description: Enterprise IPsec VPN profile name for this peer
+      additionalProperties: false
+    v1GatewaysPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GatewaysStatusPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2GcpGatewayDetails:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        pairingKey:
+          type: string
+          example: example string
+        routingPolicy:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2GatewaySummary:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        gatewayDeviceSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GatewaySummaryGatewayDeviceSummary'
+        graphiantRegion:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        speed:
+          type: string
+          example: ENUM_VALUE
+        status:
+          type: string
+          example: ENUM_VALUE
+        supportStatus:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    manaV2AWSGatewayDetailsTransitConnection:
+      type: object
+      properties:
+        credentials:
+          $ref: '#/components/schemas/manaV2AwsCredentials'
+        customerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        gateway:
+          $ref: '#/components/schemas/manaV2AwsDirectConnectGateway'
+        region:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2RegionCoordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1GatewaysPutRequest:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GatewaysGuestConsumerMatchIdGetResponseIpsecVpnTunnelConfig:
+      type: object
+      properties:
+        bgpGraphiantAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bgpLocalAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bgpNeighborHoldTime:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bgpNeighborIpv4:
+          type: string
+          example: example string
+        bgpNeighborIpv6:
+          type: string
+          example: example string
+        dpdInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        dpdRetries:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        graphiantDestinationIp:
+          type: string
+          example: example string
+        graphiantIkeId:
+          type: string
+          example: example string
+        graphiantOuterTunnelIp:
+          type: string
+          example: example string
+        graphiantTunnelIp:
+          type: string
+          example: example string
+        graphiantTunnelIpv6:
+          type: string
+          example: example string
+        ikeAuthenticationAlgorithm:
+          type: string
+          example: example string
+        ikeAuthenticationMethod:
+          type: string
+          example: example string
+        ikeDhAlgorithm:
+          type: string
+          example: example string
+        ikeEncryptionAlgorithm:
+          type: string
+          example: example string
+        ikeLifetime:
+          type: string
+          example: example string
+        ikePresharedKey:
+          type: string
+          example: example string
+        ikeVersion:
+          type: integer
+          format: int32
+          example: 123
+        ipsecAuthenticationAlgorithm:
+          type: string
+          example: example string
+        ipsecEncryptionAlgorithm:
+          type: string
+          example: example string
+        ipsecExtendedSequenceNumber:
+          type: boolean
+          example: true
+        ipsecLifetime:
+          type: string
+          example: example string
+        ipsecMode:
+          type: string
+          example: example string
+        ipsecPfsAlgorithm:
+          type: string
+          example: example string
+        ipsecProtocol:
+          type: string
+          example: example string
+        localIkeId:
+          type: string
+          example: example string
+        localOuterTunnelIp:
+          type: string
+          example: example string
+        localTunnelIp:
+          type: string
+          example: example string
+        localTunnelIpv6:
+          type: string
+          example: example string
+        tcpMss:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tunnelMtu:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2GuestConsumerSiteToSiteVpnConfig:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+            example: example string
+        ipsecGatewayDetails:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    manaV2IPsecGatewayTunnelDetails:
+      type: object
+      properties:
+        insideIpv4Cidr:
+          type: string
+          example: example string
+        insideIpv6Cidr:
+          type: string
+          example: example string
+        localIkePeerIdentity:
+          type: string
+          example: example string
+        psk:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GatewaysIdDetailsGetResponse:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
+      additionalProperties: false
+    v1GatewaysGuestConsumerMatchIdGetResponse:
+      type: object
+      properties:
+        destinationPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        ipsecTunnelConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GatewaysGuestConsumerMatchIdGetResponseIpsecVpnTunnelConfig'
+        siteToSiteVpn:
+          $ref: '#/components/schemas/manaV2GuestConsumerSiteToSiteVpnConfig'
+      additionalProperties: false
+    v1GatewaysRegionsGetResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Region'
+      additionalProperties: false
+    manaV2GatewaySummaryGatewayDeviceSummary:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        interfaceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        maintenanceMode:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2Subnet:
+      type: object
+      properties:
+        cidr:
+          type: string
+          example: example string
+        id:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableBgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        family:
+          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
+      additionalProperties: false
+    manaV2IPsecGatewayDetails:
+      type: object
+      properties:
+        destinationAddress:
+          type: string
+          example: example string
+        ikeInitiator:
+          type: boolean
+          example: true
+        mtu:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        remoteIkePeerIdentity:
+          type: string
+          example: example string
+        routing:
+          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
+        tcpMss:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tunnel1:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        tunnel2:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        vpnProfile:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2OciGatewayDetails:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        fastConnectOcid:
+          type: string
+          example: example string
+        routingPolicy:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GatewaysDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2NullablePolicyName:
+      type: object
+      properties:
+        policy:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

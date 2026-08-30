@@ -1,0 +1,365 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Integration API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Integration
+paths:
+  /v2/integration/:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2IntegrationPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2IntegrationPostResponse'
+      tags:
+      - Integration
+  /v2/integration/{integrationId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: integrationId
+        in: path
+        required: true
+        description: ID of the integration to be deleted
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2IntegrationIntegrationIdDeleteResponse'
+      tags:
+      - Integration
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: integrationId
+        in: path
+        required: true
+        description: integration id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2IntegrationIntegrationIdPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2IntegrationIntegrationIdPutResponse'
+      tags:
+      - Integration
+  /v2/integration/getall/{enterpriseId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: enterpriseId
+        in: path
+        required: true
+        description: Enterprise id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2IntegrationGetallEnterpriseIdGetResponse'
+      tags:
+      - Integration
+  /v2/integration/test/{enterpriseId}/{integrationId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: enterpriseId
+        in: path
+        required: true
+        description: Enterprise id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      - name: integrationId
+        in: path
+        required: true
+        description: Integration id
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2IntegrationTestEnterpriseIdIntegrationIdGetResponse'
+      tags:
+      - Integration
+components:
+  schemas:
+    alertserviceIntegrationDetails:
+      type: object
+      properties:
+        opsgenieKey:
+          type: string
+          example: example string
+        opsrampDetails:
+          type: string
+          example: example string
+        pagerdutyRoutingKey:
+          type: string
+          example: example string
+        webhookUrl:
+          type: string
+          example: example string
+        zendeskDetails:
+          $ref: '#/components/schemas/alertserviceZendeskDetails'
+      additionalProperties: false
+    v2IntegrationIntegrationIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationPostRequest:
+      type: object
+      properties:
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
+      additionalProperties: false
+      required:
+      - integrationBody
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2IntegrationIntegrationIdPutRequest:
+      type: object
+      properties:
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceUpdateIntegrationBody'
+      additionalProperties: false
+      required:
+      - integrationBody
+    alertserviceUpdateIntegrationBody:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterprise:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ID of the enterprise (required)
+        integrationType:
+          type: string
+          example: ENUM_VALUE
+          description: Type of integration (required)
+        isActive:
+          type: boolean
+          example: true
+          description: Indicates whether the integration is active
+        nickName:
+          type: string
+          example: example string
+          description: nick name of the integration (required)
+        updatedBy:
+          type: string
+          example: example string
+          description: ID of the user who updated the integration
+      additionalProperties: false
+      required:
+      - enterprise
+      - integrationType
+      - nickName
+    v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationIntegrationIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    alertserviceCreateIntegrationBody:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          example: example string
+          description: ID of the user who created the integration
+        createdOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterprise:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ID of the enterprise (required)
+        integrationType:
+          type: string
+          example: ENUM_VALUE
+          description: Type of integration (required)
+        isActive:
+          type: boolean
+          example: true
+          description: Indicates whether the integration is active
+        nickName:
+          type: string
+          example: example string
+          description: Name of the integration (required)
+      additionalProperties: false
+      required:
+      - enterprise
+      - integrationType
+      - nickName
+    v2IntegrationGetallEnterpriseIdGetResponse:
+      type: object
+      properties:
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceIntegration'
+      additionalProperties: false
+    alertserviceIntegration:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          example: example string
+        createdOn:
+          type: string
+          example: example string
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterpriseId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isActive:
+          type: boolean
+          example: true
+        lastScanned:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: last scanned time for integrations (zendesk)
+        nickName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    alertserviceZendeskDetails:
+      type: object
+      properties:
+        zendeskApiToken:
+          type: string
+          example: example string
+          description: zendesk api token (required)
+        zendeskAssigneeId:
+          type: string
+          example: example string
+          description: zendesk assignee id (required)
+        zendeskBaseUrl:
+          type: string
+          example: example string
+          description: zendesk base url (required)
+        zendeskEmail:
+          type: string
+          example: example string
+          description: zendesk email (required)
+      additionalProperties: false
+      required:
+      - zendeskApiToken
+      - zendeskAssigneeId
+      - zendeskBaseUrl
+      - zendeskEmail
+    v2IntegrationPostResponse:
+      type: object
+      properties:
+        integration:
+          $ref: '#/components/schemas/alertserviceIntegration'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

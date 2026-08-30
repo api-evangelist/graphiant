@@ -1,0 +1,287 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Activity API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Activity
+paths:
+  /v1/activity/logs:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ActivityLogsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ActivityLogsPostResponse'
+      tags:
+      - Activity
+components:
+  schemas:
+    v1ActivityLogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonActivityDetails'
+        filterEntities:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1ActivityLogsPostResponseActivityItems'
+        filterJobTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    v1ActivityLogsPostResponseActivityItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+      additionalProperties: false
+    auditActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    auditmonActivityDetailsTargetEvent:
+      type: object
+      properties:
+        state:
+          type: string
+          example: example string
+        stateId:
+          type: integer
+          format: int32
+          example: 123
+        traceSessionId:
+          type: string
+          example: example string
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1ActivityLogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selector:
+          $ref: '#/components/schemas/auditmonActivityLogsSelector'
+        selectorV2:
+          $ref: '#/components/schemas/auditmonActivityLogsSelectorV2'
+      additionalProperties: false
+    auditmonActivityDetailsTarget:
+      type: object
+      properties:
+        detailedFailureReason:
+          type: string
+          example: example string
+        endTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonActivityDetailsTargetEvent'
+        failureReason:
+          type: string
+          example: example string
+        ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        startTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    auditmonActivityLogsSelector:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        id:
+          type: string
+          example: example string
+        inProgress:
+          type: boolean
+          example: true
+        jobEntity:
+          $ref: '#/components/schemas/auditActivityItem'
+        targetIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    auditmonActivityLogsSelectorV2:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        siteIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        statuses:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        types:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        userIds:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    auditmonActivityDetails:
+      type: object
+      properties:
+        action:
+          type: string
+          example: example string
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        category:
+          type: string
+          example: ENUM_VALUE
+        disableAutoTimeout:
+          type: boolean
+          example: true
+        endTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: string
+          example: example string
+        initiatorType:
+          type: string
+          example: ENUM_VALUE
+        jobEntities:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        jobType:
+          type: string
+          example: ENUM_VALUE
+        originalEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        startTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        status:
+          type: string
+          example: ENUM_VALUE
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonActivityDetailsTarget'
+        traceSessionId:
+          type: string
+          example: example string
+        usage:
+          type: string
+          example: ENUM_VALUE
+        user:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

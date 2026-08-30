@@ -1,0 +1,500 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Assistant API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Assistant
+paths:
+  /v2/assistant/add-to-conversation:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantAddToConversationPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantAddToConversationPostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/delete-conversation-chat/{conversationId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: conversationId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+          example: example string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantDeleteConversationChatConversationIdDeleteResponse'
+      tags:
+      - Assistant
+  /v2/assistant/conversation-interface-enable-disable/:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantConversationInterfaceEnableDisablePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantConversationInterfaceEnableDisablePostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/conversation-context-history/:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantConversationContextHistoryPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantConversationContextHistoryPostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/version:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantVersionPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantVersionPostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/conversation-interface-state/:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantConversationInterfaceStateGetResponse'
+      tags:
+      - Assistant
+  /v2/assistant/get-conversation-details:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantGetConversationDetailsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantGetConversationDetailsPostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/get-conversations:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantGetConversationsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantGetConversationsPostResponse'
+      tags:
+      - Assistant
+  /v2/assistant/update-conversation-name:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2AssistantUpdateConversationNamePostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2AssistantUpdateConversationNamePostResponse'
+      tags:
+      - Assistant
+components:
+  schemas:
+    v2AssistantGetConversationsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/assistantTimeWindow'
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantVersionPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantGetConversationsPostResponse:
+      type: object
+      properties:
+        conversationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assistantAssistantConversation'
+        enableContextHistory:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantDeleteConversationChatConversationIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantAddToConversationPostRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        question:
+          $ref: '#/components/schemas/assistantAssistantQuestion'
+      additionalProperties: false
+    assistantAssistantConversation:
+      type: object
+      properties:
+        conversationHeader:
+          type: string
+          example: example string
+        conversationId:
+          type: string
+          example: example string
+        conversationRecentTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enableContextHistory:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantVersionPostResponse:
+      type: object
+      properties:
+        versionId:
+          type: string
+          example: example string
+      additionalProperties: false
+    assistantAssistantResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        dataframeDictionary:
+          type: array
+          items:
+            $ref: '#/components/schemas/assistantDataframeDictionary'
+        originalQuestion:
+          $ref: '#/components/schemas/assistantAssistantQuestion'
+        responseId:
+          type: string
+          example: example string
+        responseLanguage:
+          type: string
+          example: ENUM_VALUE
+        responseText:
+          type: string
+          example: example string
+        responseTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        responseType:
+          type: string
+          example: ENUM_VALUE
+        visualizationSummary:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantConversationInterfaceEnableDisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssistantUpdateConversationNamePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantConversationInterfaceEnableDisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantConversationContextHistoryPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantGetConversationDetailsPostResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        responseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assistantAssistantResponse'
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    assistantDataframeDictionary:
+      type: object
+      properties:
+        dataframeDictionaryMap:
+          type: object
+          additionalProperties:
+            type: string
+            example: example string
+        xAxis:
+          type: string
+          example: example string
+        yAxis:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantConversationInterfaceStateGetResponse:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantAddToConversationPostResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        dataframeDictionary:
+          type: array
+          items:
+            $ref: '#/components/schemas/assistantDataframeDictionary'
+        originalQuestion:
+          $ref: '#/components/schemas/assistantAssistantQuestion'
+        responseId:
+          type: string
+          example: example string
+        responseLanguage:
+          type: string
+          example: ENUM_VALUE
+        responseText:
+          type: string
+          example: example string
+        responseTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        responseType:
+          type: string
+          example: ENUM_VALUE
+        visualizationSummary:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantUpdateConversationNamePostRequest:
+      type: object
+      properties:
+        conversationHeader:
+          type: string
+          example: example string
+        conversationId:
+          type: string
+          example: example string
+      additionalProperties: false
+    assistantTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2AssistantConversationContextHistoryPostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantGetConversationDetailsPostRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        timeWindow:
+          $ref: '#/components/schemas/assistantTimeWindow'
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    assistantAssistantQuestion:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        questionLanguage:
+          type: string
+          example: ENUM_VALUE
+        questionText:
+          type: string
+          example: example string
+        questionTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

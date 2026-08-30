@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Presharedkey API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Presharedkey
+paths:
+  /v1/presharedkey:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PresharedkeyGetResponse'
+      description: Get all domain categories from the DPI engine
+      tags:
+      - Presharedkey
+components:
+  schemas:
+    v1PresharedkeyGetResponse:
+      type: object
+      properties:
+        presharedkey:
+          type: string
+          example: example string
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

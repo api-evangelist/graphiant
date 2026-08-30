@@ -1,0 +1,2670 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Device API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Device
+paths:
+  /v1/device/snapshot:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DeviceSnapshotPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceSnapshotPostResponse'
+      description: Create a device snapshot
+      tags:
+      - Device
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceSnapshotGetResponse'
+      description: Get the specified device snapshots using the snapshot id
+      tags:
+      - Device
+    put:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DeviceSnapshotPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceSnapshotPutResponse'
+      description: Update an existing device snapshot
+      tags:
+      - Device
+  /v1/device/snapshot/{snapshotId}:
+    delete:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: snapshotId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '204':
+          description: No Content
+      description: Delete specified device snapshot
+      tags:
+      - Device
+  /v1/device/snapshot/{deviceId}:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceSnapshotDeviceIdGetResponse'
+      description: Get all of a device's snapshots
+      tags:
+      - Device
+  /v1/device/routing/bgp/nbrs/counters:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: address
+        in: query
+        description: BGP Nbr address
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 10.121.12.34
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingBgpNbrsCountersGetResponse'
+      description: Get BGP Neighbor Counters
+      tags:
+      - Device
+  /v1/device/routing/bgp/nbrs/details:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: address
+        in: query
+        description: BGP Nbr address
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 10.121.12.34
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: interface
+        in: query
+        description: Interface name. Used in case of link local address
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: Ethernet3/0
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingBgpNbrsDetailsGetResponse'
+      description: Get BGP Neighbor Details Table
+      tags:
+      - Device
+  /v1/device/routing/bgp/nbrid:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingBgpNbridGetResponse'
+      description: Get BGP Neighbor ID Table
+      tags:
+      - Device
+  /v1/device/routing/odp/nbrid:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOdpNbridGetResponse'
+      description: Get BGP Neighbor addresses from ODP server
+      tags:
+      - Device
+  /v1/device/routing/bgp/nbrs/per-afi-prefix:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: address
+        in: query
+        description: BGP Nbr address
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 10.121.12.34
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: interface
+        in: query
+        description: Interface name. Used in case of link local address
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: Ethernet3/0
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingBgpNbrsPerAfiPrefixGetResponse'
+      description: Get BGP Neighbor Per Afi Prefix Counter
+      tags:
+      - Device
+  /v1/device/routing/vrf/bgp/route-count:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DeviceRoutingVrfBgpRouteCountPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingVrfBgpRouteCountPostResponse'
+      description: Get BGP VRF route count
+      tags:
+      - Device
+  /v1/device/routing/vrf/bgp/eibgp-route-count:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfName
+        in: query
+        description: Valid configured VRF names
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: management
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingVrfBgpEibgpRouteCountGetResponse'
+      description: Get eBGP/iBGP VRF route count
+      tags:
+      - Device
+  /v1/device/routing/rib/route-count:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfName
+        in: query
+        description: Valid configured VRF names
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            example: management
+          example:
+          - management
+        style: form
+        explode: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1DeviceRoutingRibRouteCountPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingRibRouteCountPostResponse'
+      description: Get BGP VRF installed route count
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/areaid:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2AreaidGetResponse'
+      description: Get OSPFv2 Area ID Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/area/interface:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2AreaInterfaceGetResponse'
+      description: Get OSPFv2 Area's Interface specific Information
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/area/interface/nbrid:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: interfaceId
+        in: query
+        description: Valid configured Interface name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: ToATT, ISP2
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2AreaInterfaceNbridGetResponse'
+      description: Get OSPFv2 Area's interface's Nbr ID table
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/area/lsdb:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2AreaLsdbGetResponse'
+      description: Get OSPFv2 Area specific LSDB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/area/nbr:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2AreaNbrGetResponse'
+      description: Get OSPFv2 Area's Neighbors Information
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/lsdb:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: ospf-demo
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: management
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2LsdbGetResponse'
+      description: Get OSPFv2 global LSDB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/rib:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: BGP-ODP
+      - name: before
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          example: example string
+      - name: last
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: management
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2RibGetResponse'
+      description: Get OSPFv2 Local RIB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv2/statistics:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfNames
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            example: management
+          example:
+          - management
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv2StatisticsGetResponse'
+      description: Get OSPFv2 Statistics
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/areaid:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3AreaidGetResponse'
+      description: Get OSPFv3 Area ID Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/area/interface:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3AreaInterfaceGetResponse'
+      description: Get OSPFv3 Area's Interface specific Information
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/area/lsdb:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3AreaLsdbGetResponse'
+      description: Get OSPFv3 Area LSDB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/area/nbr:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: areaId
+        in: query
+        description: Valid configured Area ID
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: 0.0.0.0
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: OSPF1
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: default
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3AreaNbrGetResponse'
+      description: Get OSPFv3 Area's Neighbors Information
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/lsdb:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: ospf-demo
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: management
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3LsdbGetResponse'
+      description: Get OSPFv3 global LSDB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/rib:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: instanceName
+        in: query
+        description: Valid configured OSPF Instance name
+        required: false
+        schema:
+          type: string
+          example: example string
+        example: BGP-ODP
+      - name: vrfName
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: string
+          example: example string
+        example: management
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3RibGetResponse'
+      description: Get OSPFv3 Local RIB Table
+      tags:
+      - Device
+  /v1/device/routing/ospfv3/statistics:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: query
+        description: Valid configured device ID > 0
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+        example: 1000000
+      - name: vrfNames
+        in: query
+        description: Valid configured VRF name
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            example: management
+          example:
+          - management
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DeviceRoutingOspfv3StatisticsGetResponse'
+      description: Get OSPFv3 Statistics
+      tags:
+      - Device
+  /v2/device/{deviceId}/topology:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2DeviceDeviceIdTopologyPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2DeviceDeviceIdTopologyPostResponse'
+      description: Get the device topology
+      tags:
+      - Device
+  /v2/device/{deviceId}/lan-segments:
+    post:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      - name: deviceId
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+          format: int64
+          example: 1234567891011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2DeviceDeviceIdLanSegmentsPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v2DeviceDeviceIdLanSegmentsPostResponse'
+      description: Get route count for all the LAN Segments in a device
+      tags:
+      - Device
+components:
+  schemas:
+    routingOspflsaTosMetric:
+      type: object
+      properties:
+        tos:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tosMetric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1DeviceRoutingOspfv3StatisticsGetResponse:
+      type: object
+      properties:
+        statistics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/routingOspfStatistics'
+      additionalProperties: false
+    v1DeviceSnapshotDeviceIdGetResponse:
+      type: object
+      properties:
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DeviceSnapshot'
+      additionalProperties: false
+    statsmonV2DeviceSegments:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoutes'
+      additionalProperties: false
+    routingAfiRouteCount:
+      type: object
+      properties:
+        ipv4:
+          type: integer
+          format: int64
+          example: 32
+          description: IPv4 route count
+        ipv6:
+          type: integer
+          format: int64
+          example: 6532
+          description: IPv6 route count
+      additionalProperties: false
+    statsmonV2EdgeedgeCircuitInfo:
+      type: object
+      properties:
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        deviceHostname:
+          type: string
+          example: example string
+        interfaceName:
+          type: string
+          example: example string
+        label:
+          type: string
+          example: ENUM_VALUE
+        lastResortCircuit:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+        uptime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2DeviceDeviceIdTopologyPostRequest:
+      type: object
+      properties:
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+        version:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    routingOspfStatistics:
+      type: object
+      properties:
+        discontinuityTime:
+          type: string
+          example: example string
+        routeCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1DeviceRoutingVrfBgpRouteCountPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1000000
+          description: Valid configured device ID > 0 (required)
+        vrfName:
+          type: array
+          items:
+            type: string
+            example: management
+            description: Valid configured VRF names (required)
+      additionalProperties: false
+      required:
+      - deviceId
+      - vrfName
+    v2DeviceDeviceIdLanSegmentsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2DeviceDeviceIdTopologyPostResponse:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Edge'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Node'
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2DeviceDeviceIdTopologyPostResponseSnapshot'
+      additionalProperties: false
+    v2DeviceDeviceIdLanSegmentsPostResponse:
+      type: object
+      properties:
+        deviceSegments:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2DeviceSegments'
+      additionalProperties: false
+    v1DeviceRoutingOdpNbridGetResponse:
+      type: object
+      properties:
+        nbrs:
+          type: array
+          items:
+            type: string
+            example: 10.121.12.34, 1211:343:ac34::12
+            description: BGP Nbr addresses (required)
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceSnapshotPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1DeviceRoutingOspfv3AreaLsdbGetResponse:
+      type: object
+      properties:
+        lsas:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspflsa'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    commonPageInfo:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+          description: The page number we are currently on (required)
+        endCursor:
+          type: string
+          example: xxxxxxy
+          description: Cursor pointing to the last record on the current page
+        hasNextPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page after this one in the resultset based on current position
+        hasPrevPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page before this one in the resultset based on current position
+        startCursor:
+          type: string
+          example: xxxxxx
+          description: Cursor pointing to the first record on the current page
+        totalPages:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: The number of pages in the complete resultset based on the current length of the page (required)
+        totalRecords:
+          type: integer
+          format: int32
+          example: 400
+          minimum: 0
+          description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+    v1DeviceRoutingOspfv2AreaInterfaceGetResponse:
+      type: object
+      properties:
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfInterface'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingVrfBgpEibgpRouteCountGetResponse:
+      type: object
+      properties:
+        ebgpRouteCount:
+          $ref: '#/components/schemas/routingAfiRouteCount'
+        graphiantRouteCount:
+          $ref: '#/components/schemas/routingAfiRouteCount'
+        ibgpRouteCount:
+          $ref: '#/components/schemas/routingAfiRouteCount'
+        localSourcedRouteCount:
+          $ref: '#/components/schemas/routingAfiRouteCount'
+        totalRouteCount:
+          $ref: '#/components/schemas/routingAfiRouteCount'
+      additionalProperties: false
+    routingOspflsa:
+      type: object
+      properties:
+        advertisingRouter:
+          type: string
+          example: 172.121.12.34
+          description: IP address (required)
+        age:
+          type: integer
+          format: int32
+          example: 3242342
+          minimum: 0
+          description: How old is the LSA (required)
+        asexternalLsa:
+          $ref: '#/components/schemas/routingOspfasExternalLsa'
+        checksum:
+          type: integer
+          format: int32
+          example: 2343232
+          minimum: 0
+          description: LSA Checksum (required)
+        length:
+          type: integer
+          format: int32
+          example: 123132
+          minimum: 0
+          description: LSA length (required)
+        linkId:
+          type: string
+          example: 143.12.1.5
+          description: IP address of link on peer (required)
+        networkLsa:
+          $ref: '#/components/schemas/routingOspfNetworkLsa'
+        routerLsa:
+          $ref: '#/components/schemas/routingOspfRouterLsa'
+        sequenceNumber:
+          type: string
+          example: '0x80000001'
+          description: LSA sequence number (required)
+        summaryLsa:
+          $ref: '#/components/schemas/routingOspfSummaryLsa'
+        type:
+          type: string
+          example: Router
+          description: Type of LSA (required)
+      additionalProperties: false
+    v1DeviceRoutingOspfv2AreaidGetResponse:
+      type: object
+      properties:
+        areas:
+          type: array
+          items:
+            type: string
+            example: 10.121.12.34, 1.1.1.1
+            description: Area IDs (required)
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingOspfv3RibGetResponse:
+      type: object
+      properties:
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfRoute'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v2DeviceDeviceIdTopologyPostResponseSnapshot:
+      type: object
+      properties:
+        quality:
+          type: string
+          example: ENUM_VALUE
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonV2NodeDeviceInfo:
+      type: object
+      properties:
+        controlQuality:
+          type: string
+          example: ENUM_VALUE
+        cpu:
+          type: number
+          format: float
+          example: 12.34
+        dataQuality:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        location:
+          type: string
+          example: example string
+        maintenanceMode:
+          type: boolean
+          example: true
+        memory:
+          type: number
+          format: float
+          example: 12.34
+        mgmtIp:
+          type: string
+          example: example string
+        model:
+          type: string
+          example: example string
+        portalQuality:
+          type: string
+          example: ENUM_VALUE
+        serialNumber:
+          type: string
+          example: example string
+        softwareVersion:
+          type: string
+          example: example string
+        stagingMode:
+          type: boolean
+          example: true
+        temperature:
+          type: number
+          format: float
+          example: 12.34
+        uptime:
+          $ref: '#/components/schemas/googleProtobufDuration'
+      additionalProperties: false
+    routingOspfSummaryLsa:
+      type: object
+      properties:
+        networkMask:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tosMetric:
+          $ref: '#/components/schemas/routingOspflsaTosMetric'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2DeviceSnapshot:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/commonUserInfo'
+        category:
+          type: string
+          example: ENUM_VALUE
+        createdOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        data:
+          $ref: '#/components/schemas/manaV2DeviceSnapshotData'
+        golden:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: 6-1-24-status-check
+          description: name for the snapshot
+      additionalProperties: false
+    routingOspfasExternalLsa:
+      type: object
+      properties:
+        forwardingAddress:
+          type: string
+          example: example string
+        metric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        metricType:
+          type: string
+          example: example string
+        networkMask:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tag:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tosMetric:
+          $ref: '#/components/schemas/routingOspflsaTosMetric'
+      additionalProperties: false
+    statsmonV2TimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    routingOspfRouterLsaLink:
+      type: object
+      properties:
+        linkData:
+          type: string
+          example: example string
+        linkId:
+          type: string
+          example: example string
+        linkType:
+          type: string
+          example: example string
+        metric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tosMetric:
+          $ref: '#/components/schemas/routingOspflsaTosMetric'
+      additionalProperties: false
+    v1DeviceRoutingBgpNbrsCountersGetResponse:
+      type: object
+      properties:
+        counters:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingbgpCounter'
+      additionalProperties: false
+    v1DeviceRoutingOspfv3LsdbGetResponse:
+      type: object
+      properties:
+        lsas:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspflsa'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingOspfv2AreaInterfaceNbridGetResponse:
+      type: object
+      properties:
+        nbrs:
+          type: array
+          items:
+            type: string
+            example: 2.2.2.2
+            description: Neighbor Address (required)
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceSnapshotPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    routingOspfInterface:
+      type: object
+      properties:
+        bdrIpAddr:
+          type: string
+          example: 131.34.23.11
+          description: Router IP Address (required)
+        bdrRouterId:
+          type: string
+          example: 1.1.1.1
+          description: BDR Router ID (required)
+        drIpAddr:
+          type: string
+          example: 131.34.23.11
+          description: Router IP Address (required)
+        drRouterId:
+          type: string
+          example: 1.1.1.1
+          description: Router ID (required)
+        helloInterval:
+          type: string
+          example: example string
+        helloTimer:
+          type: string
+          example: 50
+          description: Timer in seconds (required)
+        name:
+          type: string
+          example: ethernet1/0
+          description: Interface name (required)
+        neighbors:
+          type: array
+          items:
+            type: string
+            example: 1.1.12.12
+            description: Nbr Router ID (required)
+        state:
+          type: string
+          example: Loopback
+          description: interface state (required)
+        waitTimer:
+          type: string
+          example: 50
+          description: Timer in seconds (required)
+      additionalProperties: false
+    routingOspfNextHop:
+      type: object
+      properties:
+        egressInterface:
+          type: string
+          example: ATTInterface
+          description: Interface name (required)
+        lastModified:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        metric:
+          type: integer
+          format: int32
+          example: 120
+          minimum: 0
+          description: value > 0 (required)
+        nextHop:
+          type: string
+          example: 10.1.1.1
+          description: IPv4 or IPv6 Nexthop (required)
+        tag:
+          type: integer
+          format: int32
+          example: 12312
+          minimum: 0
+          description: admin assigned number (required)
+        type:
+          type: string
+          example: internal or external
+          description: route type (required)
+      additionalProperties: false
+    v1DeviceRoutingBgpNbrsDetailsGetResponse:
+      type: object
+      properties:
+        ebgpMultiHopTtl:
+          type: integer
+          format: int32
+          example: 123
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+        keepAliveTimer:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
+          type: string
+          example: ENUM_VALUE
+        b2b:
+          type: string
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
+          type: string
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    commonUserInfo:
+      type: object
+      properties:
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        exp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        originalEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeZone:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2NodeCircuitInfo:
+      type: object
+      properties:
+        averageDownlinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        averageUplinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        connectedRegionName:
+          type: string
+          example: example string
+        currentDownlinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        currentUplinkUtilization:
+          type: number
+          format: double
+          example: 123.45
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaceName:
+          type: string
+          example: example string
+        jitter:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        label:
+          type: string
+          example: ENUM_VALUE
+        lastResort:
+          type: boolean
+          example: true
+        latency:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        loss:
+          type: number
+          format: float
+          example: 12.34
+        qoe:
+          type: number
+          format: float
+          example: 12.34
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonV2NodeConnection:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        destinationIp:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastResort:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Edge:
+      type: object
+      properties:
+        a:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        b:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        circuitsInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2EdgeedgeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Connection'
+        name:
+          type: string
+          example: example string
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2DeviceSnapshotData:
+      type: object
+      properties:
+        OSPFInstalledRouteCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        T2SessionCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        TWAMPSessionCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bfdSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        bgpNeighborIpList:
+          type: array
+          items:
+            type: string
+            example: example string
+        bgpSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        deviceRole:
+          type: string
+          example: ENUM_VALUE
+        failedServicesCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        graphnosVersion:
+          type: string
+          example: example string
+        installedLabels:
+          type: integer
+          format: int32
+          example: 123
+        ipsecSessionCount:
+          type: integer
+          format: int32
+          example: 123
+        ongoingAlerts:
+          type: integer
+          format: int32
+          example: 123
+        ospfNeighborIpList:
+          type: array
+          items:
+            type: string
+            example: example string
+        ospfSessionCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1DeviceRoutingOspfv2RibGetResponse:
+      type: object
+      properties:
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfRoute'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingOspfv2StatisticsGetResponse:
+      type: object
+      properties:
+        statistics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/routingOspfStatistics'
+      additionalProperties: false
+    v1DeviceSnapshotPutRequest:
+      type: object
+      properties:
+        golden:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+        snapshotId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    routingOspfNetworkLsa:
+      type: object
+      properties:
+        attachedRouters:
+          type: array
+          items:
+            type: string
+            example: example string
+        networkMask:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    routingOspfRoute:
+      type: object
+      properties:
+        ipPrefix:
+          type: string
+          example: 131.1.0.0/16
+          description: IPv4 or IPv6 Prefix (required)
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfNextHop'
+      additionalProperties: false
+    v1DeviceRoutingOspfv2LsdbGetResponse:
+      type: object
+      properties:
+        lsas:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspflsa'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    statsmonV2VrfRoute:
+      type: object
+      properties:
+        ipv4Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipv6Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalRoutes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Connection:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        circuitCarrier:
+          type: string
+          example: example string
+        circuitName:
+          type: string
+          example: example string
+        destinationIp:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastResort:
+          type: boolean
+          example: true
+        quality:
+          type: string
+          example: ENUM_VALUE
+        sourceIp:
+          type: string
+          example: example string
+        sourcePublicIp:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2Node:
+      type: object
+      properties:
+        circuitInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeConnection'
+        id:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        nodeInfo:
+          $ref: '#/components/schemas/statsmonV2NodeDeviceInfo'
+        preferredRegionName:
+          type: string
+          example: example string
+        quality:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1DeviceRoutingBgpNbridGetResponse:
+      type: object
+      properties:
+        nbrs:
+          type: array
+          items:
+            type: string
+            example: 10.121.12.34, 1211:343:ac34::12
+            description: BGP Nbr addresses (required)
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceSnapshotGetResponse:
+      type: object
+      properties:
+        firstSnapshot:
+          $ref: '#/components/schemas/manaV2DeviceSnapshot'
+        secondSnapshot:
+          $ref: '#/components/schemas/manaV2DeviceSnapshot'
+        thirdSnapshot:
+          $ref: '#/components/schemas/manaV2DeviceSnapshot'
+      additionalProperties: false
+    v1DeviceRoutingVrfBgpRouteCountPostResponseRouteCount:
+      type: object
+      properties:
+        routeCount:
+          type: integer
+          format: int64
+          example: 1234
+          description: total route count in a vrf (required)
+        vrfName:
+          type: string
+          example: management
+          description: Valid configured VRF name (required)
+      additionalProperties: false
+    v1DeviceRoutingOspfv3AreaInterfaceGetResponse:
+      type: object
+      properties:
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfInterface'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingBgpNbrsPerAfiPrefixGetResponse:
+      type: object
+      properties:
+        prefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingprefix'
+      additionalProperties: false
+    routingbgpCounter:
+      type: object
+      properties:
+        gracefulRestart:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        localAsNumber:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        localIpAddress:
+          type: string
+          example: example string
+        localRouterId:
+          type: string
+          example: example string
+        peerRouterId:
+          type: string
+          example: example string
+        upTime:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DeviceRoutingOspfv2AreaNbrGetResponse:
+      type: object
+      properties:
+        nbrs:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfNbr'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingOspfv2AreaLsdbGetResponse:
+      type: object
+      properties:
+        lsas:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspflsa'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingRibRouteCountPostResponseRouteCount:
+      type: object
+      properties:
+        routeCount:
+          type: integer
+          format: int64
+          example: 1234
+          description: Total installed route count in a vrf (required)
+        vrfName:
+          type: string
+          example: management
+          description: Valid configured VRF name (required)
+      additionalProperties: false
+    routingprefix:
+      type: object
+      properties:
+        afiSafiName:
+          type: string
+          example: example string
+        prefixRcvd:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        prefixSent:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DeviceRoutingOspfv3AreaNbrGetResponse:
+      type: object
+      properties:
+        nbrs:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfNbr'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingOspfv3AreaidGetResponse:
+      type: object
+      properties:
+        areas:
+          type: array
+          items:
+            type: string
+            example: 10.121.12.34, 1.1.1.1
+            description: Area IDs (required)
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        token:
+          type: string
+          example: xxxxxxxxx
+          description: Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client.
+      additionalProperties: false
+    v1DeviceRoutingVrfBgpRouteCountPostResponse:
+      type: object
+      properties:
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DeviceRoutingVrfBgpRouteCountPostResponseRouteCount'
+      additionalProperties: false
+    v1DeviceRoutingRibRouteCountPostResponse:
+      type: object
+      properties:
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DeviceRoutingRibRouteCountPostResponseRouteCount'
+      additionalProperties: false
+    routingOspfRouterLsa:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/routingOspfRouterLsaLink'
+      additionalProperties: false
+    v1DeviceSnapshotPostRequest:
+      type: object
+      properties:
+        category:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        golden:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    routingOspfNbr:
+      type: object
+      properties:
+        address:
+          type: string
+          example: 1.1.1.1
+          description: v4 or v6 Address (required)
+        cost:
+          type: integer
+          format: int32
+          example: 230
+          minimum: 0
+          description: cost (required)
+        deadTimer:
+          type: integer
+          format: int32
+          example: 40
+          minimum: 0
+          description: Dead Timer (required)
+        lastStateChange:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        routerId:
+          type: string
+          example: 1.1.1.1
+          description: Router ID (required)
+        state:
+          type: string
+          example: up or down
+          description: interface state (required)
+      additionalProperties: false
+    v1DeviceRoutingRibRouteCountPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    statsmonV2VrfRoutes:
+      type: object
+      properties:
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        vrfRoute:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoute'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`

@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Graphiant Msp API
+  version: 1.0.0
+  description: Graphiant API documentation.
+servers:
+- url: https://api.graphiant.com
+security:
+- jwtAuth: []
+tags:
+- name: Msp
+paths:
+  /v1/msp/managed-enterprise-contract-info:
+    get:
+      security:
+      - jwtAuth: []
+      parameters:
+      - in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        description: 'Bearer token. Format: Bearer <your_token_here>'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1MspManagedEnterpriseContractInfoGetResponse'
+      description: Managed enterprises under the MSP with contract and credit allocation details for the requested month
+      tags:
+      - Msp
+components:
+  schemas:
+    manaV2ManagedEnterpriseContractInfo:
+      type: object
+      properties:
+        consumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed over the entirety the enterprise's contracts
+        enterpriseContract:
+          $ref: '#/components/schemas/commonBillingContract'
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enterpriseName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1MspManagedEnterpriseContractInfoGetResponse:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
+        mspConsumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed by the MSP over the entirety of its contracts
+        mspContract:
+          $ref: '#/components/schemas/commonBillingContract'
+      additionalProperties: false
+    commonBillingTimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Use `Bearer <token>`
