@@ -1,19 +1,17 @@
 aid: graphiant
 name: Graphiant
-description: 'Graphiant is a Network-as-a-Service (NaaS) provider that replaces fragmented
-  SD-WAN, MPLS and cloud-networking stacks with a single cloud-native subscription
-  service built on a stateless core architecture. Founded by former Viptela CTO Khalid
-  Raza, the platform connects branches, data centers, public and neo-cloud environments,
-  remote users, AI agents, applications, customers and business partners, delivering
-  private connectivity, end-to-end and post-quantum encryption, data-sovereignty routing
-  controls, Zero Trust Network Access, data loss prevention, deep packet inspection
-  and real-time observability. Everything the Graphiant Portal can do is exposed through
-  a token-authenticated REST/JSON API at api.graphiant.com covering device and edge
-  configuration, sites, circuits and interfaces, LAN segments, BGP and routing policy,
-  gateways, B2B extranet and Data Exchange, assurance and AI-adoption analytics, alarms,
-  notifications and third-party integrations, users, tenants and MSP account switching.
-  Graphiant publishes the OpenAPI bundle that generates its open-source Python and
-  Go SDKs, ships a graphiant CLI, and maintains an Ansible collection of NaaS playbooks.'
+description: Graphiant is a Network-as-a-Service (NaaS) provider that replaces fragmented SD-WAN, MPLS
+  and cloud-networking stacks with a single cloud-native subscription service built on a stateless core
+  architecture. Founded by former Viptela CTO Khalid Raza, the platform connects branches, data centers,
+  public and neo-cloud environments, remote users, AI agents, applications, customers and business partners,
+  delivering private connectivity, end-to-end and post-quantum encryption, data-sovereignty routing controls,
+  Zero Trust Network Access, data loss prevention, deep packet inspection and real-time observability.
+  Everything the Graphiant Portal can do is exposed through a token-authenticated REST/JSON API at api.graphiant.com
+  covering device and edge configuration, sites, circuits and interfaces, LAN segments, BGP and routing
+  policy, gateways, B2B extranet and Data Exchange, assurance and AI-adoption analytics, alarms, notifications
+  and third-party integrations, users, tenants and MSP account switching. Graphiant publishes the OpenAPI
+  bundle that generates its open-source Python and Go SDKs, ships a graphiant CLI, and maintains an Ansible
+  collection of NaaS playbooks.
 url: https://raw.githubusercontent.com/api-evangelist/graphiant/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
@@ -48,7 +46,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-08-01'
-modified: '2026-08-01'
+modified: '2026-09-16'
 image: https://cdn.prod.website-files.com/67d32c440becfce0b9a701db/67dd287e7799445a06559bab_favicon.svg
 tags:
 - Networking
@@ -138,8 +136,7 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-aggregated-notification-api
   name: Graphiant Aggregated Notification API
-  description: >-
-    The Aggregated Notification API from Graphiant — 2 operation(s) for aggregated notification.
+  description: The Aggregated Notification API from Graphiant — 2 operation(s) for aggregated notification.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -187,8 +184,7 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-allowlist-by-enterprise-api
   name: Graphiant Allowlist By Enterprise API
-  description: >-
-    The Allowlist By Enterprise API from Graphiant — 1 operation(s) for allowlist by enterprise.
+  description: The Allowlist By Enterprise API from Graphiant — 1 operation(s) for allowlist by enterprise.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -672,8 +668,7 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-extranet-b2b-monitoring-api
   name: Graphiant Extranet B2b Monitoring API
-  description: >-
-    The Extranet B2b Monitoring API from Graphiant — 6 operation(s) for extranet b2b monitoring.
+  description: The Extranet B2b Monitoring API from Graphiant — 6 operation(s) for extranet b2b monitoring.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -769,8 +764,7 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-extranets-b2b-peering-api
   name: Graphiant Extranets B2b Peering API
-  description: >-
-    The Extranets B2b Peering API from Graphiant — 13 operation(s) for extranets b2b peering.
+  description: The Extranets B2b Peering API from Graphiant — 13 operation(s) for extranets b2b peering.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -1733,7 +1727,7 @@ common:
 - type: X
   url: https://x.com/graphiant
 - type: OpenAPI
-  url: openapi/graphiant-portal-openapi-original.json
+  url: openapi/_original/graphiant-portal-openapi-original.json
 - type: Packages
   url: packages/graphiant-packages.yml
 - type: SDKs
@@ -1766,7 +1760,10 @@ common:
   url: skills/_index.yml
 - type: X-MCPServerCandidate
   url: mcp/graphiant-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   url: mcp/graphiant-tool-crosswalk.yml
 - type: ChangeLog
