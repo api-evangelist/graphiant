@@ -136,7 +136,8 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-aggregated-notification-api
   name: Graphiant Aggregated Notification API
-  description: The Aggregated Notification API from Graphiant — 2 operation(s) for aggregated notification.
+  description: >-
+    The Aggregated Notification API from Graphiant — 2 operation(s) for aggregated notification.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -184,7 +185,8 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-allowlist-by-enterprise-api
   name: Graphiant Allowlist By Enterprise API
-  description: The Allowlist By Enterprise API from Graphiant — 1 operation(s) for allowlist by enterprise.
+  description: >-
+    The Allowlist By Enterprise API from Graphiant — 1 operation(s) for allowlist by enterprise.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -668,7 +670,8 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-extranet-b2b-monitoring-api
   name: Graphiant Extranet B2b Monitoring API
-  description: The Extranet B2b Monitoring API from Graphiant — 6 operation(s) for extranet b2b monitoring.
+  description: >-
+    The Extranet B2b Monitoring API from Graphiant — 6 operation(s) for extranet b2b monitoring.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -764,7 +767,8 @@ apis:
     url: mcp/graphiant-tool-crosswalk.yml
 - aid: graphiant:graphiant-extranets-b2b-peering-api
   name: Graphiant Extranets B2b Peering API
-  description: The Extranets B2b Peering API from Graphiant — 13 operation(s) for extranets b2b peering.
+  description: >-
+    The Extranets B2b Peering API from Graphiant — 13 operation(s) for extranets b2b peering.
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
@@ -1114,32 +1118,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/graphiant-notification-api-openapi.yml
-  - type: Documentation
-    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
-  - type: APIReference
-    url: https://docs.graphiant.com/apidocs
-  - type: Authentication
-    url: authentication/graphiant-authentication.yml
-  - type: ErrorCatalog
-    url: errors/graphiant-problem-types.yml
-  - type: Conventions
-    url: conventions/graphiant-conventions.yml
-  - type: DataModel
-    url: data-model/graphiant-data-model.yml
-  - type: ToolCrosswalk
-    url: mcp/graphiant-tool-crosswalk.yml
-- aid: graphiant:graphiant-notificationlist-api
-  name: Graphiant Notificationlist API
-  description: The Notificationlist API from Graphiant — 1 operation(s) for notificationlist.
-  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
-  baseURL: https://api.graphiant.com
-  tags:
-  - Notification List
-  tags_raw:
-  - Notificationlist
-  properties:
-  - type: OpenAPI
-    url: openapi/graphiant-notificationlist-api-openapi.yml
   - type: Documentation
     url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   - type: APIReference
@@ -1650,6 +1628,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/graphiant-ztagent-api-openapi.yml
+  - type: Documentation
+    url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  - type: APIReference
+    url: https://docs.graphiant.com/apidocs
+  - type: Authentication
+    url: authentication/graphiant-authentication.yml
+  - type: ErrorCatalog
+    url: errors/graphiant-problem-types.yml
+  - type: Conventions
+    url: conventions/graphiant-conventions.yml
+  - type: DataModel
+    url: data-model/graphiant-data-model.yml
+  - type: ToolCrosswalk
+    url: mcp/graphiant-tool-crosswalk.yml
+- aid: graphiant:graphiant-notification-list-api
+  name: Graphiant Notification List API
+  description: The Notification List API from Graphiant — 1 operation(s) for notification list.
+  humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
+  baseURL: https://api.graphiant.com
+  tags:
+  - Notification List
+  properties:
+  - type: OpenAPI
+    url: openapi/graphiant-notification-list-api-openapi.yml
   - type: Documentation
     url: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   - type: APIReference
