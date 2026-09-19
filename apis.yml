@@ -530,6 +530,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Diagnostics
+  tags_raw:
   - Diagnostic
   properties:
   - type: OpenAPI
@@ -820,6 +822,8 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
+  - Flow
+  tags_raw:
   - Flows
   properties:
   - type: OpenAPI
