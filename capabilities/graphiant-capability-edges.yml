@@ -1,0 +1,174 @@
+slug: graphiant
+provider: Graphiant
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 15
+edges:
+- tag: Monitoring
+  spec_file: graphiant-monitoring-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.8
+  evidence: POST /v2/monitoring/circuits/utilization, POST /v2/monitoring/bgp, POST /v2/monitoring/bfd,
+    schemas statsmonV2InterfaceStatsSelector, statsmonV2QueueUtilization, statsmonV2TwampVisualSelector
+  reason: Operations retrieve counters and KPIs for circuits, interfaces, queues, BGP/BFD/IPsec sessions
+    and TWAMP measurements — continuous capture and analysis of network performance data.
+- tag: Users
+  spec_file: graphiant-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: PATCH /v1/users/{email}/password, POST /v1/users/passwords/expire, GET /v1/users/{id}/groups,
+    schemas iamGroup, commonPermissions, iamEnterprisePermissions
+  reason: CRUD over user accounts plus password lifecycle, verification, group and enterprise permission
+    membership — an IAM administration surface for the platform. Maps to Identity & Access Management;
+    it is platform administration rather than an industry business capability, but IAM is the honest cross-industry
+    fit.
+- tag: Account
+  spec_file: graphiant-account-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /v1/account/mfa/confirmation; PATCH /v1/account/password; PATCH /v1/account/email; schema
+    v1AccountMfaPutRequest
+  reason: Operations manage the platform user's own credentials and multi-factor authentication (enable/disable/confirm
+    MFA, change password and email). That is user identity and access credential management, not any network
+    or commercial capability.
+- tag: Troubleshooting
+  spec_file: graphiant-troubleshooting-api-openapi.yml
+  capability_id: BC-2600.10
+  capability_id_l1: BC-2600
+  capability_name: Network Fault Management
+  confidence: 0.78
+  evidence: GET /v1/troubleshooting/site-connectivity-status, POST /v1/troubleshooting/top-sites-by-alerts,
+    schemas statsmonTroubleshootingIssue, statsmonTroubleshootingLastCrash, statsmonTroubleshootingOverheating,
+    statsmonTroubleshootingControlPlane/DataPlane
+  reason: Operations expose per-site and per-device connectivity status, control/data/system-plane issues,
+    crashes, overheating and alert rankings — detection and diagnosis of network faults across the managed
+    edge estate, which is Network Fault Management. Diagnostic-only (no ticketing/restoration) so not
+    fully certain of the sub-capability.
+- tag: Backbone Health
+  spec_file: graphiant-backbone-health-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.75
+  evidence: GET /v1/backbone-health/etet-sla-matrix; POST /v1/backbone-health/top-devices-by-alerts; schema
+    statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary
+  reason: Continuous capture and analysis of backbone device/WAN KPIs, SLA and quality-of-experience matrices
+    to spot degradation — network performance management on the operator's own transport network.
+- tag: Devices
+  spec_file: graphiant-devices-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /v1/devices/{deviceId}/draft; GET /v1/devices/{deviceId}/candidate-circuits; schemas
+    manaV2CircuitConfig, manaV2BgpNeighborAddressFamilyConfig
+  reason: Draft/candidate configuration objects and a large body of *Config schemas for interfaces, circuits,
+    BGP, SNMP, NTP and policy on network elements — definition and controlled deployment of network element
+    configuration.
+- tag: Edges Hardware
+  spec_file: graphiant-edges-hardware-api-openapi.yml
+  capability_id: BC-2600.40
+  capability_id_l1: BC-2600
+  capability_name: Network Inventory Management
+  confidence: 0.75
+  evidence: GET /v1/edges-hardware/assigned and /unassigned; schema onboardingHardwareInventory
+  reason: Register of assigned versus unassigned edge hardware with location and software version — authoritative
+    inventory of physical network resources.
+- tag: Groups
+  spec_file: graphiant-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: 'schemas: iamGroup, iamEnterprisePermissions, commonPermissions; operations POST /v1/groups/{id}/members,
+    DELETE /v1/groups/{id}/members/{memberId}'
+  reason: The tag manages IAM groups, their members and permission sets within enterprises — group-based
+    access administration, which is Identity & Access Management, not a telecom-specific capability.
+- tag: Pvif
+  spec_file: graphiant-pvif-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /v1/pvif, PUT /v1/pvif/{id}; schemas manaV2PublicVifGatewayWriteRequest, manaV2BgpNeighbor,
+    manaV2BfdInstanceConfig, manaV2NullableMaxPrefix
+  reason: Create/update/delete of public virtual interface gateways with BGP neighbour, BFD, timer and
+    prefix-limit settings — direct configuration of live network elements.
+- tag: Apps
+  spec_file: graphiant-apps-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.7
+  evidence: POST /v1/apps/bandwidth; POST /v1/apps/device/{deviceId}/top; schemas ipfixAppBandwidthStats,
+    ipfixAppUtilizationSummary, ipfixTwampMetrics
+  reason: Operations return per-application bandwidth, utilisation and TWAMP latency metrics with top-talker
+    views by device and site on a NaaS/SD-WAN fabric. That is capture and analysis of network traffic
+    performance counters and KPIs, i.e. network performance management.
+- tag: Bwtracker
+  spec_file: graphiant-bwtracker-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.7
+  evidence: schema statsmonBandwidthtrackerBwUsageByRegionEdgeDetails; POST /v1/bwtracker/region/edge/summary
+  reason: Bandwidth-usage tracking and charting by enterprise, region, site, edge and gateway — network
+    traffic/performance counters analysis. Could arguably feed capacity planning, hence moderate confidence
+    on the sub-capability.
+- tag: Diagnostic
+  spec_file: graphiant-diagnostic-api-openapi.yml
+  capability_id: BC-2600.10
+  capability_id_l1: BC-2600
+  capability_name: Network Fault Management
+  confidence: 0.7
+  evidence: POST /v1/diagnostic/packetcapture-start; PUT /v1/diagnostic/clear-arp/{deviceId}; v1DiagnosticBgpResetDeviceIdPutRequest;
+    diagnosticToolsTracerouteResult-like diagnosticToolsPingResult
+  reason: Ping, traceroute, packet capture, speedtest, ARP clear and BGP/IPsec session resets on network
+    devices — fault troubleshooting, root-cause analysis and restoration actions in network operations.
+- tag: Global
+  spec_file: graphiant-global-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: PATCH /v1/global/config, POST /v1/global/lan-segments, POST /v1/global/content-filters, POST
+    /v1/global/site-lists; schemas manaV2SnmpConfig, manaV2NullableSyslogCollectorConfig, manaV2NullableNtpConfig,
+    manaV2TrafficPolicyRuleset, v1GlobalRoutingPoliciesPostRequest
+  reason: Global network configuration objects — LAN segments, site lists, application lists, content
+    filters, routing and traffic policies, NTP/SNMP/syslog settings — i.e. enterprise-wide network element
+    configuration standards applied across the fabric.
+- tag: Policy
+  spec_file: graphiant-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: POST /v1/policy/route-tag-sets, GET /v1/policy/route-tag-sets/tags, schemas manaV2RouteTag,
+    manaV2RouteTagDevice
+  reason: Routing policy objects (route tag sets applied to devices) and application definitions — configuration
+    of network elements, not corporate policy management.
+- tag: Sites
+  spec_file: graphiant-sites-api-openapi.yml
+  capability_id: BC-2600.40
+  capability_id_l1: BC-2600
+  capability_name: Network Inventory Management
+  confidence: 0.7
+  evidence: POST /v1/sites, GET /v1/sites/{siteId}/circuits, GET /v1/sites/{siteId}/devices, schemas manaV2Site,
+    manaV2SiteDeviceStub, manaV2Location
+  reason: CRUD over network sites plus their circuits, devices, locations and map details — maintenance
+    of the authoritative network resource inventory.
