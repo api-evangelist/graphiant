@@ -11,8 +11,30 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 15
+edge_count: 25
 edges:
+- tag: Gateways
+  spec_file: graphiant-gateways-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.82
+  evidence: POST /v1/gateways; GET /v1/gateways/regions; schemas manaV2AwsDirectConnectGateway, manaV2AzureGatewayDetails,
+    manaV2AWSTransitGatewayVpc
+  reason: CRUD over network gateways including AWS Direct Connect / Transit Gateway and Azure gateway
+    details, regions and IPsec routing config — provisioning of cloud and network infrastructure.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Device
+  spec_file: graphiant-device-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: GET /v1/device/routing/bgp/nbrs/details, POST /v1/device/routing/vrf/bgp/route-count; schemas
+    routingOspfStatistics, v2DeviceDeviceIdLanSegmentsPostResponse
+  reason: Management and inspection of network edge devices — BGP/OSPF routing state, VRF route counts,
+    LAN segments, topology and device snapshots. This is network infrastructure management.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Monitoring
   spec_file: graphiant-monitoring-api-openapi.yml
   capability_id: BC-2600.30
@@ -23,6 +45,17 @@ edges:
     schemas statsmonV2InterfaceStatsSelector, statsmonV2QueueUtilization, statsmonV2TwampVisualSelector
   reason: Operations retrieve counters and KPIs for circuits, interfaces, queues, BGP/BFD/IPsec sessions
     and TWAMP measurements — continuous capture and analysis of network performance data.
+- tag: Site
+  spec_file: graphiant-site-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: GET /v1/site/{id}/details/interfaces, POST /v2/site/{siteId}/topology, POST /v2/site/{siteId}/lan-segments
+  reason: Operations expose network interfaces, topology snapshots and LAN segments for a site (schemas
+    statsmonV2EdgeedgeCircuitInfo, statsmonV2VrfRoute), which is management of network infrastructure
+    rather than any commercial 'site' concept.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Users
   spec_file: graphiant-users-api-openapi.yml
   capability_id: BC-620.20
@@ -46,6 +79,17 @@ edges:
   reason: Operations manage the platform user's own credentials and multi-factor authentication (enable/disable/confirm
     MFA, change password and email). That is user identity and access credential management, not any network
     or commercial capability.
+- tag: Lan Segments
+  spec_file: graphiant-lan-segments-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: GET /v1/lan-segments/interfaces/public; schemas manaV2OspFv2Process, manaV2BgpNeighborAddressFamily,
+    manaV2DhcpLease
+  reason: Exposes LAN segment and interface inventory with BGP/OSPF/BFD/DHCP constructs — network element
+    and topology data, i.e. IT network infrastructure management.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Troubleshooting
   spec_file: graphiant-troubleshooting-api-openapi.yml
   capability_id: BC-2600.10
@@ -99,6 +143,28 @@ edges:
     DELETE /v1/groups/{id}/members/{memberId}'
   reason: The tag manages IAM groups, their members and permission sets within enterprises — group-based
     access administration, which is Identity & Access Management, not a telecom-specific capability.
+- tag: Nat
+  spec_file: graphiant-nat-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: GET /v1/nat/entries/{deviceId}, GET /v1/nat/utilization/{deviceId}; schemas ipfixNatEntry,
+    ipfixNatUsage
+  reason: Per-device NAT translation entries and NAT utilisation for network devices — network infrastructure
+    operation/monitoring, i.e. IT Infrastructure Management. Not a business-domain capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Enterprises
+  spec_file: graphiant-enterprises-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: PUT /v1/enterprises, DELETE /v1/enterprises/{enterpriseId}, GET /v1/enterprises/managed, POST
+    /v1/enterprises/eula, schemas iamEnterprise, iamCustomer, commonBillingContract
+  reason: Create, update, delete and list customer enterprises (tenants) including EULA acceptance and
+    admin lookup — tenant provisioning and lifecycle in a multi-tenant service.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Pvif
   spec_file: graphiant-pvif-api-openapi.yml
   capability_id: BC-2600.20
@@ -120,6 +186,18 @@ edges:
   reason: Operations return per-application bandwidth, utilisation and TWAMP latency metrics with top-talker
     views by device and site on a NaaS/SD-WAN fabric. That is capture and analysis of network traffic
     performance counters and KPIs, i.e. network performance management.
+- tag: Assurance
+  spec_file: graphiant-assurance-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: POST /v2/assurance/applicationprofilesummary, POST /v2/assurance/createclassifiedapplication,
+    schemas assuranceTopologyNode, v2AssuranceTopologyInventoryPostResponse
+  reason: 'Network assurance surface: application classification, DNS proxy entries, topology inventory
+    and site/region summaries with reporting. This is operational monitoring and assurance of the running
+    network, i.e. IT operations management.'
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Bwtracker
   spec_file: graphiant-bwtracker-api-openapi.yml
   capability_id: BC-2600.30
@@ -130,6 +208,16 @@ edges:
   reason: Bandwidth-usage tracking and charting by enterprise, region, site, edge and gateway — network
     traffic/performance counters analysis. Could arguably feed capacity planning, hence moderate confidence
     on the sub-capability.
+- tag: Device Status
+  spec_file: graphiant-device-status-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: POST /v1/device-status/history; schema pokedexDeviceHistoryInfo
+  reason: Current and historical operational status of network devices — infrastructure state monitoring,
+    i.e. IT operations management.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Diagnostic
   spec_file: graphiant-diagnostic-api-openapi.yml
   capability_id: BC-2600.10
@@ -140,6 +228,16 @@ edges:
     diagnosticToolsTracerouteResult-like diagnosticToolsPingResult
   reason: Ping, traceroute, packet capture, speedtest, ARP clear and BGP/IPsec session resets on network
     devices — fault troubleshooting, root-cause analysis and restoration actions in network operations.
+- tag: Flows
+  spec_file: graphiant-flows-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: POST /v1/flows/flow-table; POST /v1/flows/topology; schemas ipfixAppFlowTable, ipfixNetworkTopology
+  reason: IPFIX flow-table queries and network topology graphs (connectivity graph nodes/edges, IPsec
+    connections) are network traffic monitoring and visibility — day-to-day IT/network operations monitoring.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Global
   spec_file: graphiant-global-api-openapi.yml
   capability_id: BC-2600.20
@@ -162,6 +260,16 @@ edges:
     manaV2RouteTagDevice
   reason: Routing policy objects (route tag sets applied to devices) and application definitions — configuration
     of network elements, not corporate policy management.
+- tag: Qos
+  spec_file: graphiant-qos-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /v1/qos/circuit-profiles; schemas manaV2QoSProfile, manaV2QoSProfileQueue
+  reason: Retrieval of quality-of-service profiles and queue definitions for network circuits — network
+    infrastructure configuration/traffic engineering within IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Sites
   spec_file: graphiant-sites-api-openapi.yml
   capability_id: BC-2600.40
