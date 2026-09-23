@@ -33,6 +33,10 @@ paths:
       description: Accept End User License Agreement for the enterprise.
       tags:
       - Enterprises
+      summary: Create enterprises eula
+      x-summary-source: derived
+      operationId: postV1EnterprisesEula
+      x-operation-id-source: derived
   /v1/enterprises:
     put:
       security:
@@ -56,6 +60,10 @@ paths:
       description: Create a new enterprise with company details, account type, and admin user. MSP callers creating a managed enterprise supply pool credit allocation fields (allocated_credits and optional term end).
       tags:
       - Enterprises
+      summary: Replace enterprises
+      x-summary-source: derived
+      operationId: putV1Enterprises
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -90,6 +98,10 @@ paths:
       description: Get specific enterprises by their IDs with detailed information. Query just your own enterprise Id for more detailed info.
       tags:
       - Enterprises
+      summary: Get enterprises
+      x-summary-source: derived
+      operationId: getV1Enterprises
+      x-operation-id-source: derived
     patch:
       security:
       - jwtAuth: []
@@ -112,6 +124,10 @@ paths:
       description: Updates all relevent enterprise information.
       tags:
       - Enterprises
+      summary: Update enterprises
+      x-summary-source: derived
+      operationId: patchV1Enterprises
+      x-operation-id-source: derived
   /v1/enterprises/{enterpriseId}:
     delete:
       security:
@@ -137,6 +153,10 @@ paths:
       description: Delete a specific enterprise by ID (you must manage this tenant).
       tags:
       - Enterprises
+      summary: Delete enterprises by enterprise id
+      x-summary-source: derived
+      operationId: deleteV1EnterprisesByEnterpriseId
+      x-operation-id-source: derived
   /v1/enterprises/{enterpriseId}/admin:
     get:
       security:
@@ -166,6 +186,10 @@ paths:
       description: Get the admin account for an enterprise.
       tags:
       - Enterprises
+      summary: Get enterprises by enterprise id admin
+      x-summary-source: derived
+      operationId: getV1EnterprisesByEnterpriseIdAdmin
+      x-operation-id-source: derived
   /v1/enterprises/managed:
     get:
       security:
@@ -194,6 +218,10 @@ paths:
       description: Get enterprises managed by your tenant, filtered by enterprise type. For MSP-managed enterprises, responses include MSP pool fields such as allocated_credits and credit_allocation_contract_expiration when applicable.
       tags:
       - Enterprises
+      summary: Get enterprises managed
+      x-summary-source: derived
+      operationId: getV1EnterprisesManaged
+      x-operation-id-source: derived
   /v1/enterprises/{enterpriseId}/device-status:
     get:
       security:
@@ -230,8 +258,99 @@ paths:
                 $ref: '#/components/schemas/v1EnterprisesEnterpriseIdDeviceStatusGetResponse'
       tags:
       - Enterprises
+      summary: Get enterprises by enterprise id device status
+      x-summary-source: derived
+      operationId: getV1EnterprisesByEnterpriseIdDeviceStatus
+      x-operation-id-source: derived
 components:
   schemas:
+    v1EnterprisesEulaPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
+    v1EnterprisesPutRequest:
+      type: object
+      properties:
+        accountType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        adminEmail:
+          type: string
+          example: example string
+        adminFirstName:
+          type: string
+          example: example string
+        adminLastName:
+          type: string
+          example: example string
+        adminTimeZone:
+          type: string
+          example: example string
+        cloudProvider:
+          type: string
+          example: ENUM_VALUE
+        companyName:
+          type: string
+          example: example string
+          description: ' (required)'
+        creditLimit:
+          type: integer
+          format: int32
+          example: 123
+        description:
+          type: string
+          example: example string
+        enterpriseContract:
+          $ref: '#/components/schemas/commonBillingContract'
+        logo:
+          type: string
+          example: example string
+        marketplaceId:
+          type: string
+          example: example string
+        smallLogo:
+          type: string
+          example: example string
+      additionalProperties: false
+      required:
+      - accountType
+      - companyName
+      - enterpriseContract
+    commonBillingTimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1EnterprisesPatchRequestTokenExpiry:
+      type: object
+      properties:
+        length:
+          type: integer
+          format: int32
+          example: 123
+        timeUnit:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
     v1EnterprisesManagedGetResponse:
       type: object
       properties:
@@ -242,17 +361,138 @@ components:
           items:
             $ref: '#/components/schemas/iamEnterprise'
       additionalProperties: false
-    v1EnterprisesEulaPostRequest:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1EnterprisesGetResponse:
+    v1EnterprisesEnterpriseIdAdminGetResponse:
       type: object
       properties:
-        enterprises:
+        adminEmail:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
+      type: object
+      properties:
+        mappings:
           type: array
           items:
-            $ref: '#/components/schemas/iamEnterprise'
+            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
+      additionalProperties: false
+    pokedexDeviceMappingInfo:
+      type: object
+      properties:
+        connectTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        hostname:
+          type: string
+          example: example string
+        ipaddress:
+          type: string
+          example: example string
+        ttIdentity:
+          type: string
+          example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    iamCounts:
+      type: object
+      properties:
+        activeDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        activeUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deactivatedDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emptySitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impairedSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalEdges:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalMsps:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalSites:
+          type: integer
+          format: int64
+          example: 1234567891011
+        upSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    iamCustomer:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        companyName:
+          type: string
+          example: example string
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        description:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impersonationEnabled:
+          type: boolean
+          example: true
+        marketplaceId:
+          type: string
+          example: example string
       additionalProperties: false
     v1EnterprisesPatchRequest:
       type: object
@@ -304,18 +544,6 @@ components:
       additionalProperties: false
       required:
       - enterpriseId
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     iamEnterprise:
       type: object
       properties:
@@ -383,209 +611,13 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1EnterprisesEnterpriseIdAdminGetResponse:
+    v1EnterprisesGetResponse:
       type: object
       properties:
-        adminEmail:
-          type: string
-          example: example string
-      additionalProperties: false
-    iamCounts:
-      type: object
-      properties:
-        activeDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        activeUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deactivatedDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        emptySitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        impairedSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalCustomers:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalEdges:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalMsps:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalSites:
-          type: integer
-          format: int64
-          example: 1234567891011
-        upSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
-      type: object
-      properties:
-        mappings:
+        enterprises:
           type: array
           items:
-            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    commonBillingTimePeriod:
-      type: object
-      properties:
-        month:
-          type: integer
-          format: int32
-          example: 123
-        year:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v1EnterprisesPutRequest:
-      type: object
-      properties:
-        accountType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        adminEmail:
-          type: string
-          example: example string
-        adminFirstName:
-          type: string
-          example: example string
-        adminLastName:
-          type: string
-          example: example string
-        adminTimeZone:
-          type: string
-          example: example string
-        cloudProvider:
-          type: string
-          example: ENUM_VALUE
-        companyName:
-          type: string
-          example: example string
-          description: ' (required)'
-        creditLimit:
-          type: integer
-          format: int32
-          example: 123
-        description:
-          type: string
-          example: example string
-        enterpriseContract:
-          $ref: '#/components/schemas/commonBillingContract'
-        logo:
-          type: string
-          example: example string
-        marketplaceId:
-          type: string
-          example: example string
-        smallLogo:
-          type: string
-          example: example string
-      additionalProperties: false
-      required:
-      - accountType
-      - companyName
-      - enterpriseContract
-    pokedexDeviceMappingInfo:
-      type: object
-      properties:
-        connectTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        hostname:
-          type: string
-          example: example string
-        ipaddress:
-          type: string
-          example: example string
-        ttIdentity:
-          type: string
-          example: example string
-      additionalProperties: false
-    iamCustomer:
-      type: object
-      properties:
-        adminEmail:
-          type: string
-          example: example string
-        companyName:
-          type: string
-          example: example string
-        counts:
-          $ref: '#/components/schemas/iamCounts'
-        description:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        impersonationEnabled:
-          type: boolean
-          example: true
-        marketplaceId:
-          type: string
-          example: example string
-      additionalProperties: false
-    commonBillingContract:
-      type: object
-      properties:
-        contractedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of credits agreed upon for the entirety of the current contract
-        expirationDate:
-          $ref: '#/components/schemas/commonBillingTimePeriod'
-      additionalProperties: false
-    v1EnterprisesPatchRequestTokenExpiry:
-      type: object
-      properties:
-        length:
-          type: integer
-          format: int32
-          example: 123
-        timeUnit:
-          type: string
-          example: ENUM_VALUE
+            $ref: '#/components/schemas/iamEnterprise'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

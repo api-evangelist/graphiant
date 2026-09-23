@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantAddToConversationPostResponse'
       tags:
       - Assistant
+      summary: Create assistant add to conversation
+      x-summary-source: derived
+      operationId: postV2AssistantAddToConversation
+      x-operation-id-source: derived
   /v2/assistant/delete-conversation-chat/{conversationId}:
     delete:
       security:
@@ -63,6 +67,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantDeleteConversationChatConversationIdDeleteResponse'
       tags:
       - Assistant
+      summary: Delete assistant delete conversation chat by conversation id
+      x-summary-source: derived
+      operationId: deleteV2AssistantDeleteConversationChatByConversationId
+      x-operation-id-source: derived
   /v2/assistant/conversation-interface-enable-disable/:
     post:
       security:
@@ -89,6 +97,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantConversationInterfaceEnableDisablePostResponse'
       tags:
       - Assistant
+      summary: Create assistant conversation interface enable disable
+      x-summary-source: derived
+      operationId: postV2AssistantConversationInterfaceEnableDisable
+      x-operation-id-source: derived
   /v2/assistant/conversation-context-history/:
     post:
       security:
@@ -115,6 +127,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantConversationContextHistoryPostResponse'
       tags:
       - Assistant
+      summary: Create assistant conversation context history
+      x-summary-source: derived
+      operationId: postV2AssistantConversationContextHistory
+      x-operation-id-source: derived
   /v2/assistant/version:
     post:
       security:
@@ -141,6 +157,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantVersionPostResponse'
       tags:
       - Assistant
+      summary: Create assistant version
+      x-summary-source: derived
+      operationId: postV2AssistantVersion
+      x-operation-id-source: derived
   /v2/assistant/conversation-interface-state/:
     get:
       security:
@@ -161,6 +181,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantConversationInterfaceStateGetResponse'
       tags:
       - Assistant
+      summary: Get assistant conversation interface state
+      x-summary-source: derived
+      operationId: getV2AssistantConversationInterfaceState
+      x-operation-id-source: derived
   /v2/assistant/get-conversation-details:
     post:
       security:
@@ -187,6 +211,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantGetConversationDetailsPostResponse'
       tags:
       - Assistant
+      summary: Create assistant get conversation details
+      x-summary-source: derived
+      operationId: postV2AssistantGetConversationDetails
+      x-operation-id-source: derived
   /v2/assistant/get-conversations:
     post:
       security:
@@ -213,6 +241,10 @@ paths:
                 $ref: '#/components/schemas/v2AssistantGetConversationsPostResponse'
       tags:
       - Assistant
+      summary: Create assistant get conversations
+      x-summary-source: derived
+      operationId: postV2AssistantGetConversations
+      x-operation-id-source: derived
   /v2/assistant/update-conversation-name:
     post:
       security:
@@ -239,20 +271,21 @@ paths:
                 $ref: '#/components/schemas/v2AssistantUpdateConversationNamePostResponse'
       tags:
       - Assistant
+      summary: Create assistant update conversation name
+      x-summary-source: derived
+      operationId: postV2AssistantUpdateConversationName
+      x-operation-id-source: derived
 components:
   schemas:
-    v2AssistantGetConversationsPostRequest:
+    v2AssistantUpdateConversationNamePostRequest:
       type: object
       properties:
-        timeWindow:
-          $ref: '#/components/schemas/assistantTimeWindow'
-        userId:
+        conversationHeader:
           type: string
           example: example string
-      additionalProperties: false
-    v2AssistantVersionPostRequest:
-      type: object
-      properties: {}
+        conversationId:
+          type: string
+          example: example string
       additionalProperties: false
     v2AssistantGetConversationsPostResponse:
       type: object
@@ -265,42 +298,55 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v2AssistantDeleteConversationChatConversationIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2AssistantAddToConversationPostRequest:
-      type: object
-      properties:
-        conversationId:
-          type: string
-          example: example string
-        question:
-          $ref: '#/components/schemas/assistantAssistantQuestion'
-      additionalProperties: false
-    assistantAssistantConversation:
-      type: object
-      properties:
-        conversationHeader:
-          type: string
-          example: example string
-        conversationId:
-          type: string
-          example: example string
-        conversationRecentTimestamp:
-          type: integer
-          format: int64
-          example: 1234567891011
-        enableContextHistory:
-          type: boolean
-          example: true
-      additionalProperties: false
     v2AssistantVersionPostResponse:
       type: object
       properties:
         versionId:
           type: string
           example: example string
+      additionalProperties: false
+    v2AssistantGetConversationsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/assistantTimeWindow'
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantConversationInterfaceEnableDisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantConversationInterfaceEnableDisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssistantVersionPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    assistantDataframeDictionary:
+      type: object
+      properties:
+        dataframeDictionaryMap:
+          type: object
+          additionalProperties:
+            type: string
+            example: example string
+        xAxis:
+          type: string
+          example: example string
+        yAxis:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssistantConversationContextHistoryPostResponse:
+      type: object
+      properties: {}
       additionalProperties: false
     assistantAssistantResponse:
       type: object
@@ -334,10 +380,20 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v2AssistantConversationInterfaceEnableDisablePostRequest:
+    assistantAssistantConversation:
       type: object
       properties:
-        enable:
+        conversationHeader:
+          type: string
+          example: example string
+        conversationId:
+          type: string
+          example: example string
+        conversationRecentTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enableContextHistory:
           type: boolean
           example: true
       additionalProperties: false
@@ -357,13 +413,62 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v2AssistantConversationInterfaceEnableDisablePostResponse:
+    v2AssistantAddToConversationPostRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        question:
+          $ref: '#/components/schemas/assistantAssistantQuestion'
+      additionalProperties: false
+    assistantAssistantQuestion:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          example: example string
+        questionLanguage:
+          type: string
+          example: ENUM_VALUE
+        questionText:
+          type: string
+          example: example string
+        questionTimestamp:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssistantConversationInterfaceStateGetResponse:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssistantDeleteConversationChatConversationIdDeleteResponse:
       type: object
       properties: {}
       additionalProperties: false
-    v2AssistantConversationContextHistoryPostResponse:
+    v2AssistantConversationContextHistoryPostRequest:
       type: object
-      properties: {}
+      properties:
+        enable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    assistantTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     v2AssistantGetConversationDetailsPostResponse:
       type: object
@@ -379,27 +484,17 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    assistantDataframeDictionary:
+    v2AssistantGetConversationDetailsPostRequest:
       type: object
       properties:
-        dataframeDictionaryMap:
-          type: object
-          additionalProperties:
-            type: string
-            example: example string
-        xAxis:
+        conversationId:
           type: string
           example: example string
-        yAxis:
+        timeWindow:
+          $ref: '#/components/schemas/assistantTimeWindow'
+        userId:
           type: string
           example: example string
-      additionalProperties: false
-    v2AssistantConversationInterfaceStateGetResponse:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
       additionalProperties: false
     v2AssistantAddToConversationPostResponse:
       type: object
@@ -432,65 +527,6 @@ components:
         visualizationSummary:
           type: string
           example: example string
-      additionalProperties: false
-    v2AssistantUpdateConversationNamePostRequest:
-      type: object
-      properties:
-        conversationHeader:
-          type: string
-          example: example string
-        conversationId:
-          type: string
-          example: example string
-      additionalProperties: false
-    assistantTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v2AssistantConversationContextHistoryPostRequest:
-      type: object
-      properties:
-        enable:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v2AssistantGetConversationDetailsPostRequest:
-      type: object
-      properties:
-        conversationId:
-          type: string
-          example: example string
-        timeWindow:
-          $ref: '#/components/schemas/assistantTimeWindow'
-        userId:
-          type: string
-          example: example string
-      additionalProperties: false
-    assistantAssistantQuestion:
-      type: object
-      properties:
-        conversationId:
-          type: string
-          example: example string
-        questionLanguage:
-          type: string
-          example: ENUM_VALUE
-        questionText:
-          type: string
-          example: example string
-        questionTimestamp:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
   securitySchemes:
     jwtAuth:

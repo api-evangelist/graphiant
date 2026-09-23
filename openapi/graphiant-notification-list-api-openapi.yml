@@ -8,7 +8,7 @@ servers:
 security:
 - jwtAuth: []
 tags:
-- name: Notificationlist
+- name: Notification List
 paths:
   /v2/notificationlist:
     post:
@@ -35,48 +35,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/v2NotificationlistPostResponse'
       tags:
-      - Notificationlist
+      - Notification List
+      summary: Create notificationlist
+      x-summary-source: derived
+      operationId: postV2Notificationlist
+      x-operation-id-source: derived
 components:
   schemas:
-    alertserviceNotificationRecord:
-      type: object
-      properties:
-        alertType:
-          type: string
-          example: example string
-          description: Type of the alert underlying the notification (required)
-        muteCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Number of entities notificated muted (required)
-        name:
-          type: string
-          example: example string
-          description: Name given to the notification record (required)
-        notificationBody:
-          $ref: '#/components/schemas/alertserviceNotificationBody'
-        notificationId:
-          type: string
-          example: example string
-          description: Unique id for the notification record (required)
-        ruleId:
-          type: string
-          example: example string
-          description: The id of the rule on which notification is created (required)
-        timesTriggered:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-          description: Number of times notification was triggered for the same alert (required)
-      additionalProperties: false
-    v2NotificationlistPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/alertserviceTimeWindow'
-      additionalProperties: false
     alertserviceNotificationBody:
       type: object
       properties:
@@ -143,13 +108,56 @@ components:
             example: example string
             description: List of webhook_url recipients
       additionalProperties: false
-    v2NotificationlistPostResponse:
+    v2NotificationlistPostRequest:
       type: object
       properties:
-        notificationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceNotificationRecord'
+        timeWindow:
+          $ref: '#/components/schemas/alertserviceTimeWindow'
+      additionalProperties: false
+    alertserviceNotificationRecord:
+      type: object
+      properties:
+        alertType:
+          type: string
+          example: example string
+          description: Type of the alert underlying the notification (required)
+        muteCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Number of entities notificated muted (required)
+        name:
+          type: string
+          example: example string
+          description: Name given to the notification record (required)
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
+        notificationId:
+          type: string
+          example: example string
+          description: Unique id for the notification record (required)
+        ruleId:
+          type: string
+          example: example string
+          description: The id of the rule on which notification is created (required)
+        timesTriggered:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+          description: Number of times notification was triggered for the same alert (required)
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     alertserviceTimeWindow:
       type: object
@@ -164,17 +172,13 @@ components:
         recentTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    googleProtobufTimestamp:
+    v2NotificationlistPostResponse:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        notificationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceNotificationRecord'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

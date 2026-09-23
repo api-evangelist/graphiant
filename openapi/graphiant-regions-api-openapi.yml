@@ -46,6 +46,10 @@ paths:
       description: List gateway appliances in a region with at least one LAN interface for the given storage provider
       tags:
       - Regions
+      summary: Get regions by region id gateways
+      x-summary-source: derived
+      operationId: getV1RegionsByRegionIdGateways
+      x-operation-id-source: derived
   /v1/regions:
     get:
       security:
@@ -67,16 +71,12 @@ paths:
       description: Get regions used for the current enterprise
       tags:
       - Regions
+      summary: Get regions
+      x-summary-source: derived
+      operationId: getV1Regions
+      x-operation-id-source: derived
 components:
   schemas:
-    v1RegionsGetResponse:
-      type: object
-      properties:
-        regions:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Region'
-      additionalProperties: false
     v1RegionsRegionIdGatewaysGetResponseGateway:
       type: object
       properties:
@@ -87,18 +87,6 @@ components:
         hostname:
           type: string
           example: example string
-      additionalProperties: false
-    manaV2RegionCoordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 123.45
-        longitude:
-          type: number
-          format: double
-          example: 123.45
       additionalProperties: false
     manaV2Region:
       type: object
@@ -119,6 +107,18 @@ components:
           type: boolean
           example: true
       additionalProperties: false
+    manaV2RegionCoordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
     v1RegionsRegionIdGatewaysGetResponse:
       type: object
       properties:
@@ -126,6 +126,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
+      additionalProperties: false
+    v1RegionsGetResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Region'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

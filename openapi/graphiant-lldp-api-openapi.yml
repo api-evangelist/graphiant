@@ -39,6 +39,10 @@ paths:
       description: Get the LLDP neighbors for an interface and optionally for a specific vendor
       tags:
       - Lldp
+      summary: Get lldp by interface id neighbors
+      x-summary-source: derived
+      operationId: getV1LldpByInterfaceIdNeighbors
+      x-operation-id-source: derived
   /v1/lldp/{interfaceId}/summary:
     get:
       security:
@@ -68,6 +72,10 @@ paths:
       description: Get the summary of LLDP neighbors for an interface
       tags:
       - Lldp
+      summary: Get lldp by interface id summary
+      x-summary-source: derived
+      operationId: getV1LldpByInterfaceIdSummary
+      x-operation-id-source: derived
   /v1/lldp/{interfaceId}/vendors:
     get:
       security:
@@ -97,27 +105,12 @@ paths:
       description: Get the list LLDP vendors for an interface
       tags:
       - Lldp
+      summary: Get lldp by interface id vendors
+      x-summary-source: derived
+      operationId: getV1LldpByInterfaceIdVendors
+      x-operation-id-source: derived
 components:
   schemas:
-    manaV2VendorDetail:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        neighborCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1LldpInterfaceIdVendorsGetResponse:
-      type: object
-      properties:
-        vendors:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2VendorDetail'
-      additionalProperties: false
     manaV2LldpNeighbor:
       type: object
       properties:
@@ -152,6 +145,25 @@ components:
           format: int64
           example: 1234567891011
         numVendors:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1LldpInterfaceIdVendorsGetResponse:
+      type: object
+      properties:
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2VendorDetail'
+      additionalProperties: false
+    manaV2VendorDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        neighborCount:
           type: integer
           format: int64
           example: 1234567891011

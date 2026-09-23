@@ -31,8 +31,26 @@ paths:
       description: Returns a list of QoS profiles for circuits with associated queues & attributes
       tags:
       - Qos
+      summary: Get qos circuit profiles
+      x-summary-source: derived
+      operationId: getV1QosCircuitProfiles
+      x-operation-id-source: derived
 components:
   schemas:
+    manaV2QoSProfile:
+      type: object
+      properties:
+        kind:
+          type: string
+          example: ENUM_VALUE
+        profile:
+          type: string
+          example: ENUM_VALUE
+        queues:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfileQueue'
+      additionalProperties: false
     manaV2QoSProfileQueue:
       type: object
       properties:
@@ -55,20 +73,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2QoSProfile'
-      additionalProperties: false
-    manaV2QoSProfile:
-      type: object
-      properties:
-        kind:
-          type: string
-          example: ENUM_VALUE
-        profile:
-          type: string
-          example: ENUM_VALUE
-        queues:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2QoSProfileQueue'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -37,6 +37,10 @@ paths:
       description: Get extranet service consumption overview over timewindow
       tags:
       - Extranet
+      summary: Create extranet sites consumption overview
+      x-summary-source: derived
+      operationId: postV2ExtranetSitesConsumptionOverview
+      x-operation-id-source: derived
   /v2/extranet/service-overtime-consumption:
     post:
       security:
@@ -64,6 +68,10 @@ paths:
       description: Get extranet service cumulative consumption over timewindow
       tags:
       - Extranet
+      summary: Create extranet service overtime consumption
+      x-summary-source: derived
+      operationId: postV2ExtranetServiceOvertimeConsumption
+      x-operation-id-source: derived
   /v2/extranet/sites-usage:
     post:
       security:
@@ -91,6 +99,10 @@ paths:
       description: Get extranet service sites usage stats v2
       tags:
       - Extranet
+      summary: Create extranet sites usage
+      x-summary-source: derived
+      operationId: postV2ExtranetSitesUsage
+      x-operation-id-source: derived
   /v2/extranet/consumers-usage/top:
     post:
       security:
@@ -118,6 +130,10 @@ paths:
       description: Get extranet service top consumer usage stats
       tags:
       - Extranet
+      summary: Create extranet consumers usage top
+      x-summary-source: derived
+      operationId: postV2ExtranetConsumersUsageTop
+      x-operation-id-source: derived
   /v2/extranet/lan-segments-usage/top:
     post:
       security:
@@ -145,6 +161,10 @@ paths:
       description: Get extranet service top lan segment usage stats
       tags:
       - Extranet
+      summary: Create extranet lan segments usage top
+      x-summary-source: derived
+      operationId: postV2ExtranetLanSegmentsUsageTop
+      x-operation-id-source: derived
   /v1/extranet/sites-usage/top:
     post:
       security:
@@ -172,6 +192,10 @@ paths:
       description: Get extranet service top sites usage stats
       tags:
       - Extranet
+      summary: Create extranet sites usage top
+      x-summary-source: derived
+      operationId: postV1ExtranetSitesUsageTop
+      x-operation-id-source: derived
   /v2/extranet/total-usage:
     post:
       security:
@@ -199,6 +223,10 @@ paths:
       description: Get extranet service total usage stats
       tags:
       - Extranet
+      summary: Create extranet total usage
+      x-summary-source: derived
+      operationId: postV2ExtranetTotalUsage
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/{matchId}/consumer/check:
     post:
       security:
@@ -234,6 +262,10 @@ paths:
       description: Check extranet service consumer configuration
       tags:
       - Extranet
+      summary: Create extranet b2b matches by match id consumer check
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMatchesByMatchIdConsumerCheck
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer:
     post:
       security:
@@ -261,6 +293,10 @@ paths:
       description: Create an inter-enterprise extranet service (peering, client-to-server, …)
       tags:
       - Extranet
+      summary: Create extranet b2b producer
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bProducer
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/{matchId}/consumer:
     post:
       security:
@@ -296,6 +332,10 @@ paths:
       description: Consumer accepts an extranet service match
       tags:
       - Extranet
+      summary: Create extranet b2b matches by match id consumer
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMatchesByMatchIdConsumer
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers:
     post:
       security:
@@ -323,6 +363,10 @@ paths:
       description: Create an extranet service customer (partner directory entry)
       tags:
       - Extranet
+      summary: Create extranet b2b customers
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bCustomers
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches:
     post:
       security:
@@ -350,6 +394,10 @@ paths:
       description: Match an extranet service to a customer
       tags:
       - Extranet
+      summary: Create extranet b2b matches
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMatches
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/customers:
     post:
       security:
@@ -377,6 +425,10 @@ paths:
       description: Bulk subscribe customers to an extranet service
       tags:
       - Extranet
+      summary: Create extranet b2b matches customers
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMatchesCustomers
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer/{id}:
     delete:
       security:
@@ -406,6 +458,10 @@ paths:
       description: Delete an inter-enterprise extranet service
       tags:
       - Extranet
+      summary: Delete extranet b2b producer by id
+      x-summary-source: derived
+      operationId: deleteV1ExtranetB2bProducerById
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -434,6 +490,10 @@ paths:
       description: Get an inter-enterprise extranet service
       tags:
       - Extranet
+      summary: Get extranet b2b producer by id
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bProducerById
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -468,6 +528,10 @@ paths:
       description: Update an inter-enterprise extranet service
       tags:
       - Extranet
+      summary: Replace extranet b2b producer by id
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bProducerById
+      x-operation-id-source: derived
   /v1/extranet/b2b/consumers/{id}:
     delete:
       security:
@@ -497,6 +561,10 @@ paths:
       description: Delete an extranet service consumer subscription
       tags:
       - Extranet
+      summary: Delete extranet b2b consumers by id
+      x-summary-source: derived
+      operationId: deleteV1ExtranetB2bConsumersById
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -531,6 +599,10 @@ paths:
       description: Update extranet service consumer
       tags:
       - Extranet
+      summary: Replace extranet b2b consumers by id
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bConsumersById
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers/{id}:
     delete:
       security:
@@ -560,6 +632,10 @@ paths:
       description: Delete an extranet service customer
       tags:
       - Extranet
+      summary: Delete extranet b2b customers by id
+      x-summary-source: derived
+      operationId: deleteV1ExtranetB2bCustomersById
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -594,6 +670,10 @@ paths:
       description: Update an extranet service customer
       tags:
       - Extranet
+      summary: Replace extranet b2b customers by id
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bCustomersById
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/{matchId}:
     delete:
       security:
@@ -623,6 +703,10 @@ paths:
       description: Delete an extranet service match
       tags:
       - Extranet
+      summary: Delete extranet b2b matches by match id
+      x-summary-source: derived
+      operationId: deleteV1ExtranetB2bMatchesByMatchId
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -651,6 +735,10 @@ paths:
       description: Get extranet service match details
       tags:
       - Extranet
+      summary: Get extranet b2b matches by match id
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bMatchesByMatchId
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -685,6 +773,10 @@ paths:
       description: Update extranet service match
       tags:
       - Extranet
+      summary: Replace extranet b2b matches by match id
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bMatchesByMatchId
+      x-operation-id-source: derived
   /v1/extranet/b2b/consumers/{customerId}:
     get:
       security:
@@ -722,6 +814,10 @@ paths:
       description: Get extranet service consumer subscription
       tags:
       - Extranet
+      summary: Get extranet b2b consumers by customer id
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bConsumersByCustomerId
+      x-operation-id-source: derived
   /v1/extranet/b2b/consumers/{id}/device-status:
     get:
       security:
@@ -751,6 +847,10 @@ paths:
       description: Get extranet consumer device rollout status
       tags:
       - Extranet
+      summary: Get extranet b2b consumers by id device status
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bConsumersByIdDeviceStatus
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers/{id}/details:
     get:
       security:
@@ -780,6 +880,10 @@ paths:
       description: Get an extranet service customer
       tags:
       - Extranet
+      summary: Get extranet b2b customers by id details
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bCustomersByIdDetails
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers/{id}/matches/summary:
     get:
       security:
@@ -809,6 +913,10 @@ paths:
       description: Get matched services summary for a customer
       tags:
       - Extranet
+      summary: Get extranet b2b customers by id matches summary
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bCustomersByIdMatchesSummary
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers/summary:
     get:
       security:
@@ -830,6 +938,10 @@ paths:
       description: List extranet service customers for the enterprise
       tags:
       - Extranet
+      summary: Get extranet b2b customers summary
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bCustomersSummary
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/{matchId}/details:
     get:
       security:
@@ -859,6 +971,10 @@ paths:
       description: Get match details for consumer accept flow
       tags:
       - Extranet
+      summary: Get extranet b2b matches by match id details
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bMatchesByMatchIdDetails
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer/{id}/customers:
     get:
       security:
@@ -888,6 +1004,10 @@ paths:
       description: List customers matched to an extranet producer service
       tags:
       - Extranet
+      summary: Get extranet b2b producer by id customers
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bProducerByIdCustomers
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer/{id}/device-status:
     get:
       security:
@@ -917,6 +1037,10 @@ paths:
       description: Get extranet producer device rollout status
       tags:
       - Extranet
+      summary: Get extranet b2b producer by id device status
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bProducerByIdDeviceStatus
+      x-operation-id-source: derived
   /v1/extranet/b2b/services/summary:
     get:
       security:
@@ -938,6 +1062,10 @@ paths:
       description: List inter-enterprise extranet services
       tags:
       - Extranet
+      summary: Get extranet b2b services summary
+      x-summary-source: derived
+      operationId: getV1ExtranetB2bServicesSummary
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/pause:
     put:
       security:
@@ -965,6 +1093,10 @@ paths:
       description: Pause extranet service matches via customer summary
       tags:
       - Extranet
+      summary: Replace extranet b2b matches pause
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bMatchesPause
+      x-operation-id-source: derived
   /v1/extranet/b2b/customers/{id}/retry:
     post:
       security:
@@ -1000,6 +1132,10 @@ paths:
       description: Retry extranet service customer invite
       tags:
       - Extranet
+      summary: Create extranet b2b customers by id retry
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bCustomersByIdRetry
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer/review:
     post:
       security:
@@ -1027,6 +1163,10 @@ paths:
       description: Review inter-enterprise extranet service configuration
       tags:
       - Extranet
+      summary: Create extranet b2b producer review
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bProducerReview
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/review:
     post:
       security:
@@ -1054,6 +1194,10 @@ paths:
       description: Review extranet service match
       tags:
       - Extranet
+      summary: Create extranet b2b matches review
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMatchesReview
+      x-operation-id-source: derived
   /v1/extranet/b2b/consumers/{id}/prefixes:
     put:
       security:
@@ -1089,6 +1233,10 @@ paths:
       description: Update extranet service consumer prefix NAT (peering preset)
       tags:
       - Extranet
+      summary: Replace extranet b2b consumers by id prefixes
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bConsumersByIdPrefixes
+      x-operation-id-source: derived
   /v1/extranet/b2b/matches/{matchId}/status:
     put:
       security:
@@ -1124,6 +1272,10 @@ paths:
       description: Pause or resume an extranet service match
       tags:
       - Extranet
+      summary: Replace extranet b2b matches by match id status
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bMatchesByMatchIdStatus
+      x-operation-id-source: derived
   /v1/extranet/b2b/producer/{id}/status:
     put:
       security:
@@ -1159,8 +1311,438 @@ paths:
       description: Pause or resume an inter-enterprise extranet service
       tags:
       - Extranet
+      summary: Replace extranet b2b producer by id status
+      x-summary-source: derived
+      operationId: putV1ExtranetB2bProducerByIdStatus
+      x-operation-id-source: derived
 components:
   schemas:
+    v1ExtranetB2bMatchesCustomersPostRequest:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    ipfixEntityUsage:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: id of the entity
+        name:
+          type: string
+          example: Site 1
+          description: name of the entity
+        usage:
+          type: number
+          format: double
+          example: 1000000
+          description: usage in kbps
+      additionalProperties: false
+    v1ExtranetB2bProducerIdPutRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
+      additionalProperties: false
+    v1ExtranetB2bConsumersIdPutResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
+      additionalProperties: false
+    v1ExtranetB2bMatchesPausePutRequest:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2GuestConsumerSiteToSiteVpnConfig:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+            example: example string
+        ipsecGatewayDetails:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1ExtranetB2bConsumersIdPrefixesPutResponse:
+      type: object
+      properties:
+        consumerActivityId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2ExtranetSitesUsagePostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, or service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific site (id of the site)
+        subscriptionName:
+          type: string
+          example: example string
+          description: Optional subscription name for filter
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+        vrfId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific lan segment (id of the lan segment)
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    manaV2B2bExtranetMatch:
+      type: object
+      properties:
+        consumerPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Consumer client prefixes agreed at match (flat list; scoped to LAN segments at consumer accept)
+        lanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+        natTranslationMode:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
+        numCustomers:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Number of customers subscribed to the service
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id
+        servicePrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdDetailsGetResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetMatchConsumerDetails'
+      additionalProperties: false
+    v1ExtranetB2bMatchesPostResponse:
+      type: object
+      properties:
+        matchId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+      additionalProperties: false
+    manaV2IPsecGatewayPeersConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+          description: Name of the IPsec gateway service
+        remotePeers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IPsecGatewayRemotePeer'
+        routing:
+          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
+      additionalProperties: false
+    v1ExtranetB2bProducerIdDeviceStatusGetResponse:
+      type: object
+      properties:
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
+      additionalProperties: false
+    manaV2Policer:
+      type: object
+      properties:
+        burstSize:
+          type: integer
+          format: int32
+          example: 123
+          description: Burst size for the policer (required)
+        bw:
+          type: integer
+          format: int32
+          example: 123
+          description: Bandwidth for the policer (required)
+      additionalProperties: false
+      required:
+      - burstSize
+      - bw
+    v1ExtranetB2bConsumersIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ExtranetB2bCustomersIdDeleteResponse:
+      type: object
+      properties:
+        activityId:
+          type: string
+          example: example string
+        consumerActivityId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bProducerPostRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
+        serviceName:
+          type: string
+          example: example string
+          description: ' (required)'
+        serviceType:
+          type: string
+          example: ENUM_VALUE
+          description: Branded extranet service type (peering_service, client_to_server, …) (required)
+      additionalProperties: false
+      required:
+      - policy
+      - serviceName
+      - serviceType
+    v1ExtranetB2bProducerIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdGetResponse:
+      type: object
+      properties:
+        customerName:
+          type: string
+          example: example string
+        match:
+          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+        matchId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        serviceName:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2ExtranetSitesConsumptionOverviewPostRequest:
+      type: object
+      properties:
+        customerName:
+          type: string
+          example: Customer 1
+          description: a filter to get usage for a specific customer
+        flippedView:
+          type: boolean
+          example: true
+          description: whether to view the data from the consumer's perspective (true) or the provider's perspective (false) (required)
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        siteId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific site
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+        vrfId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific vrf
+      additionalProperties: false
+      required:
+      - flippedView
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    v1ExtranetB2bCustomersIdPutRequest:
+      type: object
+      properties:
+        invite:
+          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
+      additionalProperties: false
+    manaV2NullablePolicyName:
+      type: object
+      properties:
+        policy:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bMatchesReviewPostResponse:
+      type: object
+      properties:
+        matchId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+      additionalProperties: false
+    manaV2B2BExtranetMatchConsumerDetailsProducerPrefix:
+      type: object
+      properties:
+        customerTranslatedPrefix:
+          type: string
+          example: example string
+        prefix:
+          type: string
+          example: example string
+        tag:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bCustomersIdPutResponse:
+      type: object
+      properties:
+        invite:
+          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
+      additionalProperties: false
+    v1ExtranetB2bProducerIdStatusPutResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1ExtranetB2bCustomersIdRetryPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdStatusPutResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2ExtranetLanSegmentsUsageTopPostResponse:
+      type: object
+      properties:
+        topVrfs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixEntityUsage'
+      additionalProperties: false
+    v2ExtranetTotalUsagePostResponse:
+      type: object
+      properties:
+        usage:
+          type: number
+          format: double
+          example: 1000000
+          description: total service usage in kilo bytes
+      additionalProperties: false
+    manaV2B2bExtranetPrefixTag:
+      type: object
+      properties:
+        prefix:
+          type: string
+          example: 10.1.2.0/24
+          description: Prefix advertised by the service (required)
+        tag:
+          type: string
+          example: example string
+          description: Tag for the prefix
+      additionalProperties: false
+      required:
+      - prefix
+    manaV2ExtranetServiceConsumerPolicy:
+      type: object
+      properties:
+        consumerLanSegments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2ExtranetConsumerLanPrefixes'
+        globalObjectOps:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2GlobalObjectServiceOps'
+        natTranslationMode:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
+        siteToSiteVpn:
+          $ref: '#/components/schemas/manaV2GuestConsumerSiteToSiteVpnConfig'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bSiteInformation'
+      additionalProperties: false
+      required:
+      - consumerLanSegments
     v1ExtranetB2bMatchesMatchIdConsumerCheckPostResponse:
       type: object
       properties:
@@ -1174,29 +1756,45 @@ components:
         policy:
           $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
       additionalProperties: false
-    manaV2ExtranetNatTranslationDecentralized:
+    manaV2ExtranetServiceProducerCustomer:
       type: object
       properties:
-        prefixes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2ExtranetNatTranslationDevicePrefixes'
-      additionalProperties: false
-    v1ExtranetB2bProducerIdPutResponse:
-      type: object
-      properties:
-        activityId:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        customerId:
           type: string
           example: example string
-        consumerActivityId:
-          type: string
-          example: example string
-        id:
+        matchId:
           type: integer
           format: int64
           example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
+        matchedServices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1ExtranetB2bProducerIdCustomersGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
       additionalProperties: false
     v1ExtranetB2bConsumersCustomerIdGetResponse:
       type: object
@@ -1230,64 +1828,202 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    statsmonTimeWindow:
+    v2ExtranetServiceOvertimeConsumptionPostResponse:
       type: object
       properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 300
-          minimum: 0
-          description: the size of the time window in seconds (required)
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-      required:
-      - bucketSizeSec
-    ipfixStats:
-      type: object
-      properties:
-        avgUsage:
-          type: number
-          format: double
-          example: 1000000
-          description: Average service usage in kbps
-        peakUsage:
-          type: number
-          format: double
-          example: 1000000
-          description: Peak service usage in kbps
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1ExtranetB2bMatchesMatchIdStatusPutResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2IpsecRoutingConfig:
-      type: object
-      properties:
-        bgp:
-          $ref: '#/components/schemas/manaV2IPsecBgpRouteConfig'
-        static:
-          $ref: '#/components/schemas/manaV2IPsecStaticRouteConfig'
-      additionalProperties: false
-    v1ExtranetB2bMatchesCustomersPostRequest:
-      type: object
-      properties:
-        customers:
+        dlAggStats:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
+            $ref: '#/components/schemas/ipfixStats'
+        ulAggStats:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixStats'
+      additionalProperties: false
+    v1ExtranetB2bProducerReviewPostResponse:
+      type: object
+      properties:
+        activityId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
+      additionalProperties: false
+    v1ExtranetSitesUsageTopPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
         serviceId:
           type: integer
           format: int64
           example: 1234567891011
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    v2ExtranetServiceOvertimeConsumptionPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        siteId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific site
+        subscriptionName:
+          type: string
+          example: example string
+          description: Optional subscription name for filter
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+        vrfId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific vrf
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    v1ExtranetB2bCustomersPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        invite:
+          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
+      additionalProperties: false
+    v1ExtranetB2bProducerIdGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2ExtranetConsumersUsageTopPostResponse:
+      type: object
+      properties:
+        topConsumers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixEntityUsage'
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 10
+          description: total number of customers
+        totalUsage:
+          type: number
+          format: double
+          example: 1000000
+          description: total service usage in kilo bytes
+      additionalProperties: false
+    v1ExtranetB2bMatchesPostRequest:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        match:
+          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+      additionalProperties: false
+    manaV2NullableMd5Password:
+      type: object
+      properties:
+        md5Password:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bProducerPostResponse:
+      type: object
+      properties:
+        activityId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdConsumerPostRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id being consumed
+      additionalProperties: false
+    v1ExtranetB2bProducerIdPutResponse:
+      type: object
+      properties:
+        activityId:
+          type: string
+          example: example string
+        consumerActivityId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
+      additionalProperties: false
+    manaV2GlobalObjectServiceSummaries:
+      type: object
+      properties:
+        routingPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
       additionalProperties: false
     v2ExtranetSitesConsumptionOverviewPostResponse:
       type: object
@@ -1310,51 +2046,43 @@ components:
           example: 1000000
           description: total service usage in kilo bytes
       additionalProperties: false
-    manaV2ExtranetServiceCustomerInvite:
+    manaV2B2bSiteInformation:
       type: object
       properties:
-        adminEmails:
+        bwAllocationSiteLists:
+          type: integer
+          format: int32
+          example: 123
+          description: Total Bandwidth allocation for the service on these site lists
+        bwAllocationSites:
+          type: integer
+          format: int32
+          example: 123
+          description: Total Bandwidth allocation for the service on these sites
+        policerSiteLists:
+          $ref: '#/components/schemas/manaV2Policer'
+        policerSites:
+          $ref: '#/components/schemas/manaV2Policer'
+        siteLists:
           type: array
           items:
-            type: string
-            example: example string
-            description: Admin emails for the partner
-        maximumNumberOfSites:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: Maximum number of consumer sites
+            type: integer
+            format: int64
+            example: 1234567891011
+            description: Site list IDs where the service is deployed
+        sites:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+            description: Site IDs where the service is deployed
       additionalProperties: false
-    ipfixEntityUsage:
+    manaV2NullableBgpNeighborAddressFamilyConfig:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: id of the entity
-        name:
-          type: string
-          example: Site 1
-          description: name of the entity
-        usage:
-          type: number
-          format: double
-          example: 1000000
-          description: usage in kbps
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        family:
+          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
       additionalProperties: false
     manaV2ExtranetServiceSummary:
       type: object
@@ -1403,43 +2131,88 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    v1ExtranetB2bProducerIdDeviceStatusGetResponse:
+    v1ExtranetB2bProducerIdStatusPutRequest:
       type: object
       properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1ExtranetB2bConsumersIdPutRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
+      additionalProperties: false
+    ipfixStats:
+      type: object
+      properties:
+        avgUsage:
+          type: number
+          format: double
+          example: 1000000
+          description: Average service usage in kbps
+        peakUsage:
+          type: number
+          format: double
+          example: 1000000
+          description: Peak service usage in kbps
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    manaV2IPsecGatewayDetails:
+      type: object
+      properties:
+        destinationAddress:
+          type: string
+          example: example string
+        ikeInitiator:
+          type: boolean
+          example: true
+        mtu:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        remoteIkePeerIdentity:
+          type: string
+          example: example string
+        routing:
+          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
+        tcpMss:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tunnel1:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        tunnel2:
+          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
+        vpnProfile:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bCustomersSummaryGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceCustomerSummary'
+      additionalProperties: false
+    v1ExtranetB2bConsumersIdDeviceStatusGetResponse:
+      type: object
+      properties:
+        serviceStatus:
+          type: string
+          example: ENUM_VALUE
         summary:
           type: array
           items:
             $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
-      additionalProperties: false
-    manaV2ExtranetServiceProducerPolicy:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        globalObjectDeviceSummaries:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
-        globalObjectOps:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2GlobalObjectServiceOps'
-        natTranslationMode:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
-        prefixTags:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
-        serviceLanSegment:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: LAN segment ID for the service
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bSiteInformation'
       additionalProperties: false
     manaV2BgpNeighborAddressFamilyConfig:
       type: object
@@ -1452,489 +2225,6 @@ components:
         outboundPolicy:
           $ref: '#/components/schemas/manaV2NullablePolicyName'
       additionalProperties: false
-    v1ExtranetB2bProducerPostRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
-        serviceName:
-          type: string
-          example: example string
-          description: ' (required)'
-        serviceType:
-          type: string
-          example: ENUM_VALUE
-          description: Branded extranet service type (peering_service, client_to_server, …) (required)
-      additionalProperties: false
-      required:
-      - policy
-      - serviceName
-      - serviceType
-    v1ExtranetB2bProducerIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2B2bExtranetMatch:
-      type: object
-      properties:
-        consumerPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: Consumer client prefixes agreed at match (flat list; scoped to LAN segments at consumer accept)
-        lanSegment:
-          type: integer
-          format: int64
-          example: 1234567891011
-        natTranslationMode:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
-        numCustomers:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: Number of customers subscribed to the service
-        serviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Producer service id
-        servicePrefixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
-      additionalProperties: false
-    manaV2B2BExtranetMatchConsumerDetailsService:
-      type: object
-      properties:
-        companyName:
-          type: string
-          example: example string
-        contactEmail:
-          type: array
-          items:
-            type: string
-            example: example string
-        description:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        serviceName:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2ExtranetNatTranslationPeerToPeerPrefix:
-      type: object
-      properties:
-        outsideNatPrefix:
-          type: string
-          example: 100.1.2.0/24
-          description: Optional outside address presented for prefix on the far side of the attachment; omit for no NAT on that prefix
-        prefix:
-          type: string
-          example: 10.1.2.0/24
-          description: 'At match: customer export prefix. At consumer accept/update (peering): subscribed service prefix'
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdPutRequest:
-      type: object
-      properties:
-        invite:
-          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
-      additionalProperties: false
-    v1ExtranetSitesUsageTopPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        serviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    v1ExtranetB2bMatchesPostRequest:
-      type: object
-      properties:
-        customerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        match:
-          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-      additionalProperties: false
-    manaV2ExtranetNatTranslationPeerToPeer:
-      type: object
-      properties:
-        prefixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetNatTranslationPeerToPeerPrefix'
-      additionalProperties: false
-    v1ExtranetB2bMatchesPausePutResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bMatchesPostResponse:
-      type: object
-      properties:
-        matchId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-      additionalProperties: false
-    manaV2ExtranetServiceProducerCustomer:
-      type: object
-      properties:
-        adminEmails:
-          type: array
-          items:
-            type: string
-            example: example string
-        customerId:
-          type: string
-          example: example string
-        matchId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matchedServices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdRetryPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1ExtranetB2bProducerIdGetResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bMatchesPausePutRequest:
-      type: object
-      properties:
-        customerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2B2BExtranetMatchConsumerDetailsCustomer:
-      type: object
-      properties:
-        adminEmails:
-          type: array
-          items:
-            type: string
-            example: example string
-        companyName:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        numSites:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1ExtranetB2bMatchesMatchIdStatusPutRequest:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2ExtranetLanSegmentsUsageTopPostResponse:
-      type: object
-      properties:
-        topVrfs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixEntityUsage'
-      additionalProperties: false
-    manaV2IPsecGatewayPeersConfig:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-          description: Name of the IPsec gateway service
-        remotePeers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IPsecGatewayRemotePeer'
-        routing:
-          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
-      additionalProperties: false
-    manaV2B2bExtranetPrefixTag:
-      type: object
-      properties:
-        prefix:
-          type: string
-          example: 10.1.2.0/24
-          description: Prefix advertised by the service (required)
-        tag:
-          type: string
-          example: example string
-          description: Tag for the prefix
-      additionalProperties: false
-      required:
-      - prefix
-    v1ExtranetB2bMatchesMatchIdGetResponse:
-      type: object
-      properties:
-        customerName:
-          type: string
-          example: example string
-        match:
-          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-        matchId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        serviceName:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bProducerIdPutRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
-      additionalProperties: false
-    manaV2Policer:
-      type: object
-      properties:
-        burstSize:
-          type: integer
-          format: int32
-          example: 123
-          description: Burst size for the policer (required)
-        bw:
-          type: integer
-          format: int32
-          example: 123
-          description: Bandwidth for the policer (required)
-      additionalProperties: false
-      required:
-      - burstSize
-      - bw
-    manaV2B2bExtranetMatchConsumerDetails:
-      type: object
-      properties:
-        consumerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        consumerPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        customer:
-          $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsCustomer'
-        oldConsumerPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        oldServicePrefixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsProducerPrefix'
-        service:
-          $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsService'
-        servicePrefixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsProducerPrefix'
-      additionalProperties: false
-    manaV2ExtranetServicePolicyResponse:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
-        serviceName:
-          type: string
-          example: example string
-        serviceType:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2GlobalObjectServiceOps:
-      type: object
-      properties:
-        routingPolicyOps:
-          type: object
-          additionalProperties:
-            type: string
-            example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bCustomersPostRequest:
-      type: object
-      properties:
-        invite:
-          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
-        name:
-          type: string
-          example: example string
-          description: Partner display name (required)
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: Graphiant peer vs guest (non-Graphiant) partner (required)
-      additionalProperties: false
-      required:
-      - invite
-      - name
-      - type
-    v1ExtranetB2bConsumersIdPutRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
-      additionalProperties: false
-    v1ExtranetSitesUsageTopPostResponse:
-      type: object
-      properties:
-        topSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ExtranetSitesUsageTopPostResponseSiteUsage'
-      additionalProperties: false
-    v1ExtranetB2bMatchesReviewPostResponse:
-      type: object
-      properties:
-        matchId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-      additionalProperties: false
-    v2ExtranetTotalUsagePostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the ID associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    v1ExtranetB2bMatchesMatchIdConsumerCheckPostRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
-        serviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Producer service id being consumed
-      additionalProperties: false
-    manaV2ExtranetServiceCustomerSummary:
-      type: object
-      properties:
-        adminEmails:
-          type: array
-          items:
-            type: string
-            example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matchedServices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
     v1ExtranetB2bMatchesMatchIdDeleteResponse:
       type: object
       properties:
@@ -1944,52 +2234,6 @@ components:
         consumerActivityId:
           type: string
           example: example string
-      additionalProperties: false
-    v2ExtranetServiceOvertimeConsumptionPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        siteId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific site
-        subscriptionName:
-          type: string
-          example: example string
-          description: Optional subscription name for filter
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-        vrfId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific vrf
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    v1ExtranetB2bMatchesCustomersPostResponse:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
       additionalProperties: false
     manaV2IPsecGatewayRemotePeer:
       type: object
@@ -2028,201 +2272,14 @@ components:
           example: example string
           description: Enterprise IPsec VPN profile name for this peer
       additionalProperties: false
-    v1ExtranetB2bConsumersIdPutResponse:
+    manaV2IPsecStaticRouteConfig:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdDetailsGetResponse:
-      type: object
-      properties:
-        adminEmails:
+        destinationPrefix:
           type: array
           items:
             type: string
             example: example string
-        name:
-          type: string
-          example: example string
-        numSites:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bMatchesMatchIdConsumerPostResponse:
-      type: object
-      properties:
-        consumerActivityId:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
-      additionalProperties: false
-    v1ExtranetB2bConsumersIdPrefixesPutRequest:
-      type: object
-      properties:
-        natTranslationMode:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
-      additionalProperties: false
-    v1ExtranetB2bProducerIdStatusPutResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2ExtranetServiceOvertimeConsumptionPostResponse:
-      type: object
-      properties:
-        dlAggStats:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixStats'
-        ulAggStats:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixStats'
-      additionalProperties: false
-    manaV2IPsecGatewayTunnelDetails:
-      type: object
-      properties:
-        insideIpv4Cidr:
-          type: string
-          example: example string
-        insideIpv6Cidr:
-          type: string
-          example: example string
-        localIkePeerIdentity:
-          type: string
-          example: example string
-        psk:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdDeleteResponse:
-      type: object
-      properties:
-        activityId:
-          type: string
-          example: example string
-        consumerActivityId:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ExtranetB2bProducerIdStatusPutRequest:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdMatchesSummaryGetResponse:
-      type: object
-      properties:
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceCustomerMatchSummary'
-      additionalProperties: false
-    v1ExtranetSitesUsageTopPostResponseSiteUsage:
-      type: object
-      properties:
-        siteId:
-          type: integer
-          format: int64
-          example: 1
-          description: the id of the site
-        siteName:
-          type: string
-          example: Site 1
-          description: the name of the site
-        usage:
-          type: number
-          format: double
-          example: 1000000
-          description: usage/consumption of the service on the site in kilo bytes
-      additionalProperties: false
-    v1ExtranetB2bConsumersIdDeviceStatusGetResponse:
-      type: object
-      properties:
-        serviceStatus:
-          type: string
-          example: ENUM_VALUE
-        summary:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
-      additionalProperties: false
-    v2ExtranetConsumersUsageTopPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id of a producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    manaV2ExtranetNatTranslationCentralized:
-      type: object
-      properties:
-        prefixes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2ExtranetNatTranslationDevicePrefixes'
-      additionalProperties: false
-    v1ExtranetB2bProducerReviewPostResponse:
-      type: object
-      properties:
-        activityId:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
-      additionalProperties: false
-    v1ExtranetB2bMatchesMatchIdPutRequest:
-      type: object
-      properties:
-        match:
-          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-      additionalProperties: false
-    v1ExtranetB2bConsumersIdDeleteResponse:
-      type: object
-      properties: {}
       additionalProperties: false
     v1ExtranetB2bMatchesMatchIdPutResponse:
       type: object
@@ -2233,600 +2290,21 @@ components:
         match:
           $ref: '#/components/schemas/manaV2B2bExtranetMatch'
       additionalProperties: false
-    manaV2IPsecBgpRouteConfig:
+    manaV2ExtranetServiceCustomerInvite:
       type: object
       properties:
-        addressFamilies:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
-        holdTimer:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        keepaliveTimer:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        md5Password:
-          $ref: '#/components/schemas/manaV2NullableMd5Password'
-        peerAsn:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sendCommunity:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2IPsecStaticRouteConfig:
-      type: object
-      properties:
-        destinationPrefix:
+        adminEmails:
           type: array
           items:
             type: string
             example: example string
-      additionalProperties: false
-    manaV2GlobalObjectServiceSummaries:
-      type: object
-      properties:
-        routingPolicies:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
-      additionalProperties: false
-    manaV2NullableMd5Password:
-      type: object
-      properties:
-        md5Password:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2ExtranetTotalUsagePostResponse:
-      type: object
-      properties:
-        usage:
-          type: number
-          format: double
-          example: 1000000
-          description: total service usage in kilo bytes
-      additionalProperties: false
-    manaV2ExtranetServiceCustomerMatchSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        lanSegment:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matchedCustomers:
+            description: Admin emails for the partner
+        maximumNumberOfSites:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        name:
-          type: string
-          example: example string
-        serviceType:
-          type: string
-          example: ENUM_VALUE
-        status:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v2ExtranetLanSegmentsUsageTopPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    manaV2B2bExtranetStatusSummary:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceStatus:
-          type: string
-          example: ENUM_VALUE
-        location:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2ExtranetServiceConsumerPolicy:
-      type: object
-      properties:
-        consumerLanSegments:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2ExtranetConsumerLanPrefixes'
-        globalObjectOps:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2GlobalObjectServiceOps'
-        natTranslationMode:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
-        siteToSiteVpn:
-          $ref: '#/components/schemas/manaV2GuestConsumerSiteToSiteVpnConfig'
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bSiteInformation'
-      additionalProperties: false
-      required:
-      - consumerLanSegments
-    v1ExtranetB2bMatchesMatchIdDetailsGetResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetMatchConsumerDetails'
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdRetryPostRequest:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2ExtranetSitesUsagePostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, or service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        serviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific site (id of the site)
-        subscriptionName:
-          type: string
-          example: example string
-          description: Optional subscription name for filter
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-        vrfId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific lan segment (id of the lan segment)
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    manaV2NullableBgpNeighborAddressFamilyConfig:
-      type: object
-      properties:
-        family:
-          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
-      additionalProperties: false
-    v1ExtranetB2bCustomersIdPutResponse:
-      type: object
-      properties:
-        invite:
-          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
-      additionalProperties: false
-    manaV2GlobalObjectSummary:
-      type: object
-      properties:
-        attachPoint:
-          type: string
-          example: ENUM_VALUE
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ipVersion:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        numAttachedDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numAttachedSites:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numFailures:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numInSyncDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numOverrideDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numPolicies:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numPrefixes:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numRules:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numStatements:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        trafficPolicyType:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2B2BExtranetMatchConsumerDetailsProducerPrefix:
-      type: object
-      properties:
-        customerTranslatedPrefix:
-          type: string
-          example: example string
-        prefix:
-          type: string
-          example: example string
-        tag:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2IPsecGatewayDetails:
-      type: object
-      properties:
-        destinationAddress:
-          type: string
-          example: example string
-        ikeInitiator:
-          type: boolean
-          example: true
-        mtu:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        remoteIkePeerIdentity:
-          type: string
-          example: example string
-        routing:
-          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
-        tcpMss:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        tunnel1:
-          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
-        tunnel2:
-          $ref: '#/components/schemas/manaV2IPsecGatewayTunnelDetails'
-        vpnProfile:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ExtranetB2bCustomersPostResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        invite:
-          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
-      additionalProperties: false
-    v1ExtranetB2bCustomersSummaryGetResponse:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceCustomerSummary'
-      additionalProperties: false
-    manaV2B2bSiteInformation:
-      type: object
-      properties:
-        bwAllocationSiteLists:
-          type: integer
-          format: int32
-          example: 123
-          description: Total Bandwidth allocation for the service on these site lists
-        bwAllocationSites:
-          type: integer
-          format: int32
-          example: 123
-          description: Total Bandwidth allocation for the service on these sites
-        policerSiteLists:
-          $ref: '#/components/schemas/manaV2Policer'
-        policerSites:
-          $ref: '#/components/schemas/manaV2Policer'
-        siteLists:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-            description: Site list IDs where the service is deployed
-        sites:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-            description: Site IDs where the service is deployed
-      additionalProperties: false
-    v1ExtranetB2bProducerReviewPostRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
-        serviceName:
-          type: string
-          example: example string
-          description: ' (required)'
-        serviceType:
-          type: string
-          example: ENUM_VALUE
-          description: Branded extranet service type (peering_service, client_to_server, …) (required)
-      additionalProperties: false
-      required:
-      - policy
-      - serviceName
-      - serviceType
-    v2ExtranetSitesConsumptionOverviewPostRequest:
-      type: object
-      properties:
-        customerName:
-          type: string
-          example: Customer 1
-          description: a filter to get usage for a specific customer
-        flippedView:
-          type: boolean
-          example: true
-          description: whether to view the data from the consumer's perspective (true) or the provider's perspective (false) (required)
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        siteId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific site
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-        vrfId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific vrf
-      additionalProperties: false
-      required:
-      - flippedView
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    v1ExtranetB2bProducerPostResponse:
-      type: object
-      properties:
-        activityId:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServicePolicyResponse'
-      additionalProperties: false
-    v1ExtranetB2bProducerIdCustomersGetResponse:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
-      additionalProperties: false
-    v1ExtranetB2bMatchesReviewPostRequest:
-      type: object
-      properties:
-        customerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        match:
-          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
-      additionalProperties: false
-    ipfixConnectionMap:
-      type: object
-      properties:
-        connections:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-        connectionsV2:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-            example: 123.45
-        name:
-          type: string
-          example: Site 1
-          description: the name of the connection
-      additionalProperties: false
-    v1ExtranetB2bMatchesMatchIdConsumerPostRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
-        serviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Producer service id being consumed
-      additionalProperties: false
-    manaV2ExtranetConsumerLanPrefixes:
-      type: object
-      properties:
-        consumerPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: Consumer client prefixes on this LAN
-        servicePrefixDnat:
-          type: object
-          additionalProperties:
-            type: string
-            example: example string
-      additionalProperties: false
-    v2ExtranetConsumersUsageTopPostResponse:
-      type: object
-      properties:
-        topConsumers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixEntityUsage'
-        totalCustomers:
-          type: integer
-          format: int64
-          example: 10
-          description: total number of customers
-        totalUsage:
-          type: number
-          format: double
-          example: 1000000
-          description: total service usage in kilo bytes
-      additionalProperties: false
-    v1ExtranetB2bConsumersIdPrefixesPutResponse:
-      type: object
-      properties:
-        consumerActivityId:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2GuestConsumerSiteToSiteVpnConfig:
-      type: object
-      properties:
-        emails:
-          type: array
-          items:
-            type: string
-            example: example string
-        ipsecGatewayDetails:
-          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
-        ipsecGatewayPeers:
-          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v1ExtranetB2bServicesSummaryGetResponse:
-      type: object
-      properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetServiceSummary'
-      additionalProperties: false
-    manaV2ExtranetNatTranslationDevicePrefixes:
-      type: object
-      properties:
-        prefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: IPv4 CIDR NAT pool(s) for the device
-      additionalProperties: false
-    manaV2ExtranetNatTranslationMode:
-      type: object
-      properties:
-        centralized:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationCentralized'
-        decentralized:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationDecentralized'
-        peerToPeer:
-          $ref: '#/components/schemas/manaV2ExtranetNatTranslationPeerToPeer'
+          description: Maximum number of consumer sites
       additionalProperties: false
     v1ExtranetB2bConsumersCustomerIdGetResponseIpsecVpnTunnelConfig:
       type: object
@@ -2943,6 +2421,593 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
+    manaV2ExtranetNatTranslationDecentralized:
+      type: object
+      properties:
+        prefixes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2ExtranetNatTranslationDevicePrefixes'
+      additionalProperties: false
+    ipfixConnectionMap:
+      type: object
+      properties:
+        connections:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        connectionsV2:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+            example: 123.45
+        name:
+          type: string
+          example: Site 1
+          description: the name of the connection
+      additionalProperties: false
+    manaV2ExtranetNatTranslationDevicePrefixes:
+      type: object
+      properties:
+        prefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: IPv4 CIDR NAT pool(s) for the device
+      additionalProperties: false
+    manaV2ExtranetNatTranslationPeerToPeerPrefix:
+      type: object
+      properties:
+        outsideNatPrefix:
+          type: string
+          example: 100.1.2.0/24
+          description: Optional outside address presented for prefix on the far side of the attachment; omit for no NAT on that prefix
+        prefix:
+          type: string
+          example: 10.1.2.0/24
+          description: 'At match: customer export prefix. At consumer accept/update (peering): subscribed service prefix'
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdStatusPutRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2ExtranetServiceCustomerSummary:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedServices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1ExtranetB2bCustomersIdRetryPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ExtranetSitesUsageTopPostResponseSiteUsage:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 1
+          description: the id of the site
+        siteName:
+          type: string
+          example: Site 1
+          description: the name of the site
+        usage:
+          type: number
+          format: double
+          example: 1000000
+          description: usage/consumption of the service on the site in kilo bytes
+      additionalProperties: false
+    v1ExtranetB2bMatchesCustomersPostResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceProducerCustomer'
+      additionalProperties: false
+    manaV2IPsecGatewayTunnelDetails:
+      type: object
+      properties:
+        insideIpv4Cidr:
+          type: string
+          example: example string
+        insideIpv6Cidr:
+          type: string
+          example: example string
+        localIkePeerIdentity:
+          type: string
+          example: example string
+        psk:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bCustomersIdDetailsGetResponse:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        name:
+          type: string
+          example: example string
+        numSites:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2IPsecBgpRouteConfig:
+      type: object
+      properties:
+        addressFamilies:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
+        holdTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        md5Password:
+          $ref: '#/components/schemas/manaV2NullableMd5Password'
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sendCommunity:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2IpsecRoutingConfig:
+      type: object
+      properties:
+        bgp:
+          $ref: '#/components/schemas/manaV2IPsecBgpRouteConfig'
+        static:
+          $ref: '#/components/schemas/manaV2IPsecStaticRouteConfig'
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdPutRequest:
+      type: object
+      properties:
+        match:
+          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+      additionalProperties: false
+    v1ExtranetB2bServicesSummaryGetResponse:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceSummary'
+      additionalProperties: false
+    manaV2B2BExtranetMatchConsumerDetailsService:
+      type: object
+      properties:
+        companyName:
+          type: string
+          example: example string
+        contactEmail:
+          type: array
+          items:
+            type: string
+            example: example string
+        description:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        serviceName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ExtranetB2bMatchesPausePutResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2ExtranetNatTranslationPeerToPeer:
+      type: object
+      properties:
+        prefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetNatTranslationPeerToPeerPrefix'
+      additionalProperties: false
+    manaV2B2BExtranetMatchConsumerDetailsCustomer:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        companyName:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        numSites:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2ExtranetNatTranslationMode:
+      type: object
+      properties:
+        centralized:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationCentralized'
+        decentralized:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationDecentralized'
+        peerToPeer:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationPeerToPeer'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2GlobalObjectSummary:
+      type: object
+      properties:
+        attachPoint:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipVersion:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        numAttachedDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numAttachedSites:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numFailures:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numInSyncDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numOverrideDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numPolicies:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numPrefixes:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numRules:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numStatements:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        trafficPolicyType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1ExtranetB2bProducerReviewPostRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
+        serviceName:
+          type: string
+          example: example string
+          description: ' (required)'
+        serviceType:
+          type: string
+          example: ENUM_VALUE
+          description: Branded extranet service type (peering_service, client_to_server, …) (required)
+      additionalProperties: false
+      required:
+      - policy
+      - serviceName
+      - serviceType
+    v1ExtranetB2bMatchesMatchIdConsumerCheckPostRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
+        serviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Producer service id being consumed
+      additionalProperties: false
+    manaV2ExtranetNatTranslationCentralized:
+      type: object
+      properties:
+        prefixes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2ExtranetNatTranslationDevicePrefixes'
+      additionalProperties: false
+    v1ExtranetB2bMatchesMatchIdConsumerPostResponse:
+      type: object
+      properties:
+        consumerActivityId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceConsumerPolicy'
+      additionalProperties: false
+    manaV2B2bExtranetMatchConsumerDetails:
+      type: object
+      properties:
+        consumerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        consumerPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        customer:
+          $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsCustomer'
+        oldConsumerPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        oldServicePrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsProducerPrefix'
+        service:
+          $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsService'
+        servicePrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2BExtranetMatchConsumerDetailsProducerPrefix'
+      additionalProperties: false
+    v1ExtranetSitesUsageTopPostResponse:
+      type: object
+      properties:
+        topSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ExtranetSitesUsageTopPostResponseSiteUsage'
+      additionalProperties: false
+    manaV2GlobalObjectServiceOps:
+      type: object
+      properties:
+        routingPolicyOps:
+          type: object
+          additionalProperties:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    manaV2ExtranetServicePolicyResponse:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2ExtranetServiceProducerPolicy'
+        serviceName:
+          type: string
+          example: example string
+        serviceType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    statsmonTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 300
+          minimum: 0
+          description: the size of the time window in seconds (required)
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+      required:
+      - bucketSizeSec
+    v1ExtranetB2bCustomersIdMatchesSummaryGetResponse:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetServiceCustomerMatchSummary'
+      additionalProperties: false
+    v2ExtranetLanSegmentsUsageTopPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    v2ExtranetTotalUsagePostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the ID associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    v1ExtranetB2bMatchesReviewPostRequest:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        match:
+          $ref: '#/components/schemas/manaV2B2bExtranetMatch'
+      additionalProperties: false
+    manaV2ExtranetServiceCustomerMatchSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        lanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedCustomers:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        serviceType:
+          type: string
+          example: ENUM_VALUE
+        status:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    manaV2ExtranetConsumerLanPrefixes:
+      type: object
+      properties:
+        consumerPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Consumer client prefixes on this LAN
+        servicePrefixDnat:
+          type: object
+          additionalProperties:
+            type: string
+            example: example string
+      additionalProperties: false
     v2ExtranetSitesUsagePostResponse:
       type: object
       properties:
@@ -2960,12 +3025,103 @@ components:
           items:
             $ref: '#/components/schemas/ipfixStats'
       additionalProperties: false
-    manaV2NullablePolicyName:
+    v2ExtranetConsumersUsageTopPostRequest:
       type: object
       properties:
-        policy:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id of a producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    manaV2B2bExtranetStatusSummary:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceStatus:
+          type: string
+          example: ENUM_VALUE
+        location:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1ExtranetB2bConsumersIdPrefixesPutRequest:
+      type: object
+      properties:
+        natTranslationMode:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
+      additionalProperties: false
+    v1ExtranetB2bCustomersPostRequest:
+      type: object
+      properties:
+        invite:
+          $ref: '#/components/schemas/manaV2ExtranetServiceCustomerInvite'
+        name:
           type: string
           example: example string
+          description: Partner display name (required)
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: Graphiant peer vs guest (non-Graphiant) partner (required)
+      additionalProperties: false
+      required:
+      - invite
+      - name
+      - type
+    manaV2ExtranetServiceProducerPolicy:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        globalObjectDeviceSummaries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
+        globalObjectOps:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2GlobalObjectServiceOps'
+        natTranslationMode:
+          $ref: '#/components/schemas/manaV2ExtranetNatTranslationMode'
+        prefixTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
+        serviceLanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: LAN segment ID for the service
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bSiteInformation'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

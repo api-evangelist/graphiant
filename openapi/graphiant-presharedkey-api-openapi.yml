@@ -31,6 +31,10 @@ paths:
       description: Get all domain categories from the DPI engine
       tags:
       - Presharedkey
+      summary: Get presharedkey
+      x-summary-source: derived
+      operationId: getV1Presharedkey
+      x-operation-id-source: derived
 components:
   schemas:
     v1PresharedkeyGetResponse:

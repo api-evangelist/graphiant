@@ -33,6 +33,10 @@ paths:
       description: Configure Identity Provider (SAML) for enterprise. Creates IDP configuration affecting all users in the enterprise.
       tags:
       - Auth
+      summary: Replace auth
+      x-summary-source: derived
+      operationId: putV1Auth
+      x-operation-id-source: derived
     delete:
       security:
       - jwtAuth: []
@@ -49,6 +53,10 @@ paths:
       description: Remove Identity Provider configuration and revert to default authentication.
       tags:
       - Auth
+      summary: Delete auth
+      x-summary-source: derived
+      operationId: deleteV1Auth
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -69,6 +77,10 @@ paths:
       description: Get current Identity Provider configuration for enterprise.
       tags:
       - Auth
+      summary: Get auth
+      x-summary-source: derived
+      operationId: getV1Auth
+      x-operation-id-source: derived
     patch:
       security:
       - jwtAuth: []
@@ -91,6 +103,10 @@ paths:
       description: Update Identity Provider configuration (certificates, endpoints, etc.).
       tags:
       - Auth
+      summary: Update auth
+      x-summary-source: derived
+      operationId: patchV1Auth
+      x-operation-id-source: derived
   /v1/auth/mfa:
     patch:
       security:
@@ -114,6 +130,10 @@ paths:
       description: Enroll tenant in Multi-Factor Authentication (SMS, GoogleAuth).
       tags:
       - Auth
+      summary: Update auth mfa
+      x-summary-source: derived
+      operationId: patchV1AuthMfa
+      x-operation-id-source: derived
     delete:
       security:
       - jwtAuth: []
@@ -130,6 +150,10 @@ paths:
       description: Remove Multi-Factor Authentication enrollment for the tenant.
       tags:
       - Auth
+      summary: Delete auth mfa
+      x-summary-source: derived
+      operationId: deleteV1AuthMfa
+      x-operation-id-source: derived
     post:
       requestBody:
         required: true
@@ -162,6 +186,10 @@ paths:
                     example: Internal error
       tags:
       - Auth
+      summary: Create auth mfa
+      x-summary-source: derived
+      operationId: postV1AuthMfa
+      x-operation-id-source: derived
   /v1/auth/mfa/types:
     get:
       security:
@@ -183,6 +211,10 @@ paths:
       description: Get MFA types allowed by enterprise policy.
       tags:
       - Auth
+      summary: Get auth mfa types
+      x-summary-source: derived
+      operationId: getV1AuthMfaTypes
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -205,6 +237,10 @@ paths:
       description: Update enterprise MFA policy to allow/disallow specific MFA types.
       tags:
       - Auth
+      summary: Replace auth mfa types
+      x-summary-source: derived
+      operationId: putV1AuthMfaTypes
+      x-operation-id-source: derived
   /v1/auth/login/pre:
     get:
       parameters:
@@ -233,6 +269,10 @@ paths:
           description: Bad request
       tags:
       - Auth
+      summary: Get auth login pre
+      x-summary-source: derived
+      operationId: getV1AuthLoginPre
+      x-operation-id-source: derived
   /v1/auth/login/saml:
     get:
       parameters:
@@ -275,6 +315,10 @@ paths:
                     example: Invalid email
       tags:
       - Auth
+      summary: Get auth login saml
+      x-summary-source: derived
+      operationId: getV1AuthLoginSaml
+      x-operation-id-source: derived
   /v1/auth/login/callback:
     post:
       requestBody:
@@ -304,6 +348,10 @@ paths:
                     example: Invalid saml response
       tags:
       - Auth
+      summary: Create auth login callback
+      x-summary-source: derived
+      operationId: postV1AuthLoginCallback
+      x-operation-id-source: derived
   /v1/auth/user:
     get:
       security:
@@ -326,6 +374,10 @@ paths:
           description: Forbidden
       tags:
       - Auth
+      summary: Get auth user
+      x-summary-source: derived
+      operationId: getV1AuthUser
+      x-operation-id-source: derived
   /v1/auth/login:
     post:
       requestBody:
@@ -347,6 +399,10 @@ paths:
           description: Authenticated Failed
       tags:
       - Auth
+      summary: Create auth login
+      x-summary-source: derived
+      operationId: postV1AuthLogin
+      x-operation-id-source: derived
   /v1/auth/login/temp:
     post:
       requestBody:
@@ -366,6 +422,10 @@ paths:
           description: Not Authenticated
       tags:
       - Auth
+      summary: Create auth login temp
+      x-summary-source: derived
+      operationId: postV1AuthLoginTemp
+      x-operation-id-source: derived
   /v1/auth/gcs:
     post:
       requestBody:
@@ -399,6 +459,10 @@ paths:
                     example: Internal error
       tags:
       - Auth
+      summary: Create auth gcs
+      x-summary-source: derived
+      operationId: postV1AuthGcs
+      x-operation-id-source: derived
   /v1/auth/refresh:
     get:
       security:
@@ -458,6 +522,10 @@ paths:
                     example: Internal error
       tags:
       - Auth
+      summary: Get auth refresh
+      x-summary-source: derived
+      operationId: getV1AuthRefresh
+      x-operation-id-source: derived
   /v1/auth/session:
     get:
       security:
@@ -517,6 +585,10 @@ paths:
                     example: Internal error
       tags:
       - Auth
+      summary: Get auth session
+      x-summary-source: derived
+      operationId: getV1AuthSession
+      x-operation-id-source: derived
   /v1/auth/session/root:
     get:
       security:
@@ -568,8 +640,131 @@ paths:
                     example: Internal error
       tags:
       - Auth
+      summary: Get auth session root
+      x-summary-source: derived
+      operationId: getV1AuthSessionRoot
+      x-operation-id-source: derived
 components:
   schemas:
+    v1AuthMfaPatchRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - allowedMfaTypes
+    v1AuthLoginPostRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@example.com
+        password:
+          type: string
+          example: password123
+      required:
+      - username
+      - password
+    v1AuthGcsPostRequest:
+      type: object
+      properties:
+        gcsName:
+          type: string
+          example: my-gcs-instance
+        apiKey:
+          type: string
+          example: api-key-12345
+      required:
+      - gcsName
+      - apiKey
+    v1AuthLoginCallbackPostRequest:
+      type: object
+      properties:
+        SAMLResponse:
+          type: string
+          example: PHNhbWxwOlJlc3BvbnNl...
+        RelayState:
+          type: string
+          example: information-to-relay
+      required:
+      - SAMLResponse
+    v1AuthLoginPreGetResponse:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - SSO
+          - PASSWORD
+          example: PASSWORD
+          description: Authentication method to use
+        email:
+          type: string
+          example: user@example.com
+          description: User email address
+        iam:
+          type: string
+          example: Azure
+          description: Identity provider name (Azure/Okta)
+        relayState:
+          type: string
+          example: information-to-relay
+          description: State to relay after authentication
+        entryPoint:
+          type: string
+          example: https://saml.example.com/sso
+          description: SSO entry point URL
+      required:
+      - method
+      - email
+    v1AuthMfaTypesGetResponse:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    v1AuthLoginPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: true
+        token:
+          type: string
+          example: gr-auth-12345678-1234-1234-1234-123456789012-87654321-4321-4321-4321-210987654321
+        accountType:
+          type: string
+          enum:
+          - no_account
+          - enterprise
+          - provider
+          - msp
+          - graphiant
+          example: enterprise
+        email:
+          type: string
+          example: user@example.com
+          description: User email address (returned for MFA users)
+        mfaType:
+          type: string
+          example: TOTP
+          description: MFA type (returned for MFA users)
+        stateToken:
+          type: string
+          example: state-token-12345
+          description: State token for MFA verification (returned for MFA users)
+        status:
+          type: string
+          example: AwaitingMfa
+          description: Authentication status (returned for MFA users)
     v1AuthUserGetResponse:
       type: object
       properties:
@@ -593,36 +788,6 @@ components:
       - enterpriseId
       - permissions
       - timeZone
-    v1AuthLoginCallbackPostRequest:
-      type: object
-      properties:
-        SAMLResponse:
-          type: string
-          example: PHNhbWxwOlJlc3BvbnNl...
-        RelayState:
-          type: string
-          example: information-to-relay
-      required:
-      - SAMLResponse
-    v1AuthMfaPostRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: user@example.com
-        mfaType:
-          type: string
-          example: TOTP
-        code:
-          type: string
-          example: 123456
-        stateToken:
-          type: string
-          example: state-token-12345
-      required:
-      - email
-      - mfaType
-      - code
     v1AuthErrorPostResponse:
       type: object
       properties:
@@ -641,52 +806,12 @@ components:
       - auth
       - token
       - error
-    v1AuthMfaTypesGetResponse:
+    v1AuthRefreshGetEntryPointResponse:
       type: object
       properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-      additionalProperties: false
-    v1AuthLoginPostRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: user@example.com
-        password:
-          type: string
-          example: password123
-      required:
-      - username
-      - password
-    v1AuthPutRequest:
-      type: object
-      properties:
-        cert:
-          type: string
-          example: example string
-          description: ' (required)'
         entryPoint:
           type: string
-          example: example string
-          description: ' (required)'
-        iamType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        issuer:
-          type: string
-          example: example string
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - cert
-      - entryPoint
-      - iamType
-      - issuer
+          example: https://saml.example.com/sso
     v1AuthLoginTempPostRequest:
       type: object
       properties:
@@ -703,34 +828,6 @@ components:
       - email
       - tempPassword
       - matchId
-    v1AuthGetResponse:
-      type: object
-      properties:
-        cert:
-          type: string
-          example: example string
-        entryPoint:
-          type: string
-          example: example string
-        iamType:
-          type: string
-          example: ENUM_VALUE
-        issuer:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1AuthMfaTypesPutRequest:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - allowedMfaTypes
     authPermissions:
       type: object
       properties:
@@ -846,19 +943,67 @@ components:
           - read
           - read_write
           example: read
-    v1AuthGcsPostRequest:
+    v1AuthGetResponse:
       type: object
       properties:
-        gcsName:
+        cert:
           type: string
-          example: my-gcs-instance
-        apiKey:
+          example: example string
+        entryPoint:
           type: string
-          example: api-key-12345
+          example: example string
+        iamType:
+          type: string
+          example: ENUM_VALUE
+        issuer:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AuthPutRequest:
+      type: object
+      properties:
+        cert:
+          type: string
+          example: example string
+          description: ' (required)'
+        entryPoint:
+          type: string
+          example: example string
+          description: ' (required)'
+        iamType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        issuer:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
       required:
-      - gcsName
-      - apiKey
-    v1AuthMfaPatchRequest:
+      - cert
+      - entryPoint
+      - iamType
+      - issuer
+    v1AuthMfaPostRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        mfaType:
+          type: string
+          example: TOTP
+        code:
+          type: string
+          example: 123456
+        stateToken:
+          type: string
+          example: state-token-12345
+      required:
+      - email
+      - mfaType
+      - code
+    v1AuthMfaTypesPutRequest:
       type: object
       properties:
         allowedMfaTypes:
@@ -895,75 +1040,6 @@ components:
       - entryPoint
       - iamType
       - issuer
-    v1AuthLoginPostResponse:
-      type: object
-      properties:
-        auth:
-          type: boolean
-          example: true
-        token:
-          type: string
-          example: gr-auth-12345678-1234-1234-1234-123456789012-87654321-4321-4321-4321-210987654321
-        accountType:
-          type: string
-          enum:
-          - no_account
-          - enterprise
-          - provider
-          - msp
-          - graphiant
-          example: enterprise
-        email:
-          type: string
-          example: user@example.com
-          description: User email address (returned for MFA users)
-        mfaType:
-          type: string
-          example: TOTP
-          description: MFA type (returned for MFA users)
-        stateToken:
-          type: string
-          example: state-token-12345
-          description: State token for MFA verification (returned for MFA users)
-        status:
-          type: string
-          example: AwaitingMfa
-          description: Authentication status (returned for MFA users)
-    v1AuthLoginPreGetResponse:
-      type: object
-      properties:
-        method:
-          type: string
-          enum:
-          - SSO
-          - PASSWORD
-          example: PASSWORD
-          description: Authentication method to use
-        email:
-          type: string
-          example: user@example.com
-          description: User email address
-        iam:
-          type: string
-          example: Azure
-          description: Identity provider name (Azure/Okta)
-        relayState:
-          type: string
-          example: information-to-relay
-          description: State to relay after authentication
-        entryPoint:
-          type: string
-          example: https://saml.example.com/sso
-          description: SSO entry point URL
-      required:
-      - method
-      - email
-    v1AuthRefreshGetEntryPointResponse:
-      type: object
-      properties:
-        entryPoint:
-          type: string
-          example: https://saml.example.com/sso
   securitySchemes:
     jwtAuth:
       type: apiKey

@@ -37,6 +37,10 @@ paths:
       description: Send invitation emails for B2B data exchange service connections. For non-Graphiant enterprises, sends invite to all admin users in the proxy tenant desiganted by your msp. For Graphiant, sends to specified admin email.
       tags:
       - Invitation
+      summary: Create invitation email
+      x-summary-source: derived
+      operationId: postV1InvitationEmail
+      x-operation-id-source: derived
 components:
   schemas:
     v1InvitationEmailPostResponse:

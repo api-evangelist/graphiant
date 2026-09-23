@@ -46,8 +46,20 @@ paths:
                 $ref: '#/components/schemas/v1SearchGetResponse'
       tags:
       - Search
+      summary: Get search
+      x-summary-source: derived
+      operationId: getV1Search
+      x-operation-id-source: derived
 components:
   schemas:
+    v1SearchGetResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchSearchResult'
+      additionalProperties: false
     searchSearchResult:
       type: object
       properties:
@@ -65,14 +77,6 @@ components:
           type: string
           example: example string
           description: A search result (required)
-      additionalProperties: false
-    v1SearchGetResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchSearchResult'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

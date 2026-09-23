@@ -109,6 +109,10 @@ paths:
       description: List Conceal agents (devices) with pagination and filters.
       tags:
       - Ztagent
+      summary: Get ztagent agents
+      x-summary-source: derived
+      operationId: getV1ZtagentAgents
+      x-operation-id-source: derived
   /v1/ztagent/bindings:
     get:
       security:
@@ -138,6 +142,10 @@ paths:
       description: Return the ZTAgent integration binding for an enterprise.
       tags:
       - Ztagent
+      summary: Get ztagent bindings
+      x-summary-source: derived
+      operationId: getV1ZtagentBindings
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -164,6 +172,10 @@ paths:
       description: Create or replace the ZTAgent integration binding for an enterprise (site and customer identifiers).
       tags:
       - Ztagent
+      summary: Replace ztagent bindings
+      x-summary-source: derived
+      operationId: putV1ZtagentBindings
+      x-operation-id-source: derived
 components:
   schemas:
     v1ZtagentAgentsGetResponse:
@@ -178,7 +190,25 @@ components:
           format: int32
           example: 123
       additionalProperties: false
+    v1ZtagentBindingsPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v1ZtagentBindingsPutRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ZtagentBindingsGetResponse:
       type: object
       properties:
         customerId:
@@ -213,24 +243,6 @@ components:
         machine:
           type: string
           example: example string
-      additionalProperties: false
-    v1ZtagentBindingsGetResponse:
-      type: object
-      properties:
-        customerId:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ZtagentBindingsPutResponse:
-      type: object
-      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

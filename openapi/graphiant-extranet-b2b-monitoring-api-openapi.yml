@@ -37,6 +37,10 @@ paths:
       description: Get b2b extranet peering consumption overview
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service consumption overview
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceConsumptionOverview
+      x-operation-id-source: derived
   /v1/extranet-b2b-monitoring/peering-service/bandwidth-usage:
     post:
       security:
@@ -64,6 +68,10 @@ paths:
       description: Get b2b extranet peering service sites usage stats
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service bandwidth usage
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceBandwidthUsage
+      x-operation-id-source: derived
   /v1/extranet-b2b-monitoring/peering-service/service-overtime-consumption:
     post:
       security:
@@ -91,6 +99,10 @@ paths:
       description: Get b2b extranet peering service overtime consumption
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service service overtime consumption
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceServiceOvertimeConsumption
+      x-operation-id-source: derived
   /v1/extranet-b2b-monitoring/peering-service/consumers-usage/top:
     post:
       security:
@@ -118,6 +130,10 @@ paths:
       description: Get b2b extranet peering service top consumers usage stats
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service consumers usage top
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceConsumersUsageTop
+      x-operation-id-source: derived
   /v1/extranet-b2b-monitoring/peering-service/service-customer-list:
     post:
       security:
@@ -145,6 +161,10 @@ paths:
       description: Get b2b extranet peering service customer list within a time window
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service service customer list
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceServiceCustomerList
+      x-operation-id-source: derived
   /v1/extranet-b2b-monitoring/peering-service/service-health:
     post:
       security:
@@ -169,43 +189,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v1ExtranetB2bMonitoringPeeringServiceServiceHealthPostResponse'
-      description: 'Returns connectivity status for a b2b peering service. Provides overall service connectivity status and detailed status for producer and customer prefixes for each consumer of the serviceShows whether the service is healthy, impaired, or down, and lists any missing prefixes in Impaired state. '
+      description: Returns connectivity status for a b2b peering service. Provides overall service connectivity status and detailed status for producer and customer prefixes for each consumer of the serviceShows whether the service is healthy, impaired, or down, and lists any missing prefixes in Impaired state.
       tags:
       - Extranet B2b Monitoring
+      summary: Create extranet b2b monitoring peering service service health
+      x-summary-source: derived
+      operationId: postV1ExtranetB2bMonitoringPeeringServiceServiceHealth
+      x-operation-id-source: derived
 components:
   schemas:
-    statsmonExtranetServiceHealth:
+    ipfixEntityUsage:
       type: object
       properties:
-        customerName:
-          type: string
-          example: Customer 1
-          description: the name of the customer
-        customerPrefixHealth:
-          $ref: '#/components/schemas/statsmonExtranetPrefixHealth'
-        overallHealth:
-          type: string
-          example: Impaired
-          description: the overall connectivity status of the service (Healthy, Impaired, Down)
-        producerPrefixHealth:
-          $ref: '#/components/schemas/statsmonExtranetPrefixHealth'
-      additionalProperties: false
-    statsmonTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
+        id:
           type: integer
-          format: int32
-          example: 300
-          minimum: 0
-          description: the size of the time window in seconds (required)
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+          format: int64
+          example: 1
+          description: id of the entity
+        name:
+          type: string
+          example: Site 1
+          description: name of the entity
+        usage:
+          type: number
+          format: double
+          example: 1000000
+          description: usage in kbps
       additionalProperties: false
-      required:
-      - bucketSizeSec
     ipfixStats:
       type: object
       properties:
@@ -234,23 +244,50 @@ components:
           items:
             $ref: '#/components/schemas/ipfixStats'
       additionalProperties: false
-    ipfixEntityUsage:
+    v1ExtranetB2bMonitoringPeeringServiceConsumersUsageTopPostRequest:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: id of the entity
+          description: the id of a producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
+    ipfixConnectionMap:
+      type: object
+      properties:
+        connections:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        connectionsV2:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+            example: 123.45
         name:
           type: string
           example: Site 1
-          description: name of the entity
-        usage:
-          type: number
-          format: double
-          example: 1000000
-          description: usage in kbps
+          description: the name of the connection
       additionalProperties: false
     googleProtobufTimestamp:
       type: object
@@ -307,26 +344,23 @@ components:
       - isB2B
       - isProvider
       - timeWindow
-    ipfixConnectionMap:
+    v1ExtranetB2bMonitoringPeeringServiceConsumersUsageTopPostResponse:
       type: object
       properties:
-        connections:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-        connectionsV2:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-            example: 123.45
-        name:
-          type: string
-          example: Site 1
-          description: the name of the connection
+        topConsumers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixEntityUsage'
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 10
+          description: total number of customers
+        totalUsage:
+          type: number
+          format: double
+          example: 1000000
+          description: total service usage in kilo bytes
       additionalProperties: false
     v1ExtranetB2bMonitoringPeeringServiceConsumptionOverviewPostResponse:
       type: object
@@ -349,6 +383,44 @@ components:
           example: 1000000
           description: total service usage in kilo bytes
       additionalProperties: false
+    v1ExtranetB2bMonitoringPeeringServiceServiceOvertimeConsumptionPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
+        isB2B:
+          type: boolean
+          example: true
+          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+        isProvider:
+          type: boolean
+          example: true
+          description: whether the entity is a provider or consumer (required)
+        siteId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific site
+        subscriptionName:
+          type: string
+          example: example string
+          description: Optional subscription name for filter
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+        vrfId:
+          type: integer
+          format: int64
+          example: 1
+          description: a filter to get usage for a specific vrf
+      additionalProperties: false
+      required:
+      - id
+      - isB2B
+      - isProvider
+      - timeWindow
     statsmonExtranetPrefixHealth:
       type: object
       properties:
@@ -363,18 +435,14 @@ components:
             example: 192.168.0.0/16
             description: a list of the missing producer or consumer prefixes (in Impaired state)
       additionalProperties: false
-    v1ExtranetB2bMonitoringPeeringServiceConsumersUsageTopPostRequest:
+    v1ExtranetB2bMonitoringPeeringServiceServiceCustomerListPostRequest:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: the id of a producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
+          description: service id (required)
         isProvider:
           type: boolean
           example: true
@@ -384,9 +452,26 @@ components:
       additionalProperties: false
       required:
       - id
-      - isB2B
       - isProvider
       - timeWindow
+    v1ExtranetB2bMonitoringPeeringServiceServiceHealthPostResponse:
+      type: object
+      properties:
+        serviceHealth:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonExtranetServiceHealth'
+      additionalProperties: false
+    v1ExtranetB2bMonitoringPeeringServiceServiceCustomerListPostResponse:
+      type: object
+      properties:
+        customerName:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: the list of customer names
+      additionalProperties: false
     v1ExtranetB2bMonitoringPeeringServiceBandwidthUsagePostRequest:
       type: object
       properties:
@@ -429,25 +514,6 @@ components:
       - isB2B
       - isProvider
       - timeWindow
-    v1ExtranetB2bMonitoringPeeringServiceServiceCustomerListPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: service id (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-      required:
-      - id
-      - isProvider
-      - timeWindow
     v1ExtranetB2bMonitoringPeeringServiceBandwidthUsagePostResponse:
       type: object
       properties:
@@ -465,34 +531,38 @@ components:
           items:
             $ref: '#/components/schemas/ipfixStats'
       additionalProperties: false
-    v1ExtranetB2bMonitoringPeeringServiceServiceCustomerListPostResponse:
+    statsmonExtranetServiceHealth:
       type: object
       properties:
         customerName:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: the list of customer names
+          type: string
+          example: Customer 1
+          description: the name of the customer
+        customerPrefixHealth:
+          $ref: '#/components/schemas/statsmonExtranetPrefixHealth'
+        overallHealth:
+          type: string
+          example: Impaired
+          description: the overall connectivity status of the service (Healthy, Impaired, Down)
+        producerPrefixHealth:
+          $ref: '#/components/schemas/statsmonExtranetPrefixHealth'
       additionalProperties: false
-    v1ExtranetB2bMonitoringPeeringServiceConsumersUsageTopPostResponse:
+    statsmonTimeWindow:
       type: object
       properties:
-        topConsumers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixEntityUsage'
-        totalCustomers:
+        bucketSizeSec:
           type: integer
-          format: int64
-          example: 10
-          description: total number of customers
-        totalUsage:
-          type: number
-          format: double
-          example: 1000000
-          description: total service usage in kilo bytes
+          format: int32
+          example: 300
+          minimum: 0
+          description: the size of the time window in seconds (required)
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
+      required:
+      - bucketSizeSec
     v1ExtranetB2bMonitoringPeeringServiceServiceHealthPostRequest:
       type: object
       properties:
@@ -509,52 +579,6 @@ components:
       required:
       - id
       - isProvider
-    v1ExtranetB2bMonitoringPeeringServiceServiceOvertimeConsumptionPostRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)
-        isB2B:
-          type: boolean
-          example: true
-          description: whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)
-        isProvider:
-          type: boolean
-          example: true
-          description: whether the entity is a provider or consumer (required)
-        siteId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific site
-        subscriptionName:
-          type: string
-          example: example string
-          description: Optional subscription name for filter
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-        vrfId:
-          type: integer
-          format: int64
-          example: 1
-          description: a filter to get usage for a specific vrf
-      additionalProperties: false
-      required:
-      - id
-      - isB2B
-      - isProvider
-      - timeWindow
-    v1ExtranetB2bMonitoringPeeringServiceServiceHealthPostResponse:
-      type: object
-      properties:
-        serviceHealth:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonExtranetServiceHealth'
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

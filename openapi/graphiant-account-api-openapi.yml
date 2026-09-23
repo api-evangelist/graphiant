@@ -37,6 +37,10 @@ paths:
       description: Confirm MFA type change with verification code.
       tags:
       - Account
+      summary: Create account mfa confirmation
+      x-summary-source: derived
+      operationId: postV1AccountMfaConfirmation
+      x-operation-id-source: derived
   /v1/account/mfa:
     delete:
       security:
@@ -54,6 +58,10 @@ paths:
       description: Remove user's MFA enrollment.
       tags:
       - Account
+      summary: Delete account mfa
+      x-summary-source: derived
+      operationId: deleteV1AccountMfa
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -74,6 +82,10 @@ paths:
       description: Get user's current MFA type and enrollment status.
       tags:
       - Account
+      summary: Get account mfa
+      x-summary-source: derived
+      operationId: getV1AccountMfa
+      x-operation-id-source: derived
     put:
       security:
       - jwtAuth: []
@@ -100,6 +112,10 @@ paths:
       description: Update user's MFA type (SMS, GoogleAuth) with verification.
       tags:
       - Account
+      summary: Replace account mfa
+      x-summary-source: derived
+      operationId: putV1AccountMfa
+      x-operation-id-source: derived
   /v1/account/email:
     patch:
       security:
@@ -123,6 +139,10 @@ paths:
       description: Update user's email address with verification.
       tags:
       - Account
+      summary: Update account email
+      x-summary-source: derived
+      operationId: patchV1AccountEmail
+      x-operation-id-source: derived
   /v1/account/info:
     patch:
       security:
@@ -146,6 +166,10 @@ paths:
       description: Update current user's profile information.
       tags:
       - Account
+      summary: Update account info
+      x-summary-source: derived
+      operationId: patchV1AccountInfo
+      x-operation-id-source: derived
   /v1/account/password:
     patch:
       security:
@@ -169,40 +193,12 @@ paths:
       description: Change user password with current password verification (Graphiant cloud only).
       tags:
       - Account
+      summary: Update account password
+      x-summary-source: derived
+      operationId: patchV1AccountPassword
+      x-operation-id-source: derived
 components:
   schemas:
-    v1AccountMfaConfirmationPostRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example string
-          description: ' (required)'
-        confirmed:
-          type: boolean
-          example: true
-          description: ' (required)'
-        id:
-          type: string
-          example: example string
-          description: ' (required)'
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - code
-      - confirmed
-      - id
-      - type
-    v1AccountMfaGetResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
     v1AccountMfaPutResponse:
       type: object
       properties:
@@ -232,6 +228,19 @@ components:
       additionalProperties: false
       required:
       - type
+    v1AccountInfoPatchRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: example string
+        lastName:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
+      additionalProperties: false
     v1AccountPasswordPatchRequest:
       type: object
       properties:
@@ -247,19 +256,6 @@ components:
       required:
       - oldPassword
       - password
-    v1AccountInfoPatchRequest:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: example string
-        lastName:
-          type: string
-          example: example string
-        timeZone:
-          type: string
-          example: example string
-      additionalProperties: false
     v1AccountEmailPatchRequest:
       type: object
       properties:
@@ -270,6 +266,38 @@ components:
       additionalProperties: false
       required:
       - email
+    v1AccountMfaGetResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1AccountMfaConfirmationPostRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example string
+          description: ' (required)'
+        confirmed:
+          type: boolean
+          example: true
+          description: ' (required)'
+        id:
+          type: string
+          example: example string
+          description: ' (required)'
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - code
+      - confirmed
+      - id
+      - type
     v1AccountMfaConfirmationPostResponse:
       type: object
       properties:

@@ -37,6 +37,10 @@ paths:
       description: Create a onboarding token
       tags:
       - Onboarding
+      summary: Create onboarding cloudinit
+      x-summary-source: derived
+      operationId: postV1OnboardingCloudinit
+      x-operation-id-source: derived
     delete:
       security:
       - jwtAuth: []
@@ -53,6 +57,10 @@ paths:
       description: Delete the onboarding token
       tags:
       - Onboarding
+      summary: Delete onboarding cloudinit
+      x-summary-source: derived
+      operationId: deleteV1OnboardingCloudinit
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -73,26 +81,12 @@ paths:
       description: Get all the onboarding tokens
       tags:
       - Onboarding
+      summary: Get onboarding cloudinit
+      x-summary-source: derived
+      operationId: getV1OnboardingCloudinit
+      x-operation-id-source: derived
 components:
   schemas:
-    v1OnboardingCloudinitPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    onboardingInterface:
-      type: object
-      properties:
-        ipv4:
-          $ref: '#/components/schemas/onboardingIp'
-        ipv6:
-          $ref: '#/components/schemas/onboardingIp'
-        name:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: example string
-      additionalProperties: false
     onboardingCloudInitToken:
       type: object
       properties:
@@ -114,6 +108,25 @@ components:
         token:
           $ref: '#/components/schemas/onboardingCloudInitTokenToken'
       additionalProperties: false
+    onboardingCloudInitTokenToken:
+      type: object
+      properties:
+        createdByTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        expiryByTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        token:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1OnboardingCloudinitGetResponse:
+      type: object
+      properties:
+        cloudinitTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingCloudInitToken'
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -134,25 +147,6 @@ components:
           items:
             $ref: '#/components/schemas/onboardingCloudInitToken'
       additionalProperties: false
-    v1OnboardingCloudinitGetResponse:
-      type: object
-      properties:
-        cloudinitTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/onboardingCloudInitToken'
-      additionalProperties: false
-    onboardingCloudInitTokenToken:
-      type: object
-      properties:
-        createdByTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        expiryByTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        token:
-          type: string
-          example: example string
-      additionalProperties: false
     onboardingIp:
       type: object
       properties:
@@ -160,6 +154,20 @@ components:
           type: string
           example: example string
         ipAddr:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: example string
+      additionalProperties: false
+    onboardingInterface:
+      type: object
+      properties:
+        ipv4:
+          $ref: '#/components/schemas/onboardingIp'
+        ipv6:
+          $ref: '#/components/schemas/onboardingIp'
+        name:
           type: string
           example: example string
         type:
@@ -185,6 +193,10 @@ components:
         localWebPassword:
           type: string
           example: example string
+      additionalProperties: false
+    v1OnboardingCloudinitPostResponse:
+      type: object
+      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

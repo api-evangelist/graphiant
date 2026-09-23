@@ -45,6 +45,10 @@ paths:
           description: Internal server error
       tags:
       - Users
+      summary: Update users by email password
+      x-summary-source: derived
+      operationId: patchV1UsersByEmailPassword
+      x-operation-id-source: derived
   /v1/users/{email}/recovery:
     get:
       description: Send password recovery email to user
@@ -65,6 +69,10 @@ paths:
           description: Internal server error
       tags:
       - Users
+      summary: Get users by email recovery
+      x-summary-source: derived
+      operationId: getV1UsersByEmailRecovery
+      x-operation-id-source: derived
   /v1/users/{email}/verified:
     patch:
       description: Verify user email using verification token
@@ -94,6 +102,10 @@ paths:
           description: Internal server error
       tags:
       - Users
+      summary: Update users by email verified
+      x-summary-source: derived
+      operationId: patchV1UsersByEmailVerified
+      x-operation-id-source: derived
   /v1/users:
     put:
       security:
@@ -117,6 +129,10 @@ paths:
       description: Create a new user account with profile information. Assigns to specified group or default read-only group. Handles both IDP and non-IDP configured enterprises.
       tags:
       - Users
+      summary: Replace users
+      x-summary-source: derived
+      operationId: putV1Users
+      x-operation-id-source: derived
     get:
       security:
       - jwtAuth: []
@@ -144,6 +160,10 @@ paths:
       description: Get user information by user IDs with detailed profile data.
       tags:
       - Users
+      summary: Get users
+      x-summary-source: derived
+      operationId: getV1Users
+      x-operation-id-source: derived
   /v1/users/{id}:
     delete:
       security:
@@ -168,6 +188,10 @@ paths:
       description: Delete user account.
       tags:
       - Users
+      summary: Delete users by id
+      x-summary-source: derived
+      operationId: deleteV1UsersById
+      x-operation-id-source: derived
   /v1/users/passwords/expire:
     post:
       security:
@@ -195,6 +219,10 @@ paths:
       description: Expire passwords for multiple users and send password reset emails (Graphiant cloud only).
       tags:
       - Users
+      summary: Create users passwords expire
+      x-summary-source: derived
+      operationId: postV1UsersPasswordsExpire
+      x-operation-id-source: derived
   /v1/users/{id}/groups/enterprises:
     get:
       security:
@@ -223,6 +251,10 @@ paths:
       description: Get enterprise-specific groups for a user.
       tags:
       - Users
+      summary: Get users by id groups enterprises
+      x-summary-source: derived
+      operationId: getV1UsersByIdGroupsEnterprises
+      x-operation-id-source: derived
   /v1/users/{id}/enterprises:
     get:
       security:
@@ -251,6 +283,10 @@ paths:
       description: Get all enterprises a specific user can access.
       tags:
       - Users
+      summary: Get users by id enterprises
+      x-summary-source: derived
+      operationId: getV1UsersByIdEnterprises
+      x-operation-id-source: derived
   /v1/users/{id}/groups:
     get:
       security:
@@ -279,6 +315,10 @@ paths:
       description: Get all groups that a specific user belongs to.
       tags:
       - Users
+      summary: Get users by id groups
+      x-summary-source: derived
+      operationId: getV1UsersByIdGroups
+      x-operation-id-source: derived
   /v1/users/{id}/groups/root:
     get:
       security:
@@ -307,6 +347,10 @@ paths:
       description: Get root-level groups for a user.
       tags:
       - Users
+      summary: Get users by id groups root
+      x-summary-source: derived
+      operationId: getV1UsersByIdGroupsRoot
+      x-operation-id-source: derived
   /v1/users/{id}/verify:
     patch:
       security:
@@ -337,6 +381,10 @@ paths:
       description: Resend account verification email to user.
       tags:
       - Users
+      summary: Update users by id verify
+      x-summary-source: derived
+      operationId: patchV1UsersByIdVerify
+      x-operation-id-source: derived
 components:
   schemas:
     v1UsersIdGroupsGetResponse:
@@ -347,6 +395,32 @@ components:
           items:
             $ref: '#/components/schemas/iamGroup'
       additionalProperties: false
+    v1UsersPasswordsExpirePostResponse:
+      type: object
+      properties:
+        failedCount:
+          type: integer
+          format: int32
+          example: 123
+        failedUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamFailedUser'
+        successCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    iamFailedUser:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+      additionalProperties: false
     v1UsersIdGroupsRootGetResponse:
       type: object
       properties:
@@ -355,45 +429,15 @@ components:
           items:
             $ref: '#/components/schemas/iamGroup'
       additionalProperties: false
-    iamGroup:
+    iamEnterprisePermissions:
       type: object
       properties:
-        description:
-          type: string
-          example: example string
-        enterpriseIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        enterprisePermissions:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/iamEnterprisePermissions'
         groupType:
           type: string
           example: ENUM_VALUE
-        id:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
+          description: ' (required)'
         permissions:
           $ref: '#/components/schemas/commonPermissions'
-        timeWindowEnd:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindowStart:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1UsersIdVerifyPatchRequest:
-      type: object
-      properties: {}
       additionalProperties: false
     googleProtobufTimestamp:
       type: object
@@ -406,6 +450,92 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
+          type: string
+          example: ENUM_VALUE
+        b2b:
+          type: string
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
+          type: string
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    iamCustomer:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        companyName:
+          type: string
+          example: example string
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        description:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impersonationEnabled:
+          type: boolean
+          example: true
+        marketplaceId:
+          type: string
+          example: example string
       additionalProperties: false
     iamEnterprise:
       type: object
@@ -474,15 +604,14 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1UsersEmailPasswordPatchRequest:
+    v1UsersIdGroupsEnterprisesGetResponse:
       type: object
       properties:
-        password:
-          type: string
-          example: newPassword123
-          description: New password for the user
-      required:
-      - password
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
     v1UsersPasswordsExpirePostRequest:
       type: object
       properties:
@@ -495,75 +624,41 @@ components:
       additionalProperties: false
       required:
       - userIds
-    commonPermissions:
+    v1UsersPutRequest:
       type: object
       properties:
-        assetManager:
+        email:
           type: string
-          example: ENUM_VALUE
-        b2b:
+          example: example string
+          description: ' (required)'
+        firstName:
           type: string
-          example: ENUM_VALUE
-        b2bSecurityProfileExternal:
+          example: example string
+          description: ' (required)'
+        groupId:
           type: string
-          example: ENUM_VALUE
-        billingAndInvoicing:
+          example: example string
+        lastName:
           type: string
-          example: ENUM_VALUE
-        compliance:
+          example: example string
+          description: ' (required)'
+        timeZone:
           type: string
-          example: ENUM_VALUE
-        developerTools:
-          type: string
-          example: ENUM_VALUE
-        gateway:
-          type: string
-          example: ENUM_VALUE
-        globalServices:
-          type: string
-          example: ENUM_VALUE
-        insights:
-          type: string
-          example: ENUM_VALUE
-        licensing:
-          type: string
-          example: ENUM_VALUE
-        logs:
-          type: string
-          example: ENUM_VALUE
-        monitoringAndTroubleshooting:
-          type: string
-          example: ENUM_VALUE
-        networkConfiguration:
-          type: string
-          example: ENUM_VALUE
-        orderStatus:
-          type: string
-          example: ENUM_VALUE
-        reports:
-          type: string
-          example: ENUM_VALUE
-        safetyAndSecurity:
-          type: string
-          example: ENUM_VALUE
-        servicePolicies:
-          type: string
-          example: ENUM_VALUE
-        support:
-          type: string
-          example: ENUM_VALUE
-        userAndTenantManagement:
-          type: string
-          example: ENUM_VALUE
+          example: example string
       additionalProperties: false
-    v1UsersGetResponse:
+      required:
+      - email
+      - firstName
+      - lastName
+    v1UsersEmailPasswordPatchRequest:
       type: object
       properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/commonUser'
-      additionalProperties: false
+        password:
+          type: string
+          example: newPassword123
+          description: New password for the user
+      required:
+      - password
     commonUser:
       type: object
       properties:
@@ -598,21 +693,17 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1UsersPasswordsExpirePostResponse:
+    v1UsersIdVerifyPatchRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1UsersGetResponse:
       type: object
       properties:
-        failedCount:
-          type: integer
-          format: int32
-          example: 123
-        failedUsers:
+        users:
           type: array
           items:
-            $ref: '#/components/schemas/iamFailedUser'
-        successCount:
-          type: integer
-          format: int32
-          example: 123
+            $ref: '#/components/schemas/commonUser'
       additionalProperties: false
     v1UsersIdEnterprisesGetResponse:
       type: object
@@ -621,24 +712,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/iamEnterprise'
-      additionalProperties: false
-    v1UsersIdGroupsEnterprisesGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    iamFailedUser:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: example string
-        userId:
-          type: string
-          example: example string
       additionalProperties: false
     iamCounts:
       type: object
@@ -696,67 +769,42 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    iamEnterprisePermissions:
+    iamGroup:
       type: object
       properties:
-        groupType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-      additionalProperties: false
-    iamCustomer:
-      type: object
-      properties:
-        adminEmail:
-          type: string
-          example: example string
-        companyName:
-          type: string
-          example: example string
-        counts:
-          $ref: '#/components/schemas/iamCounts'
         description:
           type: string
           example: example string
-        enterpriseId:
+        enterpriseIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        enterprisePermissions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/iamEnterprisePermissions'
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
           type: integer
           format: int64
           example: 1234567891011
-        impersonationEnabled:
-          type: boolean
-          example: true
-        marketplaceId:
-          type: string
-          example: example string
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-    v1UsersPutRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: example string
-          description: ' (required)'
-        firstName:
-          type: string
-          example: example string
-          description: ' (required)'
-        groupId:
-          type: string
-          example: example string
-        lastName:
-          type: string
-          example: example string
-          description: ' (required)'
-        timeZone:
-          type: string
-          example: example string
-      additionalProperties: false
-      required:
-      - email
-      - firstName
-      - lastName
   securitySchemes:
     jwtAuth:
       type: apiKey

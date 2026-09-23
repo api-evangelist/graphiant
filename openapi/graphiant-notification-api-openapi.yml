@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationCreatePostResponse'
       tags:
       - Notification
+      summary: Create notification create
+      x-summary-source: derived
+      operationId: postV2NotificationCreate
+      x-operation-id-source: derived
   /v2/notification/delete:
     post:
       security:
@@ -62,6 +66,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationDeletePostResponse'
       tags:
       - Notification
+      summary: Create notification delete
+      x-summary-source: derived
+      operationId: postV2NotificationDelete
+      x-operation-id-source: derived
   /v2/notification/enabledisable:
     post:
       security:
@@ -88,6 +96,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationEnabledisablePostResponse'
       tags:
       - Notification
+      summary: Create notification enabledisable
+      x-summary-source: derived
+      operationId: postV2NotificationEnabledisable
+      x-operation-id-source: derived
   /v2/notification/update:
     post:
       security:
@@ -114,12 +126,12 @@ paths:
                 $ref: '#/components/schemas/v2NotificationUpdatePostResponse'
       tags:
       - Notification
+      summary: Create notification update
+      x-summary-source: derived
+      operationId: postV2NotificationUpdate
+      x-operation-id-source: derived
 components:
   schemas:
-    v2NotificationCreatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v2NotificationEnabledisablePostResponse:
       type: object
       properties: {}
@@ -190,21 +202,10 @@ components:
             example: example string
             description: List of webhook_url recipients
       additionalProperties: false
-    v2NotificationUpdatePostRequest:
+    v2NotificationUpdatePostResponse:
       type: object
-      properties:
-        notificationBody:
-          $ref: '#/components/schemas/alertserviceNotificationBody'
-        notificationIdList:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: List of notification ids to update (required)
+      properties: {}
       additionalProperties: false
-      required:
-      - notificationBody
-      - notificationIdList
     v2NotificationDeletePostResponse:
       type: object
       properties: {}
@@ -224,6 +225,10 @@ components:
       required:
       - notificationBody
       - ruleIdList
+    v2NotificationCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v2NotificationDeletePostRequest:
       type: object
       properties:
@@ -253,10 +258,21 @@ components:
       required:
       - enable
       - notificationIdList
-    v2NotificationUpdatePostResponse:
+    v2NotificationUpdatePostRequest:
       type: object
-      properties: {}
+      properties:
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
+        notificationIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of notification ids to update (required)
       additionalProperties: false
+      required:
+      - notificationBody
+      - notificationIdList
   securitySchemes:
     jwtAuth:
       type: apiKey

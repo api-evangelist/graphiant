@@ -31,6 +31,10 @@ paths:
       description: Get devices summary for the specified enterprise
       tags:
       - Devices Summary
+      summary: Get devices summary
+      x-summary-source: derived
+      operationId: getV1DevicesSummary
+      x-operation-id-source: derived
 components:
   schemas:
     v1DevicesSummaryGetResponseSiteSummary:
@@ -55,6 +59,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
       additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummaryDeviceSummary:
       type: object
@@ -94,25 +117,6 @@ components:
           type: number
           format: double
           example: 123.45
-      additionalProperties: false
-    manaV2Region:
-      type: object
-      properties:
-        coordinates:
-          $ref: '#/components/schemas/manaV2RegionCoordinates'
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-        regionIsoCode:
-          type: string
-          example: example string
-        unavailable:
-          type: boolean
-          example: true
       additionalProperties: false
   securitySchemes:
     jwtAuth:

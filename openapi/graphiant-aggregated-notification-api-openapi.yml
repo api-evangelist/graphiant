@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v2AggregatedNotificationEnableDisablePostResponse'
       tags:
       - Aggregated Notification
+      summary: Create aggregated notification enable disable
+      x-summary-source: derived
+      operationId: postV2AggregatedNotificationEnableDisable
+      x-operation-id-source: derived
   /v2/aggregated-notification/get-state:
     get:
       security:
@@ -56,8 +60,19 @@ paths:
                 $ref: '#/components/schemas/v2AggregatedNotificationGetStateGetResponse'
       tags:
       - Aggregated Notification
+      summary: Get aggregated notification get state
+      x-summary-source: derived
+      operationId: getV2AggregatedNotificationGetState
+      x-operation-id-source: derived
 components:
   schemas:
+    v2AggregatedNotificationGetStateGetResponse:
+      type: object
+      properties:
+        state:
+          type: boolean
+          example: true
+      additionalProperties: false
     v2AggregatedNotificationEnableDisablePostRequest:
       type: object
       properties:
@@ -71,13 +86,6 @@ components:
     v2AggregatedNotificationEnableDisablePostResponse:
       type: object
       properties: {}
-      additionalProperties: false
-    v2AggregatedNotificationGetStateGetResponse:
-      type: object
-      properties:
-        state:
-          type: boolean
-          example: true
       additionalProperties: false
   securitySchemes:
     jwtAuth:

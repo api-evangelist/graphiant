@@ -36,42 +36,31 @@ paths:
                 $ref: '#/components/schemas/v1LogsPostResponse'
       tags:
       - Logs
+      summary: Create logs
+      x-summary-source: derived
+      operationId: postV1Logs
+      x-operation-id-source: derived
 components:
   schemas:
-    syslogmonHistogram:
+    v1LogsPostResponse:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    syslogmonSyslogsSelector:
-      type: object
-      properties:
-        field:
+        cursorRef:
           type: string
-          example: ENUM_VALUE
-        values:
+          example: example string
+        histogram:
           type: array
           items:
-            type: string
-            example: example string
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
+            $ref: '#/components/schemas/syslogmonHistogram'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonLog'
+        totalLogs:
           type: integer
           format: int64
-          example: 1234567891011
+          example: 12345678910
+          minimum: 0
       additionalProperties: false
     syslogmonLog:
       type: object
@@ -131,25 +120,40 @@ components:
           items:
             $ref: '#/components/schemas/syslogmonSyslogsSelector'
       additionalProperties: false
-    v1LogsPostResponse:
+    googleProtobufTimestamp:
       type: object
       properties:
-        cursorRef:
-          type: string
-          example: example string
-        histogram:
-          type: array
-          items:
-            $ref: '#/components/schemas/syslogmonHistogram'
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/syslogmonLog'
-        totalLogs:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
-          example: 12345678910
+          example: 1234567891011
+      additionalProperties: false
+    syslogmonHistogram:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
           minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    syslogmonSyslogsSelector:
+      type: object
+      properties:
+        field:
+          type: string
+          example: ENUM_VALUE
+        values:
+          type: array
+          items:
+            type: string
+            example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v2ChildalertlistPostResponse'
       tags:
       - Childalertlist
+      summary: Create childalertlist
+      x-summary-source: derived
+      operationId: postV2Childalertlist
+      x-operation-id-source: derived
 components:
   schemas:
     alertserviceChildrenAlertListResponse:

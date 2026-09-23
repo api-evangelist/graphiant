@@ -45,6 +45,10 @@ paths:
       description: Get top talkers for a device
       tags:
       - Talkers
+      summary: Create talkers device by device id top
+      x-summary-source: derived
+      operationId: postV1TalkersDeviceByDeviceIdTop
+      x-operation-id-source: derived
   /v1/talkers/site/{siteId}/top:
     post:
       security:
@@ -80,8 +84,37 @@ paths:
       description: Get top talkers for a site
       tags:
       - Talkers
+      summary: Create talkers site by site id top
+      x-summary-source: derived
+      operationId: postV1TalkersSiteBySiteIdTop
+      x-operation-id-source: derived
 components:
   schemas:
+    ipfixTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1TalkersSiteSiteIdTopPostRequest:
+      type: object
+      properties:
+        numClients:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: The maximum number of apps to return (10 if left empty)
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -102,27 +135,6 @@ components:
           items:
             $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
-    v1TalkersDeviceDeviceIdTopPostResponse:
-      type: object
-      properties:
-        appsUtilization:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixClientUsageSummary'
-      additionalProperties: false
-    ipfixTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
     v1TalkersDeviceDeviceIdTopPostRequest:
       type: object
       properties:
@@ -135,17 +147,13 @@ components:
         timeWindow:
           $ref: '#/components/schemas/ipfixTimeWindow'
       additionalProperties: false
-    v1TalkersSiteSiteIdTopPostRequest:
+    v1TalkersDeviceDeviceIdTopPostResponse:
       type: object
       properties:
-        numClients:
-          type: integer
-          format: int32
-          example: 10
-          minimum: 0
-          description: The maximum number of apps to return (10 if left empty)
-        timeWindow:
-          $ref: '#/components/schemas/ipfixTimeWindow'
+        appsUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
     ipfixClientUsageSummary:
       type: object

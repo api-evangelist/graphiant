@@ -36,12 +36,12 @@ paths:
                 $ref: '#/components/schemas/v2AckCreateupdatePostResponse'
       tags:
       - Ack
+      summary: Create ack createupdate
+      x-summary-source: derived
+      operationId: postV2AckCreateupdate
+      x-operation-id-source: derived
 components:
   schemas:
-    v2AckCreateupdatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v2AckCreateupdatePostRequest:
       type: object
       properties:
@@ -58,6 +58,10 @@ components:
       additionalProperties: false
       required:
       - alertIdList
+    v2AckCreateupdatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

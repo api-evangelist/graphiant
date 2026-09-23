@@ -36,8 +36,24 @@ paths:
                 $ref: '#/components/schemas/v2RulelistPostResponse'
       tags:
       - Rulelist
+      summary: Create rulelist
+      x-summary-source: derived
+      operationId: postV2Rulelist
+      x-operation-id-source: derived
 components:
   schemas:
+    v2RulelistPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2RulelistPostResponse:
+      type: object
+      properties:
+        ruleList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceRuleRecord'
+      additionalProperties: false
     alertserviceRuleRecord:
       type: object
       properties:
@@ -78,18 +94,6 @@ components:
           type: string
           example: example string
           description: Name of the rule (required)
-      additionalProperties: false
-    v2RulelistPostResponse:
-      type: object
-      properties:
-        ruleList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceRuleRecord'
-      additionalProperties: false
-    v2RulelistPostRequest:
-      type: object
-      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v1DeviceStatusHistoryPostResponse'
       tags:
       - Device Status
+      summary: Create device status history
+      x-summary-source: derived
+      operationId: postV1DeviceStatusHistory
+      x-operation-id-source: derived
   /v1/device-status:
     post:
       security:
@@ -62,6 +66,10 @@ paths:
                 $ref: '#/components/schemas/v1DeviceStatusPostResponse'
       tags:
       - Device Status
+      summary: Create device status
+      x-summary-source: derived
+      operationId: postV1DeviceStatus
+      x-operation-id-source: derived
 components:
   schemas:
     v1DeviceStatusPostResponse:
@@ -71,20 +79,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    v1DeviceStatusHistoryPostRequest:
-      type: object
-      properties:
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-        role:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
     v1DeviceStatusPostRequest:
       type: object
@@ -99,43 +93,6 @@ components:
         role:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    pokedexDeviceHistoryInfo:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        event:
-          type: string
-          example: ENUM_VALUE
-        eventTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        ipaddress:
-          type: string
-          example: example string
-        ttIdentity:
-          type: string
-          example: example string
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
     pokedexDeviceMappingInfo:
       type: object
@@ -162,6 +119,32 @@ components:
           type: string
           example: example string
       additionalProperties: false
+    v1DeviceStatusHistoryPostRequest:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        role:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     v1DeviceStatusHistoryPostResponse:
       type: object
       properties:
@@ -169,6 +152,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/pokedexDeviceHistoryInfo'
+      additionalProperties: false
+    pokedexDeviceHistoryInfo:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        event:
+          type: string
+          example: ENUM_VALUE
+        eventTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ipaddress:
+          type: string
+          example: example string
+        ttIdentity:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

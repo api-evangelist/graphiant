@@ -37,6 +37,10 @@ paths:
       description: Create a new route tag scoped to the enterprise
       tags:
       - Policy
+      summary: Create policy route tag sets
+      x-summary-source: derived
+      operationId: postV1PolicyRouteTagSets
+      x-operation-id-source: derived
   /v1/policy/route-tag-sets/{id}:
     delete:
       security:
@@ -75,6 +79,10 @@ paths:
       description: Create a new route-tag scoped to the enterprise
       tags:
       - Policy
+      summary: Delete policy route tag sets by id
+      x-summary-source: derived
+      operationId: deleteV1PolicyRouteTagSetsById
+      x-operation-id-source: derived
   /v1/policy/applications:
     get:
       security:
@@ -96,6 +104,10 @@ paths:
       description: Get a list of builtin DPI applications
       tags:
       - Policy
+      summary: Get policy applications
+      x-summary-source: derived
+      operationId: getV1PolicyApplications
+      x-operation-id-source: derived
   /v1/policy/route-tag-sets/tag-detail:
     get:
       security:
@@ -117,6 +129,10 @@ paths:
       description: Get all the route tags summary for the the enterprise
       tags:
       - Policy
+      summary: Get policy route tag sets tag detail
+      x-summary-source: derived
+      operationId: getV1PolicyRouteTagSetsTagDetail
+      x-operation-id-source: derived
   /v1/policy/route-tag-sets/tags:
     get:
       security:
@@ -138,6 +154,10 @@ paths:
       description: Get all the route tags for the enterprise
       tags:
       - Policy
+      summary: Get policy route tag sets tags
+      x-summary-source: derived
+      operationId: getV1PolicyRouteTagSetsTags
+      x-operation-id-source: derived
   /v1/policy/route-tag-sets/tags-summary:
     get:
       security:
@@ -159,9 +179,13 @@ paths:
       description: Get all the route tags summary for the the enterprise
       tags:
       - Policy
+      summary: Get policy route tag sets tags summary
+      x-summary-source: derived
+      operationId: getV1PolicyRouteTagSetsTagsSummary
+      x-operation-id-source: derived
 components:
   schemas:
-    v1PolicyRouteTagSetsPostResponse:
+    v1PolicyRouteTagSetsIdDeleteResponse:
       type: object
       properties:
         id:
@@ -169,13 +193,13 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1PolicyRouteTagSetsTagsGetResponse:
+    v1PolicyRouteTagSetsPostResponse:
       type: object
       properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RouteTagElement'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     manaV2RouteTag:
       type: object
@@ -187,88 +211,6 @@ components:
           type: string
           example: example string
         levelZero:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1PolicyApplicationsGetResponse:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1PolicyApplicationsGetResponseApplication'
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-      additionalProperties: false
-    manaV2RouteTagDevice:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        locationId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        tag:
-          $ref: '#/components/schemas/manaV2RouteTag'
-      additionalProperties: false
-    manaV2RouteTagSummary:
-      type: object
-      properties:
-        deviceCount:
-          type: integer
-          format: int32
-          example: 123
-        levelOne:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelOneTag:
-          type: string
-          example: example string
-        levelTwo:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelTwoTag:
-          type: string
-          example: example string
-        levelZero:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelZeroTag:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1PolicyRouteTagSetsTagsSummaryGetResponse:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RouteTagSummary'
-      additionalProperties: false
-    v1PolicyApplicationsGetResponseApplication:
-      type: object
-      properties:
-        appId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        description:
-          type: string
-          example: example string
-        kind:
-          type: string
-          example: ENUM_VALUE
-        name:
           type: string
           example: example string
       additionalProperties: false
@@ -291,13 +233,38 @@ components:
           format: int32
           example: 123
       additionalProperties: false
-    v1PolicyRouteTagSetsIdDeleteResponse:
+    v1PolicyApplicationsGetResponseApplication:
       type: object
       properties:
-        id:
+        appId:
           type: integer
           format: int64
           example: 1234567891011
+        description:
+          type: string
+          example: example string
+        kind:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1PolicyApplicationsGetResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1PolicyApplicationsGetResponseApplication'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+      additionalProperties: false
+    v1PolicyRouteTagSetsPostRequest:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTag'
       additionalProperties: false
     v1PolicyRouteTagSetsTagDetailGetResponse:
       type: object
@@ -306,6 +273,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2RouteTagDevice'
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsGetResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagElement'
       additionalProperties: false
     commonPageInfo:
       type: object
@@ -345,11 +320,60 @@ components:
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
       additionalProperties: false
-    v1PolicyRouteTagSetsPostRequest:
+    manaV2RouteTagDevice:
       type: object
       properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        locationId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
         tag:
           $ref: '#/components/schemas/manaV2RouteTag'
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsSummaryGetResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagSummary'
+      additionalProperties: false
+    manaV2RouteTagSummary:
+      type: object
+      properties:
+        deviceCount:
+          type: integer
+          format: int32
+          example: 123
+        levelOne:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelOneTag:
+          type: string
+          example: example string
+        levelTwo:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelTwoTag:
+          type: string
+          example: example string
+        levelZero:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelZeroTag:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

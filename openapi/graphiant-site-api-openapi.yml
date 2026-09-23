@@ -39,6 +39,10 @@ paths:
       description: Get a list of a site's interfaces, loopback listed first
       tags:
       - Site
+      summary: Get site by id details interfaces
+      x-summary-source: derived
+      operationId: getV1SiteByIdDetailsInterfaces
+      x-operation-id-source: derived
   /v1/site/details/sitelists:
     post:
       security:
@@ -66,6 +70,10 @@ paths:
       description: Get a list of site list references for a site
       tags:
       - Site
+      summary: Create site details sitelists
+      x-summary-source: derived
+      operationId: postV1SiteDetailsSitelists
+      x-operation-id-source: derived
   /v2/site/{siteId}/topology:
     post:
       security:
@@ -101,6 +109,10 @@ paths:
       description: Get the site topology
       tags:
       - Site
+      summary: Create site by site id topology
+      x-summary-source: derived
+      operationId: postV2SiteBySiteIdTopology
+      x-operation-id-source: derived
   /v2/site/{siteId}/lan-segments:
     post:
       security:
@@ -136,47 +148,41 @@ paths:
       description: Get route count for all the LAN Segments in a site
       tags:
       - Site
+      summary: Create site by site id lan segments
+      x-summary-source: derived
+      operationId: postV2SiteBySiteIdLanSegments
+      x-operation-id-source: derived
 components:
   schemas:
-    statsmonV2DeviceSegments:
+    v2SiteSiteIdLanSegmentsPostResponse:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        vrfRoutes:
+        deviceSegments:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2VrfRoutes'
+            $ref: '#/components/schemas/statsmonV2DeviceSegments'
       additionalProperties: false
-    v1SiteDetailsSitelistsPostResponse:
+    statsmonV2Connection:
       type: object
       properties:
-        siteLists:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteList'
-      additionalProperties: false
-    statsmonV2EdgeedgeCircuitInfo:
-      type: object
-      properties:
+        active:
+          type: boolean
+          example: true
         circuitCarrier:
           type: string
           example: example string
         circuitName:
           type: string
           example: example string
-        deviceHostname:
+        destinationIp:
           type: string
           example: example string
-        interfaceName:
+        hostname:
           type: string
           example: example string
-        label:
-          type: string
-          example: ENUM_VALUE
-        lastResortCircuit:
+        lastEstablishedTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastResort:
           type: boolean
           example: true
         quality:
@@ -188,16 +194,98 @@ components:
         sourcePublicIp:
           type: string
           example: example string
-        uptime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1SiteDetailsSitelistsPostRequest:
+    manaV2SiteList:
       type: object
       properties:
-        siteId:
+        name:
+          type: string
+          example: example string
+        policyCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        siteCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        siteListId:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    statsmonV2TimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2SiteSiteIdLanSegmentsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v1SiteIdDetailsInterfacesGetResponse:
+      type: object
+      properties:
+        interfaces:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonV2Node:
+      type: object
+      properties:
+        circuitInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2NodeConnection'
+        id:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        nodeInfo:
+          $ref: '#/components/schemas/statsmonV2NodeDeviceInfo'
+        preferredRegionName:
+          type: string
+          example: example string
+        quality:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     statsmonV2NodeDeviceInfo:
       type: object
@@ -254,56 +342,53 @@ components:
         uptime:
           $ref: '#/components/schemas/googleProtobufDuration'
       additionalProperties: false
-    googleProtobufTimestamp:
+    statsmonV2DeviceSegments:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
+        deviceId:
           type: integer
           format: int64
           example: 1234567891011
+        vrfRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoutes'
       additionalProperties: false
-    statsmonV2TimeWindow:
+    statsmonV2Edge:
       type: object
       properties:
-        bucketSizeSec:
+        a:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v2SiteSiteIdLanSegmentsPostResponse:
-      type: object
-      properties:
-        deviceSegments:
+        b:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        circuitsInfo:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2DeviceSegments'
-      additionalProperties: false
-    v2SiteSiteIdTopologyPostResponseSnapshot:
-      type: object
-      properties:
+            $ref: '#/components/schemas/statsmonV2EdgeedgeCircuitInfo'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Connection'
+        name:
+          type: string
+          example: example string
         quality:
           type: string
           example: ENUM_VALUE
-        snapshotTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1SiteIdDetailsInterfacesGetResponse:
+    v2SiteSiteIdTopologyPostRequest:
       type: object
       properties:
-        interfaces:
-          type: array
-          items:
-            type: string
-            example: example string
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
     statsmonV2NodeCircuitInfo:
       type: object
@@ -368,6 +453,80 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
+    v1SiteDetailsSitelistsPostResponse:
+      type: object
+      properties:
+        siteLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteList'
+      additionalProperties: false
+    statsmonV2VrfRoute:
+      type: object
+      properties:
+        ipv4Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipv6Routes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalRoutes:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2SiteSiteIdTopologyPostResponseSnapshot:
+      type: object
+      properties:
+        quality:
+          type: string
+          example: ENUM_VALUE
+        snapshotTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonV2VrfRoutes:
+      type: object
+      properties:
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        vrfRoute:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2VrfRoute'
+      additionalProperties: false
+    v2SiteSiteIdTopologyPostResponse:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Edge'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2Node'
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2SiteSiteIdTopologyPostResponseSnapshot'
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     statsmonV2NodeConnection:
       type: object
       properties:
@@ -401,74 +560,33 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    statsmonV2Edge:
+    v1SiteDetailsSitelistsPostRequest:
       type: object
       properties:
-        a:
+        siteId:
           type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        b:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        circuitsInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2EdgeedgeCircuitInfo'
-        connections:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2Connection'
-        name:
-          type: string
-          example: example string
-        quality:
-          type: string
-          example: ENUM_VALUE
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-    statsmonV2VrfRoute:
+    statsmonV2EdgeedgeCircuitInfo:
       type: object
       properties:
-        ipv4Routes:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ipv6Routes:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalRoutes:
-          type: integer
-          format: int64
-          example: 1234567891011
-        vrfName:
-          type: string
-          example: example string
-      additionalProperties: false
-    statsmonV2Connection:
-      type: object
-      properties:
-        active:
-          type: boolean
-          example: true
         circuitCarrier:
           type: string
           example: example string
         circuitName:
           type: string
           example: example string
-        destinationIp:
+        deviceHostname:
           type: string
           example: example string
-        hostname:
+        interfaceName:
           type: string
           example: example string
-        lastEstablishedTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        lastResort:
+        label:
+          type: string
+          example: ENUM_VALUE
+        lastResortCircuit:
           type: boolean
           example: true
         quality:
@@ -480,110 +598,8 @@ components:
         sourcePublicIp:
           type: string
           example: example string
-      additionalProperties: false
-    statsmonV2Node:
-      type: object
-      properties:
-        circuitInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2NodeCircuitInfo'
-        connections:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2NodeConnection'
-        id:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        nodeInfo:
-          $ref: '#/components/schemas/statsmonV2NodeDeviceInfo'
-        preferredRegionName:
-          type: string
-          example: example string
-        quality:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2SiteSiteIdTopologyPostRequest:
-      type: object
-      properties:
-        snapshotTime:
+        uptime:
           $ref: '#/components/schemas/googleProtobufTimestamp'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2SiteSiteIdTopologyPostResponse:
-      type: object
-      properties:
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2Edge'
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2Node'
-        snapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2SiteSiteIdTopologyPostResponseSnapshot'
-      additionalProperties: false
-    googleProtobufDuration:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2SiteSiteIdLanSegmentsPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    manaV2SiteList:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        policyCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        siteCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        siteListId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    statsmonV2VrfRoutes:
-      type: object
-      properties:
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        vrfRoute:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2VrfRoute'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

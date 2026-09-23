@@ -37,8 +37,16 @@ paths:
       description: Generate and send temporary passwords to multiple emails for B2B service access.
       tags:
       - Temp
+      summary: Replace temp password
+      x-summary-source: derived
+      operationId: putV1TempPassword
+      x-operation-id-source: derived
 components:
   schemas:
+    v1TempPasswordPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v1TempPasswordPutRequest:
       type: object
       properties:
@@ -61,10 +69,6 @@ components:
       additionalProperties: false
       required:
       - emails
-    v1TempPasswordPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

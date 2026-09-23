@@ -36,6 +36,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationmutelistCreatePostResponse'
       tags:
       - Notificationmutelist
+      summary: Create notificationmutelist create
+      x-summary-source: derived
+      operationId: postV2NotificationmutelistCreate
+      x-operation-id-source: derived
   /v2/notificationmutelist/deletebyalertid/{alertId}:
     delete:
       security:
@@ -63,6 +67,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse'
       tags:
       - Notificationmutelist
+      summary: Delete notificationmutelist deletebyalertid by alert id
+      x-summary-source: derived
+      operationId: deleteV2NotificationmutelistDeletebyalertidByAlertId
+      x-operation-id-source: derived
   /v2/notificationmutelist/deletebyentityid/{entityId}:
     delete:
       security:
@@ -90,6 +98,10 @@ paths:
                 $ref: '#/components/schemas/v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse'
       tags:
       - Notificationmutelist
+      summary: Delete notificationmutelist deletebyentityid by entity id
+      x-summary-source: derived
+      operationId: deleteV2NotificationmutelistDeletebyentityidByEntityId
+      x-operation-id-source: derived
   /v2/notificationmutelist/{ruleId}:
     get:
       security:
@@ -117,11 +129,19 @@ paths:
                 $ref: '#/components/schemas/v2NotificationmutelistRuleIdGetResponse'
       tags:
       - Notificationmutelist
+      summary: Get notificationmutelist by rule id
+      x-summary-source: derived
+      operationId: getV2NotificationmutelistByRuleId
+      x-operation-id-source: derived
 components:
   schemas:
-    v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse:
+    v2NotificationmutelistRuleIdGetResponse:
       type: object
-      properties: {}
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
       additionalProperties: false
     alertserviceAllowAlertNotifcationListRecord:
       type: object
@@ -167,10 +187,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v2NotificationmutelistCreatePostResponse:
       type: object
       properties: {}
@@ -189,13 +205,13 @@ components:
       additionalProperties: false
       required:
       - alertId
-    v2NotificationmutelistRuleIdGetResponse:
+    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
       type: object
-      properties:
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
+      properties: {}
+      additionalProperties: false
+    v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse:
+      type: object
+      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

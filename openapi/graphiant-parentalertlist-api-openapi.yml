@@ -36,34 +36,37 @@ paths:
                 $ref: '#/components/schemas/v2ParentalertlistPostResponse'
       tags:
       - Parentalertlist
+      summary: Create parentalertlist
+      x-summary-source: derived
+      operationId: postV2Parentalertlist
+      x-operation-id-source: derived
 components:
   schemas:
-    v2ParentalertlistPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/alertserviceTimeWindow'
-      additionalProperties: false
-    alertserviceTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v2ParentalertlistPostResponse:
+    alertserviceChildrenAlertListResponse:
       type: object
       properties:
         alertList:
           type: array
           items:
             $ref: '#/components/schemas/alertserviceAlertRecord'
+      additionalProperties: false
+    v2ParentalertlistPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/alertserviceTimeWindow'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     alertserviceAlertRecord:
       type: object
@@ -195,19 +198,20 @@ components:
           example: example string
           description: Type of alert (required)
       additionalProperties: false
-    googleProtobufTimestamp:
+    alertserviceTimeWindow:
       type: object
       properties:
-        nanos:
+        bucketSizeSec:
           type: integer
           format: int32
           example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    alertserviceChildrenAlertListResponse:
+    v2ParentalertlistPostResponse:
       type: object
       properties:
         alertList:

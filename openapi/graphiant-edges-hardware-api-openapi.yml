@@ -38,6 +38,10 @@ paths:
                 $ref: '#/components/schemas/v1EdgesHardwareAssignedGetResponse'
       tags:
       - Edges Hardware
+      summary: Get edges hardware assigned
+      x-summary-source: derived
+      operationId: getV1EdgesHardwareAssigned
+      x-operation-id-source: derived
   /v1/edges-hardware/unassigned:
     get:
       security:
@@ -58,45 +62,32 @@ paths:
                 $ref: '#/components/schemas/v1EdgesHardwareUnassignedGetResponse'
       tags:
       - Edges Hardware
+      summary: Get edges hardware unassigned
+      x-summary-source: derived
+      operationId: getV1EdgesHardwareUnassigned
+      x-operation-id-source: derived
 components:
   schemas:
-    upgradeSchedule:
+    v1EdgesHardwareAssignedGetResponse:
       type: object
       properties:
-        action:
-          type: string
-          example: ENUM_VALUE
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downloadProgress:
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+      additionalProperties: false
+    v1EdgesHardwareUnassignedGetResponse:
+      type: object
+      properties:
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingHardwareInventory'
+        isNewCount:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        failureReason:
-          type: string
-          example: example string
-        state:
-          type: string
-          example: ENUM_VALUE
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        version:
-          $ref: '#/components/schemas/upgradeSwVersion'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
     manaV2Location:
       type: object
@@ -137,92 +128,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1EdgesHardwareAssignedGetResponse:
-      type: object
-      properties:
-        edgesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchEdgeSummary'
-      additionalProperties: false
-    upgradeSwVersion:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        release:
-          type: string
-          example: ENUM_VALUE
-        version:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1EdgesHardwareUnassignedGetResponse:
-      type: object
-      properties:
-        inventory:
-          type: array
-          items:
-            $ref: '#/components/schemas/onboardingHardwareInventory'
-        isNewCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    onboardingHardwareInventory:
-      type: object
-      properties:
-        assignedOn:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        createdOn:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        deviceModel:
-          type: string
-          example: example string
-        deviceSerial:
-          type: string
-          example: example string
-        ekCert:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        enterpriseName:
-          type: string
-          example: example string
-        gekPub:
-          type: string
-          example: example string
-        isCore:
-          type: boolean
-          example: true
-        isNew:
-          type: boolean
-          example: true
-        isRequested:
-          type: boolean
-          example: true
-        parentEnterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        parentEnterpriseName:
-          type: string
-          example: example string
-        role:
-          type: string
-          example: ENUM_VALUE
-        useOauth:
-          type: boolean
-          example: true
-        uuid:
-          type: string
-          example: example string
-      additionalProperties: false
     upgradeUpgradeSummary:
       type: object
       properties:
@@ -255,6 +160,32 @@ components:
         status:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    upgradeSchedule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downloadProgress:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        failureReason:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        version:
+          $ref: '#/components/schemas/upgradeSwVersion'
       additionalProperties: false
     searchEdgeSummary:
       type: object
@@ -354,6 +285,83 @@ components:
           minimum: 0
         upgradeSummary:
           $ref: '#/components/schemas/upgradeUpgradeSummary'
+      additionalProperties: false
+    upgradeSwVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        release:
+          type: string
+          example: ENUM_VALUE
+        version:
+          type: string
+          example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    onboardingHardwareInventory:
+      type: object
+      properties:
+        assignedOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        createdOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceModel:
+          type: string
+          example: example string
+        deviceSerial:
+          type: string
+          example: example string
+        ekCert:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enterpriseName:
+          type: string
+          example: example string
+        gekPub:
+          type: string
+          example: example string
+        isCore:
+          type: boolean
+          example: true
+        isNew:
+          type: boolean
+          example: true
+        isRequested:
+          type: boolean
+          example: true
+        parentEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        parentEnterpriseName:
+          type: string
+          example: example string
+        role:
+          type: string
+          example: ENUM_VALUE
+        useOauth:
+          type: boolean
+          example: true
+        uuid:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

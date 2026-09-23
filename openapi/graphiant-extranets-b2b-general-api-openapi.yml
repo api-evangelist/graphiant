@@ -31,6 +31,10 @@ paths:
       description: Get summary for a B2B extranet peering services customers
       tags:
       - Extranets B2b General
+      summary: Get extranets b2b general customers summary
+      x-summary-source: derived
+      operationId: getV1ExtranetsB2bGeneralCustomersSummary
+      x-operation-id-source: derived
   /v1/extranets-b2b-general/services-summary:
     get:
       security:
@@ -52,16 +56,12 @@ paths:
       description: Get a summary for all the B2B extranet services
       tags:
       - Extranets B2b General
+      summary: Get extranets b2b general services summary
+      x-summary-source: derived
+      operationId: getV1ExtranetsB2bGeneralServicesSummary
+      x-operation-id-source: derived
 components:
   schemas:
-    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
-      type: object
-      properties:
-        info:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
-      additionalProperties: false
     manaV2B2bExtranetApplication:
       type: object
       properties:
@@ -110,6 +110,14 @@ components:
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
+    v1ExtranetsB2bGeneralCustomersSummaryGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -121,14 +129,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v1ExtranetsB2bGeneralCustomersSummaryGetResponse:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
       additionalProperties: false
     manaV2B2bExtranetCustomerServicesSummary:
       type: object
@@ -158,6 +158,14 @@ components:
           example: ENUM_VALUE
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
+      type: object
+      properties:
+        info:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

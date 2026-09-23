@@ -8,7 +8,7 @@ servers:
 security:
 - jwtAuth: []
 tags:
-- name: Msp
+- name: MSP
 paths:
   /v1/msp/managed-enterprise-contract-info:
     get:
@@ -30,9 +30,39 @@ paths:
                 $ref: '#/components/schemas/v1MspManagedEnterpriseContractInfoGetResponse'
       description: Managed enterprises under the MSP with contract and credit allocation details for the requested month
       tags:
-      - Msp
+      - MSP
+      summary: Get msp managed enterprise contract info
+      x-summary-source: derived
+      operationId: getV1MspManagedEnterpriseContractInfo
+      x-operation-id-source: derived
 components:
   schemas:
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
+    v1MspManagedEnterpriseContractInfoGetResponse:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
+        mspConsumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed by the MSP over the entirety of its contracts
+        mspContract:
+          $ref: '#/components/schemas/commonBillingContract'
+      additionalProperties: false
     manaV2ManagedEnterpriseContractInfo:
       type: object
       properties:
@@ -51,21 +81,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1MspManagedEnterpriseContractInfoGetResponse:
-      type: object
-      properties:
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
-        mspConsumedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: All credits consumed by the MSP over the entirety of its contracts
-        mspContract:
-          $ref: '#/components/schemas/commonBillingContract'
-      additionalProperties: false
     commonBillingTimePeriod:
       type: object
       properties:
@@ -77,17 +92,6 @@ components:
           type: integer
           format: int32
           example: 123
-      additionalProperties: false
-    commonBillingContract:
-      type: object
-      properties:
-        contractedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of credits agreed upon for the entirety of the current contract
-        expirationDate:
-          $ref: '#/components/schemas/commonBillingTimePeriod'
       additionalProperties: false
   securitySchemes:
     jwtAuth:
