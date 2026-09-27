@@ -90,50 +90,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ipfixTimeWindow:
+    ipfixClientUsageSummary:
       type: object
       properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1TalkersSiteSiteIdTopPostRequest:
-      type: object
-      properties:
-        numClients:
-          type: integer
-          format: int32
-          example: 10
-          minimum: 0
-          description: The maximum number of apps to return (10 if left empty)
-        timeWindow:
-          $ref: '#/components/schemas/ipfixTimeWindow'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
+        clientIpAddress:
+          type: string
+          example: example string
+        usage:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v1TalkersSiteSiteIdTopPostResponse:
-      type: object
-      properties:
-        appsUtilization:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixClientUsageSummary'
+          description: data used in kilo bytes
       additionalProperties: false
     v1TalkersDeviceDeviceIdTopPostRequest:
       type: object
@@ -147,7 +114,7 @@ components:
         timeWindow:
           $ref: '#/components/schemas/ipfixTimeWindow'
       additionalProperties: false
-    v1TalkersDeviceDeviceIdTopPostResponse:
+    v1TalkersSiteSiteIdTopPostResponse:
       type: object
       properties:
         appsUtilization:
@@ -155,17 +122,50 @@ components:
           items:
             $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
-    ipfixClientUsageSummary:
+    googleProtobufTimestamp:
       type: object
       properties:
-        clientIpAddress:
-          type: string
-          example: example string
-        usage:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
           example: 1234567891011
-          description: data used in kilo bytes
+      additionalProperties: false
+    v1TalkersSiteSiteIdTopPostRequest:
+      type: object
+      properties:
+        numClients:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: The maximum number of apps to return (10 if left empty)
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
+    ipfixTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1TalkersDeviceDeviceIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

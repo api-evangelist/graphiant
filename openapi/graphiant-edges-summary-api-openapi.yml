@@ -89,92 +89,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1EdgesSummaryGetResponse:
-      type: object
-      properties:
-        edgesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchEdgeSummary'
-        isNewCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1EdgesSummaryPostResponse:
-      type: object
-      properties:
-        edgesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchEdgeSummary'
-      additionalProperties: false
-    upgradeUpgradeSummary:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        endOfLife:
-          type: boolean
-          example: true
-        lastDiscoveredTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        lastRunningVersion:
-          $ref: '#/components/schemas/upgradeSwVersion'
-        lastUpgradeTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        readyForActivationVersion:
-          $ref: '#/components/schemas/upgradeSwVersion'
-        rolloutId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        rolloutName:
-          type: string
-          example: example string
-        runningVersion:
-          $ref: '#/components/schemas/upgradeSwVersion'
-        schedule:
-          $ref: '#/components/schemas/upgradeSchedule'
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    upgradeSchedule:
-      type: object
-      properties:
-        action:
-          type: string
-          example: ENUM_VALUE
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downloadProgress:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        failureReason:
-          type: string
-          example: example string
-        state:
-          type: string
-          example: ENUM_VALUE
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        version:
-          $ref: '#/components/schemas/upgradeSwVersion'
-      additionalProperties: false
-    v1EdgesSummaryPostRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/v1EdgesSummaryPostRequestFilter'
-      additionalProperties: false
     manaV2Location:
       type: object
       properties:
@@ -213,6 +127,65 @@ components:
         stateCode:
           type: string
           example: example string
+      additionalProperties: false
+    v1EdgesSummaryGetResponse:
+      type: object
+      properties:
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+        isNewCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1EdgesSummaryPostRequestFilter:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        roles:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        statuses:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    upgradeSchedule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downloadProgress:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        failureReason:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        version:
+          $ref: '#/components/schemas/upgradeSwVersion'
       additionalProperties: false
     searchEdgeSummary:
       type: object
@@ -313,25 +286,31 @@ components:
         upgradeSummary:
           $ref: '#/components/schemas/upgradeUpgradeSummary'
       additionalProperties: false
-    v1EdgesSummaryPostRequestFilter:
+    v1EdgesSummaryPostRequest:
       type: object
       properties:
-        deviceIds:
+        filter:
+          $ref: '#/components/schemas/v1EdgesSummaryPostRequestFilter'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1EdgesSummaryPostResponse:
+      type: object
+      properties:
+        edgesSummary:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        roles:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-        statuses:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
+            $ref: '#/components/schemas/searchEdgeSummary'
       additionalProperties: false
     upgradeSwVersion:
       type: object
@@ -346,17 +325,38 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    googleProtobufTimestamp:
+    upgradeUpgradeSummary:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
+        deviceId:
           type: integer
           format: int64
           example: 1234567891011
+        endOfLife:
+          type: boolean
+          example: true
+        lastDiscoveredTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastRunningVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        lastUpgradeTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        readyForActivationVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        rolloutId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        rolloutName:
+          type: string
+          example: example string
+        runningVersion:
+          $ref: '#/components/schemas/upgradeSwVersion'
+        schedule:
+          $ref: '#/components/schemas/upgradeSchedule'
+        status:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
   securitySchemes:
     jwtAuth:

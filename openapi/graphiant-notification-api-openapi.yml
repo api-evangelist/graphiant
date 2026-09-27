@@ -132,10 +132,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v2NotificationEnabledisablePostResponse:
+    v2NotificationDeletePostResponse:
       type: object
       properties: {}
       additionalProperties: false
+    v2NotificationDeletePostRequest:
+      type: object
+      properties:
+        notificationIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of notification ids to delete notification records (required)
+      additionalProperties: false
+      required:
+      - notificationIdList
     alertserviceNotificationBody:
       type: object
       properties:
@@ -202,45 +214,6 @@ components:
             example: example string
             description: List of webhook_url recipients
       additionalProperties: false
-    v2NotificationUpdatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationDeletePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationCreatePostRequest:
-      type: object
-      properties:
-        notificationBody:
-          $ref: '#/components/schemas/alertserviceNotificationBody'
-        ruleIdList:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: List of rule ids (required)
-      additionalProperties: false
-      required:
-      - notificationBody
-      - ruleIdList
-    v2NotificationCreatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationDeletePostRequest:
-      type: object
-      properties:
-        notificationIdList:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: List of notification ids to delete notification records (required)
-      additionalProperties: false
-      required:
-      - notificationIdList
     v2NotificationEnabledisablePostRequest:
       type: object
       properties:
@@ -273,6 +246,33 @@ components:
       required:
       - notificationBody
       - notificationIdList
+    v2NotificationCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationUpdatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationEnabledisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationCreatePostRequest:
+      type: object
+      properties:
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
+        ruleIdList:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of rule ids (required)
+      additionalProperties: false
+      required:
+      - notificationBody
+      - ruleIdList
   securitySchemes:
     jwtAuth:
       type: apiKey

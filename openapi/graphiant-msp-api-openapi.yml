@@ -37,6 +37,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    commonBillingTimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
     commonBillingContract:
       type: object
       properties:
@@ -47,21 +59,6 @@ components:
           description: Number of credits agreed upon for the entirety of the current contract
         expirationDate:
           $ref: '#/components/schemas/commonBillingTimePeriod'
-      additionalProperties: false
-    v1MspManagedEnterpriseContractInfoGetResponse:
-      type: object
-      properties:
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
-        mspConsumedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: All credits consumed by the MSP over the entirety of its contracts
-        mspContract:
-          $ref: '#/components/schemas/commonBillingContract'
       additionalProperties: false
     manaV2ManagedEnterpriseContractInfo:
       type: object
@@ -81,17 +78,20 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    commonBillingTimePeriod:
+    v1MspManagedEnterpriseContractInfoGetResponse:
       type: object
       properties:
-        month:
-          type: integer
-          format: int32
-          example: 123
-        year:
-          type: integer
-          format: int32
-          example: 123
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
+        mspConsumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed by the MSP over the entirety of its contracts
+        mspContract:
+          $ref: '#/components/schemas/commonBillingContract'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

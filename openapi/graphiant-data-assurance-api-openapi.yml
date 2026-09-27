@@ -227,11 +227,61 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1DataAssuranceAssurancesGlobalGetResponseRow:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry'
+        assuranceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        assuranceName:
+          type: string
+          example: example string
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        flexAlgo:
+          type: string
+          example: example string
+        lans:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry'
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
+      type: object
+      properties:
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
     v1DataAssuranceAssurancesGlobalIdGetResponse:
       type: object
       properties:
         config:
           $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalPostRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2BucketApp:
       type: object
@@ -262,27 +312,13 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdPutResponse:
+    v1DataAssuranceAssurancesGlobalGetResponse:
       type: object
       properties:
-        unsyncedDeviceNames:
+        rows:
           type: array
           items:
-            type: string
-            example: example string
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
-      type: object
-      properties:
-        lanName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalPostRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRow'
       additionalProperties: false
     googleProtobufTimestamp:
       type: object
@@ -295,6 +331,43 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdPutResponse:
+      type: object
+      properties:
+        unsyncedDeviceNames:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    manaV2BucketAppServer:
+      type: object
+      properties:
+        ip:
+          type: string
+          example: example string
+        port:
+          type: integer
+          format: int32
+          example: 123
+        protocol:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponseEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2AssuranceConfig:
       type: object
@@ -322,40 +395,6 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance:
-      type: object
-      properties:
-        configs:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdPutRequest:
-      type: object
-      properties:
-        appRemovalReason:
-          type: string
-          example: example string
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponse:
-      type: object
-      properties:
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRow'
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
-      type: object
-      properties:
-        siteName:
-          type: string
-          example: example string
-      additionalProperties: false
     v1DataAssuranceFlexAlgosGetResponse:
       type: object
       properties:
@@ -363,13 +402,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
       additionalProperties: false
     v1DataAssuranceAssurancesGlobalPostResponse:
       type: object
@@ -388,33 +420,24 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v1DataAssuranceFlexAlgosGetResponseEntry:
+    v1DataAssuranceAssurancesGlobalIdPutRequest:
       type: object
       properties:
-        description:
+        appRemovalReason:
           type: string
           example: example string
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance:
+      type: object
+      properties:
+        configs:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
         id:
           type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2BucketAppServer:
-      type: object
-      properties:
-        ip:
-          type: string
-          example: example string
-        port:
-          type: integer
-          format: int32
-          example: 123
-        protocol:
-          type: string
-          example: ENUM_VALUE
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
       type: object
@@ -424,35 +447,12 @@ components:
           items:
             $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRow:
+    v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
       type: object
       properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry'
-        assuranceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        assuranceName:
+        lanName:
           type: string
           example: example string
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        flexAlgo:
-          type: string
-          example: example string
-        lans:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry'
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry'
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

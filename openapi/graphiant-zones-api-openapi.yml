@@ -37,6 +37,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    manaV2Zone:
+      type: object
+      properties:
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ZonesGetResponse:
+      type: object
+      properties:
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        zones:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Zone'
+      additionalProperties: false
     commonPageInfo:
       type: object
       properties:
@@ -74,31 +99,6 @@ components:
           example: 400
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
-      additionalProperties: false
-    v1ZonesGetResponse:
-      type: object
-      properties:
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-        zones:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Zone'
-      additionalProperties: false
-    manaV2Zone:
-      type: object
-      properties:
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

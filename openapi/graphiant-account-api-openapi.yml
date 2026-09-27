@@ -199,63 +199,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1AccountMfaPutResponse:
+    v1AccountMfaConfirmationPostResponse:
       type: object
       properties:
-        confirmed:
-          type: boolean
-          example: true
-        id:
-          type: string
-          example: example string
-        qrCode:
-          type: string
-          example: example string
-        sharedSecret:
-          type: string
-          example: example string
+        affectedUsers:
+          type: array
+          items:
+            type: string
+            example: example string
       additionalProperties: false
-    v1AccountMfaPutRequest:
-      type: object
-      properties:
-        phoneNumber:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - type
-    v1AccountInfoPatchRequest:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: example string
-        lastName:
-          type: string
-          example: example string
-        timeZone:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1AccountPasswordPatchRequest:
-      type: object
-      properties:
-        oldPassword:
-          type: string
-          example: example string
-          description: ' (required)'
-        password:
-          type: string
-          example: example string
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - oldPassword
-      - password
     v1AccountEmailPatchRequest:
       type: object
       properties:
@@ -272,6 +224,48 @@ components:
         type:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    v1AccountMfaPutRequest:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - type
+    v1AccountMfaPutResponse:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: example string
+        qrCode:
+          type: string
+          example: example string
+        sharedSecret:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AccountInfoPatchRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: example string
+        lastName:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
       additionalProperties: false
     v1AccountMfaConfirmationPostRequest:
       type: object
@@ -298,15 +292,21 @@ components:
       - confirmed
       - id
       - type
-    v1AccountMfaConfirmationPostResponse:
+    v1AccountPasswordPatchRequest:
       type: object
       properties:
-        affectedUsers:
-          type: array
-          items:
-            type: string
-            example: example string
+        oldPassword:
+          type: string
+          example: example string
+          description: ' (required)'
+        password:
+          type: string
+          example: example string
+          description: ' (required)'
       additionalProperties: false
+      required:
+      - oldPassword
+      - password
   securitySchemes:
     jwtAuth:
       type: apiKey

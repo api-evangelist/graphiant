@@ -78,105 +78,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1NatEntriesDeviceIdGetResponse:
-      type: object
-      properties:
-        natEntries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixNatEntry'
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    ipfixNatUsage:
-      type: object
-      properties:
-        currentCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountExtranet:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountPat:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountStatic:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        maxCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    commonPageInfo:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-          minimum: 0
-          description: The page number we are currently on (required)
-        endCursor:
-          type: string
-          example: xxxxxxy
-          description: Cursor pointing to the last record on the current page
-        hasNextPage:
-          type: boolean
-          example: true
-          description: An indicator whether there is a page after this one in the resultset based on current position
-        hasPrevPage:
-          type: boolean
-          example: true
-          description: An indicator whether there is a page before this one in the resultset based on current position
-        startCursor:
-          type: string
-          example: xxxxxx
-          description: Cursor pointing to the first record on the current page
-        totalPages:
-          type: integer
-          format: int32
-          example: 4
-          minimum: 0
-          description: The number of pages in the complete resultset based on the current length of the page (required)
-        totalRecords:
-          type: integer
-          format: int32
-          example: 400
-          minimum: 0
-          description: Describes the total number of records in the complete resultset (required)
-      additionalProperties: false
-    v1NatUtilizationDeviceIdGetResponse:
-      type: object
-      properties:
-        natUsage:
-          $ref: '#/components/schemas/ipfixNatUsage'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
     ipfixNatEntry:
       type: object
       properties:
@@ -228,6 +129,105 @@ components:
           format: int64
           example: 12345678910
           minimum: 0
+      additionalProperties: false
+    v1NatUtilizationDeviceIdGetResponse:
+      type: object
+      properties:
+        natUsage:
+          $ref: '#/components/schemas/ipfixNatUsage'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1NatEntriesDeviceIdGetResponse:
+      type: object
+      properties:
+        natEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixNatEntry'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    ipfixNatUsage:
+      type: object
+      properties:
+        currentCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountExtranet:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountPat:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountStatic:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        maxCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    commonPageInfo:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+          description: The page number we are currently on (required)
+        endCursor:
+          type: string
+          example: xxxxxxy
+          description: Cursor pointing to the last record on the current page
+        hasNextPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page after this one in the resultset based on current position
+        hasPrevPage:
+          type: boolean
+          example: true
+          description: An indicator whether there is a page before this one in the resultset based on current position
+        startCursor:
+          type: string
+          example: xxxxxx
+          description: Cursor pointing to the first record on the current page
+        totalPages:
+          type: integer
+          format: int32
+          example: 4
+          minimum: 0
+          description: The number of pages in the complete resultset based on the current length of the page (required)
+        totalRecords:
+          type: integer
+          format: int32
+          example: 400
+          minimum: 0
+          description: Describes the total number of records in the complete resultset (required)
       additionalProperties: false
   securitySchemes:
     jwtAuth:

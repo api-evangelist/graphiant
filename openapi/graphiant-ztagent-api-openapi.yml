@@ -178,6 +178,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1ZtagentBindingsPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v1ZtagentAgentsGetResponse:
       type: object
       properties:
@@ -189,10 +193,6 @@ components:
           type: integer
           format: int32
           example: 123
-      additionalProperties: false
-    v1ZtagentBindingsPutResponse:
-      type: object
-      properties: {}
       additionalProperties: false
     v1ZtagentBindingsPutRequest:
       type: object

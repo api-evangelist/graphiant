@@ -119,14 +119,6 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    v1RegionsRegionIdGatewaysGetResponse:
-      type: object
-      properties:
-        gateways:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
-      additionalProperties: false
     v1RegionsGetResponse:
       type: object
       properties:
@@ -134,6 +126,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2Region'
+      additionalProperties: false
+    v1RegionsRegionIdGatewaysGetResponse:
+      type: object
+      properties:
+        gateways:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

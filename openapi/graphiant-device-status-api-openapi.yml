@@ -72,15 +72,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1DeviceStatusPostResponse:
-      type: object
-      properties:
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    v1DeviceStatusPostRequest:
+    v1DeviceStatusHistoryPostRequest:
       type: object
       properties:
         deviceIds:
@@ -119,39 +111,13 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1DeviceStatusHistoryPostRequest:
-      type: object
-      properties:
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-        role:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1DeviceStatusHistoryPostResponse:
+    v1DeviceStatusPostResponse:
       type: object
       properties:
         mappings:
           type: array
           items:
-            $ref: '#/components/schemas/pokedexDeviceHistoryInfo'
+            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
       additionalProperties: false
     pokedexDeviceHistoryInfo:
       type: object
@@ -177,6 +143,40 @@ components:
         ttIdentity:
           type: string
           example: example string
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DeviceStatusHistoryPostResponse:
+      type: object
+      properties:
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/pokedexDeviceHistoryInfo'
+      additionalProperties: false
+    v1DeviceStatusPostRequest:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        role:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
   securitySchemes:
     jwtAuth:

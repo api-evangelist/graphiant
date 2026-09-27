@@ -42,30 +42,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    auditmonActivityLogsSelector:
+    auditActivityItem:
       type: object
       properties:
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
         id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
           type: string
           example: example string
-        inProgress:
-          type: boolean
-          example: true
-        jobEntity:
-          $ref: '#/components/schemas/auditActivityItem'
-        targetIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditActivityItem'
         type:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    auditmonActivityDetailsTargetEvent:
+      type: object
+      properties:
+        state:
+          type: string
+          example: example string
+        stateId:
+          type: integer
+          format: int32
+          example: 123
+        traceSessionId:
+          type: string
+          example: example string
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     auditmonActivityDetails:
       type: object
@@ -128,26 +133,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1ActivityLogsPostRequest:
-      type: object
-      properties:
-        cursorRef:
-          type: string
-          example: example string
-        numLogs:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        selector:
-          $ref: '#/components/schemas/auditmonActivityLogsSelector'
-        selectorV2:
-          $ref: '#/components/schemas/auditmonActivityLogsSelectorV2'
-      additionalProperties: false
     v1ActivityLogsPostResponseActivityItems:
       type: object
       properties:
@@ -155,48 +140,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/auditActivityItem'
-      additionalProperties: false
-    auditActivityItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    auditmonActivityDetailsTargetEvent:
-      type: object
-      properties:
-        state:
-          type: string
-          example: example string
-        stateId:
-          type: integer
-          format: int32
-          example: 123
-        traceSessionId:
-          type: string
-          example: example string
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
     auditmonActivityDetailsTarget:
       type: object
@@ -222,31 +165,6 @@ components:
         status:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    v1ActivityLogsPostResponse:
-      type: object
-      properties:
-        cursorRef:
-          type: string
-          example: example string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditmonActivityDetails'
-        filterEntities:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/v1ActivityLogsPostResponseActivityItems'
-        filterJobTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-        totalLogs:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
       additionalProperties: false
     auditmonActivityLogsSelectorV2:
       type: object
@@ -282,6 +200,88 @@ components:
           items:
             type: string
             example: example string
+      additionalProperties: false
+    v1ActivityLogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selector:
+          $ref: '#/components/schemas/auditmonActivityLogsSelector'
+        selectorV2:
+          $ref: '#/components/schemas/auditmonActivityLogsSelectorV2'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    auditmonActivityLogsSelector:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        id:
+          type: string
+          example: example string
+        inProgress:
+          type: boolean
+          example: true
+        jobEntity:
+          $ref: '#/components/schemas/auditActivityItem'
+        targetIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1ActivityLogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonActivityDetails'
+        filterEntities:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1ActivityLogsPostResponseActivityItems'
+        filterJobTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
       additionalProperties: false
   securitySchemes:
     jwtAuth:

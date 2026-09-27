@@ -43,10 +43,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1TempPasswordPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v1TempPasswordPutRequest:
       type: object
       properties:
@@ -69,6 +65,10 @@ components:
       additionalProperties: false
       required:
       - emails
+    v1TempPasswordPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

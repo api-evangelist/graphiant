@@ -43,12 +43,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1VersionPostResponse:
-      type: object
-      properties:
-        updatedVersion:
-          $ref: '#/components/schemas/manaV2VersionMetadata'
-      additionalProperties: false
     manaV2VersionMetadata:
       type: object
       properties:
@@ -76,6 +70,12 @@ components:
         name:
           type: string
           example: example string
+      additionalProperties: false
+    v1VersionPostResponse:
+      type: object
+      properties:
+        updatedVersion:
+          $ref: '#/components/schemas/manaV2VersionMetadata'
       additionalProperties: false
     v1VersionPostRequest:
       type: object

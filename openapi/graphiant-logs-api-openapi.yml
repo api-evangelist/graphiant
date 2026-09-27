@@ -42,6 +42,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1LogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        customerView:
+          type: boolean
+          example: true
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+        histogramBucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonSyslogsSelector'
+      additionalProperties: false
     v1LogsPostResponse:
       type: object
       properties:
@@ -85,41 +120,6 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1LogsPostRequest:
-      type: object
-      properties:
-        cursorRef:
-          type: string
-          example: example string
-        customerView:
-          type: boolean
-          example: true
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-        histogramBucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numLogs:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/syslogmonSyslogsSelector'
-      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -132,17 +132,6 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    syslogmonHistogram:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
     syslogmonSyslogsSelector:
       type: object
       properties:
@@ -154,6 +143,17 @@ components:
           items:
             type: string
             example: example string
+      additionalProperties: false
+    syslogmonHistogram:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -378,26 +378,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1GroupsRootGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    v1GroupsIdMembersDeletePostRequest:
-      type: object
-      properties:
-        memberIds:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - memberIds
     commonUser:
       type: object
       properties:
@@ -432,51 +412,14 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    iamEnterprisePermissions:
+    v1GroupsGetResponse:
       type: object
       properties:
-        groupType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
       additionalProperties: false
-    v1GroupsPutRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-          description: ' (required)'
-        groupId:
-          type: string
-          example: example string
-          description: Only supply if enterprise uses an idp
-        groupType:
-          type: string
-          example: ENUM_VALUE
-        managesEnterprises:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-        timeWindowEnd:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindowStart:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-      required:
-      - description
-      - name
     v1GroupsIdEnterprisesPostRequest:
       type: object
       properties:
@@ -490,18 +433,6 @@ components:
       additionalProperties: false
       required:
       - enterpriseIds
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     commonPermissions:
       type: object
       properties:
@@ -563,6 +494,79 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
+    v1GroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    iamEnterprisePermissions:
+      type: object
+      properties:
+        groupType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+      additionalProperties: false
+    v1GroupsIdMembersGetResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonUser'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GroupsPutRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+          description: ' (required)'
+        groupId:
+          type: string
+          example: example string
+          description: Only supply if enterprise uses an idp
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        managesEnterprises:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+      required:
+      - description
+      - name
     v1GroupsIdPatchRequest:
       type: object
       properties:
@@ -594,6 +598,21 @@ components:
           items:
             $ref: '#/components/schemas/iamGroup'
       additionalProperties: false
+    v1GroupsIdMembersPostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+        replaceExisting:
+          type: boolean
+          example: true
+      additionalProperties: false
+      required:
+      - memberIds
     iamGroup:
       type: object
       properties:
@@ -630,23 +649,7 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1GroupsIdMembersGetResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/commonUser'
-      additionalProperties: false
-    v1GroupsGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    v1GroupsIdMembersPostRequest:
+    v1GroupsIdMembersDeletePostRequest:
       type: object
       properties:
         memberIds:
@@ -655,9 +658,6 @@ components:
             type: string
             example: example string
             description: ' (required)'
-        replaceExisting:
-          type: boolean
-          example: true
       additionalProperties: false
       required:
       - memberIds

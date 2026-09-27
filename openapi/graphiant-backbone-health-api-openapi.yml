@@ -182,81 +182,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1BackboneHealthFilterGetResponse:
+    v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCountsDeviceCount:
       type: object
       properties:
-        circuits:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingCircuitFilter'
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingDeviceFilter'
-        lanSegments:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingLanSegmentFilter'
-        regions:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingRegionFilter'
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSiteFilter'
-      additionalProperties: false
-    statsmonTroubleshootingOverheating:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
-      additionalProperties: false
-    statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
         deviceName:
           type: string
           example: example string
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
-      additionalProperties: false
-    v1BackboneHealthTopDevicesByAlertsPostRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
-      additionalProperties: false
-    statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummaryQoeSessionBox:
-      type: object
-      properties:
-        delayValue:
-          type: number
-          format: double
-          example: 123.45
-        endTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        jitterValue:
-          type: number
-          format: double
-          example: 123.45
-        lossValue:
-          type: number
-          format: double
-          example: 123.45
-        startTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        status:
-          type: string
-          example: ENUM_VALUE
-        value:
-          type: number
-          format: double
-          example: 123.45
+        numAlerts:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
     v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts:
       type: object
@@ -266,140 +201,16 @@ components:
           items:
             $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCountsDeviceCount'
       additionalProperties: false
-    statsmonTroubleshootingDeviceFilter:
+    statsmonBackbonehealthControlPlane:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1BackboneHealthDeviceDeviceIdPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
-      additionalProperties: false
-    statsmonBackbonehealthGetQoeMatrixResponse:
-      type: object
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary'
-        qoeMatrix:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummary'
-      additionalProperties: false
-    v1BackboneHealthEtetSlaMatrixGetResponseRegionStatus:
-      type: object
-      properties:
-        peerRegion:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        controlTransitions:
+          $ref: '#/components/schemas/statsmonBackbonehealthTransitionSeries'
+        managementTransitions:
+          $ref: '#/components/schemas/statsmonBackbonehealthTransitionSeries'
         status:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    statsmonBackbonehealthTransitionSeries:
-      type: object
-      properties:
-        transitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBackbonehealthTransitions'
-      additionalProperties: false
-    statsmonBackbonehealthSystemPlane:
-      type: object
-      properties:
-        cpu:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
-        crashes:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingCrash'
-        disk:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
-        lastCrash:
-          $ref: '#/components/schemas/statsmonTroubleshootingLastCrash'
-        maintenanceWindows:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingMaintenanceWindow'
-        memory:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
-        overheating:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingOverheating'
-        status:
-          type: string
-          example: ENUM_VALUE
-        temperatureSeries:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
-      additionalProperties: false
-    upgradeSwVersion:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        release:
-          type: string
-          example: ENUM_VALUE
-        version:
-          type: string
-          example: example string
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    statsmonTroubleshootingSlaValue:
-      type: object
-      properties:
-        delayValue:
-          type: number
-          format: double
-          example: 123.45
-        jitterValue:
-          type: number
-          format: double
-          example: 123.45
-        lossValue:
-          type: number
-          format: double
-          example: 123.45
-        status:
-          type: string
-          example: ENUM_VALUE
-        time:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        value:
-          type: number
-          format: double
-          example: 123.45
       additionalProperties: false
     v1BackboneHealthEtetSlaMatrixGetResponseSlaSummary:
       type: object
@@ -451,70 +262,73 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1BackboneHealthEtWanMatrixGetResponseRegionStatus:
+    statsmonBackbonehealthSystemPlane:
       type: object
       properties:
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        cpu:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        crashes:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingCrash'
+        disk:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        lastCrash:
+          $ref: '#/components/schemas/statsmonTroubleshootingLastCrash'
+        maintenanceWindows:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingMaintenanceWindow'
+        memory:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        overheating:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingOverheating'
         status:
           type: string
           example: ENUM_VALUE
+        temperatureSeries:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
       additionalProperties: false
-    v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCountsDeviceCount:
+    statsmonBackbonehealthGetQoeMatrixResponse:
       type: object
       properties:
-        deviceName:
-          type: string
-          example: example string
-        numAlerts:
-          type: integer
-          format: int32
-          example: 123
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary'
+        qoeMatrix:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummary'
       additionalProperties: false
-    v1BackboneHealthEtetSlaMatrixGetResponseDevicesSummary:
+    statsmonTroubleshootingMaintenanceWindow:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceName:
-          type: string
-          example: example string
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
       additionalProperties: false
-    v1BackboneHealthEtWanMatrixGetResponseDeviceEtWanSummary:
+    upgradeSwVersion:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceName:
+        name:
           type: string
           example: example string
-        provider:
-          type: string
-          example: example string
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
-        status:
+        release:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    statsmonTroubleshootingTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+        version:
+          type: string
+          example: example string
       additionalProperties: false
     statsmonTroubleshootingRegion:
       type: object
@@ -527,37 +341,11 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    statsmonTroubleshootingSessionSla:
+    statsmonTroubleshootingRegionFilter:
       type: object
       properties:
-        name:
-          type: string
-          example: example string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSlaValue'
-      additionalProperties: false
-    v1BackboneHealthTopDevicesByAlertsPostResponse:
-      type: object
-      properties:
-        controlPlane:
-          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
-        dataPlane:
-          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
-        systemPlane:
-          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
-      additionalProperties: false
-    statsmonBackbonehealthTransitions:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        transitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
       additionalProperties: false
     statsmonTroubleshootingIssue:
       type: object
@@ -600,11 +388,32 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    statsmonTroubleshootingMaintenanceWindow:
+    v1BackboneHealthOverviewPostRequest:
       type: object
       properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
+        dimensions:
+          $ref: '#/components/schemas/v1BackboneHealthOverviewPostRequestDimensions'
+        filter:
+          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
+      additionalProperties: false
+    statsmonTroubleshootingTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1BackboneHealthTopDevicesByAlertsPostRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
       additionalProperties: false
     statsmonTroubleshootingFilter:
       type: object
@@ -638,89 +447,75 @@ components:
             format: int64
             example: 1234567891011
       additionalProperties: false
-    statsmonBackbonehealthControlPlane:
+    statsmonTroubleshootingDeviceFilter:
       type: object
       properties:
-        controlTransitions:
-          $ref: '#/components/schemas/statsmonBackbonehealthTransitionSeries'
-        managementTransitions:
-          $ref: '#/components/schemas/statsmonBackbonehealthTransitionSeries'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1BackboneHealthEtWanMatrixGetResponseDeviceEtWanSummary:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
+          type: string
+          example: example string
+        provider:
+          type: string
+          example: example string
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
         status:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1BackboneHealthOverviewPostRequestDimensions:
+    googleProtobufTimestamp:
       type: object
       properties:
-        certificateExpiry:
-          type: boolean
-          example: true
-        coreConnectivity:
-          type: boolean
-          example: true
-        coreCoreSlaPerformance:
-          type: boolean
-          example: true
-        coreWanPerformance:
-          type: boolean
-          example: true
-        cpu:
-          type: boolean
-          example: true
-        crashes:
-          type: boolean
-          example: true
-        creditExpiry:
-          type: boolean
-          example: true
-        disk:
-          type: boolean
-          example: true
-        fanSpeed:
-          type: boolean
-          example: true
-        licenseExpiry:
-          type: boolean
-          example: true
-        memory:
-          type: boolean
-          example: true
-        odpConnectivity:
-          type: boolean
-          example: true
-        t2Connectivity:
-          type: boolean
-          example: true
-        temperature:
-          type: boolean
-          example: true
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-    v1BackboneHealthOverviewPostRequest:
+    statsmonBackbonehealthDataPlane:
       type: object
       properties:
-        dimensions:
-          $ref: '#/components/schemas/v1BackboneHealthOverviewPostRequestDimensions'
-        filter:
-          $ref: '#/components/schemas/statsmonTroubleshootingFilter'
+        downTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBackbonehealthTransitions'
+        sessionSlas:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSessionSla'
+        status:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
-    statsmonTroubleshootingLastCrash:
+    v1BackboneHealthEtetSlaMatrixGetResponseDevicesSummary:
       type: object
       properties:
-        crashDetails:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
           type: string
           example: example string
-        reason:
-          type: string
-          example: example string
-        upSinceTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    statsmonTroubleshootingCircuitFilter:
-      type: object
-      properties:
-        circuitName:
-          type: string
-          example: example string
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
       additionalProperties: false
     v1BackboneHealthEtWanMatrixGetResponse:
       type: object
@@ -733,6 +528,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1BackboneHealthEtWanMatrixGetResponseRegionStatus'
+      additionalProperties: false
+    statsmonTroubleshootingLastCrash:
+      type: object
+      properties:
+        crashDetails:
+          type: string
+          example: example string
+        reason:
+          type: string
+          example: example string
+        upSinceTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummary:
       type: object
@@ -757,13 +564,13 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1BackboneHealthOverviewPostResponse:
+    statsmonBackbonehealthTransitionSeries:
       type: object
       properties:
-        devices:
+        transitions:
           type: array
           items:
-            $ref: '#/components/schemas/v1BackboneHealthOverviewPostResponseDeviceSummary'
+            $ref: '#/components/schemas/statsmonBackbonehealthTransitions'
       additionalProperties: false
     v1BackboneHealthOverviewPostResponseDeviceSummary:
       type: object
@@ -825,16 +632,83 @@ components:
         upSinceTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    statsmonTroubleshootingSiteFilter:
+    statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary:
       type: object
       properties:
-        siteId:
+        deviceId:
           type: integer
           format: int64
           example: 1234567891011
-        siteName:
+        deviceName:
           type: string
           example: example string
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+      additionalProperties: false
+    statsmonTroubleshootingSlaValue:
+      type: object
+      properties:
+        delayValue:
+          type: number
+          format: double
+          example: 123.45
+        jitterValue:
+          type: number
+          format: double
+          example: 123.45
+        lossValue:
+          type: number
+          format: double
+          example: 123.45
+        status:
+          type: string
+          example: ENUM_VALUE
+        time:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        value:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummaryQoeSessionBox:
+      type: object
+      properties:
+        delayValue:
+          type: number
+          format: double
+          example: 123.45
+        endTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        jitterValue:
+          type: number
+          format: double
+          example: 123.45
+        lossValue:
+          type: number
+          format: double
+          example: 123.45
+        startTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        status:
+          type: string
+          example: ENUM_VALUE
+        value:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonTroubleshootingCircuitFilter:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1BackboneHealthDeviceDeviceIdPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
       additionalProperties: false
     statsmonTroubleshootingSystemStat:
       type: object
@@ -852,18 +726,6 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    statsmonTroubleshootingCrash:
-      type: object
-      properties:
-        time:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    statsmonTroubleshootingRegionFilter:
-      type: object
-      properties:
-        region:
-          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
-      additionalProperties: false
     v1BackboneHealthEtetSlaMatrixGetResponse:
       type: object
       properties:
@@ -880,6 +742,148 @@ components:
           items:
             $ref: '#/components/schemas/v1BackboneHealthEtetSlaMatrixGetResponseSlaSummary'
       additionalProperties: false
+    v1BackboneHealthFilterGetResponse:
+      type: object
+      properties:
+        circuits:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingCircuitFilter'
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingDeviceFilter'
+        lanSegments:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingLanSegmentFilter'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingRegionFilter'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSiteFilter'
+      additionalProperties: false
+    statsmonBackbonehealthTransitions:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        transitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSystemStat'
+      additionalProperties: false
+    statsmonTroubleshootingCrash:
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonTroubleshootingSiteFilter:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1BackboneHealthTopDevicesByAlertsPostResponse:
+      type: object
+      properties:
+        controlPlane:
+          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
+        dataPlane:
+          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
+        systemPlane:
+          $ref: '#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts'
+      additionalProperties: false
+    statsmonTroubleshootingOverheating:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTroubleshootingTimeWindow'
+      additionalProperties: false
+    v1BackboneHealthOverviewPostResponse:
+      type: object
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1BackboneHealthOverviewPostResponseDeviceSummary'
+      additionalProperties: false
+    v1BackboneHealthOverviewPostRequestDimensions:
+      type: object
+      properties:
+        certificateExpiry:
+          type: boolean
+          example: true
+        coreConnectivity:
+          type: boolean
+          example: true
+        coreCoreSlaPerformance:
+          type: boolean
+          example: true
+        coreWanPerformance:
+          type: boolean
+          example: true
+        cpu:
+          type: boolean
+          example: true
+        crashes:
+          type: boolean
+          example: true
+        creditExpiry:
+          type: boolean
+          example: true
+        disk:
+          type: boolean
+          example: true
+        fanSpeed:
+          type: boolean
+          example: true
+        licenseExpiry:
+          type: boolean
+          example: true
+        memory:
+          type: boolean
+          example: true
+        odpConnectivity:
+          type: boolean
+          example: true
+        t2Connectivity:
+          type: boolean
+          example: true
+        temperature:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1BackboneHealthEtetSlaMatrixGetResponseRegionStatus:
+      type: object
+      properties:
+        peerRegion:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1BackboneHealthEtWanMatrixGetResponseRegionStatus:
+      type: object
+      properties:
+        region:
+          $ref: '#/components/schemas/statsmonTroubleshootingRegion'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
     statsmonTroubleshootingLanSegmentFilter:
       type: object
       properties:
@@ -887,20 +891,16 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    statsmonBackbonehealthDataPlane:
+    statsmonTroubleshootingSessionSla:
       type: object
       properties:
-        downTransitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBackbonehealthTransitions'
-        sessionSlas:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonTroubleshootingSessionSla'
-        status:
+        name:
           type: string
-          example: ENUM_VALUE
+          example: example string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonTroubleshootingSlaValue'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

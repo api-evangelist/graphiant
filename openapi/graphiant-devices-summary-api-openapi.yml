@@ -52,14 +52,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1DevicesSummaryGetResponse:
-      type: object
-      properties:
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
-      additionalProperties: false
     manaV2Region:
       type: object
       properties:
@@ -105,6 +97,14 @@ components:
         status:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    v1DevicesSummaryGetResponse:
+      type: object
+      properties:
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
       additionalProperties: false
     manaV2RegionCoordinates:
       type: object

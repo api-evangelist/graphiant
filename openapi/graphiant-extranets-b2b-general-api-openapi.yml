@@ -62,6 +62,55 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
+      type: object
+      properties:
+        info:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2B2bExtranetCustomerServicesSummary:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedServices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
     manaV2B2bExtranetApplication:
       type: object
       properties:
@@ -117,55 +166,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2B2bExtranetCustomerServicesSummary:
-      type: object
-      properties:
-        adminEmails:
-          type: array
-          items:
-            type: string
-            example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matchedServices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
-      type: object
-      properties:
-        info:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
       additionalProperties: false
   securitySchemes:
     jwtAuth:
