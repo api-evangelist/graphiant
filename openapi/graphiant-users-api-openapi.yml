@@ -387,134 +387,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1UsersPasswordsExpirePostRequest:
+    iamGroup:
       type: object
       properties:
-        userIds:
+        description:
+          type: string
+          example: example string
+        enterpriseIds:
           type: array
           items:
-            type: string
-            example: example string
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - userIds
-    v1UsersIdVerifyPatchRequest:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1UsersPutRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: example string
-          description: ' (required)'
-        firstName:
-          type: string
-          example: example string
-          description: ' (required)'
-        groupId:
-          type: string
-          example: example string
-        lastName:
-          type: string
-          example: example string
-          description: ' (required)'
-        timeZone:
-          type: string
-          example: example string
-      additionalProperties: false
-      required:
-      - email
-      - firstName
-      - lastName
-    v1UsersEmailPasswordPatchRequest:
-      type: object
-      properties:
-        password:
-          type: string
-          example: newPassword123
-          description: New password for the user
-      required:
-      - password
-    iamEnterprisePermissions:
-      type: object
-      properties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        enterprisePermissions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/iamEnterprisePermissions'
         groupType:
           type: string
           example: ENUM_VALUE
-          description: ' (required)'
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
         permissions:
           $ref: '#/components/schemas/commonPermissions'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
+        timeWindowEnd:
           type: integer
-          format: int32
-          example: 123
-        seconds:
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
           type: integer
           format: int64
           example: 1234567891011
       additionalProperties: false
-    iamCounts:
+    iamFailedUser:
       type: object
       properties:
-        activeDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        activeUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deactivatedDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        emptySitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        impairedSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalCustomers:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalEdges:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalMsps:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalSites:
-          type: integer
-          format: int64
-          example: 1234567891011
-        upSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
+        reason:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
       additionalProperties: false
     iamCustomer:
       type: object
@@ -541,92 +458,31 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1UsersIdGroupsGetResponse:
+    v1UsersPasswordsExpirePostResponse:
       type: object
       properties:
-        groups:
+        failedCount:
+          type: integer
+          format: int32
+          example: 123
+        failedUsers:
           type: array
           items:
-            $ref: '#/components/schemas/iamGroup'
+            $ref: '#/components/schemas/iamFailedUser'
+        successCount:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
-    commonPermissions:
+    iamEnterprisePermissions:
       type: object
       properties:
-        assetManager:
+        groupType:
           type: string
           example: ENUM_VALUE
-        b2b:
-          type: string
-          example: ENUM_VALUE
-        b2bSecurityProfileExternal:
-          type: string
-          example: ENUM_VALUE
-        billingAndInvoicing:
-          type: string
-          example: ENUM_VALUE
-        compliance:
-          type: string
-          example: ENUM_VALUE
-        developerTools:
-          type: string
-          example: ENUM_VALUE
-        gateway:
-          type: string
-          example: ENUM_VALUE
-        globalServices:
-          type: string
-          example: ENUM_VALUE
-        insights:
-          type: string
-          example: ENUM_VALUE
-        licensing:
-          type: string
-          example: ENUM_VALUE
-        logs:
-          type: string
-          example: ENUM_VALUE
-        monitoringAndTroubleshooting:
-          type: string
-          example: ENUM_VALUE
-        networkConfiguration:
-          type: string
-          example: ENUM_VALUE
-        orderStatus:
-          type: string
-          example: ENUM_VALUE
-        reports:
-          type: string
-          example: ENUM_VALUE
-        safetyAndSecurity:
-          type: string
-          example: ENUM_VALUE
-        servicePolicies:
-          type: string
-          example: ENUM_VALUE
-        support:
-          type: string
-          example: ENUM_VALUE
-        userAndTenantManagement:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1UsersGetResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/commonUser'
-      additionalProperties: false
-    iamFailedUser:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: example string
-        userId:
-          type: string
-          example: example string
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
       additionalProperties: false
     iamEnterprise:
       type: object
@@ -695,38 +551,127 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    iamGroup:
+    v1UsersGetResponse:
       type: object
       properties:
-        description:
-          type: string
-          example: example string
-        enterpriseIds:
+        users:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        enterprisePermissions:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/iamEnterprisePermissions'
-        groupType:
+            $ref: '#/components/schemas/commonUser'
+      additionalProperties: false
+    commonPermissions:
+      type: object
+      properties:
+        assetManager:
           type: string
           example: ENUM_VALUE
-        id:
+        b2b:
           type: string
-          example: example string
-        name:
+          example: ENUM_VALUE
+        b2bSecurityProfileExternal:
           type: string
-          example: example string
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-        timeWindowEnd:
+          example: ENUM_VALUE
+        billingAndInvoicing:
+          type: string
+          example: ENUM_VALUE
+        compliance:
+          type: string
+          example: ENUM_VALUE
+        developerTools:
+          type: string
+          example: ENUM_VALUE
+        gateway:
+          type: string
+          example: ENUM_VALUE
+        globalServices:
+          type: string
+          example: ENUM_VALUE
+        insights:
+          type: string
+          example: ENUM_VALUE
+        licensing:
+          type: string
+          example: ENUM_VALUE
+        logs:
+          type: string
+          example: ENUM_VALUE
+        monitoringAndTroubleshooting:
+          type: string
+          example: ENUM_VALUE
+        networkConfiguration:
+          type: string
+          example: ENUM_VALUE
+        orderStatus:
+          type: string
+          example: ENUM_VALUE
+        reports:
+          type: string
+          example: ENUM_VALUE
+        safetyAndSecurity:
+          type: string
+          example: ENUM_VALUE
+        servicePolicies:
+          type: string
+          example: ENUM_VALUE
+        support:
+          type: string
+          example: ENUM_VALUE
+        userAndTenantManagement:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    iamCounts:
+      type: object
+      properties:
+        activeDownCount:
           type: integer
           format: int64
           example: 1234567891011
-        timeWindowStart:
+        activeUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deactivatedDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emptySitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impairedSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalEdges:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalMsps:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalSites:
+          type: integer
+          format: int64
+          example: 1234567891011
+        upSitesCount:
           type: integer
           format: int64
           example: 1234567891011
@@ -739,14 +684,6 @@ components:
           items:
             $ref: '#/components/schemas/iamEnterprise'
       additionalProperties: false
-    v1UsersIdGroupsRootGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
     v1UsersIdGroupsEnterprisesGetResponse:
       type: object
       properties:
@@ -755,6 +692,85 @@ components:
           items:
             $ref: '#/components/schemas/iamGroup'
       additionalProperties: false
+    v1UsersPutRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+          description: ' (required)'
+        firstName:
+          type: string
+          example: example string
+          description: ' (required)'
+        groupId:
+          type: string
+          example: example string
+        lastName:
+          type: string
+          example: example string
+          description: ' (required)'
+        timeZone:
+          type: string
+          example: example string
+      additionalProperties: false
+      required:
+      - email
+      - firstName
+      - lastName
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1UsersEmailPasswordPatchRequest:
+      type: object
+      properties:
+        password:
+          type: string
+          example: newPassword123
+          description: New password for the user
+      required:
+      - password
+    v1UsersIdVerifyPatchRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1UsersIdGroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1UsersIdGroupsGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1UsersPasswordsExpirePostRequest:
+      type: object
+      properties:
+        userIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - userIds
     commonUser:
       type: object
       properties:
@@ -788,22 +804,6 @@ components:
         verified:
           type: boolean
           example: true
-      additionalProperties: false
-    v1UsersPasswordsExpirePostResponse:
-      type: object
-      properties:
-        failedCount:
-          type: integer
-          format: int32
-          example: 123
-        failedUsers:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamFailedUser'
-        successCount:
-          type: integer
-          format: int32
-          example: 123
       additionalProperties: false
   securitySchemes:
     jwtAuth:

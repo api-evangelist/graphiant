@@ -132,21 +132,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v2NotificationDeletePostResponse:
+    v2NotificationEnabledisablePostResponse:
       type: object
       properties: {}
       additionalProperties: false
-    v2NotificationDeletePostRequest:
+    v2NotificationCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationUpdatePostRequest:
       type: object
       properties:
+        notificationBody:
+          $ref: '#/components/schemas/alertserviceNotificationBody'
         notificationIdList:
           type: array
           items:
             type: string
             example: example string
-            description: List of notification ids to delete notification records (required)
+            description: List of notification ids to update (required)
       additionalProperties: false
       required:
+      - notificationBody
       - notificationIdList
     alertserviceNotificationBody:
       type: object
@@ -231,30 +238,23 @@ components:
       required:
       - enable
       - notificationIdList
-    v2NotificationUpdatePostRequest:
+    v2NotificationUpdatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationDeletePostRequest:
       type: object
       properties:
-        notificationBody:
-          $ref: '#/components/schemas/alertserviceNotificationBody'
         notificationIdList:
           type: array
           items:
             type: string
             example: example string
-            description: List of notification ids to update (required)
+            description: List of notification ids to delete notification records (required)
       additionalProperties: false
       required:
-      - notificationBody
       - notificationIdList
-    v2NotificationCreatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationUpdatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationEnabledisablePostResponse:
+    v2NotificationDeletePostResponse:
       type: object
       properties: {}
       additionalProperties: false

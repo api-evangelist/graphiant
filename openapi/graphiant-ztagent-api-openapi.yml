@@ -178,23 +178,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1ZtagentBindingsPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1ZtagentAgentsGetResponse:
-      type: object
-      properties:
-        agents:
-          type: array
-          items:
-            $ref: '#/components/schemas/concealAgent'
-        count:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v1ZtagentBindingsPutRequest:
+    v1ZtagentBindingsGetResponse:
       type: object
       properties:
         customerId:
@@ -208,7 +192,7 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1ZtagentBindingsGetResponse:
+    v1ZtagentBindingsPutRequest:
       type: object
       properties:
         customerId:
@@ -243,6 +227,22 @@ components:
         machine:
           type: string
           example: example string
+      additionalProperties: false
+    v1ZtagentBindingsPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ZtagentAgentsGetResponse:
+      type: object
+      properties:
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/concealAgent'
+        count:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
   securitySchemes:
     jwtAuth:

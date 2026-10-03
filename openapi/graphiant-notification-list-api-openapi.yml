@@ -42,6 +42,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     alertserviceNotificationBody:
       type: object
       properties:
@@ -114,17 +126,13 @@ components:
         timeWindow:
           $ref: '#/components/schemas/alertserviceTimeWindow'
       additionalProperties: false
-    googleProtobufTimestamp:
+    v2NotificationlistPostResponse:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        notificationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceNotificationRecord'
       additionalProperties: false
     alertserviceTimeWindow:
       type: object
@@ -171,14 +179,6 @@ components:
           example: 12345678910
           minimum: 0
           description: Number of times notification was triggered for the same alert (required)
-      additionalProperties: false
-    v2NotificationlistPostResponse:
-      type: object
-      properties:
-        notificationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceNotificationRecord'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

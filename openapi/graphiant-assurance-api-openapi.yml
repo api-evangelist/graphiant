@@ -1042,7 +1042,201 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v2AssuranceTopologySiteSummariesPostRequest:
+    v2AssuranceDeleteDnsproxyEntryDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssuranceUnclassifiedapplicationprofilesummaryPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+      additionalProperties: false
+    assuranceBucketApp:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+        builtinAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        customAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        exchangeService:
+          $ref: '#/components/schemas/assuranceExchangeServiceIdentifier'
+        flexAlgo:
+          $ref: '#/components/schemas/assuranceFlexAlgoIdentifier'
+        isDomain:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v2AssuranceTopologyInventoryPostResponse:
+      type: object
+      properties:
+        appNames:
+          type: array
+          items:
+            type: string
+            example: example string
+        clientSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceSite'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceRegion'
+        serverSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceSite'
+        topologyChangeTs:
+          type: array
+          items:
+            $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2AssuranceBucketServicesPostResponse:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceExchangeServiceIdentifier'
+      additionalProperties: false
+    assuranceClientSessionEndpointDetails:
+      type: object
+      properties:
+        circuits:
+          type: array
+          items:
+            type: string
+            example: example string
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceEdge'
+        isGateway:
+          type: boolean
+          example: true
+        jitter:
+          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
+        latency:
+          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
+        loss:
+          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
+        site:
+          $ref: '#/components/schemas/assuranceSite'
+        totalDownlinkUsage:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalUplinkUsage:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssuranceCreateclassifiedapplicationPostRequest:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+        ipPrefixList:
+          type: array
+          items:
+            type: string
+            example: example string
+        portList:
+          type: array
+          items:
+            type: string
+            example: example string
+        protocolList:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v2AssuranceUpdateAiAdoptionApproveEntryPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    assuranceTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2AssuranceTopologyRegionSummaryPostResponse:
+      type: object
+      properties:
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2AssuranceTopologyRegionSummaryPostResponseSiteEntry'
+      additionalProperties: false
+    assuranceApprovedAppEntryRequest:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+          description: app name to approve (required)
+        domain:
+          type: string
+          example: example string
+          description: app name to approve
+        id:
+          type: string
+          example: example string
+          description: approved app entry identifier
+        tagRequested:
+          type: string
+          example: ENUM_VALUE
+          description: resulting tag, approved or shadow (required)
+      additionalProperties: false
+      required:
+      - appName
+      - tagRequested
+    v2AssuranceTopologyClientSessionDetailsPostRequest:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssuranceUpdateDnsproxyEntryPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    assuranceTrendValue:
+      type: object
+      properties:
+        endTime:
+          type: integer
+          format: int64
+          example: 1234567891011
+        flowCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        startTime:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssuranceTopologyClientSummariesPostRequest:
       type: object
       properties:
         appName:
@@ -1064,60 +1258,66 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
         timeWindow:
           $ref: '#/components/schemas/assuranceTimeWindow'
       additionalProperties: false
-    v2AssuranceGetAppNamesPostResponse:
+    v2AssuranceCreateUserReportPostRequest:
       type: object
       properties:
-        appNames:
+        createdOn:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emailList:
           type: array
           items:
             type: string
             example: example string
-            description: app names returned (required)
-      additionalProperties: false
-    assuranceBucketSummary:
-      type: object
-      properties:
-        assuranceBucket:
+        pdfContent:
           type: string
-          example: ENUM_VALUE
-        bucketColor:
-          type: string
-          example: ENUM_VALUE
-        bucketNameToDisplay:
-          type: string
-          example: example string
-        bucketStats:
-          $ref: '#/components/schemas/assuranceBucketStats'
-        childBucketList:
+          format: byte
+          example: Ynl0ZXM=
+        rawContent:
           type: array
           items:
             type: string
-            example: ENUM_VALUE
-        childBucketStatsList:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceBucketStatsWithId'
-        isRoot:
-          type: boolean
-          example: true
-        isTerminal:
-          type: boolean
-          example: true
-        parentBucketList:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-      additionalProperties: false
-    v2AssuranceTopologyClientSessionDetailsPostRequest:
-      type: object
-      properties:
-        sessionId:
+            format: byte
+            example: Ynl0ZXM=
+        reportName:
           type: string
           example: example string
+        reportType:
+          type: string
+          example: ENUM_VALUE
+        timePeriod:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    assuranceTopologyFilter:
+      type: object
+      properties:
+        clientSiteIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        regionIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+            example: 123
+        serverSiteIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
       additionalProperties: false
     v2AssuranceCreateAiAdoptionApproveEntryPostRequest:
       type: object
@@ -1127,44 +1327,29 @@ components:
       additionalProperties: false
       required:
       - approvedAppEntry
-    v2AssuranceTopologyClientSummariesPostResponseSummary:
+    v2AssuranceCreateDnsproxyEntryPostResponse:
       type: object
       properties:
-        appServerKey:
+        dnsproxyEntryId:
           type: string
           example: example string
-        clientIp:
-          type: string
-          example: example string
-        clientUsername:
-          type: string
-          example: example string
-        lanSegments:
-          type: array
-          items:
-            type: string
-            example: example string
-        serverIp:
-          type: string
-          example: example string
-        serverPort:
-          type: integer
-          format: int32
-          example: 123
-        serverSiteEnterpriseName:
-          type: string
-          example: example string
-        serverSiteName:
-          type: string
-          example: example string
-        sessionCount:
-          type: integer
-          format: int32
-          example: 123
+          description: dns proxy table entry id (required)
       additionalProperties: false
-    v2AssuranceBucketAppsPostRequest:
+    v2AssuranceBucketdetailsPostResponse:
       type: object
       properties:
+        bucketDetails:
+          $ref: '#/components/schemas/assuranceBucketDetails'
+      additionalProperties: false
+    v2AssuranceApplicationdetailsbynamePostRequest:
+      type: object
+      properties:
+        appIdKey:
+          type: string
+          example: example string
+        appName:
+          type: string
+          example: example string
         bucketId:
           type: string
           example: ENUM_VALUE
@@ -1176,54 +1361,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-        unclassifiedOnly:
-          type: boolean
-          example: true
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2AssuranceBucketServicesPostRequest:
-      type: object
-      properties:
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2AssuranceAiAdoptionSummaryPostResponse:
-      type: object
-      properties:
-        topLevelKpi:
-          $ref: '#/components/schemas/assuranceTopLevelKpi'
-        whatWidget:
-          $ref: '#/components/schemas/assuranceWhatWidget'
-        whenWidget:
-          $ref: '#/components/schemas/assuranceWhenWidget'
-        whereWidget:
-          $ref: '#/components/schemas/assuranceWhereWidget'
-      additionalProperties: false
-    v2AssuranceTopologyRegionSummaryPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v2AssuranceUnclassifiedapplicationprofilesummaryPostRequest:
-      type: object
-      properties:
         timeWindow:
           $ref: '#/components/schemas/assuranceTimeWindow'
       additionalProperties: false
@@ -1263,29 +1400,47 @@ components:
           example: example string
           description: VRF associated with the user (required)
       additionalProperties: false
-    v2AssuranceGetAppNamesPostRequest:
+    assuranceRegion:
       type: object
       properties:
-        tags:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-            description: app name type to fetch (required)
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        regionIsoCode:
+          type: string
+          example: example string
+        regionName:
+          type: string
+          example: example string
       additionalProperties: false
-      required:
-      - tags
-    v2AssuranceUpdateclassifiedapplicationPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    assuranceApplicationProfileSummary:
+    assuranceGeolocation:
       type: object
       properties:
-        bucketSummaryList:
+        lat:
+          type: number
+          format: float
+          example: 12.34
+        long:
+          type: number
+          format: float
+          example: 12.34
+      additionalProperties: false
+    v2AssuranceReadDnsproxyListGetResponse:
+      type: object
+      properties:
+        dnsproxyList:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceBucketSummary'
+            $ref: '#/components/schemas/assuranceDnsProxyEntry'
+      additionalProperties: false
+    v2AssuranceApplicationdetailsbynamePostResponse:
+      type: object
+      properties:
+        appIdRecord:
+          $ref: '#/components/schemas/assuranceAppIdRecord'
+        appNameRecord:
+          $ref: '#/components/schemas/assuranceAppNameRecord'
       additionalProperties: false
     v2AssuranceGetclassifiedapplicationlistGetResponse:
       type: object
@@ -1295,90 +1450,62 @@ components:
           items:
             $ref: '#/components/schemas/assuranceClassifiedApplication'
       additionalProperties: false
-    v2AssuranceReadUserReportListGetResponse:
+    assuranceExchangeServiceIdentifier:
       type: object
       properties:
-        userReportList:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceUserReport'
+        exchangeServiceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        exchangeServiceName:
+          type: string
+          example: example string
       additionalProperties: false
-    v2AssuranceEnterprisesummaryPostResponse:
+    assuranceTopology:
       type: object
       properties:
-        enterpriseSummary:
-          $ref: '#/components/schemas/assuranceEnterpriseSummary'
-      additionalProperties: false
-    v2AssuranceCreateAiAdoptionApproveEntryPostResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          example: example string
-          description: identifier of the created approved app entry (required)
-      additionalProperties: false
-    assuranceBucketDetails:
-      type: object
-      properties:
-        appCountThreatHigh:
-          type: integer
-          format: int64
-          example: 1234567891011
-        appCountThreatLow:
-          type: integer
-          format: int64
-          example: 1234567891011
-        appCountThreatMedium:
-          type: integer
-          format: int64
-          example: 1234567891011
-        appIdRecords:
+        edges:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceAppIdRecord'
-        appNameRecords:
+            $ref: '#/components/schemas/assuranceTopologyEdge'
+        nodes:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceAppNameRecord'
-        bucketNameToDisplay:
-          type: string
-          example: example string
-        description:
-          type: string
-          example: example string
-        displayIpPort:
-          type: boolean
-          example: true
-        flowCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        newIpHint:
-          type: boolean
-          example: true
-        recommendation:
-          type: string
-          example: example string
-        trendValueList:
+            $ref: '#/components/schemas/assuranceTopologyNode'
+        paths:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceTrendValue'
-        uniqueAppCount:
-          type: integer
-          format: int64
-          example: 1234567891011
+            $ref: '#/components/schemas/assuranceTopologyPath'
       additionalProperties: false
     v2AssuranceDeleteAiAdoptionApproveEntryDeleteResponse:
       type: object
       properties: {}
       additionalProperties: false
-    v2AssuranceReadAiAdoptionApproveEntriesGetResponse:
+    assuranceBucketStatsWithId:
       type: object
       properties:
-        approvedAppList:
+        assuranceBucket:
+          type: string
+          example: ENUM_VALUE
+        bucketNameToDisplay:
+          type: string
+          example: example string
+        prevUniqueAppCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        uniqueAppCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssuranceTopologySiteSummariesPostResponse:
+      type: object
+      properties:
+        summaries:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceApprovedAppEntry'
+            $ref: '#/components/schemas/v2AssuranceTopologySiteSummariesPostResponseSummary'
       additionalProperties: false
     assuranceAppNameRecord:
       type: object
@@ -1445,25 +1572,105 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    assuranceScoreDetails:
+    assuranceTopLevelKpi:
       type: object
       properties:
-        scoreBucketList:
+        dataTransferredKbpsMetric:
+          $ref: '#/components/schemas/assuranceKpiMetric'
+        shadowAiToolsMetric:
+          $ref: '#/components/schemas/assuranceKpiMetric'
+        toolsMetric:
+          $ref: '#/components/schemas/assuranceKpiMetric'
+        usersMetric:
+          $ref: '#/components/schemas/assuranceKpiMetric'
+      additionalProperties: false
+    assuranceClientSessionPopLink:
+      type: object
+      properties:
+        firstPopName:
+          type: string
+          example: example string
+        jitter:
+          type: number
+          format: float
+          example: 12.34
+        latency:
+          type: number
+          format: float
+          example: 12.34
+        loss:
+          type: number
+          format: float
+          example: 12.34
+        secondPopName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssuranceTopologyRegionSummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v2AssuranceTopologySiteSummariesPostResponseSummary:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+        lanSegments:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceScoreBucketCount'
+            type: string
+            example: example string
+        sessionCount:
+          type: integer
+          format: int32
+          example: 123
+        site:
+          $ref: '#/components/schemas/assuranceSite'
       additionalProperties: false
-    v2AssuranceBucketdetailsPostRequest:
+    v2AssuranceTopologyOverviewPostResponseGeoregion:
       type: object
       properties:
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-        unclassifiedOnly:
+        numSites:
+          type: integer
+          format: int32
+          example: 123
+        region:
+          $ref: '#/components/schemas/assuranceRegion'
+      additionalProperties: false
+    assuranceTopologyNode:
+      type: object
+      properties:
+        active:
           type: boolean
           example: true
+        location:
+          $ref: '#/components/schemas/assuranceGeolocation'
+        name:
+          type: string
+          example: example string
+        nodeId:
+          type: string
+          example: example string
+        nodeType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     v2AssuranceTopologyClientSessionsPostRequest:
       type: object
@@ -1497,53 +1704,21 @@ components:
         timeWindow:
           $ref: '#/components/schemas/assuranceTimeWindow'
       additionalProperties: false
-    assuranceWhenWidget:
+    assuranceClientSessionEndpointDetailsStatistics:
       type: object
       properties:
-        dayOfWeek:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        hourOfDay:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        monthlyActiveUsers:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        monthlyBandwidthTransferred:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-      additionalProperties: false
-    v2AssuranceDownloadUserReportGetResponse:
-      type: object
-      properties:
-        pdfContent:
-          type: string
-          format: byte
-          example: Ynl0ZXM=
-      additionalProperties: false
-    v2AssuranceBucketAppServersPostRequest:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-        exchangeServiceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        flexAlgoId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
+        avg:
+          type: number
+          format: float
+          example: 12.34
+        max:
+          type: number
+          format: float
+          example: 12.34
+        min:
+          type: number
+          format: float
+          example: 12.34
       additionalProperties: false
     assuranceClientSession:
       type: object
@@ -1624,6 +1799,318 @@ components:
           type: string
           example: example string
       additionalProperties: false
+    assuranceTopologyEdgeLinkPerformance:
+      type: object
+      properties:
+        jitter:
+          type: number
+          format: float
+          example: 12.34
+        latency:
+          type: number
+          format: float
+          example: 12.34
+        loss:
+          type: number
+          format: float
+          example: 12.34
+      additionalProperties: false
+    v2AssuranceReadAiAdoptionApproveEntriesGetResponse:
+      type: object
+      properties:
+        approvedAppList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceApprovedAppEntry'
+      additionalProperties: false
+    assuranceEdge:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssuranceUpdateDnsproxyEntryPostRequest:
+      type: object
+      properties:
+        dnsproxyEntry:
+          $ref: '#/components/schemas/assuranceDnsProxyEntry'
+      additionalProperties: false
+    assuranceClientSessionDiaLink:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+      additionalProperties: false
+    assuranceClassifiedApplication:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+        classificationEntryId:
+          type: string
+          example: example string
+        ipPrefixList:
+          type: array
+          items:
+            type: string
+            example: example string
+        portList:
+          type: array
+          items:
+            type: string
+            example: example string
+        protocolList:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v2AssuranceTopologyClientSessionsPostResponse:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceClientSession'
+      additionalProperties: false
+    v2AssuranceEnterprisesummaryPostResponse:
+      type: object
+      properties:
+        enterpriseSummary:
+          $ref: '#/components/schemas/assuranceEnterpriseSummary'
+      additionalProperties: false
+    assuranceBucketDetails:
+      type: object
+      properties:
+        appCountThreatHigh:
+          type: integer
+          format: int64
+          example: 1234567891011
+        appCountThreatLow:
+          type: integer
+          format: int64
+          example: 1234567891011
+        appCountThreatMedium:
+          type: integer
+          format: int64
+          example: 1234567891011
+        appIdRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceAppIdRecord'
+        appNameRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceAppNameRecord'
+        bucketNameToDisplay:
+          type: string
+          example: example string
+        description:
+          type: string
+          example: example string
+        displayIpPort:
+          type: boolean
+          example: true
+        flowCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        newIpHint:
+          type: boolean
+          example: true
+        recommendation:
+          type: string
+          example: example string
+        trendValueList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceTrendValue'
+        uniqueAppCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    assuranceUserReport:
+      type: object
+      properties:
+        createdBy:
+          type: array
+          items:
+            type: string
+            example: example string
+        createdOn:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emailList:
+          type: array
+          items:
+            type: string
+            example: example string
+        enterpriseId:
+          type: string
+          example: example string
+        reportId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        reportName:
+          type: string
+          example: example string
+        reportType:
+          type: string
+          example: ENUM_VALUE
+        timePeriod:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    assuranceBucketAppServer:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+        appServerKey:
+          type: string
+          example: example string
+        serverIp:
+          type: string
+          example: example string
+        serverPort:
+          type: string
+          example: example string
+        serverProtocol:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssuranceBucketTopologiesPostRequest:
+      type: object
+      properties:
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    assuranceScoreBucketCount:
+      type: object
+      properties:
+        currScore:
+          type: integer
+          format: int64
+          example: 1234567891011
+        maxScore:
+          type: integer
+          format: int64
+          example: 1234567891011
+        scoreBucketId:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2AssuranceTopologyClientSessionDetailsPostResponse:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/assuranceClientSession'
+      additionalProperties: false
+    v2AssuranceDeleteclassifiedapplicationDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssuranceBucketdetailsPostRequest:
+      type: object
+      properties:
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+        unclassifiedOnly:
+          type: boolean
+          example: true
+      additionalProperties: false
+    assuranceApplicationProfileSummary:
+      type: object
+      properties:
+        bucketSummaryList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceBucketSummary'
+      additionalProperties: false
+    v2AssuranceTopologyClientSummariesPostResponseSummary:
+      type: object
+      properties:
+        appServerKey:
+          type: string
+          example: example string
+        clientIp:
+          type: string
+          example: example string
+        clientUsername:
+          type: string
+          example: example string
+        lanSegments:
+          type: array
+          items:
+            type: string
+            example: example string
+        serverIp:
+          type: string
+          example: example string
+        serverPort:
+          type: integer
+          format: int32
+          example: 123
+        serverSiteEnterpriseName:
+          type: string
+          example: example string
+        serverSiteName:
+          type: string
+          example: example string
+        sessionCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v2AssuranceCreateUserReportPostResponse:
+      type: object
+      properties:
+        reportId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    assuranceApprovedAppEntry:
+      type: object
+      properties:
+        activeUsers:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: number of active users (required)
+        category:
+          type: string
+          example: example string
+          description: approved AI tool category (required)
+        dataSentKbps:
+          type: number
+          format: double
+          example: 123.45
+          description: data sent in kbps (required)
+        id:
+          type: string
+          example: example string
+          description: approved app entry identifier (required)
+        tool:
+          type: string
+          example: example string
+          description: approved AI tool name (required)
+      additionalProperties: false
     v2AssuranceTopologyOverviewPostRequest:
       type: object
       properties:
@@ -1656,391 +2143,54 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v2AssuranceTopologyClientSummariesPostRequest:
+    v2AssuranceGetAppNamesPostResponse:
       type: object
       properties:
-        appName:
-          type: string
-          example: example string
-        appServerKey:
-          type: string
-          example: example string
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-        exchangeServiceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        filter:
-          $ref: '#/components/schemas/assuranceTopologyFilter'
+        appNames:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: app names returned (required)
+      additionalProperties: false
+    assuranceWhenWidget:
+      type: object
+      properties:
+        dayOfWeek:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        hourOfDay:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        monthlyActiveUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        monthlyBandwidthTransferred:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+      additionalProperties: false
+    v2AssuranceBucketTopologiesPostResponse:
+      type: object
+      properties:
+        topologies:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceFlexAlgoIdentifier'
+      additionalProperties: false
+    assuranceFlexAlgoIdentifier:
+      type: object
+      properties:
         flexAlgoId:
           type: integer
           format: int64
           example: 1234567891011
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-      additionalProperties: false
-    v2AssuranceTopologyClientSessionDetailsPostResponse:
-      type: object
-      properties:
-        session:
-          $ref: '#/components/schemas/assuranceClientSession'
-      additionalProperties: false
-    assuranceTopologyFilter:
-      type: object
-      properties:
-        clientSiteIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        regionIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-            example: 123
-        serverSiteIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    assuranceEnterpriseSummary:
-      type: object
-      properties:
-        flowsAnalyzed:
-          type: integer
-          format: int64
-          example: 1234567891011
-        gapScore:
-          type: integer
-          format: int64
-          example: 1234567891011
-        prevGapScore:
-          type: integer
-          format: int64
-          example: 1234567891011
-        riskBin:
-          type: integer
-          format: int64
-          example: 1234567891011
-        threatCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        uniqueAppsCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2AssuranceBucketServicesPostResponse:
-      type: object
-      properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceExchangeServiceIdentifier'
-      additionalProperties: false
-    assuranceTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    assuranceRegion:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-        regionIsoCode:
+        flexAlgoName:
           type: string
           example: example string
-        regionName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceTopologyClientSummariesPostResponse:
-      type: object
-      properties:
-        summaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2AssuranceTopologyClientSummariesPostResponseSummary'
-      additionalProperties: false
-    v2AssuranceTopologyOverviewPostResponse:
-      type: object
-      properties:
-        numApplications:
-          type: integer
-          format: int32
-          example: 123
-        numFlows:
-          type: integer
-          format: int32
-          example: 123
-        topology:
-          $ref: '#/components/schemas/assuranceTopology'
-        topologyChangeTs:
-          type: array
-          items:
-            $ref: '#/components/schemas/googleProtobufTimestamp'
-        trafficRegions:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2AssuranceTopologyOverviewPostResponseGeoregion'
-      additionalProperties: false
-    v2AssuranceTopologyRegionSummaryPostResponseSiteEntry:
-      type: object
-      properties:
-        edgeCount:
-          type: integer
-          format: int32
-          example: 123
-        lanSegments:
-          type: array
-          items:
-            type: string
-            example: example string
-        popNames:
-          type: array
-          items:
-            type: string
-            example: example string
-        regionName:
-          type: string
-          example: example string
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteName:
-          type: string
-          example: example string
-        tags:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    v2AssuranceCreateUserReportPostResponse:
-      type: object
-      properties:
-        reportId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2AssuranceCreateclassifiedapplicationPostResponse:
-      type: object
-      properties:
-        classificationEntryId:
-          type: string
-          example: example string
-      additionalProperties: false
-    assuranceGeolocation:
-      type: object
-      properties:
-        lat:
-          type: number
-          format: float
-          example: 12.34
-        long:
-          type: number
-          format: float
-          example: 12.34
-      additionalProperties: false
-    v2AssuranceCreateUserReportPostRequest:
-      type: object
-      properties:
-        createdOn:
-          type: integer
-          format: int64
-          example: 1234567891011
-        emailList:
-          type: array
-          items:
-            type: string
-            example: example string
-        pdfContent:
-          type: string
-          format: byte
-          example: Ynl0ZXM=
-        rawContent:
-          type: array
-          items:
-            type: string
-            format: byte
-            example: Ynl0ZXM=
-        reportName:
-          type: string
-          example: example string
-        reportType:
-          type: string
-          example: ENUM_VALUE
-        timePeriod:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    assuranceClientSessionDiaLink:
-      type: object
-      properties:
-        circuitName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceCreateDnsproxyEntryPostResponse:
-      type: object
-      properties:
-        dnsproxyEntryId:
-          type: string
-          example: example string
-          description: dns proxy table entry id (required)
-      additionalProperties: false
-    v2AssuranceApplicationprofilesummaryPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-      additionalProperties: false
-    v2AssuranceDeleteDnsproxyEntryDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2AssuranceScoredetailsPostResponse:
-      type: object
-      properties:
-        scoreDetails:
-          $ref: '#/components/schemas/assuranceScoreDetails'
-      additionalProperties: false
-    assuranceApprovedAppEntry:
-      type: object
-      properties:
-        activeUsers:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: number of active users (required)
-        category:
-          type: string
-          example: example string
-          description: approved AI tool category (required)
-        dataSentKbps:
-          type: number
-          format: double
-          example: 123.45
-          description: data sent in kbps (required)
-        id:
-          type: string
-          example: example string
-          description: approved app entry identifier (required)
-        tool:
-          type: string
-          example: example string
-          description: approved AI tool name (required)
-      additionalProperties: false
-    v2AssuranceTopologyOverviewPostResponseGeoregion:
-      type: object
-      properties:
-        numSites:
-          type: integer
-          format: int32
-          example: 123
-        region:
-          $ref: '#/components/schemas/assuranceRegion'
-      additionalProperties: false
-    assuranceScoreBucketCount:
-      type: object
-      properties:
-        currScore:
-          type: integer
-          format: int64
-          example: 1234567891011
-        maxScore:
-          type: integer
-          format: int64
-          example: 1234567891011
-        scoreBucketId:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2AssuranceBucketAppServersPostResponse:
-      type: object
-      properties:
-        appServers:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceBucketAppServer'
-      additionalProperties: false
-    v2AssuranceBucketTopologiesPostRequest:
-      type: object
-      properties:
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2AssuranceApplicationdetailsbynamePostRequest:
-      type: object
-      properties:
-        appIdKey:
-          type: string
-          example: example string
-        appName:
-          type: string
-          example: example string
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-        exchangeServiceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        flexAlgoId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-      additionalProperties: false
-    assuranceTopologyNode:
-      type: object
-      properties:
-        active:
-          type: boolean
-          example: true
-        location:
-          $ref: '#/components/schemas/assuranceGeolocation'
-        name:
-          type: string
-          example: example string
-        nodeId:
-          type: string
-          example: example string
-        nodeType:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2AssuranceApplicationprofilesummaryPostResponse:
-      type: object
-      properties:
-        applicationProfileSummary:
-          $ref: '#/components/schemas/assuranceApplicationProfileSummary'
       additionalProperties: false
     assuranceDnsProxyEntry:
       type: object
@@ -2081,259 +2231,33 @@ components:
       - nameText
       - portList
       - protocol
-    assuranceBucketStats:
-      type: object
-      properties:
-        prevUniqueAppCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        prevUniqueThreatCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        uniqueAppCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        uniqueThreatCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2AssuranceAiAdoptionSummaryPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-        userListSize:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: list size of user list in where widget (required)
-      additionalProperties: false
-      required:
-      - timeWindow
-      - userListSize
-    v2AssuranceUnclassifiedapplicationprofilesummaryPostResponse:
-      type: object
-      properties:
-        applicationProfileSummary:
-          $ref: '#/components/schemas/assuranceApplicationProfileSummary'
-      additionalProperties: false
-    assuranceEdge:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceBucketTopologiesPostResponse:
-      type: object
-      properties:
-        topologies:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceFlexAlgoIdentifier'
-      additionalProperties: false
-    assuranceBucketStatsWithId:
-      type: object
-      properties:
-        assuranceBucket:
-          type: string
-          example: ENUM_VALUE
-        bucketNameToDisplay:
-          type: string
-          example: example string
-        prevUniqueAppCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        uniqueAppCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v2AssuranceTopologyRegionSummaryPostResponse:
-      type: object
-      properties:
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2AssuranceTopologyRegionSummaryPostResponseSiteEntry'
-      additionalProperties: false
-    v2AssuranceUpdateclassifiedapplicationPostRequest:
-      type: object
-      properties:
-        classifiedApplicationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceClassifiedApplication'
-      additionalProperties: false
-    assuranceFlexAlgoIdentifier:
-      type: object
-      properties:
-        flexAlgoId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        flexAlgoName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceTopologySiteSummariesPostResponse:
-      type: object
-      properties:
-        summaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2AssuranceTopologySiteSummariesPostResponseSummary'
-      additionalProperties: false
-    v2AssuranceApplicationdetailsbynamePostResponse:
-      type: object
-      properties:
-        appIdRecord:
-          $ref: '#/components/schemas/assuranceAppIdRecord'
-        appNameRecord:
-          $ref: '#/components/schemas/assuranceAppNameRecord'
-      additionalProperties: false
-    v2AssuranceCreateclassifiedapplicationPostRequest:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
-        ipPrefixList:
-          type: array
-          items:
-            type: string
-            example: example string
-        portList:
-          type: array
-          items:
-            type: string
-            example: example string
-        protocolList:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    assuranceClientSessionEndpointDetails:
-      type: object
-      properties:
-        circuits:
-          type: array
-          items:
-            type: string
-            example: example string
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceEdge'
-        isGateway:
-          type: boolean
-          example: true
-        jitter:
-          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
-        latency:
-          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
-        loss:
-          $ref: '#/components/schemas/assuranceClientSessionEndpointDetailsStatistics'
-        site:
-          $ref: '#/components/schemas/assuranceSite'
-        totalDownlinkUsage:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalUplinkUsage:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    assuranceWhereWidget:
-      type: object
-      properties:
-        topSitesByUsers:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        topUsersByDataTransferred:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceUserDefinition'
-        topVrfsByUsers:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-      additionalProperties: false
-    assuranceBucketAppServer:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
-        appServerKey:
-          type: string
-          example: example string
-        serverIp:
-          type: string
-          example: example string
-        serverPort:
-          type: string
-          example: example string
-        serverProtocol:
-          type: string
-          example: example string
-      additionalProperties: false
-    assuranceExchangeServiceIdentifier:
-      type: object
-      properties:
-        exchangeServiceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        exchangeServiceName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceDeleteUserReportDeleteResponse:
+    v2AssuranceUpdateclassifiedapplicationPostResponse:
       type: object
       properties: {}
       additionalProperties: false
-    assuranceSite:
+    v2AssuranceBucketAppServersPostResponse:
       type: object
       properties:
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-        siteEnterpriseName:
-          type: string
-          example: example string
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteName:
-          type: string
-          example: example string
+        appServers:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceBucketAppServer'
       additionalProperties: false
-    v2AssuranceTopologyInventoryPostRequest:
+    v2AssuranceReadUserReportListGetResponse:
       type: object
       properties:
-        bucketId:
-          type: string
-          example: ENUM_VALUE
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
-        topologyType:
-          type: string
-          example: ENUM_VALUE
+        userReportList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceUserReport'
+      additionalProperties: false
+    assuranceScoreDetails:
+      type: object
+      properties:
+        scoreBucketList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceScoreBucketCount'
       additionalProperties: false
     v2AssuranceTopologyOverviewPostRequestTopologyFilter:
       type: object
@@ -2357,23 +2281,56 @@ components:
             format: int64
             example: 1234567891011
       additionalProperties: false
-    v2AssuranceTopologySiteSummariesPostResponseSummary:
+    v2AssuranceCreateAiAdoptionApproveEntryPostResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: example string
+          description: identifier of the created approved app entry (required)
+      additionalProperties: false
+    v2AssuranceBucketAppServersPostRequest:
       type: object
       properties:
         appName:
           type: string
           example: example string
-        lanSegments:
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+        exchangeServiceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        flexAlgoId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+      additionalProperties: false
+    v2AssuranceDeleteUserReportDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AssuranceGetAppNamesPostRequest:
+      type: object
+      properties:
+        tags:
           type: array
           items:
             type: string
-            example: example string
-        sessionCount:
-          type: integer
-          format: int32
-          example: 123
-        site:
-          $ref: '#/components/schemas/assuranceSite'
+            example: ENUM_VALUE
+            description: app name type to fetch (required)
+      additionalProperties: false
+      required:
+      - tags
+    v2AssuranceCreateclassifiedapplicationPostResponse:
+      type: object
+      properties:
+        classificationEntryId:
+          type: string
+          example: example string
       additionalProperties: false
     assuranceAppIdRecord:
       type: object
@@ -2482,51 +2439,61 @@ components:
             type: string
             example: example string
       additionalProperties: false
-    v2AssuranceDeleteclassifiedapplicationDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    assuranceTopologyEdgeLinkPerformance:
+    v2AssuranceUpdateclassifiedapplicationPostRequest:
       type: object
       properties:
-        jitter:
-          type: number
-          format: float
-          example: 12.34
-        latency:
-          type: number
-          format: float
-          example: 12.34
-        loss:
-          type: number
-          format: float
-          example: 12.34
+        classifiedApplicationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceClassifiedApplication'
       additionalProperties: false
-    assuranceClientSessionPopLink:
+    v2AssuranceBucketAppsPostRequest:
       type: object
       properties:
-        firstPopName:
+        bucketId:
           type: string
-          example: example string
-        jitter:
-          type: number
-          format: float
-          example: 12.34
-        latency:
-          type: number
-          format: float
-          example: 12.34
-        loss:
-          type: number
-          format: float
-          example: 12.34
-        secondPopName:
-          type: string
-          example: example string
+          example: ENUM_VALUE
+        exchangeServiceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        flexAlgoId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+        unclassifiedOnly:
+          type: boolean
+          example: true
       additionalProperties: false
-    v2AssuranceUpdateDnsproxyEntryPostResponse:
+    assuranceEnterpriseSummary:
       type: object
-      properties: {}
+      properties:
+        flowsAnalyzed:
+          type: integer
+          format: int64
+          example: 1234567891011
+        gapScore:
+          type: integer
+          format: int64
+          example: 1234567891011
+        prevGapScore:
+          type: integer
+          format: int64
+          example: 1234567891011
+        riskBin:
+          type: integer
+          format: int64
+          example: 1234567891011
+        threatCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        uniqueAppsCount:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     assuranceTopologyPath:
       type: object
@@ -2536,24 +2503,6 @@ components:
           items:
             type: string
             example: example string
-      additionalProperties: false
-    v2AssuranceUpdateDnsproxyEntryPostRequest:
-      type: object
-      properties:
-        dnsproxyEntry:
-          $ref: '#/components/schemas/assuranceDnsProxyEntry'
-      additionalProperties: false
-    assuranceTopLevelKpi:
-      type: object
-      properties:
-        dataTransferredKbpsMetric:
-          $ref: '#/components/schemas/assuranceKpiMetric'
-        shadowAiToolsMetric:
-          $ref: '#/components/schemas/assuranceKpiMetric'
-        toolsMetric:
-          $ref: '#/components/schemas/assuranceKpiMetric'
-        usersMetric:
-          $ref: '#/components/schemas/assuranceKpiMetric'
       additionalProperties: false
     assuranceTopologyEdge:
       type: object
@@ -2569,164 +2518,134 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v2AssuranceScoredetailsPostRequest:
+    assuranceWhereWidget:
       type: object
       properties:
-        timeWindow:
-          $ref: '#/components/schemas/assuranceTimeWindow'
+        topSitesByUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        topUsersByDataTransferred:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceUserDefinition'
+        topVrfsByUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
       additionalProperties: false
-    assuranceApprovedAppEntryRequest:
+    assuranceSite:
       type: object
       properties:
-        appName:
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        siteEnterpriseName:
           type: string
           example: example string
-          description: app name to approve (required)
-        domain:
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
           type: string
           example: example string
-          description: app name to approve
-        id:
-          type: string
-          example: example string
-          description: approved app entry identifier
-        tagRequested:
-          type: string
-          example: ENUM_VALUE
-          description: resulting tag, approved or shadow (required)
       additionalProperties: false
-      required:
-      - appName
-      - tagRequested
-    v2AssuranceBucketdetailsPostResponse:
+    v2AssuranceAiAdoptionSummaryPostResponse:
       type: object
       properties:
-        bucketDetails:
-          $ref: '#/components/schemas/assuranceBucketDetails'
+        topLevelKpi:
+          $ref: '#/components/schemas/assuranceTopLevelKpi'
+        whatWidget:
+          $ref: '#/components/schemas/assuranceWhatWidget'
+        whenWidget:
+          $ref: '#/components/schemas/assuranceWhenWidget'
+        whereWidget:
+          $ref: '#/components/schemas/assuranceWhereWidget'
       additionalProperties: false
-    v2AssuranceTopologyInventoryPostResponse:
+    v2AssuranceTopologyRegionSummaryPostResponseSiteEntry:
       type: object
       properties:
-        appNames:
+        edgeCount:
+          type: integer
+          format: int32
+          example: 123
+        lanSegments:
           type: array
           items:
             type: string
             example: example string
-        clientSites:
+        popNames:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceSite'
-        regions:
+            type: string
+            example: example string
+        regionName:
+          type: string
+          example: example string
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+        tags:
           type: array
           items:
-            $ref: '#/components/schemas/assuranceRegion'
-        serverSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceSite'
+            type: string
+            example: example string
+      additionalProperties: false
+    v2AssuranceTopologyOverviewPostResponse:
+      type: object
+      properties:
+        numApplications:
+          type: integer
+          format: int32
+          example: 123
+        numFlows:
+          type: integer
+          format: int32
+          example: 123
+        topology:
+          $ref: '#/components/schemas/assuranceTopology'
         topologyChangeTs:
           type: array
           items:
             $ref: '#/components/schemas/googleProtobufTimestamp'
+        trafficRegions:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2AssuranceTopologyOverviewPostResponseGeoregion'
       additionalProperties: false
-    v2AssuranceUpdateAiAdoptionApproveEntryPostResponse:
+    assuranceWhatWidget:
       type: object
-      properties: {}
+      properties:
+        bubbleCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        topToolsByActiveUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+        topToolsByDataTransferred:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceKpiMetric'
+      additionalProperties: false
+    v2AssuranceUnclassifiedapplicationprofilesummaryPostResponse:
+      type: object
+      properties:
+        applicationProfileSummary:
+          $ref: '#/components/schemas/assuranceApplicationProfileSummary'
       additionalProperties: false
     v2AssuranceCreateDnsproxyEntryPostRequest:
       type: object
       properties:
         dnsproxyEntry:
           $ref: '#/components/schemas/assuranceDnsProxyEntry'
-      additionalProperties: false
-    assuranceClassifiedApplication:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
-        classificationEntryId:
-          type: string
-          example: example string
-        ipPrefixList:
-          type: array
-          items:
-            type: string
-            example: example string
-        portList:
-          type: array
-          items:
-            type: string
-            example: example string
-        protocolList:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    assuranceClientSessionEndpointLink:
-      type: object
-      properties:
-        circuitName:
-          type: string
-          example: example string
-        jitter:
-          type: number
-          format: float
-          example: 12.34
-        latency:
-          type: number
-          format: float
-          example: 12.34
-        loss:
-          type: number
-          format: float
-          example: 12.34
-        popName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2AssuranceTopologyClientSessionsPostResponse:
-      type: object
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceClientSession'
-      additionalProperties: false
-    assuranceUserReport:
-      type: object
-      properties:
-        createdBy:
-          type: array
-          items:
-            type: string
-            example: example string
-        createdOn:
-          type: integer
-          format: int64
-          example: 1234567891011
-        emailList:
-          type: array
-          items:
-            type: string
-            example: example string
-        enterpriseId:
-          type: string
-          example: example string
-        reportId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        reportName:
-          type: string
-          example: example string
-        reportType:
-          type: string
-          example: ENUM_VALUE
-        timePeriod:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
     assuranceKpiMetric:
       type: object
@@ -2760,113 +2679,113 @@ components:
           example: 123.45
           description: metric value (required)
       additionalProperties: false
-    v2AssuranceEnterprisesummaryPostRequest:
+    assuranceClientSessionEndpointLink:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+        jitter:
+          type: number
+          format: float
+          example: 12.34
+        latency:
+          type: number
+          format: float
+          example: 12.34
+        loss:
+          type: number
+          format: float
+          example: 12.34
+        popName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2AssuranceTopologyClientSummariesPostResponse:
+      type: object
+      properties:
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2AssuranceTopologyClientSummariesPostResponseSummary'
+      additionalProperties: false
+    v2AssuranceBucketServicesPostRequest:
+      type: object
+      properties:
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2AssuranceAiAdoptionSummaryPostRequest:
       type: object
       properties:
         timeWindow:
           $ref: '#/components/schemas/assuranceTimeWindow'
-      additionalProperties: false
-    assuranceTopology:
-      type: object
-      properties:
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceTopologyEdge'
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceTopologyNode'
-        paths:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceTopologyPath'
-      additionalProperties: false
-    assuranceTrendValue:
-      type: object
-      properties:
-        endTime:
+        userListSize:
           type: integer
           format: int64
           example: 1234567891011
-        flowCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        startTime:
-          type: integer
-          format: int64
-          example: 1234567891011
+          description: list size of user list in where widget (required)
       additionalProperties: false
-    assuranceClientSessionEndpointDetailsStatistics:
-      type: object
-      properties:
-        avg:
-          type: number
-          format: float
-          example: 12.34
-        max:
-          type: number
-          format: float
-          example: 12.34
-        min:
-          type: number
-          format: float
-          example: 12.34
-      additionalProperties: false
-    assuranceWhatWidget:
-      type: object
-      properties:
-        bubbleCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        topToolsByActiveUsers:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-        topToolsByDataTransferred:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceKpiMetric'
-      additionalProperties: false
-    v2AssuranceBucketAppsPostResponse:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceBucketApp'
-      additionalProperties: false
-    assuranceBucketApp:
+      required:
+      - timeWindow
+      - userListSize
+    v2AssuranceTopologySiteSummariesPostRequest:
       type: object
       properties:
         appName:
           type: string
           example: example string
-        builtinAppId:
+        appServerKey:
+          type: string
+          example: example string
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+        exchangeServiceId:
           type: integer
           format: int64
           example: 1234567891011
-        customAppId:
+        filter:
+          $ref: '#/components/schemas/assuranceTopologyFilter'
+        flexAlgoId:
           type: integer
           format: int64
           example: 1234567891011
-        exchangeService:
-          $ref: '#/components/schemas/assuranceExchangeServiceIdentifier'
-        flexAlgo:
-          $ref: '#/components/schemas/assuranceFlexAlgoIdentifier'
-        isDomain:
-          type: boolean
-          example: true
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
       additionalProperties: false
-    v2AssuranceReadDnsproxyListGetResponse:
+    v2AssuranceApplicationprofilesummaryPostRequest:
       type: object
       properties:
-        dnsproxyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/assuranceDnsProxyEntry'
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+      additionalProperties: false
+    v2AssuranceApplicationprofilesummaryPostResponse:
+      type: object
+      properties:
+        applicationProfileSummary:
+          $ref: '#/components/schemas/assuranceApplicationProfileSummary'
+      additionalProperties: false
+    v2AssuranceTopologyInventoryPostRequest:
+      type: object
+      properties:
+        bucketId:
+          type: string
+          example: ENUM_VALUE
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+        topologyType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2AssuranceDownloadUserReportGetResponse:
+      type: object
+      properties:
+        pdfContent:
+          type: string
+          format: byte
+          example: Ynl0ZXM=
       additionalProperties: false
     v2AssuranceUpdateAiAdoptionApproveEntryPostRequest:
       type: object
@@ -2876,6 +2795,87 @@ components:
       additionalProperties: false
       required:
       - approvedAppEntry
+    v2AssuranceScoredetailsPostResponse:
+      type: object
+      properties:
+        scoreDetails:
+          $ref: '#/components/schemas/assuranceScoreDetails'
+      additionalProperties: false
+    v2AssuranceScoredetailsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+      additionalProperties: false
+    v2AssuranceEnterprisesummaryPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/assuranceTimeWindow'
+      additionalProperties: false
+    assuranceBucketSummary:
+      type: object
+      properties:
+        assuranceBucket:
+          type: string
+          example: ENUM_VALUE
+        bucketColor:
+          type: string
+          example: ENUM_VALUE
+        bucketNameToDisplay:
+          type: string
+          example: example string
+        bucketStats:
+          $ref: '#/components/schemas/assuranceBucketStats'
+        childBucketList:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        childBucketStatsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceBucketStatsWithId'
+        isRoot:
+          type: boolean
+          example: true
+        isTerminal:
+          type: boolean
+          example: true
+        parentBucketList:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    assuranceBucketStats:
+      type: object
+      properties:
+        prevUniqueAppCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        prevUniqueThreatCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        uniqueAppCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        uniqueThreatCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2AssuranceBucketAppsPostResponse:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/assuranceBucketApp'
+      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

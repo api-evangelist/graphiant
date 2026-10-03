@@ -52,14 +52,6 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1QosCircuitProfilesGetResponse:
-      type: object
-      properties:
-        profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2QoSProfile'
-      additionalProperties: false
     manaV2QoSProfile:
       type: object
       properties:
@@ -73,6 +65,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2QoSProfileQueue'
+      additionalProperties: false
+    v1QosCircuitProfilesGetResponse:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfile'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

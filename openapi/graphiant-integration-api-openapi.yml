@@ -183,6 +183,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2IntegrationPostRequest:
+      type: object
+      properties:
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
+      additionalProperties: false
+      required:
+      - integrationBody
+    v2IntegrationIntegrationIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     alertserviceUpdateIntegrationBody:
       type: object
       properties:
@@ -214,17 +238,89 @@ components:
       - enterprise
       - integrationType
       - nickName
-    v2IntegrationPostRequest:
+    alertserviceIntegrationDetails:
       type: object
       properties:
-        integrationBody:
-          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
+        opsgenieKey:
+          type: string
+          example: example string
+        opsrampDetails:
+          type: string
+          example: example string
+        pagerdutyRoutingKey:
+          type: string
+          example: example string
+        webhookUrl:
+          type: string
+          example: example string
+        zendeskDetails:
+          $ref: '#/components/schemas/alertserviceZendeskDetails'
+      additionalProperties: false
+    alertserviceIntegration:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          example: example string
+        createdOn:
+          type: string
+          example: example string
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterpriseId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isActive:
+          type: boolean
+          example: true
+        lastScanned:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: last scanned time for integrations (zendesk)
+        nickName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    alertserviceZendeskDetails:
+      type: object
+      properties:
+        zendeskApiToken:
+          type: string
+          example: example string
+          description: zendesk api token (required)
+        zendeskAssigneeId:
+          type: string
+          example: example string
+          description: zendesk assignee id (required)
+        zendeskBaseUrl:
+          type: string
+          example: example string
+          description: zendesk base url (required)
+        zendeskEmail:
+          type: string
+          example: example string
+          description: zendesk email (required)
       additionalProperties: false
       required:
-      - integrationBody
-    v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
+      - zendeskApiToken
+      - zendeskAssigneeId
+      - zendeskBaseUrl
+      - zendeskEmail
+    v2IntegrationGetallEnterpriseIdGetResponse:
       type: object
-      properties: {}
+      properties:
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceIntegration'
       additionalProperties: false
     alertserviceCreateIntegrationBody:
       type: object
@@ -259,31 +355,14 @@ components:
       - enterprise
       - integrationType
       - nickName
-    alertserviceZendeskDetails:
+    v2IntegrationIntegrationIdPutRequest:
       type: object
       properties:
-        zendeskApiToken:
-          type: string
-          example: example string
-          description: zendesk api token (required)
-        zendeskAssigneeId:
-          type: string
-          example: example string
-          description: zendesk assignee id (required)
-        zendeskBaseUrl:
-          type: string
-          example: example string
-          description: zendesk base url (required)
-        zendeskEmail:
-          type: string
-          example: example string
-          description: zendesk email (required)
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceUpdateIntegrationBody'
       additionalProperties: false
       required:
-      - zendeskApiToken
-      - zendeskAssigneeId
-      - zendeskBaseUrl
-      - zendeskEmail
+      - integrationBody
     v2IntegrationPostResponse:
       type: object
       properties:
@@ -294,88 +373,9 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v2IntegrationIntegrationIdPutRequest:
-      type: object
-      properties:
-        integrationBody:
-          $ref: '#/components/schemas/alertserviceUpdateIntegrationBody'
-      additionalProperties: false
-      required:
-      - integrationBody
-    alertserviceIntegration:
-      type: object
-      properties:
-        createdBy:
-          type: string
-          example: example string
-        createdOn:
-          type: string
-          example: example string
-        details:
-          $ref: '#/components/schemas/alertserviceIntegrationDetails'
-        enterpriseId:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isActive:
-          type: boolean
-          example: true
-        lastScanned:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: last scanned time for integrations (zendesk)
-        nickName:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2IntegrationGetallEnterpriseIdGetResponse:
-      type: object
-      properties:
-        integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceIntegration'
-      additionalProperties: false
-    v2IntegrationIntegrationIdPutResponse:
+    v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
       type: object
       properties: {}
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    alertserviceIntegrationDetails:
-      type: object
-      properties:
-        opsgenieKey:
-          type: string
-          example: example string
-        opsrampDetails:
-          type: string
-          example: example string
-        pagerdutyRoutingKey:
-          type: string
-          example: example string
-        webhookUrl:
-          type: string
-          example: example string
-        zendeskDetails:
-          $ref: '#/components/schemas/alertserviceZendeskDetails'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

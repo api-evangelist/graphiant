@@ -293,54 +293,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufDuration:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2LanSegmentSitesMap:
-      type: object
-      properties:
-        siteIds:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2SiteLanSegmentDeviceBuckets'
-        siteListIds:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2SiteLanSegmentDeviceBuckets'
-      additionalProperties: false
-    v1SitesSiteIdCircuitsGetResponseData:
-      type: object
-      properties:
-        circuits:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Circuit'
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-      additionalProperties: false
-    manaV2BgpMultipath:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     v1SitesMapDetailsGetResponse:
       type: object
       properties:
@@ -348,59 +300,6 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/manaV2LanSegmentSitesMap'
-      additionalProperties: false
-    manaV2BgpAggregation:
-      type: object
-      properties:
-        asSet:
-          type: boolean
-          example: true
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        prefix:
-          type: string
-          example: example string
-        summaryOnly:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2BfdInstance:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
-        minimumInterval:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        multiplier:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2BgpRedistribute:
-      type: object
-      properties:
-        bgp:
-          type: boolean
-          example: true
-        connected:
-          type: boolean
-          example: true
-        dia:
-          type: boolean
-          example: true
-        ospfv2:
-          type: boolean
-          example: true
-        static:
-          type: boolean
-          example: true
       additionalProperties: false
     manaV2CircuitInterface:
       type: object
@@ -423,64 +322,85 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    manaV2SiteDeviceStub:
+    manaV2RouteTag:
       type: object
       properties:
-        hostname:
+        levelOne:
           type: string
           example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
+        levelTwo:
+          type: string
+          example: example string
+        levelZero:
+          type: string
+          example: example string
       additionalProperties: false
-    manaV2StaticRoute:
+    manaV2BgpRedistribute:
       type: object
       properties:
-        administrativeDistance:
+        bgp:
+          type: boolean
+          example: true
+        connected:
+          type: boolean
+          example: true
+        dia:
+          type: boolean
+          example: true
+        ospfv2:
+          type: boolean
+          example: true
+        static:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2GlobalObjectOperationConfig:
+      type: object
+      properties:
+        interface:
+          $ref: '#/components/schemas/manaV2NullableSiteInterfaceName'
+        operation:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2QoSProfileQueue:
+      type: object
+      properties:
+        bandwidthPercent:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        description:
+        defaultQueue:
+          type: boolean
+          example: true
+        slaClass:
           type: string
-          example: example string
-        id:
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2BgpMultipath:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        vrfId:
           type: integer
           format: int64
           example: 1234567891011
-        nextHop:
-          $ref: '#/components/schemas/manaV2StaticRouteNexthop'
-        nextHops:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2StaticRouteNexthop'
-        prefix:
-          type: string
-          example: example string
       additionalProperties: false
-    v1SitesSiteIdDevicesGetResponse:
+    v1SitesSiteIdCircuitsGetResponseData:
       type: object
       properties:
-        device:
+        circuits:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2topology_device'
-      additionalProperties: false
-    manaV2SingleRouteTagRouteTagElement:
-      type: object
-      properties:
-        id:
+            $ref: '#/components/schemas/manaV2Circuit'
+        deviceId:
           type: integer
           format: int64
-          example: 1234567891011
-        tag:
-          type: string
-          example: example string
-        tagValue:
-          type: integer
-          format: int32
-          example: 123
+          example: 12345678910
+          minimum: 0
       additionalProperties: false
     manaV2Circuit:
       type: object
@@ -582,85 +502,132 @@ components:
         wanInterfaceV2:
           $ref: '#/components/schemas/manaV2CircuitInterface'
       additionalProperties: false
-    manaV2QoSProfileQueue:
+    v1SitesSiteIdCircuitsGetResponse:
       type: object
       properties:
-        bandwidthPercent:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        defaultQueue:
-          type: boolean
-          example: true
-        slaClass:
-          type: string
-          example: ENUM_VALUE
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SitesSiteIdCircuitsGetResponseData'
       additionalProperties: false
-    manaV2NullableSiteInterfaceName:
+    v1SitesGetResponse:
       type: object
       properties:
-        interface:
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Site'
+      additionalProperties: false
+    v1SitesSiteIdPostResponse:
+      type: object
+      properties:
+        site:
+          $ref: '#/components/schemas/manaV2Site'
+      additionalProperties: false
+    v1SitesSiteIdPostRequest:
+      type: object
+      properties:
+        site:
+          $ref: '#/components/schemas/manaV2NewSite'
+      additionalProperties: false
+    manaV2Site:
+      type: object
+      properties:
+        address:
           type: string
           example: example string
-      additionalProperties: false
-    manaV2BfdNeighbor:
-      type: object
-      properties:
-        desiredMinimumTxInterval:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ifIndex:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        interface:
-          type: string
-          example: example string
-        lastUpdated:
+        createdAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
-        localDiag:
-          type: string
-          example: ENUM_VALUE
-        peerAddress:
-          type: string
-          example: example string
-        remoteDiag:
-          type: string
-          example: ENUM_VALUE
-        requiredMinimumRxInterval:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteDeviceStub'
+        edgeCount:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        segmentName:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        location:
+          $ref: '#/components/schemas/manaV2Location'
+        name:
           type: string
           example: example string
-        sourceAddress:
+        notes:
           type: string
           example: example string
-        state:
-          type: string
-          example: ENUM_VALUE
-        timeInState:
-          $ref: '#/components/schemas/googleProtobufDuration'
-        up:
-          type: boolean
-          example: true
+        policyReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        policyTag:
+          $ref: '#/components/schemas/manaV2SingleRouteTag'
+        segmentCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        siteListReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        tags:
+          type: array
+          items:
+            type: string
+            example: example string
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    manaV2RouteTag:
+    manaV2SiteDeviceStub:
       type: object
       properties:
-        levelOne:
+        hostname:
           type: string
           example: example string
-        levelTwo:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1SitesPostResponse:
+      type: object
+      properties:
+        site:
+          $ref: '#/components/schemas/manaV2Site'
+      additionalProperties: false
+    manaV2StaticRouteNexthop:
+      type: object
+      properties:
+        circuit:
           type: string
           example: example string
-        levelZero:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        metric:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        nextHopAddress:
+          type: string
+          example: example string
+        nexthop:
+          type: string
+          example: example string
+        outgoingInterface:
+          type: string
+          example: example string
+        thirdPartyIpsecTunnel:
           type: string
           example: example string
       additionalProperties: false
@@ -685,6 +652,21 @@ components:
           $ref: '#/components/schemas/manaV2SingleRouteTagRouteTagElement'
         levelZero:
           $ref: '#/components/schemas/manaV2SingleRouteTagRouteTagElement'
+      additionalProperties: false
+    manaV2SingleRouteTagRouteTagElement:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        tag:
+          type: string
+          example: example string
+        tagValue:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
     manaV2NewSite:
       type: object
@@ -747,6 +729,250 @@ components:
           additionalProperties:
             type: string
             example: ENUM_VALUE
+      additionalProperties: false
+    v1SitesDetailsGetResponse:
+      type: object
+      properties:
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Site'
+      additionalProperties: false
+    manaV2BfdInstance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        minimumInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        multiplier:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1SitesSiteIdDevicesGetResponse:
+      type: object
+      properties:
+        device:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2topology_device'
+      additionalProperties: false
+    manaV2BfdNeighbor:
+      type: object
+      properties:
+        desiredMinimumTxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ifIndex:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        interface:
+          type: string
+          example: example string
+        lastUpdated:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localDiag:
+          type: string
+          example: ENUM_VALUE
+        peerAddress:
+          type: string
+          example: example string
+        remoteDiag:
+          type: string
+          example: ENUM_VALUE
+        requiredMinimumRxInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        segmentName:
+          type: string
+          example: example string
+        sourceAddress:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: ENUM_VALUE
+        timeInState:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        up:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2SiteLanSegmentDeviceBuckets:
+      type: object
+      properties:
+        lanSegmentExists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteDeviceSummary'
+        lanSegmentMissing:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteDeviceSummary'
+      additionalProperties: false
+    manaV2topology_device:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        hostname:
+          type: string
+          example: example string
+        location:
+          type: string
+          example: example string
+        maintenanceMode:
+          type: boolean
+          example: true
+        managementIp:
+          type: string
+          example: example string
+        model:
+          type: string
+          example: example string
+        role:
+          type: string
+          example: ENUM_VALUE
+        serialNumber:
+          type: string
+          example: example string
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        softwareVersion:
+          type: string
+          example: example string
+        stagingMode:
+          type: boolean
+          example: true
+        uptime:
+          $ref: '#/components/schemas/googleProtobufDuration'
+        vrrpInterface:
+          type: string
+          example: example string
+        vrrpState:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1SitesPostRequest:
+      type: object
+      properties:
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        site:
+          $ref: '#/components/schemas/manaV2NewSite'
+      additionalProperties: false
+    manaV2Location:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          example: example string
+        addressLine2:
+          type: string
+          example: example string
+        city:
+          type: string
+          example: example string
+        country:
+          type: string
+          example: example string
+        countryCode:
+          type: string
+          example: example string
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+        notes:
+          type: string
+          example: example string
+        provinceCode:
+          type: string
+          example: example string
+        state:
+          type: string
+          example: example string
+        stateCode:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2BgpDynamicNeighborOperPeer:
+      type: object
+      properties:
+        lastOperStatusChange:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        localAddress:
+          type: string
+          example: example string
+          description: Local address used for this peer session, if known from oper
+        operStatus:
+          type: boolean
+          example: true
+          description: True when the BGP session to this peer is operationally up (e.g. established)
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Peer ASN from oper, if reported
+        remoteAddress:
+          type: string
+          example: example string
+          description: Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)
+        state:
+          type: string
+          example: ENUM_VALUE
+          description: BGP FSM state for this peer session
+      additionalProperties: false
+    manaV2LanSegmentSitesMap:
+      type: object
+      properties:
+        siteIds:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2SiteLanSegmentDeviceBuckets'
+        siteListIds:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2SiteLanSegmentDeviceBuckets'
+      additionalProperties: false
+    manaV2QoSProfile:
+      type: object
+      properties:
+        kind:
+          type: string
+          example: ENUM_VALUE
+        profile:
+          type: string
+          example: ENUM_VALUE
+        queues:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfileQueue'
       additionalProperties: false
     manaV2BgpNeighbor:
       type: object
@@ -840,6 +1066,13 @@ components:
           type: boolean
           example: true
       additionalProperties: false
+    manaV2NullableSiteInterfaceName:
+      type: object
+      properties:
+        interface:
+          type: string
+          example: example string
+      additionalProperties: false
     commonPageInfo:
       type: object
       properties:
@@ -878,211 +1111,47 @@ components:
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
       additionalProperties: false
-    v1SitesPostRequest:
+    manaV2BgpNeighborAddressFamily:
       type: object
       properties:
-        enterpriseId:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        id:
           type: integer
           format: int64
           example: 1234567891011
-        site:
-          $ref: '#/components/schemas/manaV2NewSite'
-      additionalProperties: false
-    v1SitesPostResponse:
-      type: object
-      properties:
-        site:
-          $ref: '#/components/schemas/manaV2Site'
-      additionalProperties: false
-    manaV2QoSProfile:
-      type: object
-      properties:
-        kind:
+        inboundPolicy:
           type: string
-          example: ENUM_VALUE
-        profile:
+          example: example string
+        outboundPolicy:
           type: string
-          example: ENUM_VALUE
-        queues:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2QoSProfileQueue'
+          example: example string
       additionalProperties: false
-    manaV2StaticRouteNexthop:
+    manaV2StaticRoute:
       type: object
       properties:
-        circuit:
+        administrativeDistance:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        description:
           type: string
           example: example string
         id:
           type: integer
           format: int64
           example: 1234567891011
-        metric:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        nextHopAddress:
-          type: string
-          example: example string
-        nexthop:
-          type: string
-          example: example string
-        outgoingInterface:
-          type: string
-          example: example string
-        thirdPartyIpsecTunnel:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2Location:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-          example: example string
-        addressLine2:
-          type: string
-          example: example string
-        city:
-          type: string
-          example: example string
-        country:
-          type: string
-          example: example string
-        countryCode:
-          type: string
-          example: example string
-        latitude:
-          type: number
-          format: double
-          example: 123.45
-        longitude:
-          type: number
-          format: double
-          example: 123.45
-        notes:
-          type: string
-          example: example string
-        provinceCode:
-          type: string
-          example: example string
-        state:
-          type: string
-          example: example string
-        stateCode:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2Site:
-      type: object
-      properties:
-        address:
-          type: string
-          example: example string
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        devices:
+        nextHop:
+          $ref: '#/components/schemas/manaV2StaticRouteNexthop'
+        nextHops:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2SiteDeviceStub'
-        edgeCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        location:
-          $ref: '#/components/schemas/manaV2Location'
-        name:
+            $ref: '#/components/schemas/manaV2StaticRouteNexthop'
+        prefix:
           type: string
           example: example string
-        notes:
-          type: string
-          example: example string
-        policyReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        policyTag:
-          $ref: '#/components/schemas/manaV2SingleRouteTag'
-        segmentCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        siteListReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        tags:
-          type: array
-          items:
-            type: string
-            example: example string
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    manaV2GlobalObjectOperationConfig:
-      type: object
-      properties:
-        interface:
-          $ref: '#/components/schemas/manaV2NullableSiteInterfaceName'
-        operation:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2BgpDynamicNeighborOperPeer:
-      type: object
-      properties:
-        lastOperStatusChange:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        localAddress:
-          type: string
-          example: example string
-          description: Local address used for this peer session, if known from oper
-        operStatus:
-          type: boolean
-          example: true
-          description: True when the BGP session to this peer is operationally up (e.g. established)
-        peerAsn:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: Peer ASN from oper, if reported
-        remoteAddress:
-          type: string
-          example: example string
-          description: Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)
-        state:
-          type: string
-          example: ENUM_VALUE
-          description: BGP FSM state for this peer session
-      additionalProperties: false
-    v1SitesDetailsGetResponse:
-      type: object
-      properties:
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Site'
-      additionalProperties: false
-    v1SitesGetResponse:
-      type: object
-      properties:
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Site'
       additionalProperties: false
     manaV2SiteDeviceSummary:
       type: object
@@ -1100,103 +1169,34 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1SitesSiteIdPostRequest:
+    manaV2BgpAggregation:
       type: object
       properties:
-        site:
-          $ref: '#/components/schemas/manaV2NewSite'
-      additionalProperties: false
-    manaV2topology_device:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        hostname:
-          type: string
-          example: example string
-        location:
-          type: string
-          example: example string
-        maintenanceMode:
+        asSet:
           type: boolean
           example: true
-        managementIp:
-          type: string
-          example: example string
-        model:
-          type: string
-          example: example string
-        role:
-          type: string
-          example: ENUM_VALUE
-        serialNumber:
-          type: string
-          example: example string
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        softwareVersion:
-          type: string
-          example: example string
-        stagingMode:
-          type: boolean
-          example: true
-        uptime:
-          $ref: '#/components/schemas/googleProtobufDuration'
-        vrrpInterface:
-          type: string
-          example: example string
-        vrrpState:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2SiteLanSegmentDeviceBuckets:
-      type: object
-      properties:
-        lanSegmentExists:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteDeviceSummary'
-        lanSegmentMissing:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteDeviceSummary'
-      additionalProperties: false
-    v1SitesSiteIdPostResponse:
-      type: object
-      properties:
-        site:
-          $ref: '#/components/schemas/manaV2Site'
-      additionalProperties: false
-    v1SitesSiteIdCircuitsGetResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SitesSiteIdCircuitsGetResponseData'
-      additionalProperties: false
-    manaV2BgpNeighborAddressFamily:
-      type: object
-      properties:
-        addressFamily:
-          type: string
-          example: ENUM_VALUE
         id:
           type: integer
           format: int64
           example: 1234567891011
-        inboundPolicy:
+        prefix:
           type: string
           example: example string
-        outboundPolicy:
-          type: string
-          example: example string
+        summaryOnly:
+          type: boolean
+          example: true
+      additionalProperties: false
+    googleProtobufDuration:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -77,17 +77,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1RegionsRegionIdGatewaysGetResponseGateway:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostname:
-          type: string
-          example: example string
-      additionalProperties: false
     manaV2Region:
       type: object
       properties:
@@ -107,6 +96,25 @@ components:
           type: boolean
           example: true
       additionalProperties: false
+    v1RegionsRegionIdGatewaysGetResponseGateway:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1RegionsGetResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Region'
+      additionalProperties: false
     manaV2RegionCoordinates:
       type: object
       properties:
@@ -118,14 +126,6 @@ components:
           type: number
           format: double
           example: 123.45
-      additionalProperties: false
-    v1RegionsGetResponse:
-      type: object
-      properties:
-        regions:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Region'
       additionalProperties: false
     v1RegionsRegionIdGatewaysGetResponse:
       type: object

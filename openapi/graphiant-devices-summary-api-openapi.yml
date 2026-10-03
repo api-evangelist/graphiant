@@ -52,25 +52,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    manaV2Region:
-      type: object
-      properties:
-        coordinates:
-          $ref: '#/components/schemas/manaV2RegionCoordinates'
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-        regionIsoCode:
-          type: string
-          example: example string
-        unavailable:
-          type: boolean
-          example: true
-      additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummaryDeviceSummary:
       type: object
       properties:
@@ -97,6 +78,25 @@ components:
         status:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
       additionalProperties: false
     v1DevicesSummaryGetResponse:
       type: object

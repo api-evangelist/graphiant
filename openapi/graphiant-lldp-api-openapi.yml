@@ -111,6 +111,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1LldpInterfaceIdSummaryGetResponse:
+      type: object
+      properties:
+        numNeighbors:
+          type: integer
+          format: int64
+          example: 1234567891011
+        numVendors:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     v1LldpInterfaceIdVendorsGetResponse:
       type: object
       properties:
@@ -118,6 +130,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2VendorDetail'
+      additionalProperties: false
+    manaV2VendorDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        neighborCount:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     v1LldpInterfaceIdNeighborsGetResponse:
       type: object
@@ -152,29 +175,6 @@ components:
         vendor:
           type: string
           example: example string
-      additionalProperties: false
-    v1LldpInterfaceIdSummaryGetResponse:
-      type: object
-      properties:
-        numNeighbors:
-          type: integer
-          format: int64
-          example: 1234567891011
-        numVendors:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2VendorDetail:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        neighborCount:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
   securitySchemes:
     jwtAuth:

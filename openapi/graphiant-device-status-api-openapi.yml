@@ -72,6 +72,43 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    pokedexDeviceHistoryInfo:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        event:
+          type: string
+          example: ENUM_VALUE
+        eventTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ipaddress:
+          type: string
+          example: example string
+        ttIdentity:
+          type: string
+          example: example string
+      additionalProperties: false
     v1DeviceStatusHistoryPostRequest:
       type: object
       properties:
@@ -118,43 +155,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    pokedexDeviceHistoryInfo:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        event:
-          type: string
-          example: ENUM_VALUE
-        eventTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        ipaddress:
-          type: string
-          example: example string
-        ttIdentity:
-          type: string
-          example: example string
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
     v1DeviceStatusHistoryPostResponse:
       type: object

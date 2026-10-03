@@ -1855,141 +1855,98 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1GlobalAppsCustomGetResponseEntry:
+    manaV2TrafficPolicyRulesetConfigNullableRule:
       type: object
       properties:
-        app:
-          $ref: '#/components/schemas/manaV2App'
-        appConfig:
-          $ref: '#/components/schemas/manaV2GlobalAppConfig'
-        appListReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-        policyReferenceCount:
-          type: integer
-          format: int32
-          example: 123
+        rule:
+          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRuleRule'
       additionalProperties: false
-    manaV2NullableSnmpVacmGroupAccessValue:
+    v1GlobalNtpsDeviceGetResponse:
       type: object
       properties:
-        access:
-          $ref: '#/components/schemas/manaV2SnmpVacmGroupAccessConfig'
+        ntps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Ntp'
       additionalProperties: false
-    manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch:
+    manaV2IPsecProfile:
       type: object
       properties:
-        match:
-          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatchMatch'
-      additionalProperties: false
-    manaV2SnmpVacmGroupAccess:
-      type: object
-      properties:
-        context:
-          type: string
-          example: example string
-        groupContextMatch:
-          type: string
-          example: ENUM_VALUE
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        readView:
-          type: string
-          example: example string
-        securityLevel:
-          type: string
-          example: ENUM_VALUE
-        writeView:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2SnmpUsmRemoteUserConfig:
-      type: object
-      properties:
-        authLocKey:
-          type: string
-          example: example string
-        authProtocol:
-          type: string
-          example: ENUM_VALUE
-        encryptionLocKey:
-          type: string
-          example: example string
-        encryptionProtocol:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2NullableRoutingProtocol:
-      type: object
-      properties:
-        protocol:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2NullableMetric:
-      type: object
-      properties:
-        absolute:
+        antiReplayWindowSize:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        modifier:
+        dpdInterval:
           type: integer
           format: int32
           example: 123
-      additionalProperties: false
-    v1GlobalNtpsPostRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    v1GlobalAppsAppListsAppListIdPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2SnmpEngineEndpointConfig:
-      type: object
-      properties:
-        addresses:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpEngineEndpointsAddress'
-        autoIpv4:
+          minimum: 0
+        esn:
           type: boolean
           example: true
-        autoIpv6:
-          type: boolean
-          example: true
-        interface:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ikeDhGroup:
           type: string
-          example: example string
-        lanSegment:
+          example: ENUM_VALUE
+        ikeEncryptionAlg:
           type: string
-          example: example string
+          example: ENUM_VALUE
+        ikeIntegrity:
+          type: string
+          example: ENUM_VALUE
+        ipsecEncryptionAlg:
+          type: string
+          example: ENUM_VALUE
+        ipsecIntegrity:
+          type: string
+          example: ENUM_VALUE
         name:
           type: string
           example: example string
+        perfectForwardSecrecy:
+          type: string
+          example: ENUM_VALUE
+        reauthInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        rekeyInterval:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
-    manaV2NullableIPsecVpnProfilesConfig:
+    manaV2RouteTag:
       type: object
       properties:
-        vpnProfile:
-          $ref: '#/components/schemas/manaV2IPsecProfile'
+        levelOne:
+          type: string
+          example: example string
+        levelTwo:
+          type: string
+          example: example string
+        levelZero:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableSecurityZonePairConfig:
+      type: object
+      properties:
+        pair:
+          $ref: '#/components/schemas/manaV2SecurityZonePairConfig'
+      additionalProperties: false
+    v1GlobalSyslogsPostResponse:
+      type: object
+      properties:
+        collectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SyslogCollector'
       additionalProperties: false
     v1GlobalLanSegmentsPostResponse:
       type: object
@@ -2002,146 +1959,114 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    manaV2GlobalContentFilterConfig:
+    manaV2NullableEnterprisePrefixSetConfig:
       type: object
       properties:
-        lanNames:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: LAN interface names to scope the filter; when empty, all LANs are included.
-        name:
-          type: string
-          example: example string
-          description: Display name for this global content filter configuration.
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalContentFilterRule'
-        siteListId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Site list whose members this content filter applies to; omit the oneof when no site scope is set.
-        useAllSites:
+        target:
+          $ref: '#/components/schemas/manaV2EnterprisePrefixSetConfig'
+      additionalProperties: false
+    manaV2SnmpConfig:
+      type: object
+      properties:
+        communities:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpCommunityConfigValue'
+        engineAuthenTraps:
           type: boolean
           example: true
-          description: When true, the filter applies to all sites in the tenant (must be the constant true).
-      additionalProperties: false
-    manaV2SnmpVacmViewConfig:
-      type: object
-      properties:
-        includeExcludeList:
+        engineEnabled:
+          type: boolean
+          example: true
+        engineEndpoints:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/manaV2SnmpVacmViewIncludeConfig'
-        name:
+            $ref: '#/components/schemas/manaV2NullableSnmpEngineEndpointConfigValue'
+        engineHighCpuTraps:
+          type: boolean
+          example: true
+        engineHighMemoryTraps:
+          type: boolean
+          example: true
+        engineIdAdminOctets:
           type: string
           example: example string
-      additionalProperties: false
-    v1GlobalAppsGraphiantGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalAppsGraphiantGetResponseEntry'
-      additionalProperties: false
-    manaV2ForwardingPolicyConfig:
-      type: object
-      properties:
-        dpiApplications:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableDpiApplicationConfig'
-        networkLists:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableIpNetworkListConfig'
-        portLists:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableL4PortListConfig'
-        securityRulesets:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSecurityPolicyRulesetConfig'
-        trafficRulesets:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableTrafficPolicyRulesetConfig'
-        zoneFirewalls:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableZoneFirewallConfig'
-        zones:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSecurityZoneConfig'
-      additionalProperties: false
-    v1GlobalSiteListsGetResponseEntry:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        description:
+        engineIdAdminText:
           type: string
           example: example string
-        edgeReferences:
-          type: integer
-          format: int32
-          example: 123
-        id:
+        engineIdIpv4:
+          type: string
+          example: example string
+        engineIdIpv6:
+          type: string
+          example: example string
+        engineIdMac:
+          type: string
+          example: example string
+        engineIdRaw:
+          type: string
+          example: example string
+        engineLocalAcessV4:
+          type: boolean
+          example: true
+        engineLocalAcessV6:
+          type: boolean
+          example: true
+        engineUserHints:
+          type: boolean
+          example: true
+        engineUserValidation:
+          type: boolean
+          example: true
+        globalId:
           type: integer
           format: int64
           example: 1234567891011
+        isGlobalSync:
+          type: boolean
+          example: true
         name:
           type: string
           example: example string
-        policyReferences:
-          type: integer
-          format: int32
-          example: 123
-        siteListReferences:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    manaV2NullableApplicationMatchConfig:
-      type: object
-      properties:
-        match:
-          $ref: '#/components/schemas/manaV2ApplicationMatchConfig'
-      additionalProperties: false
-    v1GlobalAppsAppListsAppListIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1GlobalContentFiltersGetResponseRowSiteEntry:
-      type: object
-      properties:
-        siteName:
-          type: string
-          example: example string
-          description: Display name of a site included in this filter's global or site-list-bounded scope.
-      additionalProperties: false
-    manaV2SecurityZoneConfig:
-      type: object
-      properties:
-        inside:
-          type: string
-          example: example string
-        pairs:
+        notifyFilterProfiles:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSecurityZonePairConfig'
+            $ref: '#/components/schemas/manaV2NullableSnmpNotifyFilterProfileConfigValue'
+        snmpVersion:
+          type: string
+          example: ENUM_VALUE
+        targets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpTargetConfigValue'
+        usmLocalUsers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableUsmLocalUserConfigValue'
+        usmRemoteUsers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableUsmRemoteUserConfigValue'
+        v2cEnabled:
+          type: boolean
+          example: true
+        v3Enabled:
+          type: boolean
+          example: true
+        vacmGroups:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableVacmGroupValue'
+        vacmViews:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpVacmViewValue'
       additionalProperties: false
-    manaV2NullableDscpMatchConfig:
+    manaV2NullableRouteTagSet:
       type: object
       properties:
-        match:
-          $ref: '#/components/schemas/manaV2Dscp'
+        entry:
+          $ref: '#/components/schemas/manaV2RouteTag'
       additionalProperties: false
     manaV2TrafficPolicyRulesetRuleAction:
       type: object
@@ -2170,381 +2095,67 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    manaV2NullableSnmpConfig:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/manaV2SnmpConfig'
-      additionalProperties: false
-    manaV2NullableProtocolRouteType:
-      type: object
-      properties:
-        routeType:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1GlobalSiteListsIdPutRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteListEntry'
-      additionalProperties: false
-    manaV2SecurityPolicyRulesetConfig:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
-        rules:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfigNullableRule'
-      additionalProperties: false
-    manaV2ForwardingPolicy:
-      type: object
-      properties:
-        dpiApplications:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2DpiCustomApplication'
-        networkLists:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpNetworkList'
-        portLists:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2L4PortList'
-        securityRulesets:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRuleset'
-        trafficRulesets:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRuleset'
-        zoneFirewalls:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ZoneFirewallPolicy'
-        zonePairs:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityZone'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1GlobalAppsAppListsGetResponse:
+    v1GlobalAppsCategoriesGetResponse:
       type: object
       properties:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/v1GlobalAppsAppListsGetResponseEntry'
+            $ref: '#/components/schemas/v1GlobalAppsCategoriesGetResponseEntry'
       additionalProperties: false
-    manaV2AppListConfig:
+    v1GlobalSyncPostRequest:
       type: object
       properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2AppIdentifier'
-        description:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2GlobalContentFilterRule:
-      type: object
-      properties:
-        domainCategoryId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: ID of the category whose traffic will be blocked by the content filter.
-        exceptionWildcards:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: List of wildcard strings each representing a selection of domains that are exceptions that will not be blocked even if it is in the provided category
-      additionalProperties: false
-    manaV2PrefixSet:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2PrefixSetEntry'
-        errorMessage:
-          type: string
-          example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        mode:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2PrefixSetPolicy'
-        policyCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1GlobalAppsCategoriesCategoryIdAppsGetResponse:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2App'
-      additionalProperties: false
-    manaV2DpiCustomApplication:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        destinationNetwork:
-          type: string
-          example: example string
-        destinationNetworkList:
-          type: string
-          example: example string
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        destinationPortList:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ipProtocol:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-        sourceNetwork:
-          type: string
-          example: example string
-        sourceNetworkList:
-          type: string
-          example: example string
-        sourcePort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sourcePortList:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalAppsCustomAppIdPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2NullableDomainListMatchConfig:
-      type: object
-      properties:
-        match:
-          $ref: '#/components/schemas/manaV2DomainListMatchConfig'
-      additionalProperties: false
-    v1GlobalLanSegmentsVrfIdDevicesGetResponseEntry:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostName:
-          type: string
-          example: example string
-        numInterfaces:
-          type: integer
-          format: int32
-          example: 123
-        site:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1GlobalDomainCategoriesGetResponse:
-      type: object
-      properties:
-        domainCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2DomainCategory'
-      additionalProperties: false
-    manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction:
-      type: object
-      properties:
-        backupCircuit:
-          $ref: '#/components/schemas/manaV2NullableSetCircuitConfig'
-        backupCircuitLabel:
-          $ref: '#/components/schemas/manaV2NullableSetCircuitLabelConfig'
-        egress:
-          type: string
-          example: ENUM_VALUE
-        logging:
-          type: boolean
-          example: true
-        primaryCircuit:
-          $ref: '#/components/schemas/manaV2NullableSetCircuitConfig'
-        primaryCircuitLabel:
-          $ref: '#/components/schemas/manaV2NullableSetCircuitLabelConfig'
-        remark:
-          $ref: '#/components/schemas/manaV2NullableSetDscpConfig'
-        setSlaClass:
-          $ref: '#/components/schemas/manaV2NullableSetSlaClassConfig'
-      additionalProperties: false
-    v1GlobalSiteListsPostResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2VacmGroupConfig:
-      type: object
-      properties:
-        accesses:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpVacmGroupAccessValue'
-        members:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpVacmGroupMemberValue'
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalSyslogsPostRequest:
-      type: object
-      properties:
-        ids:
+        deviceIds:
           type: array
           items:
             type: integer
             format: int64
             example: 1234567891011
+        ipfixExportedId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ntpId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        prefixSetId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        routingPolicyId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        snmpId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        syslogServerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        trafficPolicyId:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-    manaV2Ntp:
+    v1GlobalNtpsPostResponse:
       type: object
       properties:
-        domains:
+        ntps:
           type: array
           items:
-            type: string
-            example: example string
-        errorMessage:
-          type: string
-          example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
+            $ref: '#/components/schemas/manaV2Ntp'
       additionalProperties: false
-    manaV2GlobalAppPortRange:
+    v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponse:
       type: object
       properties:
-        lower:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        upper:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2SecurityZonePairConfig:
-      type: object
-      properties:
-        outside:
-          type: string
-          example: example string
-        ruleset:
-          type: string
-          example: example string
-        tcpProtection:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2RoutingPolicyConfigNullableStatement:
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatement'
+        siteToSiteVpn:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponseSiteToSiteVpn'
       additionalProperties: false
     manaV2RoutingPolicyConfigNullableStatementStatementNullableActionAction:
       type: object
@@ -2574,29 +2185,148 @@ components:
         weight:
           $ref: '#/components/schemas/manaV2NullableWeight'
       additionalProperties: false
-    manaV2SnmpVacmGroupMember:
+    v1GlobalSummaryPostResponse:
+      type: object
+      properties:
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
+      additionalProperties: false
+    manaV2NullableMetric:
+      type: object
+      properties:
+        absolute:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        modifier:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1GlobalAppsAppListsPostRequest:
+      type: object
+      properties:
+        appListConfig:
+          $ref: '#/components/schemas/manaV2AppListConfig'
+      additionalProperties: false
+    manaV2NtpConfig:
+      type: object
+      properties:
+        domains:
+          type: array
+          items:
+            type: string
+            example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isGlobalSync:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2SecurityZonePairConfig:
+      type: object
+      properties:
+        outside:
+          type: string
+          example: example string
+        ruleset:
+          type: string
+          example: example string
+        tcpProtection:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2SiteListSiteEntry:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        edgeReferences:
+          type: integer
+          format: int32
+          example: 123
+        siteName:
+          type: string
+          example: example string
+        tag:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagId'
+      additionalProperties: false
+    v1GlobalSnmpsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2EnterprisePrefixSetDataEntry:
+      type: object
+      properties:
+        ipPrefix:
+          type: string
+          example: example string
+        maskLower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        maskUpper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1GlobalAppsGraphiantGetResponseEntry:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/manaV2App'
+        appListReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+        policyReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    manaV2SnmpVacmView:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1234567891011
-        securityModel:
-          type: string
-          example: ENUM_VALUE
-        securityName:
-          type: string
-          example: example string
-        snmpCommunity:
+        includeExclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SnmpVacmViewInclude'
+        name:
           type: string
           example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
-    v1GlobalContentFiltersGlobalContentFilterIdPutResponse:
+    manaV2NullableSnmpNotifyFilterProfileConfigValue:
       type: object
-      properties: {}
+      properties:
+        notifyFilterProfile:
+          $ref: '#/components/schemas/manaV2SnmpNotifyFilterProfileConfig'
       additionalProperties: false
     v1GlobalContentFiltersGetResponse:
       type: object
@@ -2606,87 +2336,65 @@ components:
           items:
             $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRow'
       additionalProperties: false
-    manaV2SyslogCollectorConfig:
+    manaV2RoutingPolicyConfig:
       type: object
       properties:
-        enabled:
-          type: boolean
-          example: true
+        attachPoint:
+          type: string
+          example: ENUM_VALUE
+        defaultAction:
+          type: string
+          example: ENUM_VALUE
+        description:
+          type: string
+          example: example string
         globalId:
           type: integer
           format: int64
           example: 1234567891011
-        host:
-          type: string
-          example: example string
-        interfaceName:
-          type: string
-          example: example string
         isGlobalSync:
           type: boolean
           example: true
         name:
           type: string
           example: example string
-        port:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        severity:
-          type: string
-          example: ENUM_VALUE
-        transport:
-          type: string
-          example: ENUM_VALUE
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
+        statements:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatement'
       additionalProperties: false
-    manaV2SnmpVacmViewInclude:
+    v1GlobalSyncPostResponse:
       type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        include:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
+      properties: {}
       additionalProperties: false
-    manaV2NullableSetCircuitConfig:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalIpsecProfileGetResponseIPsecProfileCount:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ipsecProfileName:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2SecurityPolicyRuleset:
+    v1GlobalLanSegmentsPostRequest:
       type: object
       properties:
         description:
           type: string
           example: example string
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalAppsAppListsAppListIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2SyslogCollector:
+      type: object
+      properties:
+        destinationHost:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        enabled:
+          type: boolean
+          example: true
         errorMessage:
           type: string
           example: example string
@@ -2698,68 +2406,123 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-        index:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
         name:
           type: string
           example: example string
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRulesetRule'
+        severity:
+          type: string
+          example: ENUM_VALUE
+        sourceInterface:
+          type: string
+          example: example string
         status:
           type: string
           example: ENUM_VALUE
+        transport:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
       additionalProperties: false
-    manaV2SnmpUsmRemoteUser:
+    v1GlobalIpsecProfileIdGetResponse:
       type: object
       properties:
-        authLocKey:
+        ipsecProfile:
+          $ref: '#/components/schemas/manaV2IPsecProfile'
+      additionalProperties: false
+    manaV2NullableSecurityZoneConfig:
+      type: object
+      properties:
+        zone:
+          $ref: '#/components/schemas/manaV2SecurityZoneConfig'
+      additionalProperties: false
+    manaV2NullableCommunity:
+      type: object
+      properties:
+        community:
+          $ref: '#/components/schemas/manaV2CommunityContainer'
+      additionalProperties: false
+    manaV2SnmpCommunity:
+      type: object
+      properties:
+        communityString:
           type: string
           example: example string
-        authProtocol:
-          type: string
-          example: ENUM_VALUE
-        encryptionLocKey:
-          type: string
-          example: example string
-        encryptionProtocol:
-          type: string
-          example: ENUM_VALUE
         id:
           type: integer
           format: int64
           example: 1234567891011
-        name:
-          type: string
-          example: example string
       additionalProperties: false
-    v1GlobalAppsCategoriesGetResponseEntry:
+    manaV2RouteTagId:
       type: object
       properties:
-        appCount:
+        levelOne:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelTwo:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelZero:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2NullableSetCircuitLabelConfig:
+      type: object
+      properties:
+        ipsecLabel:
+          type: string
+          example: ENUM_VALUE
+        label:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NullableDpiApplicationConfig:
+      type: object
+      properties:
+        application:
+          $ref: '#/components/schemas/manaV2DpiApplicationConfig'
+      additionalProperties: false
+    manaV2NullableAdministrativeDistance:
+      type: object
+      properties:
+        distance:
           type: integer
           format: int32
           example: 123
-        category:
-          $ref: '#/components/schemas/manaV2App'
+          minimum: 0
       additionalProperties: false
-    manaV2NullableDestinationNetworkMatchConfig:
+    v1GlobalIpsecProfileGetResponse:
       type: object
       properties:
-        destinationNetwork:
+        ipsecProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalIpsecProfileGetResponseIPsecProfileCount'
+      additionalProperties: false
+    manaV2ZoneFirewallPolicy:
+      type: object
+      properties:
+        ip:
+          $ref: '#/components/schemas/manaV2IpFirewallPolicy'
+        udp:
+          $ref: '#/components/schemas/manaV2UdpFlowTable'
+        zoneName:
           type: string
           example: example string
       additionalProperties: false
-    manaV2NullableSnmpEngineEndpointsAddress:
+    v1GlobalContentFiltersPostRequest:
       type: object
       properties:
-        address:
-          type: string
-          example: example string
+        config:
+          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
       additionalProperties: false
     manaV2Snmp:
       type: object
@@ -2861,99 +2624,254 @@ components:
           items:
             $ref: '#/components/schemas/manaV2SnmpVacmGroup'
       additionalProperties: false
-    manaV2ForwardingPolicyMatch:
+    v1GlobalTrafficPoliciesPostResponse:
       type: object
       properties:
-        application:
+        trafficPolicy:
+          $ref: '#/components/schemas/manaV2ForwardingPolicy'
+      additionalProperties: false
+    v1GlobalLanSegmentsGetResponseEntry:
+      type: object
+      properties:
+        associatedInterfaces:
+          type: integer
+          format: int32
+          example: 123
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        description:
           type: string
           example: example string
-        destinationNetwork:
+        edgeReferences:
+          type: integer
+          format: int32
+          example: 123
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
           type: string
           example: example string
-        destinationPort:
+        siteListReferences:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    manaV2SecurityPolicyRuleset:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        errorMessage:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        index:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        destinationPortRange:
-          $ref: '#/components/schemas/manaV2PortRange'
-        domainCategoryIds:
+        name:
+          type: string
+          example: example string
+        rules:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        domainWildcards:
-          type: array
-          items:
-            type: string
-            example: example string
-        dscp:
-          $ref: '#/components/schemas/manaV2Dscp'
-        icmpType:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ipProtocol:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRulesetRule'
+        status:
           type: string
           example: ENUM_VALUE
-        protocol:
-          type: string
-          example: ENUM_VALUE
-        sourceNetwork:
+      additionalProperties: false
+    manaV2SnmpNotifyFilterProfileConfig:
+      type: object
+      properties:
+        includeExcludeList:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NotifyFilterProfileIncludeConfig'
+        name:
           type: string
           example: example string
-        sourcePort:
+      additionalProperties: false
+    manaV2SnmpVacmGroupMemberConfig:
+      type: object
+      properties:
+        community:
+          type: string
+          example: example string
+        securityModel:
+          type: string
+          example: ENUM_VALUE
+        securityName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2RoutingPolicyStatement:
+      type: object
+      properties:
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RoutingPolicyStatementAction'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RoutingPolicyStatementMatch'
+        seq:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        sourcePortRange:
-          $ref: '#/components/schemas/manaV2PortRange'
       additionalProperties: false
-    v1GlobalSnmpsPostRequest:
+    manaV2RoutingPolicyStatementAction:
       type: object
       properties:
-        ids:
+        administrativeDistance:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        aspathPrepend:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        bgpSetNextHop:
+          type: string
+          example: example string
+        callPolicy:
+          type: string
+          example: example string
+        community:
+          $ref: '#/components/schemas/manaV2CommunityType'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        localPref:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        metricAbsolute:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        metricModifier:
+          type: integer
+          format: int32
+          example: 123
+        result:
+          type: string
+          example: ENUM_VALUE
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        weight:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1GlobalAppsAppListsPostResponse:
+      type: object
+      properties:
+        appIdentifier:
+          $ref: '#/components/schemas/manaV2AppIdentifier'
+      additionalProperties: false
+    v1GlobalRoutingPoliciesPostResponse:
+      type: object
+      properties:
+        routingPolicies:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
+            $ref: '#/components/schemas/manaV2RoutingPolicy'
       additionalProperties: false
-    manaV2NotifyFilterProfileIncludeConfig:
+    manaV2SnmpVacmGroupMember:
       type: object
       properties:
-        enabled:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        securityModel:
+          type: string
+          example: ENUM_VALUE
+        securityName:
+          type: string
+          example: example string
+        snmpCommunity:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NotifyFilterProfileInclude:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        include:
           type: boolean
           example: true
+        subtree:
+          type: string
+          example: example string
       additionalProperties: false
-    v1GlobalLanSegmentsGetResponse:
+    manaV2SnmpUsmRemoteUser:
       type: object
       properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalLanSegmentsGetResponseEntry'
-      additionalProperties: false
-    v1GlobalPrefixSetsPostResponse:
-      type: object
-      properties:
-        prefixSets:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2PrefixSet'
-      additionalProperties: false
-    manaV2RoutingPolicyConfig:
-      type: object
-      properties:
-        attachPoint:
+        authLocKey:
+          type: string
+          example: example string
+        authProtocol:
           type: string
           example: ENUM_VALUE
-        defaultAction:
+        encryptionLocKey:
+          type: string
+          example: example string
+        encryptionProtocol:
           type: string
           example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableUsmLocalUserConfigValue:
+      type: object
+      properties:
+        localUser:
+          $ref: '#/components/schemas/manaV2SnmpUsmLocalUserConfig'
+      additionalProperties: false
+    manaV2SecurityPolicyRulesetConfig:
+      type: object
+      properties:
         description:
           type: string
           example: example string
@@ -2967,10 +2885,383 @@ components:
         name:
           type: string
           example: example string
-        statements:
+        rules:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatement'
+            $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfigNullableRule'
+      additionalProperties: false
+    manaV2NullableSnmpConfig:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2SnmpConfig'
+      additionalProperties: false
+    manaV2ForwardingPolicy:
+      type: object
+      properties:
+        dpiApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DpiCustomApplication'
+        networkLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpNetworkList'
+        portLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2L4PortList'
+        securityRulesets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRuleset'
+        trafficRulesets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRuleset'
+        zoneFirewalls:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ZoneFirewallPolicy'
+        zonePairs:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityZone'
+      additionalProperties: false
+    manaV2SnmpUsmRemoteUserConfig:
+      type: object
+      properties:
+        authLocKey:
+          type: string
+          example: example string
+        authProtocol:
+          type: string
+          example: ENUM_VALUE
+        encryptionLocKey:
+          type: string
+          example: example string
+        encryptionProtocol:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2PrefixSetPolicy:
+      type: object
+      properties:
+        attachPoint:
+          type: string
+          example: ENUM_VALUE
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalSummaryPostRequest:
+      type: object
+      properties:
+        ipfixExportedType:
+          type: boolean
+          example: true
+        ntpType:
+          type: boolean
+          example: true
+        prefixSetType:
+          type: boolean
+          example: true
+        routingPolicyType:
+          type: boolean
+          example: true
+        snmpType:
+          type: boolean
+          example: true
+        syslogServerType:
+          type: boolean
+          example: true
+        trafficPolicyType:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2RoutingPolicyConfigNullableStatementStatementNullableAction:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableActionAction'
+      additionalProperties: false
+    manaV2NullableSourceNetworkMatchConfig:
+      type: object
+      properties:
+        sourceNetwork:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2PrefixSetConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        entries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2PrefixSetConfigNullableEntry'
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isGlobalSync:
+          type: boolean
+          example: true
+        mode:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalSyslogsSiteGetResponse:
+      type: object
+      properties:
+        collectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SyslogCollector'
+      additionalProperties: false
+    v1GlobalPrefixSetsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2ForwardingPolicyMatchConfig:
+      type: object
+      properties:
+        application:
+          $ref: '#/components/schemas/manaV2NullableApplicationMatchConfig'
+        contentFilter:
+          $ref: '#/components/schemas/manaV2NullableContentFilterMatchConfig'
+        destinationNetwork:
+          $ref: '#/components/schemas/manaV2NullableDestinationNetworkMatchConfig'
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        destinationPortRange:
+          $ref: '#/components/schemas/manaV2PortRangeConfig'
+        domainList:
+          $ref: '#/components/schemas/manaV2NullableDomainListMatchConfig'
+        dscp:
+          $ref: '#/components/schemas/manaV2NullableDscpMatchConfig'
+        icmpType:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ipProtocol:
+          type: string
+          example: ENUM_VALUE
+        protocol:
+          $ref: '#/components/schemas/manaV2NullableIpProtocol'
+        sourceNetwork:
+          $ref: '#/components/schemas/manaV2NullableSourceNetworkMatchConfig'
+        sourcePort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourcePortRange:
+          $ref: '#/components/schemas/manaV2PortRangeConfig'
+      additionalProperties: false
+    manaV2RoutingPolicyConfigNullableStatementStatement:
+      type: object
+      properties:
+        actions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableAction'
+        matches:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch'
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2PrefixSetConfigNullableEntryEntry:
+      type: object
+      properties:
+        ipPrefix:
+          type: string
+          example: example string
+        maskLower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        maskUpper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableSnmpVacmViewValue:
+      type: object
+      properties:
+        view:
+          $ref: '#/components/schemas/manaV2SnmpVacmViewConfig'
+      additionalProperties: false
+    manaV2RoutingPolicyStatementMatch:
+      type: object
+      properties:
+        community:
+          type: array
+          items:
+            type: string
+            example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        prefixSet:
+          type: string
+          example: example string
+        protocolRouteType:
+          type: string
+          example: ENUM_VALUE
+        routeTag:
+          $ref: '#/components/schemas/manaV2RouteTag'
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourceInterface:
+          type: string
+          example: example string
+        sourceProtocol:
+          type: string
+          example: ENUM_VALUE
+        stalePurge:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2ZoneFirewallIpPolicyConfig:
+      type: object
+      properties:
+        blockLandAttacks:
+          type: boolean
+          example: true
+        sessionLimit:
+          $ref: '#/components/schemas/manaV2NullableSessionLimit'
+        urpf:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GlobalAppsCustomPostRequest:
+      type: object
+      properties:
+        appConfig:
+          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+      additionalProperties: false
+    v1GlobalDeviceStatusGetResponse:
+      type: object
+      properties:
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalObjectDeviceStatus'
+      additionalProperties: false
+    manaV2SnmpVacmViewConfig:
+      type: object
+      properties:
+        includeExcludeList:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2SnmpVacmViewIncludeConfig'
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalSiteListsIdSitesGetResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteListSiteEntry'
+      additionalProperties: false
+    manaV2PortRangeConfig:
+      type: object
+      properties:
+        lower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        upper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2DomainCategory:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+          description: Optional longer text describing what sites or traffic belong in this category.
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Stable identifier for this domain category in the content-filter catalog.
+        name:
+          type: string
+          example: example string
+          description: Human-readable name of the domain category.
+        type:
+          type: string
+          example: example string
+          description: Optional category classifier or grouping hint from the catalog (e.g. vendor-specific type).
+      additionalProperties: false
+    manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction:
+      type: object
+      properties:
+        backupCircuit:
+          $ref: '#/components/schemas/manaV2NullableSetCircuitConfig'
+        backupCircuitLabel:
+          $ref: '#/components/schemas/manaV2NullableSetCircuitLabelConfig'
+        egress:
+          type: string
+          example: ENUM_VALUE
+        logging:
+          type: boolean
+          example: true
+        primaryCircuit:
+          $ref: '#/components/schemas/manaV2NullableSetCircuitConfig'
+        primaryCircuitLabel:
+          $ref: '#/components/schemas/manaV2NullableSetCircuitLabelConfig'
+        remark:
+          $ref: '#/components/schemas/manaV2NullableSetDscpConfig'
+        setSlaClass:
+          $ref: '#/components/schemas/manaV2NullableSetSlaClassConfig'
       additionalProperties: false
     manaV2DpiApplicationConfig:
       type: object
@@ -3026,103 +3317,18 @@ components:
         sourcePorts:
           $ref: '#/components/schemas/manaV2L4PortListConfig'
       additionalProperties: false
-    v1GlobalSyslogsPostResponse:
+    v1GlobalLanSegmentsVrfIdDevicesGetResponse:
       type: object
       properties:
-        collectors:
+        entries:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2SyslogCollector'
-      additionalProperties: false
-    v1GlobalAppsCustomAppIdDetailsAppListsGetResponse:
-      type: object
-      properties:
-        appLists:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2App'
-      additionalProperties: false
-    v1GlobalConfigPatchResponse:
-      type: object
-      properties:
-        globalPrefixSets:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        ipfixExporters:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        ntps:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        prefixSets:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        routingPolicies:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        snmps:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        status:
-          type: string
-          example: example string
-        syslogServers:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        trafficPolicies:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-        vpnProfiles:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    v1GlobalContentFiltersGetResponseRowLanEntry:
-      type: object
-      properties:
-        lanName:
-          type: string
-          example: example string
-          description: Name of a LAN segment that the filter is applied on.
-      additionalProperties: false
-    v1GlobalSiteListsIdPutResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
+            $ref: '#/components/schemas/v1GlobalLanSegmentsVrfIdDevicesGetResponseEntry'
         status:
           type: string
           example: example string
       additionalProperties: false
-    v1GlobalAppsAppListOptionsGetResponse:
+    v1GlobalAppsAppListsAppListIdDetailsAppsGetResponse:
       type: object
       properties:
         apps:
@@ -3130,43 +3336,38 @@ components:
           items:
             $ref: '#/components/schemas/manaV2App'
       additionalProperties: false
-    v1GlobalRoutingPoliciesPostRequest:
+    googleProtobufTimestamp:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    v1GlobalNtpsSiteGetResponse:
-      type: object
-      properties:
-        ntps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Ntp'
-      additionalProperties: false
-    manaV2SnmpVacmView:
-      type: object
-      properties:
-        id:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
           example: 1234567891011
-        includeExclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SnmpVacmViewInclude'
-        name:
+      additionalProperties: false
+    manaV2NullableBgpSetNextHop:
+      type: object
+      properties:
+        nextHop:
           type: string
           example: example string
       additionalProperties: false
-    manaV2PrefixSetPolicy:
+    manaV2SnmpUsmLocalUser:
       type: object
       properties:
-        attachPoint:
+        authPassphrase:
+          type: string
+          example: example string
+        authProtocol:
+          type: string
+          example: ENUM_VALUE
+        encryptionPassphrase:
+          type: string
+          example: example string
+        encryptionProtocol:
           type: string
           example: ENUM_VALUE
         id:
@@ -3177,61 +3378,56 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    manaV2NullableAsPathPrepend:
+    v1GlobalAppsCustomAppIdGetResponse:
       type: object
       properties:
-        repeat:
+        appConfig:
+          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+      additionalProperties: false
+    manaV2NullableDomainListMatchConfig:
+      type: object
+      properties:
+        match:
+          $ref: '#/components/schemas/manaV2DomainListMatchConfig'
+      additionalProperties: false
+    manaV2NullableRoutingPolicyConfig:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2RoutingPolicyConfig'
+      additionalProperties: false
+    v1GlobalSiteListsIdGetResponse:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteListEntry'
+      additionalProperties: false
+    v1GlobalAppsAppListsGetResponseEntry:
+      type: object
+      properties:
+        appCount:
           type: integer
           format: int32
           example: 123
-          minimum: 0
+        appList:
+          $ref: '#/components/schemas/manaV2App'
+        policyReferenceCount:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
-    manaV2NullableNtpConfig:
+    v1GlobalSnmpsSiteGetResponse:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/manaV2NtpConfig'
-      additionalProperties: false
-    manaV2NullableStalePurge:
-      type: object
-      properties:
-        stale:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2PrefixSetConfigNullableEntry:
-      type: object
-      properties:
-        entry:
-          $ref: '#/components/schemas/manaV2PrefixSetConfigNullableEntryEntry'
-      additionalProperties: false
-    v1GlobalPrefixSetsPostRequest:
-      type: object
-      properties:
-        ids:
+        snmps:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    manaV2IpNetworkListConfig:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        networks:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    manaV2NullableSnmpNotifyFilterProfileConfigValue:
-      type: object
-      properties:
-        notifyFilterProfile:
-          $ref: '#/components/schemas/manaV2SnmpNotifyFilterProfileConfig'
+            $ref: '#/components/schemas/manaV2Snmp'
       additionalProperties: false
     manaV2RoutingPolicyConfigNullableStatementStatementNullableMatchMatch:
       type: object
@@ -3256,89 +3452,28 @@ components:
         stale:
           $ref: '#/components/schemas/manaV2NullableStalePurge'
       additionalProperties: false
-    manaV2NullableIpNetworkListConfig:
+    manaV2GlobalAppPortRange:
       type: object
       properties:
-        list:
-          $ref: '#/components/schemas/manaV2IpNetworkListConfig'
+        lower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        upper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
-    v1GlobalSnmpsDeviceGetResponse:
-      type: object
-      properties:
-        snmps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Snmp'
-      additionalProperties: false
-    manaV2NullableSnmpEngineEndpointConfigValue:
-      type: object
-      properties:
-        engineEndpoint:
-          $ref: '#/components/schemas/manaV2SnmpEngineEndpointConfig'
-      additionalProperties: false
-    manaV2SecurityPolicyRulesetConfigNullableRuleRule:
+    manaV2TrafficPolicyRulesetRule:
       type: object
       properties:
         action:
-          type: string
-          example: ENUM_VALUE
+          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetRuleAction'
         description:
           type: string
           example: example string
-        downlinkBurstRate:
-          $ref: '#/components/schemas/manaV2NullableMeterRates'
-        downlinkPolicerRate:
-          $ref: '#/components/schemas/manaV2NullableMeterRates'
-        logging:
-          type: boolean
-          example: true
-        match:
-          $ref: '#/components/schemas/manaV2ForwardingPolicyMatchConfig'
-        name:
-          type: string
-          example: example string
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        uplinkBurstRate:
-          $ref: '#/components/schemas/manaV2NullableMeterRates'
-        uplinkPolicerRate:
-          $ref: '#/components/schemas/manaV2NullableMeterRates'
-      additionalProperties: false
-    v1GlobalAppsCustomPostResponse:
-      type: object
-      properties:
-        appIdentifier:
-          $ref: '#/components/schemas/manaV2AppIdentifier'
-      additionalProperties: false
-    manaV2NullableIpProtocol:
-      type: object
-      properties:
-        ipProtocol:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2SecurityPolicyRulesetRule:
-      type: object
-      properties:
-        action:
-          type: string
-          example: ENUM_VALUE
-        description:
-          type: string
-          example: example string
-        downlinkBurstRate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        downlinkPolicerRate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
         id:
           type: integer
           format: int64
@@ -3348,9 +3483,6 @@ components:
           format: int32
           example: 123
           minimum: 0
-        logging:
-          type: boolean
-          example: true
         match:
           $ref: '#/components/schemas/manaV2ForwardingPolicyMatch'
         name:
@@ -3361,339 +3493,87 @@ components:
           format: int32
           example: 123
           minimum: 0
-        uplinkBurstRate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        uplinkPolicerRate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
       additionalProperties: false
-    manaV2NullableSetCircuitLabelConfig:
+    manaV2SnmpEngineEndpointConfig:
       type: object
       properties:
-        ipsecLabel:
-          type: string
-          example: ENUM_VALUE
-        label:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2RouteTag:
-      type: object
-      properties:
-        levelOne:
-          type: string
-          example: example string
-        levelTwo:
-          type: string
-          example: example string
-        levelZero:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2NullableIpfixExporterConfig:
-      type: object
-      properties:
-        exporter:
-          $ref: '#/components/schemas/manaV2IpfixExporterConfig'
-      additionalProperties: false
-    manaV2SiteListEntry:
-      type: object
-      properties:
-        regular:
-          type: integer
-          format: int64
-          example: 1234567891011
-        tag:
-          $ref: '#/components/schemas/manaV2RouteTagId'
-      additionalProperties: false
-    manaV2EnterprisePrefixSetConfig:
-      type: object
-      properties:
-        prefixSet:
-          $ref: '#/components/schemas/manaV2EnterprisePrefixSetData'
-      additionalProperties: false
-    v1GlobalContentFiltersGetResponseRowRuleEntry:
-      type: object
-      properties:
-        domainCategory:
-          type: string
-          example: example string
-          description: Name of the domain category whose traffic is blocked by this rule.
-        exceptionWildcards:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: Wildcard patterns for domains that remain allowed despite the category block.
-      additionalProperties: false
-    v1GlobalSiteListsIdSitesGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteListSiteEntry'
-      additionalProperties: false
-    manaV2NullableBgpSetNextHop:
-      type: object
-      properties:
-        nextHop:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2NullableInterfaceName:
-      type: object
-      properties:
+        addresses:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpEngineEndpointsAddress'
+        autoIpv4:
+          type: boolean
+          example: true
+        autoIpv6:
+          type: boolean
+          example: true
         interface:
           type: string
           example: example string
-      additionalProperties: false
-    v1GlobalAppsCustomAppIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2SnmpNotifyFilterProfile:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        includeExcludeList:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2NotifyFilterProfileInclude'
+        lanSegment:
+          type: string
+          example: example string
         name:
           type: string
           example: example string
       additionalProperties: false
-    manaV2SnmpVacmGroup:
-      type: object
-      properties:
-        accesses:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SnmpVacmGroupAccess'
-        groupMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SnmpVacmGroupMember'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        views:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SnmpVacmView'
-      additionalProperties: false
-    manaV2Dscp:
-      type: object
-      properties:
-        codePoint:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1GlobalTrafficPoliciesPostResponse:
-      type: object
-      properties:
-        trafficPolicy:
-          $ref: '#/components/schemas/manaV2ForwardingPolicy'
-      additionalProperties: false
-    manaV2IpNetworkList:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        networks:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    v1GlobalDeviceStatusGetResponse:
-      type: object
-      properties:
-        statuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalObjectDeviceStatus'
-      additionalProperties: false
-    v1GlobalContentFiltersGetResponseRow:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        globalContentFilterId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: ID for the global content filter.
-        globalContentFilterName:
-          type: string
-          example: example string
-          description: Given name of this global content filter.
-        lans:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowLanEntry'
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowRuleEntry'
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowSiteEntry'
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1GlobalIpsecProfileGetResponse:
-      type: object
-      properties:
-        ipsecProfiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalIpsecProfileGetResponseIPsecProfileCount'
-      additionalProperties: false
-    v1GlobalContentFiltersPostResponse:
-      type: object
-      properties:
-        globalContentFilterId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Server-assigned ID for the newly created global content filter.
-      additionalProperties: false
-    manaV2IpfixExporterConfig:
-      type: object
-      properties:
-        destinationAddress:
-          type: string
-          example: example string
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
-        monitoredSegments:
-          type: array
-          items:
-            type: string
-            example: example string
-        name:
-          type: string
-          example: example string
-        sampleMode:
-          type: string
-          example: ENUM_VALUE
-        sampleRate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sourceInterfaceName:
-          type: string
-          example: example string
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2NullableSessionLimit:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2DomainListMatchConfig:
-      type: object
-      properties:
-        domainWildcards:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: List of wildcard strings each representing a selection of domains to apply the policy action on
-      additionalProperties: false
-    manaV2SnmpVacmGroupMemberConfig:
+    manaV2SnmpTargetConfig:
       type: object
       properties:
         community:
           type: string
           example: example string
-        securityModel:
-          type: string
-          example: ENUM_VALUE
-        securityName:
+        lanSegment:
           type: string
           example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2NtpConfig:
-      type: object
-      properties:
-        domains:
-          type: array
-          items:
-            type: string
-            example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
         name:
           type: string
           example: example string
-      additionalProperties: false
-    v1GlobalContentFiltersPostRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
-      additionalProperties: false
-    manaV2RoutingPolicy:
-      type: object
-      properties:
-        attachPoint:
+        notifyFilterProfile:
+          type: string
+          example: example string
+        notifyType:
           type: string
           example: ENUM_VALUE
-        defaultAction:
+        sourceIp:
+          type: string
+          example: example string
+        targetIp:
+          type: string
+          example: example string
+        targetType:
           type: string
           example: ENUM_VALUE
+        usmSecurityLevel:
+          type: string
+          example: ENUM_VALUE
+        usmUserName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableSnmpEngineEndpointsAddress:
+      type: object
+      properties:
+        address:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableSyslogCollectorConfig:
+      type: object
+      properties:
+        target:
+          $ref: '#/components/schemas/manaV2SyslogCollectorConfig'
+      additionalProperties: false
+    manaV2PrefixSet:
+      type: object
+      properties:
         description:
           type: string
           example: example string
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2PrefixSetEntry'
         errorMessage:
           type: string
           example: example string
@@ -3705,60 +3585,120 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+        mode:
+          type: string
+          example: ENUM_VALUE
         name:
           type: string
           example: example string
-        statements:
+        policies:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2RoutingPolicyStatement'
+            $ref: '#/components/schemas/manaV2PrefixSetPolicy'
+        policyCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
         status:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    manaV2PrefixSetEntry:
+    v1GlobalSiteListsGetResponseEntry:
       type: object
       properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        description:
+          type: string
+          example: example string
+        edgeReferences:
+          type: integer
+          format: int32
+          example: 123
         id:
           type: integer
           format: int64
           example: 1234567891011
-        ipPrefix:
+        name:
           type: string
           example: example string
-        maskLower:
+        policyReferences:
           type: integer
           format: int32
           example: 123
-          minimum: 0
-        maskUpper:
+        siteListReferences:
           type: integer
           format: int32
           example: 123
-          minimum: 0
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
       additionalProperties: false
-    v1GlobalAppsCustomAppIdGetResponse:
+    v1GlobalAppsCategoriesCategoryIdAppsGetResponse:
       type: object
       properties:
-        appConfig:
-          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2App'
       additionalProperties: false
-    v1GlobalAppsAppListsAppListIdGetResponse:
+    manaV2NullableApplicationMatchConfig:
       type: object
       properties:
-        appListConfig:
-          $ref: '#/components/schemas/manaV2AppListConfig'
+        match:
+          $ref: '#/components/schemas/manaV2ApplicationMatchConfig'
       additionalProperties: false
-    v1GlobalContentFiltersGlobalContentFilterIdGetResponse:
+    v1GlobalAppsCustomAppIdDetailsAppListsGetResponse:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
+        appLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2App'
+      additionalProperties: false
+    v1GlobalAttachedEdgesPostRequest:
+      type: object
+      properties:
+        ipfixExportedIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        ntpIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        prefixSetIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        routingPolicyIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        snmpIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        syslogServerIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        trafficPolicyIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
       additionalProperties: false
     v1GlobalAttachedEdgesPostResponse:
       type: object
@@ -3768,64 +3708,62 @@ components:
           items:
             $ref: '#/components/schemas/manaV2GlobalObjectDeviceStatus'
       additionalProperties: false
-    manaV2RoutingPolicyConfigNullableStatementStatementNullableAction:
+    manaV2TrafficPolicyRulesetConfigNullableRuleRule:
       type: object
       properties:
         action:
-          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableActionAction'
-      additionalProperties: false
-    v1GlobalNtpsDeviceGetResponse:
-      type: object
-      properties:
-        ntps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Ntp'
-      additionalProperties: false
-    manaV2NullableWeight:
-      type: object
-      properties:
-        weight:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1GlobalSummaryPostResponse:
-      type: object
-      properties:
-        summaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
-      additionalProperties: false
-    manaV2EnterprisePrefixSetDataEntry:
-      type: object
-      properties:
-        ipPrefix:
+          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction'
+        description:
           type: string
           example: example string
-        maskLower:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        maskUpper:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
+        match:
+          $ref: '#/components/schemas/manaV2ForwardingPolicyMatchConfig'
+        name:
+          type: string
+          example: example string
         seq:
           type: integer
           format: int32
           example: 123
           minimum: 0
       additionalProperties: false
-    manaV2NullableSnmpVacmViewValue:
+    manaV2ApplicationMatchConfig:
       type: object
       properties:
-        view:
-          $ref: '#/components/schemas/manaV2SnmpVacmViewConfig'
+        builtin:
+          type: string
+          example: example string
+        custom:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2EnterprisePrefixSetData:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2EnterprisePrefixSetDataEntry'
+        mode:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GlobalContentFiltersGetResponseRowSiteEntry:
+      type: object
+      properties:
+        siteName:
+          type: string
+          example: example string
+          description: Display name of a site included in this filter's global or site-list-bounded scope.
+      additionalProperties: false
+    manaV2NullableTrafficPolicyRulesetConfig:
+      type: object
+      properties:
+        ruleset:
+          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfig'
       additionalProperties: false
     manaV2SnmpTarget:
       type: object
@@ -3865,239 +3803,34 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1GlobalNtpsPostResponse:
+    manaV2IpNetworkList:
       type: object
       properties:
-        ntps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Ntp'
-      additionalProperties: false
-    manaV2NullableSnmpTargetConfigValue:
-      type: object
-      properties:
-        target:
-          $ref: '#/components/schemas/manaV2SnmpTargetConfig'
-      additionalProperties: false
-    manaV2NullableCallPolicy:
-      type: object
-      properties:
-        policy:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2PortRange:
-      type: object
-      properties:
-        lower:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        upper:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2ZoneFirewallUdpPolicyConfig:
-      type: object
-      properties:
-        unidirectionalFlowLimit:
-          $ref: '#/components/schemas/manaV2NullableSessionLimit'
-      additionalProperties: false
-    manaV2NullableSecurityPolicyRulesetConfig:
-      type: object
-      properties:
-        ruleset:
-          $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfig'
-      additionalProperties: false
-    manaV2DomainCategory:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-          description: Optional longer text describing what sites or traffic belong in this category.
         id:
           type: integer
           format: int64
           example: 1234567891011
-          description: Stable identifier for this domain category in the content-filter catalog.
         name:
           type: string
           example: example string
-          description: Human-readable name of the domain category.
-        type:
-          type: string
-          example: example string
-          description: Optional category classifier or grouping hint from the catalog (e.g. vendor-specific type).
-      additionalProperties: false
-    v1GlobalSiteListsPostRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SiteListEntry'
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2SnmpVacmGroupAccessConfig:
-      type: object
-      properties:
-        context:
-          type: string
-          example: example string
-        contextMatch:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-        readView:
-          type: string
-          example: example string
-        securityLevel:
-          type: string
-          example: ENUM_VALUE
-        securityModel:
-          type: string
-          example: ENUM_VALUE
-        writeView:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalAppsCustomAppIdPutRequest:
-      type: object
-      properties:
-        appConfig:
-          $ref: '#/components/schemas/manaV2GlobalAppConfig'
-      additionalProperties: false
-    manaV2GlobalObjectDeviceStatus:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        errorMessage:
-          type: string
-          example: example string
-        hostname:
-          type: string
-          example: example string
-        internalState:
-          type: string
-          example: ENUM_VALUE
-        siteName:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        statusSince:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    manaV2ZoneFirewallPolicy:
-      type: object
-      properties:
-        ip:
-          $ref: '#/components/schemas/manaV2IpFirewallPolicy'
-        udp:
-          $ref: '#/components/schemas/manaV2UdpFlowTable'
-        zoneName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalAppsAppListsPostRequest:
-      type: object
-      properties:
-        appListConfig:
-          $ref: '#/components/schemas/manaV2AppListConfig'
-      additionalProperties: false
-    manaV2IpfixExporter:
-      type: object
-      properties:
-        destinationAddress:
-          type: string
-          example: example string
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        errorMessage:
-          type: string
-          example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        monitoredSegments:
+        networks:
           type: array
           items:
             type: string
             example: example string
-        name:
-          type: string
-          example: example string
-        sampleMode:
-          type: string
-          example: example string
-        sampleRate:
+      additionalProperties: false
+    v1GlobalSiteListsIdPutResponse:
+      type: object
+      properties:
+        id:
           type: integer
           format: int64
           example: 1234567891011
-        sourceAddress:
-          type: string
-          example: example string
-        sourceInterface:
-          type: string
-          example: example string
-        sourceSegment:
-          type: string
-          example: example string
         status:
           type: string
-          example: ENUM_VALUE
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        vrfName:
-          type: string
           example: example string
       additionalProperties: false
-    manaV2L4PortListConfig:
-      type: object
-      properties:
-        name:
-          type: string
-          example: example string
-        ports:
-          type: array
-          items:
-            type: integer
-            format: int32
-            example: 123
-            minimum: 0
-      additionalProperties: false
-    manaV2NullableTrafficPolicyRulesetConfig:
-      type: object
-      properties:
-        ruleset:
-          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfig'
-      additionalProperties: false
-    manaV2NotifyFilterProfileInclude:
+    manaV2SnmpVacmViewInclude:
       type: object
       properties:
         id:
@@ -4107,150 +3840,6 @@ components:
         include:
           type: boolean
           example: true
-        subtree:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2ForwardingPolicyMatchConfig:
-      type: object
-      properties:
-        application:
-          $ref: '#/components/schemas/manaV2NullableApplicationMatchConfig'
-        contentFilter:
-          $ref: '#/components/schemas/manaV2NullableContentFilterMatchConfig'
-        destinationNetwork:
-          $ref: '#/components/schemas/manaV2NullableDestinationNetworkMatchConfig'
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        destinationPortRange:
-          $ref: '#/components/schemas/manaV2PortRangeConfig'
-        domainList:
-          $ref: '#/components/schemas/manaV2NullableDomainListMatchConfig'
-        dscp:
-          $ref: '#/components/schemas/manaV2NullableDscpMatchConfig'
-        icmpType:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ipProtocol:
-          type: string
-          example: ENUM_VALUE
-        protocol:
-          $ref: '#/components/schemas/manaV2NullableIpProtocol'
-        sourceNetwork:
-          $ref: '#/components/schemas/manaV2NullableSourceNetworkMatchConfig'
-        sourcePort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sourcePortRange:
-          $ref: '#/components/schemas/manaV2PortRangeConfig'
-      additionalProperties: false
-    manaV2TrafficPolicyRuleset:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        errorMessage:
-          type: string
-          example: example string
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        index:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRulesetRule'
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2CommunityType:
-      type: object
-      properties:
-        additive:
-          type: boolean
-          example: true
-        communityList:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    v1GlobalAppsGraphiantGetResponseEntry:
-      type: object
-      properties:
-        app:
-          $ref: '#/components/schemas/manaV2App'
-        appListReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-        policyReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v1GlobalTrafficPoliciesPostRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    v1GlobalAppsCustomGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalAppsCustomGetResponseEntry'
-      additionalProperties: false
-    manaV2NullableUsmLocalUserConfigValue:
-      type: object
-      properties:
-        localUser:
-          $ref: '#/components/schemas/manaV2SnmpUsmLocalUserConfig'
-      additionalProperties: false
-    manaV2NullableSecurityZoneConfig:
-      type: object
-      properties:
-        zone:
-          $ref: '#/components/schemas/manaV2SecurityZoneConfig'
-      additionalProperties: false
-    v1GlobalContentFiltersGlobalContentFilterIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2SnmpNotifyFilterProfileConfig:
-      type: object
-      properties:
-        includeExcludeList:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NotifyFilterProfileIncludeConfig'
         name:
           type: string
           example: example string
@@ -4261,122 +3850,46 @@ components:
         member:
           $ref: '#/components/schemas/manaV2SnmpVacmGroupMemberConfig'
       additionalProperties: false
-    manaV2SnmpEngineEndpoint:
+    v1GlobalSnmpsPostResponse:
       type: object
       properties:
-        addresses:
+        snmps:
           type: array
           items:
-            type: string
-            example: example string
-        autoIpv4:
-          type: boolean
-          example: true
-        autoIpv6:
-          type: boolean
-          example: true
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        interfaceName:
-          type: string
-          example: example string
-        lanSegment:
+            $ref: '#/components/schemas/manaV2Snmp'
+      additionalProperties: false
+    manaV2AppListConfig:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AppIdentifier'
+        description:
           type: string
           example: example string
         name:
           type: string
           example: example string
       additionalProperties: false
-    manaV2NullableUsmRemoteUserConfigValue:
+    manaV2NullableDestinationNetworkMatchConfig:
       type: object
       properties:
-        remoteUser:
-          $ref: '#/components/schemas/manaV2SnmpUsmRemoteUserConfig'
-      additionalProperties: false
-    manaV2PrefixSetConfigNullableEntryEntry:
-      type: object
-      properties:
-        ipPrefix:
+        destinationNetwork:
           type: string
           example: example string
-        maskLower:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        maskUpper:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
       additionalProperties: false
-    manaV2NullableLocalPreferance:
+    manaV2PrefixSetConfigNullableEntry:
       type: object
       properties:
-        localPref:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
+        entry:
+          $ref: '#/components/schemas/manaV2PrefixSetConfigNullableEntryEntry'
       additionalProperties: false
-    manaV2IPsecProfile:
+    manaV2NullableIpfixExporterConfig:
       type: object
       properties:
-        antiReplayWindowSize:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        dpdInterval:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        esn:
-          type: boolean
-          example: true
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ikeDhGroup:
-          type: string
-          example: ENUM_VALUE
-        ikeEncryptionAlg:
-          type: string
-          example: ENUM_VALUE
-        ikeIntegrity:
-          type: string
-          example: ENUM_VALUE
-        ipsecEncryptionAlg:
-          type: string
-          example: ENUM_VALUE
-        ipsecIntegrity:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-        perfectForwardSecrecy:
-          type: string
-          example: ENUM_VALUE
-        reauthInterval:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        rekeyInterval:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
+        exporter:
+          $ref: '#/components/schemas/manaV2IpfixExporterConfig'
       additionalProperties: false
     manaV2App:
       type: object
@@ -4390,36 +3903,28 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponseSiteToSiteVpn:
+    v1GlobalAppsAppListsGetResponse:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalAppsAppListsGetResponseEntry'
+      additionalProperties: false
+    manaV2NullableSnmpCommunityConfigValue:
+      type: object
+      properties:
         name:
           type: string
           example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
-    manaV2NullableSecurityZonePairConfig:
+    v1GlobalSnmpsDeviceGetResponse:
       type: object
       properties:
-        pair:
-          $ref: '#/components/schemas/manaV2SecurityZonePairConfig'
-      additionalProperties: false
-    manaV2NullableSetDscpConfig:
-      type: object
-      properties:
-        val:
-          $ref: '#/components/schemas/manaV2Dscp'
+        snmps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Snmp'
       additionalProperties: false
     manaV2GlobalObjectSummary:
       type: object
@@ -4488,50 +3993,170 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1GlobalAppsCustomPostRequest:
+    manaV2GlobalObjectDeviceStatus:
       type: object
       properties:
-        appConfig:
-          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        errorMessage:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        internalState:
+          type: string
+          example: ENUM_VALUE
+        siteName:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        statusSince:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1GlobalIpfixPostResponse:
+    v1GlobalContentFiltersPostResponse:
       type: object
       properties:
-        exporters:
+        globalContentFilterId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Server-assigned ID for the newly created global content filter.
+      additionalProperties: false
+    v1GlobalNtpsSiteGetResponse:
+      type: object
+      properties:
+        ntps:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2IpfixExporter'
+            $ref: '#/components/schemas/manaV2Ntp'
       additionalProperties: false
-    manaV2NullableSnmpCommunityConfigValue:
+    v1GlobalIpfixPostRequest:
       type: object
       properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2NullableSetSlaClassConfig:
+      type: object
+      properties:
+        class:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NullableSessionLimit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2VacmGroupConfig:
+      type: object
+      properties:
+        accesses:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpVacmGroupAccessValue'
+        members:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSnmpVacmGroupMemberValue'
         name:
           type: string
           example: example string
       additionalProperties: false
-    manaV2SnmpVacmViewIncludeConfig:
+    manaV2RoutingPolicy:
       type: object
       properties:
-        enabled:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2SiteListSiteEntry:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        edgeReferences:
-          type: integer
-          format: int32
-          example: 123
-        siteName:
+        attachPoint:
+          type: string
+          example: ENUM_VALUE
+        defaultAction:
+          type: string
+          example: ENUM_VALUE
+        description:
           type: string
           example: example string
-        tag:
+        errorMessage:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        statements:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2RouteTagId'
+            $ref: '#/components/schemas/manaV2RoutingPolicyStatement'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NullableCommunities:
+      type: object
+      properties:
+        community:
+          $ref: '#/components/schemas/manaV2CommunityType'
+      additionalProperties: false
+    manaV2EnterprisePrefixSetConfig:
+      type: object
+      properties:
+        prefixSet:
+          $ref: '#/components/schemas/manaV2EnterprisePrefixSetData'
+      additionalProperties: false
+    v1GlobalRoutingPoliciesPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2NullableRoutingProtocol:
+      type: object
+      properties:
+        protocol:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NullableUsmRemoteUserConfigValue:
+      type: object
+      properties:
+        remoteUser:
+          $ref: '#/components/schemas/manaV2SnmpUsmRemoteUserConfig'
+      additionalProperties: false
+    manaV2NullableInterfaceName:
+      type: object
+      properties:
+        interface:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableIpNetworkListConfig:
+      type: object
+      properties:
+        list:
+          $ref: '#/components/schemas/manaV2IpNetworkListConfig'
       additionalProperties: false
     v1GlobalSyslogsDeviceGetResponse:
       type: object
@@ -4541,120 +4166,40 @@ components:
           items:
             $ref: '#/components/schemas/manaV2SyslogCollector'
       additionalProperties: false
-    manaV2NullableVacmGroupValue:
+    manaV2CommunityType:
       type: object
       properties:
-        group:
-          $ref: '#/components/schemas/manaV2VacmGroupConfig'
+        additive:
+          type: boolean
+          example: true
+        communityList:
+          type: array
+          items:
+            type: string
+            example: example string
       additionalProperties: false
-    v1GlobalSyncPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2SnmpConfig:
+    manaV2NullableLocalPreferance:
       type: object
       properties:
-        communities:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpCommunityConfigValue'
-        engineAuthenTraps:
-          type: boolean
-          example: true
-        engineEnabled:
-          type: boolean
-          example: true
-        engineEndpoints:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpEngineEndpointConfigValue'
-        engineHighCpuTraps:
-          type: boolean
-          example: true
-        engineHighMemoryTraps:
-          type: boolean
-          example: true
-        engineIdAdminOctets:
-          type: string
-          example: example string
-        engineIdAdminText:
-          type: string
-          example: example string
-        engineIdIpv4:
-          type: string
-          example: example string
-        engineIdIpv6:
-          type: string
-          example: example string
-        engineIdMac:
-          type: string
-          example: example string
-        engineIdRaw:
-          type: string
-          example: example string
-        engineLocalAcessV4:
-          type: boolean
-          example: true
-        engineLocalAcessV6:
-          type: boolean
-          example: true
-        engineUserHints:
-          type: boolean
-          example: true
-        engineUserValidation:
-          type: boolean
-          example: true
-        globalId:
+        localPref:
           type: integer
-          format: int64
-          example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
-        notifyFilterProfiles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpNotifyFilterProfileConfigValue'
-        snmpVersion:
-          type: string
-          example: ENUM_VALUE
-        targets:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpTargetConfigValue'
-        usmLocalUsers:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableUsmLocalUserConfigValue'
-        usmRemoteUsers:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableUsmRemoteUserConfigValue'
-        v2cEnabled:
-          type: boolean
-          example: true
-        v3Enabled:
-          type: boolean
-          example: true
-        vacmGroups:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableVacmGroupValue'
-        vacmViews:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableSnmpVacmViewValue'
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
-    manaV2L4PortList:
+    manaV2DomainListMatchConfig:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
+        domainWildcards:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of wildcard strings each representing a selection of domains to apply the policy action on
+      additionalProperties: false
+    manaV2L4PortListConfig:
+      type: object
+      properties:
         name:
           type: string
           example: example string
@@ -4665,56 +4210,6 @@ components:
             format: int32
             example: 123
             minimum: 0
-      additionalProperties: false
-    manaV2SnmpUsmLocalUserConfig:
-      type: object
-      properties:
-        authPassphrase:
-          type: string
-          example: example string
-        authProtocol:
-          type: string
-          example: ENUM_VALUE
-        encryptionPassphrase:
-          type: string
-          example: example string
-        encryptionProtocol:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2NullableCommunity:
-      type: object
-      properties:
-        community:
-          $ref: '#/components/schemas/manaV2CommunityContainer'
-      additionalProperties: false
-    v1GlobalSummaryPostRequest:
-      type: object
-      properties:
-        ipfixExportedType:
-          type: boolean
-          example: true
-        ntpType:
-          type: boolean
-          example: true
-        prefixSetType:
-          type: boolean
-          example: true
-        routingPolicyType:
-          type: boolean
-          example: true
-        snmpType:
-          type: boolean
-          example: true
-        syslogServerType:
-          type: boolean
-          example: true
-        trafficPolicyType:
-          type: boolean
-          example: true
       additionalProperties: false
     manaV2GlobalAppConfig:
       type: object
@@ -4746,51 +4241,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    manaV2SnmpUsmLocalUser:
-      type: object
-      properties:
-        authPassphrase:
-          type: string
-          example: example string
-        authProtocol:
-          type: string
-          example: ENUM_VALUE
-        encryptionPassphrase:
-          type: string
-          example: example string
-        encryptionProtocol:
-          type: string
-          example: ENUM_VALUE
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalIpsecProfileIdGetResponse:
-      type: object
-      properties:
-        ipsecProfile:
-          $ref: '#/components/schemas/manaV2IPsecProfile'
-      additionalProperties: false
-    manaV2RouteTagId:
-      type: object
-      properties:
-        levelOne:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelTwo:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelZero:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     manaV2NullablePrefixSet:
       type: object
       properties:
@@ -4798,59 +4248,13 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1GlobalRoutingPoliciesPostResponse:
+    manaV2NullablePrefixSetConfig:
       type: object
       properties:
-        routingPolicies:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RoutingPolicy'
+        prefixSet:
+          $ref: '#/components/schemas/manaV2PrefixSetConfig'
       additionalProperties: false
-    manaV2TrafficPolicyRulesetConfigNullableRuleRule:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction'
-        description:
-          type: string
-          example: example string
-        match:
-          $ref: '#/components/schemas/manaV2ForwardingPolicyMatchConfig'
-        name:
-          type: string
-          example: example string
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1GlobalAppsCategoriesGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalAppsCategoriesGetResponseEntry'
-      additionalProperties: false
-    manaV2NullableMeterRates:
-      type: object
-      properties:
-        rate:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1GlobalSiteStatusGetResponse:
-      type: object
-      properties:
-        statuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalObjectDeviceStatus'
-      additionalProperties: false
-    v1GlobalSiteListsGetResponse:
+    v1GlobalSiteListsIdPutRequest:
       type: object
       properties:
         description:
@@ -4859,165 +4263,48 @@ components:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/v1GlobalSiteListsGetResponseEntry'
+            $ref: '#/components/schemas/manaV2SiteListEntry'
       additionalProperties: false
-    manaV2SnmpCommunity:
+    v1GlobalAppsCustomAppIdPutRequest:
       type: object
       properties:
-        communityString:
+        appConfig:
+          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+      additionalProperties: false
+    manaV2SnmpVacmGroupAccess:
+      type: object
+      properties:
+        context:
           type: string
           example: example string
+        groupContextMatch:
+          type: string
+          example: ENUM_VALUE
         id:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    manaV2ContentFilterMatchConfig:
-      type: object
-      properties:
-        domainCategoryIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    manaV2SnmpTargetConfig:
-      type: object
-      properties:
-        community:
-          type: string
-          example: example string
-        lanSegment:
-          type: string
-          example: example string
         name:
           type: string
           example: example string
-        notifyFilterProfile:
+        readView:
           type: string
           example: example string
-        notifyType:
+        securityLevel:
           type: string
           example: ENUM_VALUE
-        sourceIp:
-          type: string
-          example: example string
-        targetIp:
-          type: string
-          example: example string
-        targetType:
-          type: string
-          example: ENUM_VALUE
-        usmSecurityLevel:
-          type: string
-          example: ENUM_VALUE
-        usmUserName:
+        writeView:
           type: string
           example: example string
       additionalProperties: false
-    v1GlobalLanSegmentsPostRequest:
+    manaV2Ntp:
       type: object
       properties:
-        description:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2ZoneFirewallConfig:
-      type: object
-      properties:
-        ip:
-          $ref: '#/components/schemas/manaV2ZoneFirewallIpPolicyConfig'
-        udp:
-          $ref: '#/components/schemas/manaV2ZoneFirewallUdpPolicyConfig'
-      additionalProperties: false
-    manaV2NullableSetSlaClassConfig:
-      type: object
-      properties:
-        class:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1GlobalAttachedEdgesPostRequest:
-      type: object
-      properties:
-        ipfixExportedIds:
+        domains:
           type: array
           items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        ntpIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        prefixSetIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        routingPolicyIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        snmpIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        syslogServerIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        trafficPolicyIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    manaV2ApplicationMatchConfig:
-      type: object
-      properties:
-        builtin:
-          type: string
-          example: example string
-        custom:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2NullableSourceNetworkMatchConfig:
-      type: object
-      properties:
-        sourceNetwork:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2SyslogCollector:
-      type: object
-      properties:
-        destinationHost:
-          type: string
-          example: example string
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        enabled:
-          type: boolean
-          example: true
+            type: string
+            example: example string
         errorMessage:
           type: string
           example: example string
@@ -5032,321 +4319,29 @@ components:
         name:
           type: string
           example: example string
-        severity:
-          type: string
-          example: ENUM_VALUE
-        sourceInterface:
-          type: string
-          example: example string
         status:
           type: string
           example: ENUM_VALUE
-        transport:
-          type: string
-          example: ENUM_VALUE
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        vrfName:
-          type: string
-          example: example string
       additionalProperties: false
-    manaV2EnterprisePrefixSetData:
+    v1GlobalContentFiltersGlobalContentFilterIdGetResponse:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
+      additionalProperties: false
+    manaV2TrafficPolicyRuleset:
       type: object
       properties:
         description:
           type: string
           example: example string
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2EnterprisePrefixSetDataEntry'
-        mode:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2AppIdentifier:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    manaV2ZoneFirewallIpPolicyConfig:
-      type: object
-      properties:
-        blockLandAttacks:
-          type: boolean
-          example: true
-        sessionLimit:
-          $ref: '#/components/schemas/manaV2NullableSessionLimit'
-        urpf:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1GlobalAppsAppListsGetResponseEntry:
-      type: object
-      properties:
-        appCount:
-          type: integer
-          format: int32
-          example: 123
-        appList:
-          $ref: '#/components/schemas/manaV2App'
-        policyReferenceCount:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    manaV2SecurityZone:
-      type: object
-      properties:
-        inside:
-          type: string
-          example: example string
-        outside:
-          type: string
-          example: example string
-        ruleset:
-          type: string
-          example: example string
-        tcpProtection:
-          type: boolean
-          example: true
-      additionalProperties: false
-    manaV2IpFirewallPolicy:
-      type: object
-      properties:
-        blockLandAttacks:
-          type: boolean
-          example: true
-        sessionLimit:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        urpf:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1GlobalSyslogsSiteGetResponse:
-      type: object
-      properties:
-        collectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SyslogCollector'
-      additionalProperties: false
-    manaV2NullableRouteTagSet:
-      type: object
-      properties:
-        entry:
-          $ref: '#/components/schemas/manaV2RouteTag'
-      additionalProperties: false
-    manaV2PrefixSetConfig:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        entries:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2PrefixSetConfigNullableEntry'
-        globalId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
-        mode:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2RoutingPolicyStatementAction:
-      type: object
-      properties:
-        administrativeDistance:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        aspathPrepend:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        bgpSetNextHop:
-          type: string
-          example: example string
-        callPolicy:
-          type: string
-          example: example string
-        community:
-          $ref: '#/components/schemas/manaV2CommunityType'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        localPref:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        metricAbsolute:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        metricModifier:
-          type: integer
-          format: int32
-          example: 123
-        result:
-          type: string
-          example: ENUM_VALUE
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        weight:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2NullableZoneFirewallConfig:
-      type: object
-      properties:
-        zoneFirewall:
-          $ref: '#/components/schemas/manaV2ZoneFirewallConfig'
-      additionalProperties: false
-    manaV2CommunityContainer:
-      type: object
-      properties:
-        community:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    manaV2RoutingPolicyStatement:
-      type: object
-      properties:
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RoutingPolicyStatementAction'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RoutingPolicyStatementMatch'
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2NullableEnterprisePrefixSetConfig:
-      type: object
-      properties:
-        target:
-          $ref: '#/components/schemas/manaV2EnterprisePrefixSetConfig'
-      additionalProperties: false
-    manaV2NullablePrefixSetConfig:
-      type: object
-      properties:
-        prefixSet:
-          $ref: '#/components/schemas/manaV2PrefixSetConfig'
-      additionalProperties: false
-    v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponse:
-      type: object
-      properties:
-        siteToSiteVpn:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponseSiteToSiteVpn'
-      additionalProperties: false
-    manaV2NullableContentFilterMatchConfig:
-      type: object
-      properties:
-        match:
-          $ref: '#/components/schemas/manaV2ContentFilterMatchConfig'
-      additionalProperties: false
-    manaV2NullableDpiApplicationConfig:
-      type: object
-      properties:
-        application:
-          $ref: '#/components/schemas/manaV2DpiApplicationConfig'
-      additionalProperties: false
-    v1GlobalLanSegmentsVrfIdDevicesGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GlobalLanSegmentsVrfIdDevicesGetResponseEntry'
-        status:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GlobalAppsAppListsAppListIdDetailsAppsGetResponse:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2App'
-      additionalProperties: false
-    manaV2TrafficPolicyRulesetConfig:
-      type: object
-      properties:
-        description:
+        errorMessage:
           type: string
           example: example string
         globalId:
           type: integer
           format: int64
           example: 1234567891011
-        isGlobalSync:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
-        rules:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRule'
-      additionalProperties: false
-    manaV2TrafficPolicyRulesetConfigNullableRule:
-      type: object
-      properties:
-        rule:
-          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRuleRule'
-      additionalProperties: false
-    manaV2TrafficPolicyRulesetRule:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/manaV2TrafficPolicyRulesetRuleAction'
-        description:
-          type: string
-          example: example string
         id:
           type: integer
           format: int64
@@ -5356,6 +4351,77 @@ components:
           format: int32
           example: 123
           minimum: 0
+        name:
+          type: string
+          example: example string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRulesetRule'
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2NotifyFilterProfileIncludeConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GlobalIpfixDeviceGetResponse:
+      type: object
+      properties:
+        exporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpfixExporter'
+      additionalProperties: false
+    v1GlobalSiteListsPostRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SiteListEntry'
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2SecurityPolicyRulesetRule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        description:
+          type: string
+          example: example string
+        downlinkBurstRate:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        downlinkPolicerRate:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        index:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        logging:
+          type: boolean
+          example: true
         match:
           $ref: '#/components/schemas/manaV2ForwardingPolicyMatch'
         name:
@@ -5366,18 +4432,239 @@ components:
           format: int32
           example: 123
           minimum: 0
+        uplinkBurstRate:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        uplinkPolicerRate:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
-    v1GlobalContentFiltersGlobalContentFilterIdPutRequest:
+    manaV2IpfixExporterConfig:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
+        destinationAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isGlobalSync:
+          type: boolean
+          example: true
+        monitoredSegments:
+          type: array
+          items:
+            type: string
+            example: example string
+        name:
+          type: string
+          example: example string
+        sampleMode:
+          type: string
+          example: ENUM_VALUE
+        sampleRate:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourceInterfaceName:
+          type: string
+          example: example string
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-    v1GlobalAppsAppListsPostResponse:
+    manaV2GlobalContentFilterConfig:
+      type: object
+      properties:
+        lanNames:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: LAN interface names to scope the filter; when empty, all LANs are included.
+        name:
+          type: string
+          example: example string
+          description: Display name for this global content filter configuration.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalContentFilterRule'
+        siteListId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Site list whose members this content filter applies to; omit the oneof when no site scope is set.
+        useAllSites:
+          type: boolean
+          example: true
+          description: When true, the filter applies to all sites in the tenant (must be the constant true).
+      additionalProperties: false
+    v1GlobalContentFiltersGlobalContentFilterIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2NullableCallPolicy:
+      type: object
+      properties:
+        policy:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableIpProtocol:
+      type: object
+      properties:
+        ipProtocol:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GlobalSyslogsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    v1GlobalTrafficPoliciesPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2SnmpVacmViewIncludeConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GlobalAppsCustomPostResponse:
       type: object
       properties:
         appIdentifier:
           $ref: '#/components/schemas/manaV2AppIdentifier'
+      additionalProperties: false
+    v1GlobalAppsAppListOptionsGetResponse:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2App'
+      additionalProperties: false
+    v1GlobalContentFiltersGetResponseRow:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        globalContentFilterId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ID for the global content filter.
+        globalContentFilterName:
+          type: string
+          example: example string
+          description: Given name of this global content filter.
+        lans:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowLanEntry'
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowRuleEntry'
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalContentFiltersGetResponseRowSiteEntry'
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v1GlobalContentFiltersGetResponseRowLanEntry:
+      type: object
+      properties:
+        lanName:
+          type: string
+          example: example string
+          description: Name of a LAN segment that the filter is applied on.
+      additionalProperties: false
+    v1GlobalIpsecProfileVpnProfileIdSiteToSiteGetResponseSiteToSiteVpn:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GlobalAppsCustomGetResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalAppsCustomGetResponseEntry'
+      additionalProperties: false
+    manaV2GlobalContentFilterRule:
+      type: object
+      properties:
+        domainCategoryId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ID of the category whose traffic will be blocked by the content filter.
+        exceptionWildcards:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: List of wildcard strings each representing a selection of domains that are exceptions that will not be blocked even if it is in the provided category
+      additionalProperties: false
+    manaV2NullableSetDscpConfig:
+      type: object
+      properties:
+        val:
+          $ref: '#/components/schemas/manaV2Dscp'
+      additionalProperties: false
+    manaV2ContentFilterMatchConfig:
+      type: object
+      properties:
+        domainCategoryIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
       additionalProperties: false
     v1GlobalConfigPatchRequest:
       type: object
@@ -5417,106 +4704,28 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/manaV2NullableIPsecVpnProfilesConfig'
       additionalProperties: false
-    manaV2RoutingPolicyStatementMatch:
+    manaV2AppIdentifier:
       type: object
       properties:
-        community:
-          type: array
-          items:
-            type: string
-            example: example string
         id:
           type: integer
           format: int64
           example: 1234567891011
-        prefixSet:
-          type: string
-          example: example string
-        protocolRouteType:
+        type:
           type: string
           example: ENUM_VALUE
-        routeTag:
-          $ref: '#/components/schemas/manaV2RouteTag'
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sourceInterface:
-          type: string
-          example: example string
-        sourceProtocol:
-          type: string
-          example: ENUM_VALUE
-        stalePurge:
-          type: boolean
-          example: true
       additionalProperties: false
-    manaV2NullableCommunities:
+    manaV2SnmpVacmGroup:
       type: object
       properties:
-        community:
-          $ref: '#/components/schemas/manaV2CommunityType'
-      additionalProperties: false
-    manaV2NullableSyslogCollectorConfig:
-      type: object
-      properties:
-        target:
-          $ref: '#/components/schemas/manaV2SyslogCollectorConfig'
-      additionalProperties: false
-    manaV2NullableAdministrativeDistance:
-      type: object
-      properties:
-        distance:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2PortRangeConfig:
-      type: object
-      properties:
-        lower:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        upper:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1GlobalAppsAppListsAppListIdPutRequest:
-      type: object
-      properties:
-        appListConfig:
-          $ref: '#/components/schemas/manaV2AppListConfig'
-      additionalProperties: false
-    v1GlobalSnmpsPostResponse:
-      type: object
-      properties:
-        snmps:
+        accesses:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2Snmp'
-      additionalProperties: false
-    v1GlobalLanSegmentsGetResponseEntry:
-      type: object
-      properties:
-        associatedInterfaces:
-          type: integer
-          format: int32
-          example: 123
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        description:
-          type: string
-          example: example string
-        edgeReferences:
-          type: integer
-          format: int32
-          example: 123
+            $ref: '#/components/schemas/manaV2SnmpVacmGroupAccess'
+        groupMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SnmpVacmGroupMember'
         id:
           type: integer
           format: int64
@@ -5524,103 +4733,149 @@ components:
         name:
           type: string
           example: example string
-        siteListReferences:
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SnmpVacmView'
+      additionalProperties: false
+    v1GlobalAppsCustomAppIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1GlobalAppsCategoriesGetResponseEntry:
+      type: object
+      properties:
+        appCount:
           type: integer
           format: int32
           example: 123
+        category:
+          $ref: '#/components/schemas/manaV2App'
       additionalProperties: false
-    v1GlobalIpfixSiteGetResponse:
+    manaV2SecurityZoneConfig:
       type: object
       properties:
-        exporters:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpfixExporter'
-      additionalProperties: false
-    v1GlobalSyncPostRequest:
-      type: object
-      properties:
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-        ipfixExportedId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ntpId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        prefixSetId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        routingPolicyId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        snmpId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        syslogServerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        trafficPolicyId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2NullableRoutingPolicyConfig:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2RoutingPolicyConfig'
-      additionalProperties: false
-    manaV2RoutingPolicyConfigNullableStatementStatement:
-      type: object
-      properties:
-        actions:
+        inside:
+          type: string
+          example: example string
+        pairs:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableAction'
-        matches:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch'
-        seq:
+            $ref: '#/components/schemas/manaV2NullableSecurityZonePairConfig'
+      additionalProperties: false
+    v1GlobalSiteStatusGetResponse:
+      type: object
+      properties:
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalObjectDeviceStatus'
+      additionalProperties: false
+    v1GlobalAppsAppListsAppListIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2SecurityZone:
+      type: object
+      properties:
+        inside:
+          type: string
+          example: example string
+        outside:
+          type: string
+          example: example string
+        ruleset:
+          type: string
+          example: example string
+        tcpProtection:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2NullableZoneFirewallConfig:
+      type: object
+      properties:
+        zoneFirewall:
+          $ref: '#/components/schemas/manaV2ZoneFirewallConfig'
+      additionalProperties: false
+    manaV2NullableL4PortListConfig:
+      type: object
+      properties:
+        list:
+          $ref: '#/components/schemas/manaV2L4PortListConfig'
+      additionalProperties: false
+    v1GlobalIpsecProfileGetResponseIPsecProfileCount:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipsecProfileName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableIPsecVpnProfilesConfig:
+      type: object
+      properties:
+        vpnProfile:
+          $ref: '#/components/schemas/manaV2IPsecProfile'
+      additionalProperties: false
+    manaV2IpNetworkListConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        networks:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    manaV2NullableMeterRates:
+      type: object
+      properties:
+        rate:
           type: integer
           format: int32
           example: 123
           minimum: 0
       additionalProperties: false
-    manaV2SecurityPolicyRulesetConfigNullableRule:
+    manaV2NullableSnmpTargetConfigValue:
       type: object
       properties:
-        rule:
-          $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfigNullableRuleRule'
+        target:
+          $ref: '#/components/schemas/manaV2SnmpTargetConfig'
       additionalProperties: false
-    v1GlobalIpfixPostRequest:
+    manaV2SnmpVacmGroupAccessConfig:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-      additionalProperties: false
-    v1GlobalIpfixDeviceGetResponse:
-      type: object
-      properties:
-        exporters:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpfixExporter'
+        context:
+          type: string
+          example: example string
+        contextMatch:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+        readView:
+          type: string
+          example: example string
+        securityLevel:
+          type: string
+          example: ENUM_VALUE
+        securityModel:
+          type: string
+          example: ENUM_VALUE
+        writeView:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2UdpFlowTable:
       type: object
@@ -5636,7 +4891,13 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    v1GlobalSiteListsIdGetResponse:
+    manaV2NullableSecurityPolicyRulesetConfig:
+      type: object
+      properties:
+        ruleset:
+          $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfig'
+      additionalProperties: false
+    v1GlobalSiteListsGetResponse:
       type: object
       properties:
         description:
@@ -5645,21 +4906,760 @@ components:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2SiteListEntry'
+            $ref: '#/components/schemas/v1GlobalSiteListsGetResponseEntry'
       additionalProperties: false
-    manaV2NullableL4PortListConfig:
+    v1GlobalAppsGraphiantGetResponse:
       type: object
       properties:
-        list:
-          $ref: '#/components/schemas/manaV2L4PortListConfig'
-      additionalProperties: false
-    v1GlobalSnmpsSiteGetResponse:
-      type: object
-      properties:
-        snmps:
+        entries:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2Snmp'
+            $ref: '#/components/schemas/v1GlobalAppsGraphiantGetResponseEntry'
+      additionalProperties: false
+    manaV2NullableNtpConfig:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2NtpConfig'
+      additionalProperties: false
+    manaV2DpiCustomApplication:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        destinationNetwork:
+          type: string
+          example: example string
+        destinationNetworkList:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        destinationPortList:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipProtocol:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+        sourceNetwork:
+          type: string
+          example: example string
+        sourceNetworkList:
+          type: string
+          example: example string
+        sourcePort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourcePortList:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalSiteListsPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalAppsAppListsAppListIdPutRequest:
+      type: object
+      properties:
+        appListConfig:
+          $ref: '#/components/schemas/manaV2AppListConfig'
+      additionalProperties: false
+    manaV2TrafficPolicyRulesetConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isGlobalSync:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+        rules:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRulesetConfigNullableRule'
+      additionalProperties: false
+    manaV2NullableSetCircuitConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GlobalNtpsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2RoutingPolicyConfigNullableStatement:
+      type: object
+      properties:
+        statement:
+          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatement'
+      additionalProperties: false
+    v1GlobalContentFiltersGlobalContentFilterIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1GlobalPrefixSetsPostResponse:
+      type: object
+      properties:
+        prefixSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2PrefixSet'
+      additionalProperties: false
+    manaV2SnmpEngineEndpoint:
+      type: object
+      properties:
+        addresses:
+          type: array
+          items:
+            type: string
+            example: example string
+        autoIpv4:
+          type: boolean
+          example: true
+        autoIpv6:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaceName:
+          type: string
+          example: example string
+        lanSegment:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2SecurityPolicyRulesetConfigNullableRuleRule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        description:
+          type: string
+          example: example string
+        downlinkBurstRate:
+          $ref: '#/components/schemas/manaV2NullableMeterRates'
+        downlinkPolicerRate:
+          $ref: '#/components/schemas/manaV2NullableMeterRates'
+        logging:
+          type: boolean
+          example: true
+        match:
+          $ref: '#/components/schemas/manaV2ForwardingPolicyMatchConfig'
+        name:
+          type: string
+          example: example string
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        uplinkBurstRate:
+          $ref: '#/components/schemas/manaV2NullableMeterRates'
+        uplinkPolicerRate:
+          $ref: '#/components/schemas/manaV2NullableMeterRates'
+      additionalProperties: false
+    v1GlobalContentFiltersGetResponseRowRuleEntry:
+      type: object
+      properties:
+        domainCategory:
+          type: string
+          example: example string
+          description: Name of the domain category whose traffic is blocked by this rule.
+        exceptionWildcards:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Wildcard patterns for domains that remain allowed despite the category block.
+      additionalProperties: false
+    v1GlobalAppsCustomAppIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1GlobalLanSegmentsGetResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GlobalLanSegmentsGetResponseEntry'
+      additionalProperties: false
+    manaV2NullableDscpMatchConfig:
+      type: object
+      properties:
+        match:
+          $ref: '#/components/schemas/manaV2Dscp'
+      additionalProperties: false
+    manaV2SyslogCollectorConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        host:
+          type: string
+          example: example string
+        interfaceName:
+          type: string
+          example: example string
+        isGlobalSync:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+        port:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        severity:
+          type: string
+          example: ENUM_VALUE
+        transport:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2ZoneFirewallUdpPolicyConfig:
+      type: object
+      properties:
+        unidirectionalFlowLimit:
+          $ref: '#/components/schemas/manaV2NullableSessionLimit'
+      additionalProperties: false
+    manaV2SnmpUsmLocalUserConfig:
+      type: object
+      properties:
+        authPassphrase:
+          type: string
+          example: example string
+        authProtocol:
+          type: string
+          example: ENUM_VALUE
+        encryptionPassphrase:
+          type: string
+          example: example string
+        encryptionProtocol:
+          type: string
+          example: ENUM_VALUE
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch:
+      type: object
+      properties:
+        match:
+          $ref: '#/components/schemas/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatchMatch'
+      additionalProperties: false
+    manaV2PrefixSetEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        ipPrefix:
+          type: string
+          example: example string
+        maskLower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        maskUpper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2ForwardingPolicyMatch:
+      type: object
+      properties:
+        application:
+          type: string
+          example: example string
+        destinationNetwork:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        destinationPortRange:
+          $ref: '#/components/schemas/manaV2PortRange'
+        domainCategoryIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
+        domainWildcards:
+          type: array
+          items:
+            type: string
+            example: example string
+        dscp:
+          $ref: '#/components/schemas/manaV2Dscp'
+        icmpType:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ipProtocol:
+          type: string
+          example: ENUM_VALUE
+        protocol:
+          type: string
+          example: ENUM_VALUE
+        sourceNetwork:
+          type: string
+          example: example string
+        sourcePort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourcePortRange:
+          $ref: '#/components/schemas/manaV2PortRange'
+      additionalProperties: false
+    v1GlobalLanSegmentsVrfIdDevicesGetResponseEntry:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostName:
+          type: string
+          example: example string
+        numInterfaces:
+          type: integer
+          format: int32
+          example: 123
+        site:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2NullableSnmpEngineEndpointConfigValue:
+      type: object
+      properties:
+        engineEndpoint:
+          $ref: '#/components/schemas/manaV2SnmpEngineEndpointConfig'
+      additionalProperties: false
+    manaV2Dscp:
+      type: object
+      properties:
+        codePoint:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2L4PortList:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        ports:
+          type: array
+          items:
+            type: integer
+            format: int32
+            example: 123
+            minimum: 0
+      additionalProperties: false
+    v1GlobalAppsCustomGetResponseEntry:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/manaV2App'
+        appConfig:
+          $ref: '#/components/schemas/manaV2GlobalAppConfig'
+        appListReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+        policyReferenceCount:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1GlobalDomainCategoriesGetResponse:
+      type: object
+      properties:
+        domainCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DomainCategory'
+      additionalProperties: false
+    manaV2ForwardingPolicyConfig:
+      type: object
+      properties:
+        dpiApplications:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableDpiApplicationConfig'
+        networkLists:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableIpNetworkListConfig'
+        portLists:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableL4PortListConfig'
+        securityRulesets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSecurityPolicyRulesetConfig'
+        trafficRulesets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableTrafficPolicyRulesetConfig'
+        zoneFirewalls:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableZoneFirewallConfig'
+        zones:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableSecurityZoneConfig'
+      additionalProperties: false
+    manaV2CommunityContainer:
+      type: object
+      properties:
+        community:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    manaV2NullableStalePurge:
+      type: object
+      properties:
+        stale:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GlobalIpfixSiteGetResponse:
+      type: object
+      properties:
+        exporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpfixExporter'
+      additionalProperties: false
+    v1GlobalAppsAppListsAppListIdGetResponse:
+      type: object
+      properties:
+        appListConfig:
+          $ref: '#/components/schemas/manaV2AppListConfig'
+      additionalProperties: false
+    manaV2ZoneFirewallConfig:
+      type: object
+      properties:
+        ip:
+          $ref: '#/components/schemas/manaV2ZoneFirewallIpPolicyConfig'
+        udp:
+          $ref: '#/components/schemas/manaV2ZoneFirewallUdpPolicyConfig'
+      additionalProperties: false
+    v1GlobalIpfixPostResponse:
+      type: object
+      properties:
+        exporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpfixExporter'
+      additionalProperties: false
+    manaV2SnmpNotifyFilterProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        includeExcludeList:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2NotifyFilterProfileInclude'
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2PortRange:
+      type: object
+      properties:
+        lower:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        upper:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableSnmpVacmGroupAccessValue:
+      type: object
+      properties:
+        access:
+          $ref: '#/components/schemas/manaV2SnmpVacmGroupAccessConfig'
+      additionalProperties: false
+    manaV2NullableVacmGroupValue:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/manaV2VacmGroupConfig'
+      additionalProperties: false
+    v1GlobalContentFiltersGlobalContentFilterIdPutRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/manaV2GlobalContentFilterConfig'
+      additionalProperties: false
+    manaV2NullableContentFilterMatchConfig:
+      type: object
+      properties:
+        match:
+          $ref: '#/components/schemas/manaV2ContentFilterMatchConfig'
+      additionalProperties: false
+    v1GlobalConfigPatchResponse:
+      type: object
+      properties:
+        globalPrefixSets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        ipfixExporters:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        ntps:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        prefixSets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        routingPolicies:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        snmps:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        status:
+          type: string
+          example: example string
+        syslogServers:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        trafficPolicies:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+        vpnProfiles:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 1234567891011
+      additionalProperties: false
+    manaV2IpFirewallPolicy:
+      type: object
+      properties:
+        blockLandAttacks:
+          type: boolean
+          example: true
+        sessionLimit:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        urpf:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2SiteListEntry:
+      type: object
+      properties:
+        regular:
+          type: integer
+          format: int64
+          example: 1234567891011
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTagId'
+      additionalProperties: false
+    manaV2IpfixExporter:
+      type: object
+      properties:
+        destinationAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        errorMessage:
+          type: string
+          example: example string
+        globalId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        monitoredSegments:
+          type: array
+          items:
+            type: string
+            example: example string
+        name:
+          type: string
+          example: example string
+        sampleMode:
+          type: string
+          example: example string
+        sampleRate:
+          type: integer
+          format: int64
+          example: 1234567891011
+        sourceAddress:
+          type: string
+          example: example string
+        sourceInterface:
+          type: string
+          example: example string
+        sourceSegment:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        vrfName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2NullableAsPathPrepend:
+      type: object
+      properties:
+        repeat:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableWeight:
+      type: object
+      properties:
+        weight:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    manaV2NullableProtocolRouteType:
+      type: object
+      properties:
+        routeType:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2SecurityPolicyRulesetConfigNullableRule:
+      type: object
+      properties:
+        rule:
+          $ref: '#/components/schemas/manaV2SecurityPolicyRulesetConfigNullableRuleRule'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

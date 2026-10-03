@@ -78,65 +78,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ipfixNatEntry:
+    googleProtobufTimestamp:
       type: object
       properties:
-        destinationIpAddress:
-          type: string
-          example: example string
-        destinationPort:
+        nanos:
           type: integer
           format: int32
           example: 123
-          minimum: 0
-        insideGlobalIpAddress:
-          type: string
-          example: example string
-        insideGlobalPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        insideLocalIpAddress:
-          type: string
-          example: example string
-        insideLocalPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        natType:
-          type: string
-          example: ENUM_VALUE
-        outsideGlobalIpAddress:
-          type: string
-          example: example string
-        outsideGlobalPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        preDestinationIpAddress:
-          type: string
-          example: example string
-        preDestinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        vrfId:
+        seconds:
           type: integer
           format: int64
-          example: 12345678910
-          minimum: 0
-      additionalProperties: false
-    v1NatUtilizationDeviceIdGetResponse:
-      type: object
-      properties:
-        natUsage:
-          $ref: '#/components/schemas/ipfixNatUsage'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+          example: 1234567891011
       additionalProperties: false
     v1NatEntriesDeviceIdGetResponse:
       type: object
@@ -150,17 +102,13 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    googleProtobufTimestamp:
+    v1NatUtilizationDeviceIdGetResponse:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        natUsage:
+          $ref: '#/components/schemas/ipfixNatUsage'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     ipfixNatUsage:
       type: object
@@ -228,6 +176,58 @@ components:
           example: 400
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+    ipfixNatEntry:
+      type: object
+      properties:
+        destinationIpAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        insideGlobalIpAddress:
+          type: string
+          example: example string
+        insideGlobalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        insideLocalIpAddress:
+          type: string
+          example: example string
+        insideLocalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        natType:
+          type: string
+          example: ENUM_VALUE
+        outsideGlobalIpAddress:
+          type: string
+          example: example string
+        outsideGlobalPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        preDestinationIpAddress:
+          type: string
+          example: example string
+        preDestinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        vrfId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -218,6 +218,31 @@ components:
       additionalProperties: false
       required:
       - email
+    v1AccountMfaConfirmationPostRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example string
+          description: ' (required)'
+        confirmed:
+          type: boolean
+          example: true
+          description: ' (required)'
+        id:
+          type: string
+          example: example string
+          description: ' (required)'
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - code
+      - confirmed
+      - id
+      - type
     v1AccountMfaGetResponse:
       type: object
       properties:
@@ -225,19 +250,6 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1AccountMfaPutRequest:
-      type: object
-      properties:
-        phoneNumber:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - type
     v1AccountMfaPutResponse:
       type: object
       properties:
@@ -267,30 +279,18 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1AccountMfaConfirmationPostRequest:
+    v1AccountMfaPutRequest:
       type: object
       properties:
-        code:
+        phoneNumber:
           type: string
           example: example string
-          description: ' (required)'
-        confirmed:
-          type: boolean
-          example: true
-          description: ' (required)'
-        id:
-          type: string
-          example: example string
-          description: ' (required)'
         type:
           type: string
           example: ENUM_VALUE
           description: ' (required)'
       additionalProperties: false
       required:
-      - code
-      - confirmed
-      - id
       - type
     v1AccountPasswordPatchRequest:
       type: object
