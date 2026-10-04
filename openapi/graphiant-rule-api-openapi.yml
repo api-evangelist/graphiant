@@ -42,6 +42,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v2RuleEnabledisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v2RuleEnabledisablePostRequest:
       type: object
       properties:
@@ -59,10 +63,6 @@ components:
       required:
       - enable
       - ruleIdList
-    v2RuleEnabledisablePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

@@ -393,58 +393,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1SoftwareRolloutsPostResponse:
+    v1SoftwareRolloutsSchedulePostRequest:
       type: object
       properties:
+        failedOnly:
+          type: boolean
+          example: true
+          description: When true, only devices previously marked failed are rescheduled.
         id:
           type: integer
           format: int64
           example: 42
-          description: Identifier of the created rollout. (required)
-      additionalProperties: false
-    v1SoftwareRunningSummaryGetResponse:
-      type: object
-      properties:
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SoftwareRunningSummaryGetResponseVersionSummary'
-      additionalProperties: false
-    v1SoftwareGcsreleaseUploadNotesPostRequest:
-      type: object
-      properties:
-        details:
-          $ref: '#/components/schemas/upgradeGcsReleaseDetails'
-      additionalProperties: false
-    v1SoftwareAutoUpgradeDefaultGetResponse:
-      type: object
-      properties:
-        profile:
-          $ref: '#/components/schemas/upgradeUpgradeCanaryProfile'
-        release:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1SoftwareRolloutsSchedulePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1SoftwareRolloutsPostRequest:
-      type: object
-      properties:
-        rolloutConfig:
-          $ref: '#/components/schemas/upgradeRolloutConfig'
+          description: Rollout identifier to schedule. (required)
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
       required:
-      - rolloutConfig
-    v1SoftwareRolloutsGetResponse:
-      type: object
-      properties:
-        rollouts:
-          type: array
-          items:
-            $ref: '#/components/schemas/upgradeRollout'
-      additionalProperties: false
+      - id
     upgradeGcsReleaseDetails:
       type: object
       properties:
@@ -458,41 +423,29 @@ components:
         releaseTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    upgradeUpgradeCanaryProfile:
-      type: object
-      properties:
-        action:
-          type: string
-          example: ENUM_VALUE
-        name:
-          type: string
-          example: example string
-        occurrence:
-          $ref: '#/components/schemas/upgradeUpgradeOccurrence'
-        release:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    upgradeRolloutDevice:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1001
-          description: Device identifier. (required)
-        hostname:
-          type: string
-          example: edge-site-01
-          description: Device hostname for display.
-      additionalProperties: false
-    v1SoftwareGcsreleaseUploadNotesPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v1SoftwareRolloutsPutResponse:
       type: object
       properties: {}
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1SoftwareRunningSummaryGetResponse:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SoftwareRunningSummaryGetResponseVersionSummary'
       additionalProperties: false
     upgradeWeeklyRecurrence:
       type: object
@@ -511,6 +464,22 @@ components:
       required:
       - interval
       - weekday
+    upgradeReleaseSummary:
+      type: object
+      properties:
+        eosTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        key:
+          $ref: '#/components/schemas/upgradeInventoryKey'
+        name:
+          type: string
+          example: example string
+        release:
+          type: string
+          example: ENUM_VALUE
+        releaseTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
     upgradeGcsReleaseCategory:
       type: object
       properties:
@@ -520,24 +489,6 @@ components:
         title:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    upgradeMonthlyRecurrence:
-      type: object
-      properties:
-        date:
-          type: integer
-          format: int32
-          example: 15
-          minimum: 0
-          description: Calendar day of month (1–31) for fixed-date monthly recurrence; optional if ordinal and weekday are set.
-        ordinal:
-          type: string
-          example: Second
-          description: For nth-weekday-of-month style recurrence; use together with weekday, or use date instead.
-        weekday:
-          type: string
-          example: Tuesday
-          description: Weekday paired with ordinal for monthly nth-weekday recurrence; optional if date is set.
       additionalProperties: false
     upgradeUpgradeOccurrence:
       type: object
@@ -564,74 +515,73 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1SoftwareReleasesDownloadGetResponse:
+    upgradeRecurringSchedule:
       type: object
       properties:
-        imageLink:
-          type: string
-          example: example string
+        monthly:
+          $ref: '#/components/schemas/upgradeMonthlyRecurrence'
+        startsAtTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        weekly:
+          $ref: '#/components/schemas/upgradeWeeklyRecurrence'
+        yearly:
+          $ref: '#/components/schemas/upgradeYearlyRecurrence'
       additionalProperties: false
-    googleProtobufTimestamp:
+      required:
+      - startsAtTs
+    v1SoftwareRolloutsPostRequest:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1SoftwareRunningDetailsGetResponse:
-      type: object
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SoftwareRunningDetailsGetResponseDevice'
-      additionalProperties: false
-    v1SoftwareRolloutsIdGetResponse:
-      type: object
-      properties:
-        rollout:
-          $ref: '#/components/schemas/upgradeRollout'
-      additionalProperties: false
-    v1SoftwareRolloutsPutRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 42
-          description: Rollout identifier to update. (required)
         rolloutConfig:
           $ref: '#/components/schemas/upgradeRolloutConfig'
       additionalProperties: false
       required:
-      - id
       - rolloutConfig
-    v1SoftwareRolloutsIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1SoftwareRunningDetailsGetResponseDevice:
+    v1SoftwareAutoUpgradeDefaultGetResponse:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        enterpriseName:
+        profile:
+          $ref: '#/components/schemas/upgradeUpgradeCanaryProfile'
+        release:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    upgradeUpgradeCanaryProfile:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        name:
           type: string
           example: example string
-        hostname:
+        occurrence:
+          $ref: '#/components/schemas/upgradeUpgradeOccurrence'
+        release:
           type: string
-          example: example string
+          example: ENUM_VALUE
+      additionalProperties: false
+    upgradeMonthlyRecurrence:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int32
+          example: 15
+          minimum: 0
+          description: Calendar day of month (1–31) for fixed-date monthly recurrence; optional if ordinal and weekday are set.
+        ordinal:
+          type: string
+          example: Second
+          description: For nth-weekday-of-month style recurrence; use together with weekday, or use date instead.
+        weekday:
+          type: string
+          example: Tuesday
+          description: Weekday paired with ordinal for monthly nth-weekday recurrence; optional if date is set.
+      additionalProperties: false
+    v1SoftwareGcsreleaseUploadNotesPostResponse:
+      type: object
+      properties: {}
       additionalProperties: false
     v1SoftwareRunningSummaryGetResponseVersionSummary:
       type: object
@@ -644,51 +594,6 @@ components:
         name:
           type: string
           example: example string
-        version:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1SoftwareRolloutsSchedulePostRequest:
-      type: object
-      properties:
-        failedOnly:
-          type: boolean
-          example: true
-          description: When true, only devices previously marked failed are rescheduled.
-        id:
-          type: integer
-          format: int64
-          example: 42
-          description: Rollout identifier to schedule. (required)
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-      required:
-      - id
-    upgradeReleaseSummary:
-      type: object
-      properties:
-        eosTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        key:
-          $ref: '#/components/schemas/upgradeInventoryKey'
-        name:
-          type: string
-          example: example string
-        release:
-          type: string
-          example: ENUM_VALUE
-        releaseTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    upgradeInventoryKey:
-      type: object
-      properties:
-        model:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
         version:
           type: string
           example: example string
@@ -751,6 +656,14 @@ components:
       additionalProperties: false
       required:
       - month
+    v1SoftwareRunningDetailsGetResponse:
+      type: object
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SoftwareRunningDetailsGetResponseDevice'
+      additionalProperties: false
     v1SoftwareAutoUpgradeDefaultPutRequest:
       type: object
       properties:
@@ -760,6 +673,10 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
+    v1SoftwareRolloutsSchedulePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v1SoftwareReleasesSummaryGetResponse:
       type: object
       properties:
@@ -767,6 +684,78 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/upgradeReleaseSummary'
+      additionalProperties: false
+    v1SoftwareRolloutsPutRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 42
+          description: Rollout identifier to update. (required)
+        rolloutConfig:
+          $ref: '#/components/schemas/upgradeRolloutConfig'
+      additionalProperties: false
+      required:
+      - id
+      - rolloutConfig
+    v1SoftwareRolloutsPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 42
+          description: Identifier of the created rollout. (required)
+      additionalProperties: false
+    upgradeRolloutDevice:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1001
+          description: Device identifier. (required)
+        hostname:
+          type: string
+          example: edge-site-01
+          description: Device hostname for display.
+      additionalProperties: false
+    v1SoftwareRunningDetailsGetResponseDevice:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        enterpriseName:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1SoftwareRolloutsGetResponse:
+      type: object
+      properties:
+        rollouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/upgradeRollout'
+      additionalProperties: false
+    v1SoftwareGcsreleaseUploadNotesPostRequest:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/upgradeGcsReleaseDetails'
+      additionalProperties: false
+    v1SoftwareRolloutsIdDeleteResponse:
+      type: object
+      properties: {}
       additionalProperties: false
     upgradeRolloutConfig:
       type: object
@@ -801,20 +790,31 @@ components:
       - action
       - name
       - release
-    upgradeRecurringSchedule:
+    upgradeInventoryKey:
       type: object
       properties:
-        monthly:
-          $ref: '#/components/schemas/upgradeMonthlyRecurrence'
-        startsAtTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        weekly:
-          $ref: '#/components/schemas/upgradeWeeklyRecurrence'
-        yearly:
-          $ref: '#/components/schemas/upgradeYearlyRecurrence'
+        model:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        version:
+          type: string
+          example: example string
       additionalProperties: false
-      required:
-      - startsAtTs
+    v1SoftwareRolloutsIdGetResponse:
+      type: object
+      properties:
+        rollout:
+          $ref: '#/components/schemas/upgradeRollout'
+      additionalProperties: false
+    v1SoftwareReleasesDownloadGetResponse:
+      type: object
+      properties:
+        imageLink:
+          type: string
+          example: example string
+      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

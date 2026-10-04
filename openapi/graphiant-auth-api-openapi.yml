@@ -646,6 +646,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1AuthLoginTempPostRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        tempPassword:
+          type: string
+          example: temp123456
+        matchId:
+          type: number
+          example: 12345
+      required:
+      - email
+      - tempPassword
+      - matchId
+    v1AuthGcsPostRequest:
+      type: object
+      properties:
+        gcsName:
+          type: string
+          example: my-gcs-instance
+        apiKey:
+          type: string
+          example: api-key-12345
+      required:
+      - gcsName
+      - apiKey
     v1AuthPatchRequest:
       type: object
       properties:
@@ -671,96 +699,6 @@ components:
       - entryPoint
       - iamType
       - issuer
-    v1AuthLoginCallbackPostRequest:
-      type: object
-      properties:
-        SAMLResponse:
-          type: string
-          example: PHNhbWxwOlJlc3BvbnNl...
-        RelayState:
-          type: string
-          example: information-to-relay
-      required:
-      - SAMLResponse
-    v1AuthRefreshGetEntryPointResponse:
-      type: object
-      properties:
-        entryPoint:
-          type: string
-          example: https://saml.example.com/sso
-    v1AuthLoginTempPostRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: user@example.com
-        tempPassword:
-          type: string
-          example: temp123456
-        matchId:
-          type: number
-          example: 12345
-      required:
-      - email
-      - tempPassword
-      - matchId
-    v1AuthLoginPostResponse:
-      type: object
-      properties:
-        auth:
-          type: boolean
-          example: true
-        token:
-          type: string
-          example: gr-auth-12345678-1234-1234-1234-123456789012-87654321-4321-4321-4321-210987654321
-        accountType:
-          type: string
-          enum:
-          - no_account
-          - enterprise
-          - provider
-          - msp
-          - graphiant
-          example: enterprise
-        email:
-          type: string
-          example: user@example.com
-          description: User email address (returned for MFA users)
-        mfaType:
-          type: string
-          example: TOTP
-          description: MFA type (returned for MFA users)
-        stateToken:
-          type: string
-          example: state-token-12345
-          description: State token for MFA verification (returned for MFA users)
-        status:
-          type: string
-          example: AwaitingMfa
-          description: Authentication status (returned for MFA users)
-    v1AuthUserGetResponse:
-      type: object
-      properties:
-        userId:
-          type: string
-          example: user-12345
-          description: User identifier
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Enterprise identifier
-        permissions:
-          $ref: '#/components/schemas/authPermissions'
-        timeZone:
-          type: string
-          example: America/New_York
-          description: User timezone
-      required:
-      - userId
-      - enterpriseId
-      - permissions
-      - timeZone
     v1AuthLoginPreGetResponse:
       type: object
       properties:
@@ -790,69 +728,21 @@ components:
       required:
       - method
       - email
-    v1AuthMfaTypesPutRequest:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - allowedMfaTypes
-    v1AuthErrorPostResponse:
-      type: object
-      properties:
-        auth:
-          type: boolean
-          example: false
-        token:
-          type:
-          - string
-          - 'null'
-          example: null
-        error:
-          type: string
-          example: email not provided
-      required:
-      - auth
-      - token
-      - error
-    v1AuthPutRequest:
+    v1AuthGetResponse:
       type: object
       properties:
         cert:
           type: string
           example: example string
-          description: ' (required)'
         entryPoint:
           type: string
           example: example string
-          description: ' (required)'
         iamType:
           type: string
           example: ENUM_VALUE
-          description: ' (required)'
         issuer:
           type: string
           example: example string
-          description: ' (required)'
-      additionalProperties: false
-      required:
-      - cert
-      - entryPoint
-      - iamType
-      - issuer
-    v1AuthMfaTypesGetResponse:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
       additionalProperties: false
     authPermissions:
       type: object
@@ -969,18 +859,122 @@ components:
           - read
           - read_write
           example: read
-    v1AuthGcsPostRequest:
+    v1AuthLoginCallbackPostRequest:
       type: object
       properties:
-        gcsName:
+        SAMLResponse:
           type: string
-          example: my-gcs-instance
-        apiKey:
+          example: PHNhbWxwOlJlc3BvbnNl...
+        RelayState:
           type: string
-          example: api-key-12345
+          example: information-to-relay
       required:
-      - gcsName
-      - apiKey
+      - SAMLResponse
+    v1AuthLoginPostRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@example.com
+        password:
+          type: string
+          example: password123
+      required:
+      - username
+      - password
+    v1AuthUserGetResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: user-12345
+          description: User identifier
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Enterprise identifier
+        permissions:
+          $ref: '#/components/schemas/authPermissions'
+        timeZone:
+          type: string
+          example: America/New_York
+          description: User timezone
+      required:
+      - userId
+      - enterpriseId
+      - permissions
+      - timeZone
+    v1AuthErrorPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: false
+        token:
+          type:
+          - string
+          - 'null'
+          example: null
+        error:
+          type: string
+          example: email not provided
+      required:
+      - auth
+      - token
+      - error
+    v1AuthPutRequest:
+      type: object
+      properties:
+        cert:
+          type: string
+          example: example string
+          description: ' (required)'
+        entryPoint:
+          type: string
+          example: example string
+          description: ' (required)'
+        iamType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        issuer:
+          type: string
+          example: example string
+          description: ' (required)'
+      additionalProperties: false
+      required:
+      - cert
+      - entryPoint
+      - iamType
+      - issuer
+    v1AuthMfaTypesPutRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - allowedMfaTypes
+    v1AuthRefreshGetEntryPointResponse:
+      type: object
+      properties:
+        entryPoint:
+          type: string
+          example: https://saml.example.com/sso
+    v1AuthMfaTypesGetResponse:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
     v1AuthMfaPostRequest:
       type: object
       properties:
@@ -1000,6 +994,40 @@ components:
       - email
       - mfaType
       - code
+    v1AuthLoginPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: true
+        token:
+          type: string
+          example: gr-auth-12345678-1234-1234-1234-123456789012-87654321-4321-4321-4321-210987654321
+        accountType:
+          type: string
+          enum:
+          - no_account
+          - enterprise
+          - provider
+          - msp
+          - graphiant
+          example: enterprise
+        email:
+          type: string
+          example: user@example.com
+          description: User email address (returned for MFA users)
+        mfaType:
+          type: string
+          example: TOTP
+          description: MFA type (returned for MFA users)
+        stateToken:
+          type: string
+          example: state-token-12345
+          description: State token for MFA verification (returned for MFA users)
+        status:
+          type: string
+          example: AwaitingMfa
+          description: Authentication status (returned for MFA users)
     v1AuthMfaPatchRequest:
       type: object
       properties:
@@ -1012,34 +1040,6 @@ components:
       additionalProperties: false
       required:
       - allowedMfaTypes
-    v1AuthGetResponse:
-      type: object
-      properties:
-        cert:
-          type: string
-          example: example string
-        entryPoint:
-          type: string
-          example: example string
-        iamType:
-          type: string
-          example: ENUM_VALUE
-        issuer:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1AuthLoginPostRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: user@example.com
-        password:
-          type: string
-          example: password123
-      required:
-      - username
-      - password
   securitySchemes:
     jwtAuth:
       type: apiKey

@@ -87,6 +87,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    onboardingCloudInitToken:
+      type: object
+      properties:
+        cloudinitConfig:
+          $ref: '#/components/schemas/onboardingCloudInitConfiguration'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceSerial:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        role:
+          type: string
+          example: ENUM_VALUE
+        token:
+          $ref: '#/components/schemas/onboardingCloudInitTokenToken'
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -98,6 +119,34 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    v1OnboardingCloudinitPostRequest:
+      type: object
+      properties:
+        cloudinitTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingCloudInitToken'
+      additionalProperties: false
+    onboardingCloudInitConfiguration:
+      type: object
+      properties:
+        deviceType:
+          type: string
+          example: example string
+        dnsServers:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/onboardingInterface'
+        localWebPassword:
+          type: string
+          example: example string
       additionalProperties: false
     v1OnboardingCloudinitGetResponse:
       type: object
@@ -121,35 +170,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1OnboardingCloudinitPostRequest:
-      type: object
-      properties:
-        cloudinitTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/onboardingCloudInitToken'
-      additionalProperties: false
-    onboardingCloudInitToken:
-      type: object
-      properties:
-        cloudinitConfig:
-          $ref: '#/components/schemas/onboardingCloudInitConfiguration'
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceSerial:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
-        role:
-          type: string
-          example: ENUM_VALUE
-        token:
-          $ref: '#/components/schemas/onboardingCloudInitTokenToken'
-      additionalProperties: false
     onboardingCloudInitTokenToken:
       type: object
       properties:
@@ -160,30 +180,6 @@ components:
         token:
           type: string
           example: example string
-      additionalProperties: false
-    onboardingCloudInitConfiguration:
-      type: object
-      properties:
-        deviceType:
-          type: string
-          example: example string
-        dnsServers:
-          type: string
-          example: example string
-        hostname:
-          type: string
-          example: example string
-        interfaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/onboardingInterface'
-        localWebPassword:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1OnboardingCloudinitPostResponse:
-      type: object
-      properties: {}
       additionalProperties: false
     onboardingIp:
       type: object
@@ -197,6 +193,10 @@ components:
         type:
           type: string
           example: example string
+      additionalProperties: false
+    v1OnboardingCloudinitPostResponse:
+      type: object
+      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

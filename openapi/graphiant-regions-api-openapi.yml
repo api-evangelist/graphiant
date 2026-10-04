@@ -77,35 +77,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2Region:
+    v1RegionsRegionIdGatewaysGetResponse:
       type: object
       properties:
-        coordinates:
-          $ref: '#/components/schemas/manaV2RegionCoordinates'
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-        regionIsoCode:
-          type: string
-          example: example string
-        unavailable:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1RegionsRegionIdGatewaysGetResponseGateway:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostname:
-          type: string
-          example: example string
+        gateways:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
       additionalProperties: false
     v1RegionsGetResponse:
       type: object
@@ -127,13 +105,35 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    v1RegionsRegionIdGatewaysGetResponse:
+    v1RegionsRegionIdGatewaysGetResponseGateway:
       type: object
       properties:
-        gateways:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1RegionsRegionIdGatewaysGetResponseGateway'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
       additionalProperties: false
   securitySchemes:
     jwtAuth:

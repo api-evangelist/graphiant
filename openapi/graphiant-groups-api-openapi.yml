@@ -378,44 +378,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    iamEnterprisePermissions:
-      type: object
-      properties:
-        groupType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-      additionalProperties: false
-    v1GroupsEnterprisesGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    v1GroupsRootGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
     v1GroupsIdMembersDeletePostRequest:
       type: object
       properties:
@@ -428,14 +390,6 @@ components:
       additionalProperties: false
       required:
       - memberIds
-    v1GroupsIdMembersGetResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/commonUser'
-      additionalProperties: false
     commonPermissions:
       type: object
       properties:
@@ -497,41 +451,43 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    v1GroupsPutRequest:
+    googleProtobufTimestamp:
       type: object
       properties:
-        description:
-          type: string
-          example: example string
-          description: ' (required)'
-        groupId:
-          type: string
-          example: example string
-          description: Only supply if enterprise uses an idp
-        groupType:
-          type: string
-          example: ENUM_VALUE
-        managesEnterprises:
-          type: boolean
-          example: true
-        name:
-          type: string
-          example: example string
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-        timeWindowEnd:
+        nanos:
           type: integer
-          format: int64
-          example: 1234567891011
-        timeWindowStart:
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
           example: 1234567891011
       additionalProperties: false
+    v1GroupsIdMembersPostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+        replaceExisting:
+          type: boolean
+          example: true
+      additionalProperties: false
       required:
-      - description
-      - name
+      - memberIds
+    iamEnterprisePermissions:
+      type: object
+      properties:
+        groupType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+      additionalProperties: false
     v1GroupsGetResponse:
       type: object
       properties:
@@ -539,6 +495,56 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1GroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1GroupsIdMembersGetResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonUser'
+      additionalProperties: false
+    commonUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        firstName:
+          type: string
+          example: example string
+        lastActiveAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        lastName:
+          type: string
+          example: example string
+        mfaFactor:
+          type: string
+          example: example string
+        phoneNumber:
+          type: string
+          example: example string
+        timeZone:
+          type: string
+          example: example string
+        userId:
+          type: string
+          example: example string
+        verified:
+          type: boolean
+          example: true
       additionalProperties: false
     iamGroup:
       type: object
@@ -576,19 +582,41 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1GroupsIdEnterprisesPostRequest:
+    v1GroupsPutRequest:
       type: object
       properties:
-        enterpriseIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-            description: ' (required)'
+        description:
+          type: string
+          example: example string
+          description: ' (required)'
+        groupId:
+          type: string
+          example: example string
+          description: Only supply if enterprise uses an idp
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        managesEnterprises:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
       required:
-      - enterpriseIds
+      - description
+      - name
     v1GroupsIdPatchRequest:
       type: object
       properties:
@@ -612,55 +640,27 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    commonUser:
+    v1GroupsEnterprisesGetResponse:
       type: object
       properties:
-        email:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        firstName:
-          type: string
-          example: example string
-        lastActiveAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        lastName:
-          type: string
-          example: example string
-        mfaFactor:
-          type: string
-          example: example string
-        phoneNumber:
-          type: string
-          example: example string
-        timeZone:
-          type: string
-          example: example string
-        userId:
-          type: string
-          example: example string
-        verified:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1GroupsIdMembersPostRequest:
-      type: object
-      properties:
-        memberIds:
+        groups:
           type: array
           items:
-            type: string
-            example: example string
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1GroupsIdEnterprisesPostRequest:
+      type: object
+      properties:
+        enterpriseIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 1234567891011
             description: ' (required)'
-        replaceExisting:
-          type: boolean
-          example: true
       additionalProperties: false
       required:
-      - memberIds
+      - enterpriseIds
   securitySchemes:
     jwtAuth:
       type: apiKey

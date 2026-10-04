@@ -78,67 +78,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1NatEntriesDeviceIdGetResponse:
-      type: object
-      properties:
-        natEntries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixNatEntry'
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1NatUtilizationDeviceIdGetResponse:
-      type: object
-      properties:
-        natUsage:
-          $ref: '#/components/schemas/ipfixNatUsage'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    ipfixNatUsage:
-      type: object
-      properties:
-        currentCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountExtranet:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountPat:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        currentCountStatic:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        maxCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-      additionalProperties: false
     commonPageInfo:
       type: object
       properties:
@@ -176,6 +115,38 @@ components:
           example: 400
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
+      additionalProperties: false
+    v1NatEntriesDeviceIdGetResponse:
+      type: object
+      properties:
+        natEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixNatEntry'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1NatUtilizationDeviceIdGetResponse:
+      type: object
+      properties:
+        natUsage:
+          $ref: '#/components/schemas/ipfixNatUsage'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     ipfixNatEntry:
       type: object
@@ -224,6 +195,35 @@ components:
           example: 123
           minimum: 0
         vrfId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    ipfixNatUsage:
+      type: object
+      properties:
+        currentCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountExtranet:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountPat:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        currentCountStatic:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        maxCount:
           type: integer
           format: int64
           example: 12345678910

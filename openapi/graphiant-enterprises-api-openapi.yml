@@ -264,6 +264,46 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
+    v1EnterprisesEnterpriseIdAdminGetResponse:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1EnterprisesManagedGetResponse:
+      type: object
+      properties:
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamEnterprise'
+      additionalProperties: false
+    commonBillingTimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -276,6 +316,123 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
+    iamCounts:
+      type: object
+      properties:
+        activeDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        activeUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deactivatedDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        emptySitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impairedSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingDownCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        stagingUpCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalCustomers:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalEdges:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalMsps:
+          type: integer
+          format: int64
+          example: 1234567891011
+        totalSites:
+          type: integer
+          format: int64
+          example: 1234567891011
+        upSitesCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1EnterprisesGetResponse:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamEnterprise'
+      additionalProperties: false
+    v1EnterprisesEulaPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1EnterprisesPutRequest:
+      type: object
+      properties:
+        accountType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        adminEmail:
+          type: string
+          example: example string
+        adminFirstName:
+          type: string
+          example: example string
+        adminLastName:
+          type: string
+          example: example string
+        adminTimeZone:
+          type: string
+          example: example string
+        cloudProvider:
+          type: string
+          example: ENUM_VALUE
+        companyName:
+          type: string
+          example: example string
+          description: ' (required)'
+        creditLimit:
+          type: integer
+          format: int32
+          example: 123
+        description:
+          type: string
+          example: example string
+        enterpriseContract:
+          $ref: '#/components/schemas/commonBillingContract'
+        logo:
+          type: string
+          example: example string
+        marketplaceId:
+          type: string
+          example: example string
+        smallLogo:
+          type: string
+          example: example string
+      additionalProperties: false
+      required:
+      - accountType
+      - companyName
+      - enterpriseContract
     iamEnterprise:
       type: object
       properties:
@@ -343,81 +500,13 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    commonBillingTimePeriod:
+    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
       type: object
       properties:
-        month:
-          type: integer
-          format: int32
-          example: 123
-        year:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    v1EnterprisesGetResponse:
-      type: object
-      properties:
-        enterprises:
+        mappings:
           type: array
           items:
-            $ref: '#/components/schemas/iamEnterprise'
-      additionalProperties: false
-    iamCounts:
-      type: object
-      properties:
-        activeDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        activeUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deactivatedDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        emptySitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        impairedSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingDownCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        stagingUpCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalCustomers:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalEdges:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalMsps:
-          type: integer
-          format: int64
-          example: 1234567891011
-        totalSites:
-          type: integer
-          format: int64
-          example: 1234567891011
-        upSitesCount:
-          type: integer
-          format: int64
-          example: 1234567891011
+            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
       additionalProperties: false
     pokedexDeviceMappingInfo:
       type: object
@@ -444,28 +533,16 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1EnterprisesEulaPostRequest:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
+    v1EnterprisesPatchRequestTokenExpiry:
       type: object
       properties:
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    commonBillingContract:
-      type: object
-      properties:
-        contractedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of credits agreed upon for the entirety of the current contract
-        expirationDate:
-          $ref: '#/components/schemas/commonBillingTimePeriod'
+        length:
+          type: integer
+          format: int32
+          example: 123
+        timeUnit:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     iamCustomer:
       type: object
@@ -489,13 +566,6 @@ components:
           type: boolean
           example: true
         marketplaceId:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1EnterprisesEnterpriseIdAdminGetResponse:
-      type: object
-      properties:
-        adminEmail:
           type: string
           example: example string
       additionalProperties: false
@@ -549,76 +619,6 @@ components:
       additionalProperties: false
       required:
       - enterpriseId
-    v1EnterprisesPutRequest:
-      type: object
-      properties:
-        accountType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        adminEmail:
-          type: string
-          example: example string
-        adminFirstName:
-          type: string
-          example: example string
-        adminLastName:
-          type: string
-          example: example string
-        adminTimeZone:
-          type: string
-          example: example string
-        cloudProvider:
-          type: string
-          example: ENUM_VALUE
-        companyName:
-          type: string
-          example: example string
-          description: ' (required)'
-        creditLimit:
-          type: integer
-          format: int32
-          example: 123
-        description:
-          type: string
-          example: example string
-        enterpriseContract:
-          $ref: '#/components/schemas/commonBillingContract'
-        logo:
-          type: string
-          example: example string
-        marketplaceId:
-          type: string
-          example: example string
-        smallLogo:
-          type: string
-          example: example string
-      additionalProperties: false
-      required:
-      - accountType
-      - companyName
-      - enterpriseContract
-    v1EnterprisesManagedGetResponse:
-      type: object
-      properties:
-        counts:
-          $ref: '#/components/schemas/iamCounts'
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamEnterprise'
-      additionalProperties: false
-    v1EnterprisesPatchRequestTokenExpiry:
-      type: object
-      properties:
-        length:
-          type: integer
-          format: int32
-          example: 123
-        timeUnit:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

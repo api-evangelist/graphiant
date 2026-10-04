@@ -183,6 +183,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    alertserviceZendeskDetails:
+      type: object
+      properties:
+        zendeskApiToken:
+          type: string
+          example: example string
+          description: zendesk api token (required)
+        zendeskAssigneeId:
+          type: string
+          example: example string
+          description: zendesk assignee id (required)
+        zendeskBaseUrl:
+          type: string
+          example: example string
+          description: zendesk base url (required)
+        zendeskEmail:
+          type: string
+          example: example string
+          description: zendesk email (required)
+      additionalProperties: false
+      required:
+      - zendeskApiToken
+      - zendeskAssigneeId
+      - zendeskBaseUrl
+      - zendeskEmail
+    v2IntegrationIntegrationIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -194,18 +223,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v2IntegrationPostRequest:
-      type: object
-      properties:
-        integrationBody:
-          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
-      additionalProperties: false
-      required:
-      - integrationBody
-    v2IntegrationIntegrationIdPutResponse:
-      type: object
-      properties: {}
       additionalProperties: false
     alertserviceUpdateIntegrationBody:
       type: object
@@ -289,31 +306,36 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    alertserviceZendeskDetails:
+    v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationIntegrationIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationIntegrationIdPutRequest:
       type: object
       properties:
-        zendeskApiToken:
-          type: string
-          example: example string
-          description: zendesk api token (required)
-        zendeskAssigneeId:
-          type: string
-          example: example string
-          description: zendesk assignee id (required)
-        zendeskBaseUrl:
-          type: string
-          example: example string
-          description: zendesk base url (required)
-        zendeskEmail:
-          type: string
-          example: example string
-          description: zendesk email (required)
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceUpdateIntegrationBody'
       additionalProperties: false
       required:
-      - zendeskApiToken
-      - zendeskAssigneeId
-      - zendeskBaseUrl
-      - zendeskEmail
+      - integrationBody
+    v2IntegrationPostRequest:
+      type: object
+      properties:
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
+      additionalProperties: false
+      required:
+      - integrationBody
+    v2IntegrationPostResponse:
+      type: object
+      properties:
+        integration:
+          $ref: '#/components/schemas/alertserviceIntegration'
+      additionalProperties: false
     v2IntegrationGetallEnterpriseIdGetResponse:
       type: object
       properties:
@@ -355,28 +377,6 @@ components:
       - enterprise
       - integrationType
       - nickName
-    v2IntegrationIntegrationIdPutRequest:
-      type: object
-      properties:
-        integrationBody:
-          $ref: '#/components/schemas/alertserviceUpdateIntegrationBody'
-      additionalProperties: false
-      required:
-      - integrationBody
-    v2IntegrationPostResponse:
-      type: object
-      properties:
-        integration:
-          $ref: '#/components/schemas/alertserviceIntegration'
-      additionalProperties: false
-    v2IntegrationIntegrationIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

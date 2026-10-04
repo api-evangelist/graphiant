@@ -37,6 +37,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
     commonBillingTimePeriod:
       type: object
       properties:
@@ -48,32 +59,6 @@ components:
           type: integer
           format: int32
           example: 123
-      additionalProperties: false
-    v1MspManagedEnterpriseContractInfoGetResponse:
-      type: object
-      properties:
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
-        mspConsumedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: All credits consumed by the MSP over the entirety of its contracts
-        mspContract:
-          $ref: '#/components/schemas/commonBillingContract'
-      additionalProperties: false
-    commonBillingContract:
-      type: object
-      properties:
-        contractedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of credits agreed upon for the entirety of the current contract
-        expirationDate:
-          $ref: '#/components/schemas/commonBillingTimePeriod'
       additionalProperties: false
     manaV2ManagedEnterpriseContractInfo:
       type: object
@@ -92,6 +77,21 @@ components:
         enterpriseName:
           type: string
           example: example string
+      additionalProperties: false
+    v1MspManagedEnterpriseContractInfoGetResponse:
+      type: object
+      properties:
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ManagedEnterpriseContractInfo'
+        mspConsumedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: All credits consumed by the MSP over the entirety of its contracts
+        mspContract:
+          $ref: '#/components/schemas/commonBillingContract'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

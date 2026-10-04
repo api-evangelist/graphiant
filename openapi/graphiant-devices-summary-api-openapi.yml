@@ -37,20 +37,25 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1DevicesSummaryGetResponseSiteSummary:
+    v1DevicesSummaryGetResponse:
       type: object
       properties:
-        devices:
+        sites:
           type: array
           items:
-            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummaryDeviceSummary'
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteName:
-          type: string
-          example: example string
+            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
+      additionalProperties: false
+    manaV2RegionCoordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
       additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummaryDeviceSummary:
       type: object
@@ -98,25 +103,20 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1DevicesSummaryGetResponse:
+    v1DevicesSummaryGetResponseSiteSummary:
       type: object
       properties:
-        sites:
+        devices:
           type: array
           items:
-            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
-      additionalProperties: false
-    manaV2RegionCoordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 123.45
-        longitude:
-          type: number
-          format: double
-          example: 123.45
+            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummaryDeviceSummary'
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -182,18 +182,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1AppsDeviceDeviceIdTopPostResponse:
-      type: object
-      properties:
-        appsUtilization:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixAppUtilizationSummary'
-        totalCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     v1AppsDeviceDeviceIdTopPostRequest:
       type: object
       properties:
@@ -206,45 +194,50 @@ components:
         timeWindow:
           $ref: '#/components/schemas/ipfixTimeWindow'
       additionalProperties: false
-    ipfixAppVisualization:
+    ipfixAppIncidents:
       type: object
       properties:
-        appId:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        appName:
-          type: string
-          example: example string
-        circuitAvailability:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int32
-            example: 123
-            minimum: 0
-        circuitMap:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ipfixCircuitMetrics'
-        currentStatus:
-          type: string
-          example: ENUM_VALUE
-          description: current status of the app.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixAppIncidentsData'
       additionalProperties: false
-    v1AppsAppSummaryPostResponse:
-      type: object
-      properties:
-        appSummary:
-          $ref: '#/components/schemas/ipfixAppStateSummaryCount'
-      additionalProperties: false
-    statsmonV2CircuitIncidentsSelector:
+    v1AppsVisualizationPostRequest:
       type: object
       properties:
         circuitName:
           type: string
           example: example string
+          description: Circuit name is specified if circuit apps utilization data is desired.
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDia:
+          type: boolean
+          example: true
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+          description: SLA class is specified if queue apps utilization data is desired. Circuit name must be provided.
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    statsmonCircuitsIncidentsData:
+      type: object
+      properties:
+        dlIncidents:
+          $ref: '#/components/schemas/statsmonCircuitIncidents'
+        overallStatus:
+          type: string
+          example: ENUM_VALUE
+          description: Overall circuit status based on num of poor/fair incidents.
+        totalIncidents:
+          $ref: '#/components/schemas/statsmonCircuitIncidents'
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ulIncidents:
+          $ref: '#/components/schemas/statsmonCircuitIncidents'
       additionalProperties: false
     ipfixTimeWindow:
       type: object
@@ -259,41 +252,77 @@ components:
         recentTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    ipfixAppIncidents:
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    statsmonCircuitsIncidents:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/ipfixAppIncidentsData'
+            $ref: '#/components/schemas/statsmonCircuitsIncidentsData'
+        name:
+          type: string
+          example: example string
       additionalProperties: false
-    ipfixAppBandwidthStats:
+    ipfixTwampMetrics:
       type: object
       properties:
-        dlBw:
+        healthAvg:
+          type: string
+          example: ENUM_VALUE
+          description: 'calculated health average (over time window) '
+        jitter:
           type: number
           format: double
           example: 123.45
-          description: Bandwidth in kilo bits per second
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        ulBw:
+          description: Jitter in ms
+        latency:
           type: number
           format: double
           example: 123.45
-          description: Bandwidth in kilo bits per second
+          description: Latency in  ms
+        loss:
+          type: number
+          format: float
+          example: 12.34
+          description: Loss in percentage
+        mos:
+          type: number
+          format: float
+          example: 12.34
+        status:
+          type: string
+          example: ENUM_VALUE
+          description: calculated status (last measured value)
       additionalProperties: false
-    v1AppsSiteSiteIdTopPostResponse:
+    statsmonV2CircuitIncidentsData:
       type: object
       properties:
-        appsUtilization:
+        samples:
           type: array
           items:
-            $ref: '#/components/schemas/ipfixAppUtilizationSummary'
-        totalCount:
-          type: integer
-          format: int64
-          example: 1234567891011
+            $ref: '#/components/schemas/statsmonV2CircuitIncidentsDataSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2CircuitIncidentsSelector'
+      additionalProperties: false
+    v1AppsBandwidthPostResponse:
+      type: object
+      properties:
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixAppBandwidthStats'
       additionalProperties: false
     statsmonCircuitIncidents:
       type: object
@@ -308,6 +337,95 @@ components:
           format: int32
           example: 123
           minimum: 0
+      additionalProperties: false
+    ipfixAppStateSummaryCount:
+      type: object
+      properties:
+        appHealth:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+            example: 123
+            minimum: 0
+        appIncidents:
+          $ref: '#/components/schemas/ipfixAppIncidents'
+        appsOnDeviceCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        averageQoe:
+          type: number
+          format: double
+          example: 123.45
+        circuitsIncidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonCircuitsIncidents'
+        circuitsIncidentsv2:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2CircuitIncidents'
+      additionalProperties: false
+    ipfixAppUtilizationSummary:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        appName:
+          type: string
+          example: example string
+        usage:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: application usage in kilo bytes
+      additionalProperties: false
+    statsmonTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 300
+          minimum: 0
+          description: the size of the time window in seconds (required)
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+      required:
+      - bucketSizeSec
+    statsmonV2CircuitIncidentsSelector:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AppsAppSummaryPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDia:
+          type: boolean
+          example: true
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
+    statsmonV2CircuitIncidents:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/statsmonV2CircuitIncidentsData'
       additionalProperties: false
     v1AppsBandwidthPostRequest:
       type: object
@@ -335,34 +453,6 @@ components:
         ulCircuitName:
           type: string
           example: example string
-      additionalProperties: false
-    statsmonCircuitsIncidentsData:
-      type: object
-      properties:
-        dlIncidents:
-          $ref: '#/components/schemas/statsmonCircuitIncidents'
-        overallStatus:
-          type: string
-          example: ENUM_VALUE
-          description: Overall circuit status based on num of poor/fair incidents.
-        totalIncidents:
-          $ref: '#/components/schemas/statsmonCircuitIncidents'
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        ulIncidents:
-          $ref: '#/components/schemas/statsmonCircuitIncidents'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
     statsmonV2CircuitIncidentsDataSample:
       type: object
@@ -402,72 +492,49 @@ components:
           format: float
           example: 12.34
       additionalProperties: false
-    statsmonTimeWindow:
+    v1AppsAppSummaryPostResponse:
       type: object
       properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 300
-          minimum: 0
-          description: the size of the time window in seconds (required)
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+        appSummary:
+          $ref: '#/components/schemas/ipfixAppStateSummaryCount'
       additionalProperties: false
-      required:
-      - bucketSizeSec
-    v1AppsVisualizationPostRequest:
+    statsmonV2CircuitIncidentsDataSampleIncidents:
       type: object
       properties:
-        circuitName:
-          type: string
-          example: example string
-          description: Circuit name is specified if circuit apps utilization data is desired.
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isDia:
-          type: boolean
-          example: true
-        slaClass:
-          type: string
-          example: ENUM_VALUE
-          description: SLA class is specified if queue apps utilization data is desired. Circuit name must be provided.
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-    ipfixAppStateSummaryCount:
-      type: object
-      properties:
-        appHealth:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int32
-            example: 123
-            minimum: 0
-        appIncidents:
-          $ref: '#/components/schemas/ipfixAppIncidents'
-        appsOnDeviceCount:
+        numFairIncidents:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        averageQoe:
-          type: number
-          format: double
-          example: 123.45
-        circuitsIncidents:
+        numPoorIncidents:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1AppsSiteSiteIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonCircuitsIncidents'
-        circuitsIncidentsv2:
+            $ref: '#/components/schemas/ipfixAppUtilizationSummary'
+        totalCount:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1AppsDeviceDeviceIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2CircuitIncidents'
+            $ref: '#/components/schemas/ipfixAppUtilizationSummary'
+        totalCount:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
     v1AppsVisualizationPostResponse:
       type: object
@@ -493,74 +560,21 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    v1AppsAppSummaryPostRequest:
+    ipfixAppBandwidthStats:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isDia:
-          type: boolean
-          example: true
-        timeWindow:
-          $ref: '#/components/schemas/ipfixTimeWindow'
-      additionalProperties: false
-    statsmonV2CircuitIncidentsDataSampleIncidents:
-      type: object
-      properties:
-        numFairIncidents:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numPoorIncidents:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    ipfixTwampMetrics:
-      type: object
-      properties:
-        healthAvg:
-          type: string
-          example: ENUM_VALUE
-          description: 'calculated health average (over time window) '
-        jitter:
+        dlBw:
           type: number
           format: double
           example: 123.45
-          description: Jitter in ms
-        latency:
+          description: Bandwidth in kilo bits per second
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ulBw:
           type: number
           format: double
           example: 123.45
-          description: Latency in  ms
-        loss:
-          type: number
-          format: float
-          example: 12.34
-          description: Loss in percentage
-        mos:
-          type: number
-          format: float
-          example: 12.34
-        status:
-          type: string
-          example: ENUM_VALUE
-          description: calculated status (last measured value)
-      additionalProperties: false
-    statsmonCircuitsIncidents:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonCircuitsIncidentsData'
-        name:
-          type: string
-          example: example string
+          description: Bandwidth in kilo bits per second
       additionalProperties: false
     ipfixAppIncidentsData:
       type: object
@@ -577,47 +591,6 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1AppsBandwidthPostResponse:
-      type: object
-      properties:
-        stats:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixAppBandwidthStats'
-      additionalProperties: false
-    statsmonV2CircuitIncidents:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/statsmonV2CircuitIncidentsData'
-      additionalProperties: false
-    ipfixAppUtilizationSummary:
-      type: object
-      properties:
-        appId:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        appName:
-          type: string
-          example: example string
-        usage:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: application usage in kilo bytes
-      additionalProperties: false
-    statsmonV2CircuitIncidentsData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2CircuitIncidentsDataSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2CircuitIncidentsSelector'
-      additionalProperties: false
     v1AppsSiteSiteIdTopPostRequest:
       type: object
       properties:
@@ -629,6 +602,33 @@ components:
           description: The maximum number of apps to return (100 if left empty)
         timeWindow:
           $ref: '#/components/schemas/ipfixTimeWindow'
+      additionalProperties: false
+    ipfixAppVisualization:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        appName:
+          type: string
+          example: example string
+        circuitAvailability:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+            example: 123
+            minimum: 0
+        circuitMap:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ipfixCircuitMetrics'
+        currentStatus:
+          type: string
+          example: ENUM_VALUE
+          description: current status of the app.
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -66,6 +66,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v2AggregatedNotificationEnableDisablePostRequest:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+          description: Enable or disable aggregated notifications. True means enabled (required)
+      additionalProperties: false
+      required:
+      - enable
     v2AggregatedNotificationGetStateGetResponse:
       type: object
       properties:
@@ -77,16 +87,6 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v2AggregatedNotificationEnableDisablePostRequest:
-      type: object
-      properties:
-        enable:
-          type: boolean
-          example: true
-          description: Enable or disable aggregated notifications. True means enabled (required)
-      additionalProperties: false
-      required:
-      - enable
   securitySchemes:
     jwtAuth:
       type: apiKey

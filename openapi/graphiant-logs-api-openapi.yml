@@ -74,52 +74,6 @@ components:
           example: 12345678910
           minimum: 0
       additionalProperties: false
-    syslogmonLog:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        facility:
-          type: string
-          example: example string
-        hostname:
-          type: string
-          example: example string
-        level:
-          type: string
-          example: ENUM_VALUE
-        message:
-          type: string
-          example: example string
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    syslogmonSyslogsSelector:
-      type: object
-      properties:
-        field:
-          type: string
-          example: ENUM_VALUE
-        values:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    syslogmonHistogram:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
     v1LogsPostRequest:
       type: object
       properties:
@@ -154,6 +108,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/syslogmonSyslogsSelector'
+      additionalProperties: false
+    syslogmonSyslogsSelector:
+      type: object
+      properties:
+        field:
+          type: string
+          example: ENUM_VALUE
+        values:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    syslogmonHistogram:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    syslogmonLog:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        facility:
+          type: string
+          example: example string
+        hostname:
+          type: string
+          example: example string
+        level:
+          type: string
+          example: ENUM_VALUE
+        message:
+          type: string
+          example: example string
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

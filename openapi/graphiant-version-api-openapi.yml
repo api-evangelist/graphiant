@@ -43,25 +43,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1VersionPostResponse:
-      type: object
-      properties:
-        updatedVersion:
-          $ref: '#/components/schemas/manaV2VersionMetadata'
-      additionalProperties: false
-    manaV2ConfigurationMetadata:
-      type: object
-      properties:
-        commitConfirm:
-          type: boolean
-          example: true
-        description:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
     v1VersionPostRequest:
       type: object
       properties:
@@ -75,6 +56,12 @@ components:
           type: integer
           format: int32
           example: 123
+      additionalProperties: false
+    v1VersionPostResponse:
+      type: object
+      properties:
+        updatedVersion:
+          $ref: '#/components/schemas/manaV2VersionMetadata'
       additionalProperties: false
     manaV2VersionMetadata:
       type: object
@@ -90,6 +77,19 @@ components:
           type: integer
           format: int32
           example: 123
+      additionalProperties: false
+    manaV2ConfigurationMetadata:
+      type: object
+      properties:
+        commitConfirm:
+          type: boolean
+          example: true
+        description:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

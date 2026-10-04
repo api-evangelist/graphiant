@@ -185,93 +185,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2RouteTagSummary:
-      type: object
-      properties:
-        deviceCount:
-          type: integer
-          format: int32
-          example: 123
-        levelOne:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelOneTag:
-          type: string
-          example: example string
-        levelTwo:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelTwoTag:
-          type: string
-          example: example string
-        levelZero:
-          type: integer
-          format: int64
-          example: 1234567891011
-        levelZeroTag:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1PolicyRouteTagSetsIdDeleteResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2RouteTagElement:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        nextSet:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RouteTagElement'
-        tag:
-          type: string
-          example: example string
-        tagValue:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    manaV2RouteTag:
-      type: object
-      properties:
-        levelOne:
-          type: string
-          example: example string
-        levelTwo:
-          type: string
-          example: example string
-        levelZero:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1PolicyRouteTagSetsTagsSummaryGetResponse:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RouteTagSummary'
-      additionalProperties: false
-    v1PolicyApplicationsGetResponse:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1PolicyApplicationsGetResponseApplication'
-        pageInfo:
-          $ref: '#/components/schemas/commonPageInfo'
-      additionalProperties: false
     commonPageInfo:
       type: object
       properties:
@@ -310,29 +223,18 @@ components:
           minimum: 0
           description: Describes the total number of records in the complete resultset (required)
       additionalProperties: false
-    manaV2RouteTagDevice:
+    manaV2RouteTag:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        locationId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        tag:
-          $ref: '#/components/schemas/manaV2RouteTag'
-      additionalProperties: false
-    v1PolicyRouteTagSetsPostRequest:
-      type: object
-      properties:
-        tag:
-          $ref: '#/components/schemas/manaV2RouteTag'
+        levelOne:
+          type: string
+          example: example string
+        levelTwo:
+          type: string
+          example: example string
+        levelZero:
+          type: string
+          example: example string
       additionalProperties: false
     v1PolicyRouteTagSetsPostResponse:
       type: object
@@ -341,6 +243,68 @@ components:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    v1PolicyRouteTagSetsPostRequest:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTag'
+      additionalProperties: false
+    manaV2RouteTagSummary:
+      type: object
+      properties:
+        deviceCount:
+          type: integer
+          format: int32
+          example: 123
+        levelOne:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelOneTag:
+          type: string
+          example: example string
+        levelTwo:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelTwoTag:
+          type: string
+          example: example string
+        levelZero:
+          type: integer
+          format: int64
+          example: 1234567891011
+        levelZeroTag:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsGetResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagElement'
+      additionalProperties: false
+    manaV2RouteTagElement:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        nextSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RouteTagElement'
+        tag:
+          type: string
+          example: example string
+        tagValue:
+          type: integer
+          format: int32
+          example: 123
       additionalProperties: false
     v1PolicyApplicationsGetResponseApplication:
       type: object
@@ -359,13 +323,39 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1PolicyRouteTagSetsTagsGetResponse:
+    v1PolicyRouteTagSetsIdDeleteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2RouteTagDevice:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        locationId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        tag:
+          $ref: '#/components/schemas/manaV2RouteTag'
+      additionalProperties: false
+    v1PolicyRouteTagSetsTagsSummaryGetResponse:
       type: object
       properties:
         tags:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2RouteTagElement'
+            $ref: '#/components/schemas/manaV2RouteTagSummary'
       additionalProperties: false
     v1PolicyRouteTagSetsTagDetailGetResponse:
       type: object
@@ -374,6 +364,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2RouteTagDevice'
+      additionalProperties: false
+    v1PolicyApplicationsGetResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1PolicyApplicationsGetResponseApplication'
+        pageInfo:
+          $ref: '#/components/schemas/commonPageInfo'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

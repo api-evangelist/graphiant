@@ -148,142 +148,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2BandwidthConsumptionSummary:
-      type: object
-      properties:
-        contractualSummary:
-          $ref: '#/components/schemas/manaV2ContractualBandwidthConsumptionSummary'
-        globalSummary:
-          $ref: '#/components/schemas/manaV2GlobalBandwidthConsumptionSummary'
-        regionalSummaries:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2RegionalBandwidthConsumptionSummary'
-      additionalProperties: false
-    manaV2deviceSnapshotRow:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostname:
-          type: string
-          example: example string
-        region:
-          type: string
-          example: example string
-        site:
-          type: string
-          example: example string
-        snapshotCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        snapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2DeviceSnapshot'
-        uptime:
-          $ref: '#/components/schemas/googleProtobufDuration'
-      additionalProperties: false
     v1EnterpriseContractPutResponse:
       type: object
       properties: {}
       additionalProperties: false
-    manaV2BandwidthInfo:
+    manaV2DeviceSnapshot:
       type: object
       properties:
-        combinedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Sum of the credits associated with cloud and gateway networks
-        coreBandwidth:
-          type: number
-          format: float
-          example: 12.34
-          description: Soft-upper-bounded max speed in gigabytes per second associated with core network connections
-        coreCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Credits derived from bandwidth on core network connections
-        gwBandwidth:
-          type: number
-          format: float
-          example: 12.34
-          description: Soft-upper-bounded max speed in gigabytes per second associated with gateway connections
-        gwCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Credits derived from bandwidth on gateway network connections
-      additionalProperties: false
-    v1EnterpriseAllocationGetResponse:
-      type: object
-      properties:
-        consumptionSummary:
-          $ref: '#/components/schemas/manaV2BandwidthConsumptionSummary'
-        conversionHolders:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2AllocationConversionHolder'
-        regionalAllocations:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2RegionalAllocation'
-        zeroTrustSummary:
-          $ref: '#/components/schemas/manaV2ZeroTrustConsumptionSummary'
-      additionalProperties: false
-    manaV2RegionalAllocation:
-      type: object
-      properties:
-        allocationCore:
-          type: number
-          format: float
-          example: 12.34
-          description: Gigabytes per second allowed for core network connections on this region
-        allocationGw:
-          type: number
-          format: float
-          example: 12.34
-          description: Gigabytes per second allowed for gateway connections on this region
-        allocationInternet:
-          type: number
-          format: float
-          example: 12.34
-          description: Gigabytes per second allowed for dia gateway internet access on this region. Must be 0, 10, or 100
-        creditCore:
-          type: number
-          format: float
-          example: 12.34
-        creditGw:
-          type: number
-          format: float
-          example: 12.34
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-        regionName:
+        author:
+          $ref: '#/components/schemas/commonUserInfo'
+        category:
           type: string
-          example: example string
-      additionalProperties: false
-    manaV2InternetAccessBandwidthInfo:
-      type: object
-      properties:
-        internetBandwidth:
-          type: number
-          format: float
-          example: 12.34
-          description: Bandwidth value associated with dia gateways. This should either be 0, 10, or 100.
-        internetCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Additional credits to support the provided DIA bandwidth
+          example: ENUM_VALUE
+        createdOn:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        data:
+          $ref: '#/components/schemas/manaV2DeviceSnapshotData'
+        golden:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: 6-1-24-status-check
+          description: name for the snapshot
       additionalProperties: false
     manaV2DeviceSnapshotData:
       type: object
@@ -349,6 +240,132 @@ components:
           format: int32
           example: 123
       additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2InternetAccessBandwidthInfo:
+      type: object
+      properties:
+        internetBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Bandwidth value associated with dia gateways. This should either be 0, 10, or 100.
+        internetCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Additional credits to support the provided DIA bandwidth
+      additionalProperties: false
+    v1EnterpriseSnapshotGetResponse:
+      type: object
+      properties:
+        deviceSnapshotRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2deviceSnapshotRow'
+        deviceSnapshotMap:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2DeviceSnapshotList'
+      additionalProperties: false
+    v1EnterpriseConfigurationGetResponse:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
+      additionalProperties: false
+    manaV2GlobalBandwidthConsumptionSummary:
+      type: object
+      properties:
+        allocatedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits allocated for the current month
+        consumedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits billed for the current month. It equals the the higher value between the credits allocated and used for the month
+        priorAllocatedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits allocated for the prior month
+        priorConsumedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits billed for the prior month.
+        recommendedMonthlyCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Expected amount of credits to allocate for the month to match the overall contracted amount. For monthly-contracted enterprises, this is equivalent to the monthly number of credits being billed while for term-based-contracted enterprises, this is equivalent to the number of credits to use up in this and the following months to use up exactly the number of credits remaining in the contract.
+      additionalProperties: false
+    manaV2AllocationConversionHolderBin:
+      type: object
+      properties:
+        allocationUpperBound:
+          type: number
+          format: float
+          example: 12.34
+          description: Int32 value indicating the conversion rates apply from the prior highest upper bound to this upper bound
+        coreConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits for connections to core devices
+        coreConversionRate:
+          type: integer
+          format: int32
+          example: 123
+        gwConversionFactor:
+          type: number
+          format: float
+          example: 12.34
+          description: Conversion rate from gigabytes per second to Graphiant credits for connections to gateway devices
+        gwConversionRate:
+          type: integer
+          format: int32
+          example: 123
+        isPrivate:
+          type: boolean
+          example: true
+          description: True-only flag indicating the conversion rates apply within a private context such as in-country
+      additionalProperties: false
+    manaV2EnterpriseConfiguration:
+      type: object
+      properties:
+        encryption:
+          type: string
+          example: ENUM_VALUE
+        useEncryption:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2AllocationConversionHolder:
+      type: object
+      properties:
+        bins:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AllocationConversionHolderBin'
+      additionalProperties: false
+    v1EnterpriseConfigurationPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     commonPermissions:
       type: object
       properties:
@@ -410,136 +427,6 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    manaV2DeviceSnapshot:
-      type: object
-      properties:
-        author:
-          $ref: '#/components/schemas/commonUserInfo'
-        category:
-          type: string
-          example: ENUM_VALUE
-        createdOn:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        data:
-          $ref: '#/components/schemas/manaV2DeviceSnapshotData'
-        golden:
-          type: boolean
-          example: true
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: 6-1-24-status-check
-          description: name for the snapshot
-      additionalProperties: false
-    manaV2TimePeriod:
-      type: object
-      properties:
-        month:
-          type: integer
-          format: int32
-          example: 123
-        year:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    manaV2AllocationConversionHolderBin:
-      type: object
-      properties:
-        allocationUpperBound:
-          type: number
-          format: float
-          example: 12.34
-          description: Int32 value indicating the conversion rates apply from the prior highest upper bound to this upper bound
-        coreConversionFactor:
-          type: number
-          format: float
-          example: 12.34
-          description: Conversion rate from gigabytes per second to Graphiant credits for connections to core devices
-        coreConversionRate:
-          type: integer
-          format: int32
-          example: 123
-        gwConversionFactor:
-          type: number
-          format: float
-          example: 12.34
-          description: Conversion rate from gigabytes per second to Graphiant credits for connections to gateway devices
-        gwConversionRate:
-          type: integer
-          format: int32
-          example: 123
-        isPrivate:
-          type: boolean
-          example: true
-          description: True-only flag indicating the conversion rates apply within a private context such as in-country
-      additionalProperties: false
-    manaV2EnterpriseConfiguration:
-      type: object
-      properties:
-        encryption:
-          type: string
-          example: ENUM_VALUE
-        useEncryption:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1EnterpriseConfigurationGetResponse:
-      type: object
-      properties:
-        configuration:
-          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
-      additionalProperties: false
-    v1EnterpriseConfigurationPutRequest:
-      type: object
-      properties:
-        configuration:
-          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2AllocationConversionHolder:
-      type: object
-      properties:
-        bins:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2AllocationConversionHolderBin'
-      additionalProperties: false
-    manaV2ZeroTrustConsumptionSummary:
-      type: object
-      properties:
-        userAgentCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of devices that have been installed with the zero trust agent
-      additionalProperties: false
-    manaV2DeviceSnapshotList:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 123
-        snapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2DeviceSnapshot'
-      additionalProperties: false
     manaV2RegionalBandwidthConsumptionSummary:
       type: object
       properties:
@@ -565,50 +452,110 @@ components:
         usage:
           $ref: '#/components/schemas/manaV2BandwidthInfo'
       additionalProperties: false
-    v1EnterpriseSnapshotGetResponse:
+    manaV2deviceSnapshotRow:
       type: object
       properties:
-        deviceSnapshotRecords:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        region:
+          type: string
+          example: example string
+        site:
+          type: string
+          example: example string
+        snapshotCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        snapshots:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2deviceSnapshotRow'
-        deviceSnapshotMap:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2DeviceSnapshotList'
+            $ref: '#/components/schemas/manaV2DeviceSnapshot'
+        uptime:
+          $ref: '#/components/schemas/googleProtobufDuration'
       additionalProperties: false
-    manaV2GlobalBandwidthConsumptionSummary:
+    manaV2ZeroTrustConsumptionSummary:
       type: object
       properties:
-        allocatedMonthlyCredits:
+        userAgentCredits:
           type: number
           format: float
           example: 12.34
-          description: Credits allocated for the current month
-        consumedMonthlyCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Credits billed for the current month. It equals the the higher value between the credits allocated and used for the month
-        priorAllocatedMonthlyCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Credits allocated for the prior month
-        priorConsumedMonthlyCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Credits billed for the prior month.
-        recommendedMonthlyCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Expected amount of credits to allocate for the month to match the overall contracted amount. For monthly-contracted enterprises, this is equivalent to the monthly number of credits being billed while for term-based-contracted enterprises, this is equivalent to the number of credits to use up in this and the following months to use up exactly the number of credits remaining in the contract.
+          description: Number of devices that have been installed with the zero trust agent
       additionalProperties: false
-    v1EnterpriseConfigurationPutResponse:
+    v1EnterpriseConfigurationPutRequest:
       type: object
-      properties: {}
+      properties:
+        configuration:
+          $ref: '#/components/schemas/manaV2EnterpriseConfiguration'
+      additionalProperties: false
+    manaV2TimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1EnterpriseAllocationGetResponse:
+      type: object
+      properties:
+        consumptionSummary:
+          $ref: '#/components/schemas/manaV2BandwidthConsumptionSummary'
+        conversionHolders:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2AllocationConversionHolder'
+        regionalAllocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2RegionalAllocation'
+        zeroTrustSummary:
+          $ref: '#/components/schemas/manaV2ZeroTrustConsumptionSummary'
+      additionalProperties: false
+    manaV2RegionalAllocation:
+      type: object
+      properties:
+        allocationCore:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for core network connections on this region
+        allocationGw:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for gateway connections on this region
+        allocationInternet:
+          type: number
+          format: float
+          example: 12.34
+          description: Gigabytes per second allowed for dia gateway internet access on this region. Must be 0, 10, or 100
+        creditCore:
+          type: number
+          format: float
+          example: 12.34
+        creditGw:
+          type: number
+          format: float
+          example: 12.34
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        regionName:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2ContractualBandwidthConsumptionSummary:
       type: object
@@ -630,6 +577,35 @@ components:
           format: float
           example: 12.34
           description: Number of unused credits remaining under the current contract
+      additionalProperties: false
+    manaV2BandwidthInfo:
+      type: object
+      properties:
+        combinedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Sum of the credits associated with cloud and gateway networks
+        coreBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Soft-upper-bounded max speed in gigabytes per second associated with core network connections
+        coreCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits derived from bandwidth on core network connections
+        gwBandwidth:
+          type: number
+          format: float
+          example: 12.34
+          description: Soft-upper-bounded max speed in gigabytes per second associated with gateway connections
+        gwCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Credits derived from bandwidth on gateway network connections
       additionalProperties: false
     v1EnterpriseContractPutRequest:
       type: object
@@ -677,6 +653,30 @@ components:
         userId:
           type: string
           example: example string
+      additionalProperties: false
+    manaV2DeviceSnapshotList:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 123
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2DeviceSnapshot'
+      additionalProperties: false
+    manaV2BandwidthConsumptionSummary:
+      type: object
+      properties:
+        contractualSummary:
+          $ref: '#/components/schemas/manaV2ContractualBandwidthConsumptionSummary'
+        globalSummary:
+          $ref: '#/components/schemas/manaV2GlobalBandwidthConsumptionSummary'
+        regionalSummaries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2RegionalBandwidthConsumptionSummary'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

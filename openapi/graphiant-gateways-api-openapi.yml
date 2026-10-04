@@ -325,102 +325,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2IPsecBgpRouteConfig:
+    googleProtobufTimestamp:
       type: object
       properties:
-        addressFamilies:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
-        holdTimer:
+        nanos:
           type: integer
           format: int32
           example: 123
-          minimum: 0
-        keepaliveTimer:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        md5Password:
-          $ref: '#/components/schemas/manaV2NullableMd5Password'
-        peerAsn:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sendCommunity:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1GatewaysPutRequest:
-      type: object
-      properties:
-        details:
-          $ref: '#/components/schemas/manaV2GatewayDetails'
-        id:
+        seconds:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    manaV2OciGatewayDetails:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        fastConnectOcid:
-          type: string
-          example: example string
-        routingPolicy:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GatewaysRegionsGetResponse:
-      type: object
-      properties:
-        regions:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Region'
-      additionalProperties: false
-    manaV2NullableMd5Password:
-      type: object
-      properties:
-        md5Password:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2AzureGatewayDetails:
-      type: object
-      properties:
-        msPeeringVlanId:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        routingPolicy:
-          type: string
-          example: example string
-        serviceKey:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2IPsecGatewayTunnelDetails:
-      type: object
-      properties:
-        insideIpv4Cidr:
-          type: string
-          example: example string
-        insideIpv6Cidr:
-          type: string
-          example: example string
-        localIkePeerIdentity:
-          type: string
-          example: example string
-        psk:
-          type: string
-          example: example string
       additionalProperties: false
     v1GatewaysReferenceConsumerGetResponse:
       type: object
@@ -430,35 +345,39 @@ components:
         ipsecGatewayPeers:
           $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
       additionalProperties: false
-    manaV2AWSTransitGatewayVpc:
+    manaV2AwsTransitGateway:
       type: object
       properties:
-        id:
-          type: string
-          example: example string
-        subnets:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2Subnet'
-      additionalProperties: false
-    manaV2Region:
-      type: object
-      properties:
-        coordinates:
-          $ref: '#/components/schemas/manaV2RegionCoordinates'
-        id:
+        asn:
           type: integer
           format: int32
           example: 123
-        name:
+          minimum: 0
+        id:
           type: string
           example: example string
-        regionIsoCode:
+        vpcs:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AWSTransitGatewayVpc'
+      additionalProperties: false
+    v1GatewaysStatusPostRequest:
+      type: object
+      properties:
+        deviceInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GatewaysStatusPostRequestDeviceInfo'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+        supportStatus:
           type: string
           example: example string
-        unavailable:
-          type: boolean
-          example: true
       additionalProperties: false
     v1GatewaysGuestConsumerMatchIdGetResponseIpsecVpnTunnelConfig:
       type: object
@@ -575,47 +494,77 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    v1GatewaysStatusPostRequest:
+    manaV2GcpGatewayDetails:
       type: object
       properties:
-        deviceInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GatewaysStatusPostRequestDeviceInfo'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
+        description:
           type: string
-          example: ENUM_VALUE
-        supportStatus:
+          example: example string
+        pairingKey:
+          type: string
+          example: example string
+        routingPolicy:
           type: string
           example: example string
       additionalProperties: false
-    manaV2AWSGatewayDetailsTransitConnection:
+    manaV2RegionCoordinates:
       type: object
       properties:
-        credentials:
-          $ref: '#/components/schemas/manaV2AwsCredentials'
-        customerAsn:
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    manaV2BgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        inboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+        outboundPolicy:
+          $ref: '#/components/schemas/manaV2NullablePolicyName'
+      additionalProperties: false
+    v1GatewaysPostRequest:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
+      additionalProperties: false
+    manaV2AwsGatewayDetails:
+      type: object
+      properties:
+        accountId:
+          type: string
+          example: example string
+        advanceSettings:
+          $ref: '#/components/schemas/manaV2AwsAdvanceSettings'
+        transitConnection:
+          $ref: '#/components/schemas/manaV2AWSGatewayDetailsTransitConnection'
+      additionalProperties: false
+    manaV2NullableBgpNeighborAddressFamilyConfig:
+      type: object
+      properties:
+        family:
+          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
+      additionalProperties: false
+    manaV2AzureGatewayDetails:
+      type: object
+      properties:
+        msPeeringVlanId:
           type: integer
           format: int32
           example: 123
           minimum: 0
-        gateway:
-          $ref: '#/components/schemas/manaV2AwsDirectConnectGateway'
-        region:
+        routingPolicy:
           type: string
           example: example string
-      additionalProperties: false
-    manaV2Subnet:
-      type: object
-      properties:
-        cidr:
-          type: string
-          example: example string
-        id:
+        serviceKey:
           type: string
           example: example string
       additionalProperties: false
@@ -626,6 +575,187 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2GatewaySummary'
+      additionalProperties: false
+    manaV2AwsDirectConnectGateway:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        id:
+          type: string
+          example: example string
+        name:
+          type: string
+          example: example string
+        transitGateways:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2AwsTransitGateway'
+      additionalProperties: false
+    v1GatewaysGuestConsumerMatchIdGetResponse:
+      type: object
+      properties:
+        destinationPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        ipsecTunnelConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GatewaysGuestConsumerMatchIdGetResponseIpsecVpnTunnelConfig'
+        siteToSiteVpn:
+          $ref: '#/components/schemas/manaV2GuestConsumerSiteToSiteVpnConfig'
+      additionalProperties: false
+    v1GatewaysStatusPostRequestDeviceInfo:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        interfaceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GatewaysIdDetailsGetResponse:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
+      additionalProperties: false
+    manaV2AwsAdvanceSettings:
+      type: object
+      properties:
+        addressFamily:
+          type: string
+          example: ENUM_VALUE
+        allowedPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        amazonBgpRouterIp:
+          type: string
+          example: example string
+        bgpAuthKey:
+          type: string
+          example: example string
+        customerBgpRouterIp:
+          type: string
+          example: example string
+        isJumbo:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2IPsecGatewayPeersConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+          description: Name of the IPsec gateway service
+        remotePeers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IPsecGatewayRemotePeer'
+        routing:
+          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
+      additionalProperties: false
+    v1GatewaysStatusPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2OciGatewayDetails:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        fastConnectOcid:
+          type: string
+          example: example string
+        routingPolicy:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GatewaysRegionsGetResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Region'
+      additionalProperties: false
+    manaV2AWSTransitGatewayVpc:
+      type: object
+      properties:
+        id:
+          type: string
+          example: example string
+        subnets:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2Subnet'
+      additionalProperties: false
+    manaV2GatewaySummaryGatewayDeviceSummary:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        interfaceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        maintenanceMode:
+          type: boolean
+          example: true
+      additionalProperties: false
+    manaV2GatewayDetails:
+      type: object
+      properties:
+        aws:
+          $ref: '#/components/schemas/manaV2AwsGatewayDetails'
+        azure:
+          $ref: '#/components/schemas/manaV2AzureGatewayDetails'
+        description:
+          type: string
+          example: example string
+        gcp:
+          $ref: '#/components/schemas/manaV2GcpGatewayDetails'
+        ipsecGateway:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+        oci:
+          $ref: '#/components/schemas/manaV2OciGatewayDetails'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+        speed:
+          type: string
+          example: ENUM_VALUE
+        vrfId:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    manaV2NullableMd5Password:
+      type: object
+      properties:
+        md5Password:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2GatewaySummary:
       type: object
@@ -660,243 +790,6 @@ components:
           example: ENUM_VALUE
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    manaV2NullablePolicyName:
-      type: object
-      properties:
-        policy:
-          type: string
-          example: example string
-      additionalProperties: false
-    manaV2AwsDirectConnectGateway:
-      type: object
-      properties:
-        asn:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        id:
-          type: string
-          example: example string
-        name:
-          type: string
-          example: example string
-        transitGateways:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2AwsTransitGateway'
-      additionalProperties: false
-    manaV2GuestConsumerSiteToSiteVpnConfig:
-      type: object
-      properties:
-        emails:
-          type: array
-          items:
-            type: string
-            example: example string
-        ipsecGatewayDetails:
-          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
-        ipsecGatewayPeers:
-          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    manaV2GatewayDetails:
-      type: object
-      properties:
-        aws:
-          $ref: '#/components/schemas/manaV2AwsGatewayDetails'
-        azure:
-          $ref: '#/components/schemas/manaV2AzureGatewayDetails'
-        description:
-          type: string
-          example: example string
-        gcp:
-          $ref: '#/components/schemas/manaV2GcpGatewayDetails'
-        ipsecGateway:
-          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
-        ipsecGatewayPeers:
-          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
-        oci:
-          $ref: '#/components/schemas/manaV2OciGatewayDetails'
-        regionId:
-          type: integer
-          format: int32
-          example: 123
-        speed:
-          type: string
-          example: ENUM_VALUE
-        vrfId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2AwsCredentials:
-      type: object
-      properties:
-        accessKeyId:
-          type: string
-          example: example string
-        secretAccessKey:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1GatewaysIdDetailsGetResponse:
-      type: object
-      properties:
-        details:
-          $ref: '#/components/schemas/manaV2GatewayDetails'
-      additionalProperties: false
-    manaV2AwsTransitGateway:
-      type: object
-      properties:
-        asn:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        id:
-          type: string
-          example: example string
-        vpcs:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2AWSTransitGatewayVpc'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2BgpNeighborAddressFamilyConfig:
-      type: object
-      properties:
-        addressFamily:
-          type: string
-          example: ENUM_VALUE
-        inboundPolicy:
-          $ref: '#/components/schemas/manaV2NullablePolicyName'
-        outboundPolicy:
-          $ref: '#/components/schemas/manaV2NullablePolicyName'
-      additionalProperties: false
-    v1GatewaysGuestConsumerMatchIdGetResponse:
-      type: object
-      properties:
-        destinationPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        ipsecTunnelConfig:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GatewaysGuestConsumerMatchIdGetResponseIpsecVpnTunnelConfig'
-        siteToSiteVpn:
-          $ref: '#/components/schemas/manaV2GuestConsumerSiteToSiteVpnConfig'
-      additionalProperties: false
-    v1GatewaysStatusPostRequestDeviceInfo:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        interfaceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2NullableBgpNeighborAddressFamilyConfig:
-      type: object
-      properties:
-        family:
-          $ref: '#/components/schemas/manaV2BgpNeighborAddressFamilyConfig'
-      additionalProperties: false
-    manaV2IpsecRoutingConfig:
-      type: object
-      properties:
-        bgp:
-          $ref: '#/components/schemas/manaV2IPsecBgpRouteConfig'
-        static:
-          $ref: '#/components/schemas/manaV2IPsecStaticRouteConfig'
-      additionalProperties: false
-    v1GatewaysDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2AwsGatewayDetails:
-      type: object
-      properties:
-        accountId:
-          type: string
-          example: example string
-        advanceSettings:
-          $ref: '#/components/schemas/manaV2AwsAdvanceSettings'
-        transitConnection:
-          $ref: '#/components/schemas/manaV2AWSGatewayDetailsTransitConnection'
-      additionalProperties: false
-    manaV2RegionCoordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 123.45
-        longitude:
-          type: number
-          format: double
-          example: 123.45
-      additionalProperties: false
-    manaV2AwsAdvanceSettings:
-      type: object
-      properties:
-        addressFamily:
-          type: string
-          example: ENUM_VALUE
-        allowedPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        amazonBgpRouterIp:
-          type: string
-          example: example string
-        bgpAuthKey:
-          type: string
-          example: example string
-        customerBgpRouterIp:
-          type: string
-          example: example string
-        isJumbo:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v1GatewaysStatusPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2GcpGatewayDetails:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        pairingKey:
-          type: string
-          example: example string
-        routingPolicy:
-          type: string
-          example: example string
       additionalProperties: false
     manaV2IPsecGatewayDetails:
       type: object
@@ -933,15 +826,62 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1GatewaysIpsecRegionsRegionIdVrfsVrfIdInsideSubnetGetResponse:
+    manaV2AWSGatewayDetailsTransitConnection:
       type: object
       properties:
-        ipv4Subnet:
+        credentials:
+          $ref: '#/components/schemas/manaV2AwsCredentials'
+        customerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        gateway:
+          $ref: '#/components/schemas/manaV2AwsDirectConnectGateway'
+        region:
           type: string
           example: example string
-        ipv6Subnet:
+      additionalProperties: false
+    manaV2AwsCredentials:
+      type: object
+      properties:
+        accessKeyId:
           type: string
           example: example string
+        secretAccessKey:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2IPsecGatewayTunnelDetails:
+      type: object
+      properties:
+        insideIpv4Cidr:
+          type: string
+          example: example string
+        insideIpv6Cidr:
+          type: string
+          example: example string
+        localIkePeerIdentity:
+          type: string
+          example: example string
+        psk:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1GatewaysPostResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1GatewaysDeleteResponse:
+      type: object
+      properties: {}
       additionalProperties: false
     manaV2IPsecGatewayRemotePeer:
       type: object
@@ -980,47 +920,75 @@ components:
           example: example string
           description: Enterprise IPsec VPN profile name for this peer
       additionalProperties: false
-    v1GatewaysPostRequest:
+    manaV2NullablePolicyName:
       type: object
       properties:
-        details:
-          $ref: '#/components/schemas/manaV2GatewayDetails'
-      additionalProperties: false
-    v1GatewaysPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2IPsecGatewayPeersConfig:
-      type: object
-      properties:
-        name:
+        policy:
           type: string
           example: example string
-          description: Name of the IPsec gateway service
-        remotePeers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IPsecGatewayRemotePeer'
-        routing:
-          $ref: '#/components/schemas/manaV2IpsecRoutingConfig'
       additionalProperties: false
-    manaV2GatewaySummaryGatewayDeviceSummary:
+    v1GatewaysIpsecRegionsRegionIdVrfsVrfIdInsideSubnetGetResponse:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostname:
+        ipv4Subnet:
           type: string
           example: example string
-        interfaceId:
+        ipv6Subnet:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2IPsecBgpRouteConfig:
+      type: object
+      properties:
+        addressFamilies:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2NullableBgpNeighborAddressFamilyConfig'
+        holdTimer:
           type: integer
-          format: int64
-          example: 1234567891011
-        maintenanceMode:
+          format: int32
+          example: 123
+          minimum: 0
+        keepaliveTimer:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        md5Password:
+          $ref: '#/components/schemas/manaV2NullableMd5Password'
+        peerAsn:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sendCommunity:
           type: boolean
           example: true
+      additionalProperties: false
+    manaV2GuestConsumerSiteToSiteVpnConfig:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+            example: example string
+        ipsecGatewayDetails:
+          $ref: '#/components/schemas/manaV2IPsecGatewayDetails'
+        ipsecGatewayPeers:
+          $ref: '#/components/schemas/manaV2IPsecGatewayPeersConfig'
+        regionId:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    manaV2IpsecRoutingConfig:
+      type: object
+      properties:
+        bgp:
+          $ref: '#/components/schemas/manaV2IPsecBgpRouteConfig'
+        static:
+          $ref: '#/components/schemas/manaV2IPsecStaticRouteConfig'
       additionalProperties: false
     manaV2IPsecStaticRouteConfig:
       type: object
@@ -1031,16 +999,48 @@ components:
             type: string
             example: example string
       additionalProperties: false
-    v1GatewaysPostResponse:
+    manaV2Subnet:
       type: object
       properties:
+        cidr:
+          type: string
+          example: example string
+        id:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1GatewaysPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1GatewaysPutRequest:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/manaV2GatewayDetails'
         id:
           type: integer
           format: int64
           example: 1234567891011
-        status:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
   securitySchemes:
     jwtAuth:

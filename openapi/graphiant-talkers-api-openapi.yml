@@ -90,18 +90,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     ipfixClientUsageSummary:
       type: object
       properties:
@@ -113,6 +101,14 @@ components:
           format: int64
           example: 1234567891011
           description: data used in kilo bytes
+      additionalProperties: false
+    v1TalkersSiteSiteIdTopPostResponse:
+      type: object
+      properties:
+        appsUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
     ipfixTimeWindow:
       type: object
@@ -127,18 +123,6 @@ components:
         recentTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1TalkersDeviceDeviceIdTopPostRequest:
-      type: object
-      properties:
-        numClients:
-          type: integer
-          format: int32
-          example: 10
-          minimum: 0
-          description: The maximum number of client usage info to be returned (10 if left empty)
-        timeWindow:
-          $ref: '#/components/schemas/ipfixTimeWindow'
-      additionalProperties: false
     v1TalkersSiteSiteIdTopPostRequest:
       type: object
       properties:
@@ -151,6 +135,18 @@ components:
         timeWindow:
           $ref: '#/components/schemas/ipfixTimeWindow'
       additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     v1TalkersDeviceDeviceIdTopPostResponse:
       type: object
       properties:
@@ -159,13 +155,17 @@ components:
           items:
             $ref: '#/components/schemas/ipfixClientUsageSummary'
       additionalProperties: false
-    v1TalkersSiteSiteIdTopPostResponse:
+    v1TalkersDeviceDeviceIdTopPostRequest:
       type: object
       properties:
-        appsUtilization:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixClientUsageSummary'
+        numClients:
+          type: integer
+          format: int32
+          example: 10
+          minimum: 0
+          description: The maximum number of client usage info to be returned (10 if left empty)
+        timeWindow:
+          $ref: '#/components/schemas/ipfixTimeWindow'
       additionalProperties: false
   securitySchemes:
     jwtAuth:
