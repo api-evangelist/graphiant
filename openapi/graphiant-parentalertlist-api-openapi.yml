@@ -42,6 +42,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    alertserviceChildrenAlertListResponse:
+      type: object
+      properties:
+        alertList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAlertRecord'
+      additionalProperties: false
     v2ParentalertlistPostRequest:
       type: object
       properties:
@@ -178,14 +186,6 @@ components:
           example: example string
           description: Type of alert (required)
       additionalProperties: false
-    v2ParentalertlistPostResponse:
-      type: object
-      properties:
-        alertList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceAlertRecord'
-      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -197,14 +197,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    alertserviceChildrenAlertListResponse:
-      type: object
-      properties:
-        alertList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceAlertRecord'
       additionalProperties: false
     alertserviceTimeWindow:
       type: object
@@ -218,6 +210,14 @@ components:
           $ref: '#/components/schemas/googleProtobufTimestamp'
         recentTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2ParentalertlistPostResponse:
+      type: object
+      properties:
+        alertList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAlertRecord'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

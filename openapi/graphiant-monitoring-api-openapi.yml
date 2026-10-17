@@ -801,125 +801,36 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    statsmonV2QueueInstantStatsSelector:
+    v2MonitoringTwampPostRequest:
       type: object
       properties:
-        interfaceName:
-          type: string
-          example: example string
-        slaClass:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringQueueInstantPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2QueueInstantStatsSelector'
-      additionalProperties: false
-    v2MonitoringBfdPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringBfdPostResponseData'
-      additionalProperties: false
-    v2MonitoringMacsecDeviceIdStatusGetResponseMaCsecStatus:
-      type: object
-      properties:
-        interfaceName:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    statsmonV2InterfaceStatsSelector:
-      type: object
-      properties:
-        interfaceName:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringInterfacePostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2InterfaceStatsSelector'
-      additionalProperties: false
-    statsmonExtranetEdgeStatus:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        disconnectedReason:
-          type: string
-          example: No route to the server
-          description: the reason for the edge being disconnected
-        hostname:
-          type: string
-          example: edge1
-          description: the hostname of the edge
-        id:
-          type: integer
-          format: int64
-          example: 30000000001
-          description: the id of the edge/device
-        siteName:
-          type: string
-          example: site1
-          description: the name of the site
-        status:
-          type: string
-          example: Healthy
-          description: the health status of the edge (Healthy, Impaired, Down)
-      additionalProperties: false
-    v2MonitoringCircuitsBandwidthPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringCircuitsBandwidthPostResponseData'
-      additionalProperties: false
-    v2MonitoringCircuitsBandwidthPostResponseData:
-      type: object
-      properties:
-        carrier:
-          type: string
-          example: example string
         deviceId:
           type: integer
           format: int64
           example: 12345678910
           minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringCircuitsVisualizationPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringCircuitsVisualizationPostResponseData'
+        hostname:
+          type: string
+          example: example string
+          description: hostname of the device.
+      additionalProperties: false
+    v2MonitoringSiteCircuitsBandwidthSiteIdPostResponseData:
+      type: object
+      properties:
         dlBwKbpsSamples:
           type: array
           items:
@@ -931,13 +842,46 @@ components:
           items:
             $ref: '#/components/schemas/statsmonV2StatsSample'
       additionalProperties: false
-    v2MonitoringExtranetServiceStatusDetailsGetResponse:
+    v2MonitoringCircuitsUtilizationPostResponseData:
+      type: object
+      properties:
+        configLinkUpSpeedMbps:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        queueUtilization:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2QueueUtilization'
+        selector:
+          $ref: '#/components/schemas/statsmonV2CircuitUtilizationSelector'
+      additionalProperties: false
+    v2MonitoringInterfacePostResponseData:
+      type: object
+      properties:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2InterfaceStatsSelector'
+      additionalProperties: false
+    v2MonitoringExtranetSiteStatusGetResponse:
       type: object
       properties:
         statuses:
           type: array
           items:
             $ref: '#/components/schemas/statsmonExtranetSiteStatus'
+      additionalProperties: false
+    v2MonitoringBgpPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringBgpPostResponseData'
       additionalProperties: false
     v2MonitoringSystemPostResponseData:
       type: object
@@ -948,6 +892,80 @@ components:
             $ref: '#/components/schemas/statsmonV2StatsSample'
         selector:
           $ref: '#/components/schemas/statsmonV2SystemStatsSelector'
+      additionalProperties: false
+    v2MonitoringIkeErrorHistoryPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+        tunnelName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2MonitoringSiteTwampSiteIdPostResponseData:
+      type: object
+      properties:
+        carrier:
+          type: string
+          example: example string
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
+      additionalProperties: false
+    v2MonitoringSystemPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2SystemStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringExtranetEdgeStatusGetResponse:
+      type: object
+      properties:
+        edgeStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonExtranetEdgeStatus'
+      additionalProperties: false
+    statsmonV2CircuitBandwidthStatsSelector:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    statsmonV2SystemStatsSelector:
+      type: object
+      properties:
+        type:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     v2MonitoringBfdPostRequest:
       type: object
@@ -964,6 +982,33 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
+    v2MonitoringSegmentRouteCountsPostRequest:
+      type: object
+      properties:
+        deviceIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 12345678910
+            minimum: 0
+      additionalProperties: false
+    v2MonitoringSegmentRouteCountsPostResponseData:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        ipv4RouteCount:
+          $ref: '#/components/schemas/statsmonV2StatsSample'
+        ipv6RouteCount:
+          $ref: '#/components/schemas/statsmonV2StatsSample'
+        segmentName:
+          type: string
+          example: example string
+      additionalProperties: false
     v2MonitoringSiteTwampSiteIdPostResponse:
       type: object
       properties:
@@ -972,27 +1017,23 @@ components:
           items:
             $ref: '#/components/schemas/v2MonitoringSiteTwampSiteIdPostResponseData'
       additionalProperties: false
-    v2MonitoringSiteTwampSiteIdPostRequest:
+    v2MonitoringExtranetServiceStatusDetailsGetResponse:
       type: object
       properties:
-        selectors:
+        statuses:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
+            $ref: '#/components/schemas/statsmonExtranetSiteStatus'
       additionalProperties: false
-    v2MonitoringSiteCircuitsBandwidthSiteIdPostRequest:
+    v2MonitoringIkeErrorHistoryPostResponse:
       type: object
       properties:
-        selectors:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
+            $ref: '#/components/schemas/v2MonitoringIkeErrorHistoryPostResponseData'
       additionalProperties: false
-    v2MonitoringCircuitsUtilizationPostRequest:
+    v2MonitoringIpsecPostRequest:
       type: object
       properties:
         deviceId:
@@ -1003,39 +1044,19 @@ components:
         selectors:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2CircuitUtilizationSelector'
+            $ref: '#/components/schemas/statsmonV2IpSecStatsSelector'
         timeWindow:
           $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
-    v2MonitoringPolicyPostRequest:
+    v2MonitoringCircuitsVisualizationPostResponseData:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
+        samples:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2PolicyStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2MonitoringCircuitsVisualizationPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2TwampVisualSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2TwampVisualSelector'
       additionalProperties: false
     v2MonitoringExtranetLogDetailsPostResponseLogDetails:
       type: object
@@ -1059,20 +1080,18 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v2MonitoringInterfacePostRequest:
+    statsmonV2TwampVisualSelector:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2InterfaceStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
+        circuitName:
+          type: string
+          example: example string
+        coreLocation:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     v2MonitoringCircuitsUtilizationPostResponse:
       type: object
@@ -1081,6 +1100,53 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v2MonitoringCircuitsUtilizationPostResponseData'
+      additionalProperties: false
+    statsmonV2QueueInstantStatsSelector:
+      type: object
+      properties:
+        interfaceName:
+          type: string
+          example: example string
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2MonitoringCircuitsSummaryPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    statsmonV2BfdStatsSelector:
+      type: object
+      properties:
+        ifIndex:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        peerAddress:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2MonitoringInterfacePostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringInterfacePostResponseData'
       additionalProperties: false
     statsmonV2QueueUtilization:
       type: object
@@ -1110,13 +1176,178 @@ components:
           format: float
           example: 12.34
       additionalProperties: false
-    v2MonitoringCircuitsSummaryPostResponse:
+    statsmonExtranetEdgeStatus:
       type: object
       properties:
-        circuitSummaries:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        disconnectedReason:
+          type: string
+          example: No route to the server
+          description: the reason for the edge being disconnected
+        hostname:
+          type: string
+          example: edge1
+          description: the hostname of the edge
+        id:
+          type: integer
+          format: int64
+          example: 30000000001
+          description: the id of the edge/device
+        siteName:
+          type: string
+          example: site1
+          description: the name of the site
+        status:
+          type: string
+          example: Healthy
+          description: the health status of the edge (Healthy, Impaired, Down)
+      additionalProperties: false
+    v2MonitoringTwampPostResponseData:
+      type: object
+      properties:
+        samples:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2CircuitSummary'
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
+      additionalProperties: false
+    statsmonV2InterfaceStatsSelector:
+      type: object
+      properties:
+        interfaceName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2MonitoringPolicyPostResponseData:
+      type: object
+      properties:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2PolicyStatsSelector'
+      additionalProperties: false
+    statsmonV2BgpStatsSelector:
+      type: object
+      properties:
+        peerAddress:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+        vrf:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonV2TimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    v2MonitoringIpsecPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringIpsecPostResponseData'
+      additionalProperties: false
+    v2MonitoringExtranetServiceStatusGetResponse:
+      type: object
+      properties:
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonExtranetServerStatus'
+      additionalProperties: false
+    v2MonitoringInterfacePostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2InterfaceStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringMacsecDeviceIdStatusGetResponse:
+      type: object
+      properties:
+        macsecStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringMacsecDeviceIdStatusGetResponseMaCsecStatus'
+      additionalProperties: false
+    v2MonitoringCircuitsUtilizationPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2CircuitUtilizationSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringTwampPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringTwampPostResponseData'
+      additionalProperties: false
+    v2MonitoringCircuitsVisualizationPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2TwampVisualSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    statsmonV2StatsSample:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ENUM_VALUE
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        value:
+          type: number
+          format: double
+          example: 123.45
       additionalProperties: false
     v2MonitoringExtranetStatusDetailsGetResponse:
       type: object
@@ -1136,10 +1367,24 @@ components:
         siteStatus:
           $ref: '#/components/schemas/statsmonExtranetSiteStatus'
       additionalProperties: false
-    statsmonV2CircuitUtilizationSelector:
+    v2MonitoringIkeErrorHistoryPostResponseData:
       type: object
       properties:
-        circuitName:
+        destinationAddress:
+          type: string
+          example: example string
+        destinationPort:
+          type: string
+          example: example string
+        errorType:
+          type: string
+          example: ENUM_VALUE
+        message:
+          type: string
+          example: example string
+        timestamp:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        tunnelName:
           type: string
           example: example string
       additionalProperties: false
@@ -1151,55 +1396,7 @@ components:
           items:
             $ref: '#/components/schemas/v2MonitoringQueueInstantPostResponseData'
       additionalProperties: false
-    v2MonitoringSystemPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2SystemStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2MonitoringPolicyPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2PolicyStatsSelector'
-      additionalProperties: false
-    v2MonitoringSegmentRouteCountsPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringSegmentRouteCountsPostResponseData'
-      additionalProperties: false
-    statsmonV2SystemStatsSelector:
-      type: object
-      properties:
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringInterfacePostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringInterfacePostResponseData'
-      additionalProperties: false
-    statsmonV2CircuitBandwidthStatsSelector:
+    statsmonV2TwampStatsSelector:
       type: object
       properties:
         circuitName:
@@ -1210,6 +1407,12 @@ components:
           format: int64
           example: 12345678910
           minimum: 0
+        interfaceName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     statsmonExtranetSiteStatus:
       type: object
@@ -1232,6 +1435,44 @@ components:
           items:
             $ref: '#/components/schemas/statsmonExtranetServerStatus'
       additionalProperties: false
+    statsmonV2IpSecStatsSelector:
+      type: object
+      properties:
+        peerGdi:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2MonitoringSiteCircuitsBandwidthSiteIdPostRequest:
+      type: object
+      properties:
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringMacsecDeviceIdStatusGetResponseMaCsecStatus:
+      type: object
+      properties:
+        interfaceName:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2MonitoringSystemPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringSystemPostResponseData'
+      additionalProperties: false
     v2MonitoringExtranetLogDetailsPostRequest:
       type: object
       properties:
@@ -1253,298 +1494,6 @@ components:
       - id
       - isB2B
       - isProvider
-    v2MonitoringBgpPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringBgpPostResponseData'
-      additionalProperties: false
-    v2MonitoringCircuitsSummaryPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2MonitoringCircuitsVisualizationPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2TwampVisualSelector'
-      additionalProperties: false
-    statsmonV2TwampVisualSelector:
-      type: object
-      properties:
-        circuitName:
-          type: string
-          example: example string
-        coreLocation:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringSiteTwampSiteIdPostResponseData:
-      type: object
-      properties:
-        carrier:
-          type: string
-          example: example string
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
-      additionalProperties: false
-    v2MonitoringIpsecPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringIpsecPostResponseData'
-      additionalProperties: false
-    v2MonitoringBfdPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2BfdStatsSelector'
-      additionalProperties: false
-    statsmonV2TimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    statsmonV2BgpStatsSelector:
-      type: object
-      properties:
-        peerAddress:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-        vrf:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2MonitoringSegmentRouteCountsPostRequest:
-      type: object
-      properties:
-        deviceIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 12345678910
-            minimum: 0
-      additionalProperties: false
-    v2MonitoringExtranetLogDetailsPostResponse:
-      type: object
-      properties:
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringExtranetLogDetailsPostResponseLogDetails'
-      additionalProperties: false
-    v2MonitoringIkeErrorHistoryPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-        tunnelName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v2MonitoringIpsecPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2IpSecStatsSelector'
-      additionalProperties: false
-    v2MonitoringCircuitsBandwidthPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2MonitoringTwampPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringTwampPostResponseData'
-      additionalProperties: false
-    v2MonitoringIpsecPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2IpSecStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    statsmonV2IpSecStatsSelector:
-      type: object
-      properties:
-        peerGdi:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringSiteCircuitsBandwidthSiteIdPostResponseData:
-      type: object
-      properties:
-        dlBwKbpsSamples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
-        ulBwKbpsSamples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-      additionalProperties: false
-    v2MonitoringIkeErrorHistoryPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringIkeErrorHistoryPostResponseData'
-      additionalProperties: false
-    v2MonitoringExtranetEdgeStatusGetResponse:
-      type: object
-      properties:
-        edgeStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonExtranetEdgeStatus'
-      additionalProperties: false
-    statsmonV2TwampStatsSelector:
-      type: object
-      properties:
-        circuitName:
-          type: string
-          example: example string
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        interfaceName:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v2MonitoringPolicyPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringPolicyPostResponseData'
-      additionalProperties: false
-    v2MonitoringBgpPostResponseData:
-      type: object
-      properties:
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2StatsSample'
-        selector:
-          $ref: '#/components/schemas/statsmonV2BgpStatsSelector'
-      additionalProperties: false
-    v2MonitoringExtranetServiceStatusGetResponse:
-      type: object
-      properties:
-        statuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonExtranetServerStatus'
-      additionalProperties: false
-    v2MonitoringTwampPostRequest:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
-        timeWindow:
-          $ref: '#/components/schemas/statsmonV2TimeWindow'
-      additionalProperties: false
-    v2MonitoringSystemPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringSystemPostResponseData'
-      additionalProperties: false
     v2MonitoringQueueInstantPostRequest:
       type: object
       properties:
@@ -1566,17 +1515,77 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
-    statsmonV2PolicyStatsSelector:
+    v2MonitoringQueueInstantPostResponseData:
       type: object
       properties:
-        index:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2QueueInstantStatsSelector'
+      additionalProperties: false
+    v2MonitoringSiteTwampSiteIdPostRequest:
+      type: object
+      properties:
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringPolicyPostRequest:
+      type: object
+      properties:
+        deviceId:
           type: integer
-          format: int32
-          example: 123
+          format: int64
+          example: 12345678910
           minimum: 0
-        type:
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2PolicyStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
+      additionalProperties: false
+    v2MonitoringCircuitsBandwidthPostResponseData:
+      type: object
+      properties:
+        carrier:
           type: string
-          example: ENUM_VALUE
+          example: example string
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        dlBwKbpsSamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
+        ulBwKbpsSamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+      additionalProperties: false
+    v2MonitoringCircuitsBandwidthPostRequest:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2CircuitBandwidthStatsSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
     statsmonExtranetServerStatus:
       type: object
@@ -1589,37 +1598,6 @@ components:
           type: string
           example: Healthy
           description: the health status of the server (Healthy, Impaired, Down)
-      additionalProperties: false
-    v2MonitoringSegmentRouteCountsPostResponseData:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        ipv4RouteCount:
-          $ref: '#/components/schemas/statsmonV2StatsSample'
-        ipv6RouteCount:
-          $ref: '#/components/schemas/statsmonV2StatsSample'
-        segmentName:
-          type: string
-          example: example string
-      additionalProperties: false
-    statsmonV2BfdStatsSelector:
-      type: object
-      properties:
-        ifIndex:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        peerAddress:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
       additionalProperties: false
     v2MonitoringBgpPostRequest:
       type: object
@@ -1636,75 +1614,23 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonV2TimeWindow'
       additionalProperties: false
-    v2MonitoringSiteCircuitsBandwidthSiteIdPostResponse:
+    v2MonitoringBgpPostResponseData:
+      type: object
+      properties:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2BgpStatsSelector'
+      additionalProperties: false
+    v2MonitoringPolicyPostResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/v2MonitoringSiteCircuitsBandwidthSiteIdPostResponseData'
-      additionalProperties: false
-    v2MonitoringMacsecDeviceIdStatusGetResponse:
-      type: object
-      properties:
-        macsecStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringMacsecDeviceIdStatusGetResponseMaCsecStatus'
-      additionalProperties: false
-    statsmonV2StatsSample:
-      type: object
-      properties:
-        status:
-          type: string
-          example: ENUM_VALUE
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        value:
-          type: number
-          format: double
-          example: 123.45
-      additionalProperties: false
-    v2MonitoringExtranetSiteStatusGetResponse:
-      type: object
-      properties:
-        statuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonExtranetSiteStatus'
-      additionalProperties: false
-    v2MonitoringCircuitsVisualizationPostResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2MonitoringCircuitsVisualizationPostResponseData'
-        hostname:
-          type: string
-          example: example string
-          description: hostname of the device.
-      additionalProperties: false
-    v2MonitoringIkeErrorHistoryPostResponseData:
-      type: object
-      properties:
-        destinationAddress:
-          type: string
-          example: example string
-        destinationPort:
-          type: string
-          example: example string
-        errorType:
-          type: string
-          example: ENUM_VALUE
-        message:
-          type: string
-          example: example string
-        timestamp:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        tunnelName:
-          type: string
-          example: example string
+            $ref: '#/components/schemas/v2MonitoringPolicyPostResponseData'
       additionalProperties: false
     statsmonV2CircuitSummary:
       type: object
@@ -1827,22 +1753,23 @@ components:
           example: 12.34
           description: Graphiant score/QoE based on mos
       additionalProperties: false
-    v2MonitoringCircuitsUtilizationPostResponseData:
+    v2MonitoringExtranetLogDetailsPostResponse:
       type: object
       properties:
-        configLinkUpSpeedMbps:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        queueUtilization:
+        logs:
           type: array
           items:
-            $ref: '#/components/schemas/statsmonV2QueueUtilization'
-        selector:
-          $ref: '#/components/schemas/statsmonV2CircuitUtilizationSelector'
+            $ref: '#/components/schemas/v2MonitoringExtranetLogDetailsPostResponseLogDetails'
       additionalProperties: false
-    v2MonitoringTwampPostResponseData:
+    v2MonitoringCircuitsBandwidthPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringCircuitsBandwidthPostResponseData'
+      additionalProperties: false
+    v2MonitoringIpsecPostResponseData:
       type: object
       properties:
         samples:
@@ -1850,7 +1777,80 @@ components:
           items:
             $ref: '#/components/schemas/statsmonV2StatsSample'
         selector:
-          $ref: '#/components/schemas/statsmonV2TwampStatsSelector'
+          $ref: '#/components/schemas/statsmonV2IpSecStatsSelector'
+      additionalProperties: false
+    statsmonV2CircuitUtilizationSelector:
+      type: object
+      properties:
+        circuitName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v2MonitoringSiteCircuitsBandwidthSiteIdPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringSiteCircuitsBandwidthSiteIdPostResponseData'
+      additionalProperties: false
+    statsmonV2PolicyStatsSelector:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v2MonitoringBfdPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringBfdPostResponseData'
+      additionalProperties: false
+    v2MonitoringBfdPostResponseData:
+      type: object
+      properties:
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2StatsSample'
+        selector:
+          $ref: '#/components/schemas/statsmonV2BfdStatsSelector'
+      additionalProperties: false
+    v2MonitoringCircuitsSummaryPostResponse:
+      type: object
+      properties:
+        circuitSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonV2CircuitSummary'
+      additionalProperties: false
+    v2MonitoringSegmentRouteCountsPostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2MonitoringSegmentRouteCountsPostResponseData'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

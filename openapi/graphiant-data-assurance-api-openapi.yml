@@ -227,32 +227,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2BucketAppServer:
-      type: object
-      properties:
-        ip:
-          type: string
-          example: example string
-        port:
-          type: integer
-          format: int32
-          example: 123
-        protocol:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
     manaV2BucketApp:
       type: object
       properties:
@@ -282,34 +256,14 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
+    v1DataAssuranceAssurancesGlobalIdPutRequest:
       type: object
       properties:
-        assurances:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
-      additionalProperties: false
-    v1DataAssuranceFlexAlgosGetResponseEntry:
-      type: object
-      properties:
-        description:
+        appRemovalReason:
           type: string
           example: example string
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
-      type: object
-      properties:
-        lanName:
-          type: string
-          example: example string
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
       additionalProperties: false
     v1DataAssuranceAssurancesGlobalGetResponseRow:
       type: object
@@ -341,19 +295,24 @@ components:
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
+    v1DataAssuranceAssurancesGlobalIdGetResponse:
       type: object
       properties:
-        appName:
-          type: string
-          example: example string
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
+    v1DataAssuranceAssurancesGlobalPostResponse:
       type: object
       properties:
-        siteName:
-          type: string
-          example: example string
+        assuranceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        unsyncedDeviceNames:
+          type: array
+          items:
+            type: string
+            example: example string
       additionalProperties: false
     v1DataAssuranceAssurancesGlobalIdDeleteResponse:
       type: object
@@ -365,11 +324,21 @@ components:
         config:
           $ref: '#/components/schemas/manaV2AssuranceConfig'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdGetResponse:
+    v1DataAssuranceAssurancesGlobalIdPutResponse:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
+        unsyncedDeviceNames:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
+      type: object
+      properties:
+        lanName:
+          type: string
+          example: example string
       additionalProperties: false
     v1DataAssuranceAssurancesGlobalGetResponse:
       type: object
@@ -389,13 +358,13 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1DataAssuranceFlexAlgosGetResponse:
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
       type: object
       properties:
-        entries:
+        assurances:
           type: array
           items:
-            $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
       additionalProperties: false
     manaV2AssuranceConfig:
       type: object
@@ -423,36 +392,67 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdPutRequest:
+    manaV2BucketAppServer:
       type: object
       properties:
-        appRemovalReason:
+        ip:
           type: string
           example: example string
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
+        port:
+          type: integer
+          format: int32
+          example: 123
+        protocol:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdPutResponse:
+    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
       type: object
       properties:
-        unsyncedDeviceNames:
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponse:
+      type: object
+      properties:
+        entries:
           type: array
           items:
-            type: string
-            example: example string
+            $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalPostResponse:
+    googleProtobufTimestamp:
       type: object
       properties:
-        assuranceId:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
           example: 1234567891011
-        unsyncedDeviceNames:
-          type: array
-          items:
-            type: string
-            example: example string
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponseEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

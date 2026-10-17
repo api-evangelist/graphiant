@@ -178,6 +178,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1ZtagentBindingsPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ZtagentBindingsPutRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
+          type: string
+          example: example string
+      additionalProperties: false
     v1ZtagentBindingsGetResponse:
       type: object
       properties:
@@ -225,24 +243,6 @@ components:
         machine:
           type: string
           example: example string
-      additionalProperties: false
-    v1ZtagentBindingsPutRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ZtagentBindingsPutResponse:
-      type: object
-      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

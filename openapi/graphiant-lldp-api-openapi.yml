@@ -111,6 +111,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1LldpInterfaceIdNeighborsGetResponse:
+      type: object
+      properties:
+        neighbors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2LldpNeighbor'
+      additionalProperties: false
+    v1LldpInterfaceIdVendorsGetResponse:
+      type: object
+      properties:
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2VendorDetail'
+      additionalProperties: false
+    v1LldpInterfaceIdSummaryGetResponse:
+      type: object
+      properties:
+        numNeighbors:
+          type: integer
+          format: int64
+          example: 1234567891011
+        numVendors:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
     manaV2LldpNeighbor:
       type: object
       properties:
@@ -137,14 +165,6 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1LldpInterfaceIdNeighborsGetResponse:
-      type: object
-      properties:
-        neighbors:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2LldpNeighbor'
-      additionalProperties: false
     manaV2VendorDetail:
       type: object
       properties:
@@ -152,26 +172,6 @@ components:
           type: string
           example: example string
         neighborCount:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1LldpInterfaceIdVendorsGetResponse:
-      type: object
-      properties:
-        vendors:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2VendorDetail'
-      additionalProperties: false
-    v1LldpInterfaceIdSummaryGetResponse:
-      type: object
-      properties:
-        numNeighbors:
-          type: integer
-          format: int64
-          example: 1234567891011
-        numVendors:
           type: integer
           format: int64
           example: 1234567891011

@@ -264,58 +264,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    commonBillingContract:
-      type: object
-      properties:
-        contractedCredits:
-          type: number
-          format: float
-          example: 12.34
-          description: Number of credits agreed upon for the entirety of the current contract
-        expirationDate:
-          $ref: '#/components/schemas/commonBillingTimePeriod'
-      additionalProperties: false
-    v1EnterprisesEnterpriseIdAdminGetResponse:
-      type: object
-      properties:
-        adminEmail:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1EnterprisesManagedGetResponse:
-      type: object
-      properties:
-        counts:
-          $ref: '#/components/schemas/iamCounts'
-        enterprises:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamEnterprise'
-      additionalProperties: false
-    commonBillingTimePeriod:
-      type: object
-      properties:
-        month:
-          type: integer
-          format: int32
-          example: 123
-        year:
-          type: integer
-          format: int32
-          example: 123
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
     iamCounts:
       type: object
       properties:
@@ -372,6 +320,112 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
+    v1EnterprisesManagedGetResponse:
+      type: object
+      properties:
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamEnterprise'
+      additionalProperties: false
+    commonBillingContract:
+      type: object
+      properties:
+        contractedCredits:
+          type: number
+          format: float
+          example: 12.34
+          description: Number of credits agreed upon for the entirety of the current contract
+        expirationDate:
+          $ref: '#/components/schemas/commonBillingTimePeriod'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1EnterprisesPatchRequestTokenExpiry:
+      type: object
+      properties:
+        length:
+          type: integer
+          format: int32
+          example: 123
+        timeUnit:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1EnterprisesEulaPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
+      type: object
+      properties:
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
+      additionalProperties: false
+    pokedexDeviceMappingInfo:
+      type: object
+      properties:
+        connectTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        hostname:
+          type: string
+          example: example string
+        ipaddress:
+          type: string
+          example: example string
+        ttIdentity:
+          type: string
+          example: example string
+      additionalProperties: false
+    iamCustomer:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        companyName:
+          type: string
+          example: example string
+        counts:
+          $ref: '#/components/schemas/iamCounts'
+        description:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        impersonationEnabled:
+          type: boolean
+          example: true
+        marketplaceId:
+          type: string
+          example: example string
+      additionalProperties: false
     v1EnterprisesGetResponse:
       type: object
       properties:
@@ -380,27 +434,29 @@ components:
           items:
             $ref: '#/components/schemas/iamEnterprise'
       additionalProperties: false
-    v1EnterprisesEulaPostRequest:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1EnterprisesPutRequest:
+    v1EnterprisesEnterpriseIdAdminGetResponse:
       type: object
       properties:
-        accountType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
         adminEmail:
           type: string
           example: example string
-        adminFirstName:
-          type: string
-          example: example string
-        adminLastName:
-          type: string
-          example: example string
-        adminTimeZone:
+      additionalProperties: false
+    commonBillingTimePeriod:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+          example: 123
+        year:
+          type: integer
+          format: int32
+          example: 123
+      additionalProperties: false
+    v1EnterprisesPatchRequest:
+      type: object
+      properties:
+        adminEmail:
           type: string
           example: example string
         cloudProvider:
@@ -409,7 +465,6 @@ components:
         companyName:
           type: string
           example: example string
-          description: ' (required)'
         creditLimit:
           type: integer
           format: int32
@@ -419,20 +474,35 @@ components:
           example: example string
         enterpriseContract:
           $ref: '#/components/schemas/commonBillingContract'
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ' (required)'
+        impersonationEnabled:
+          type: boolean
+          example: true
         logo:
           type: string
           example: example string
         marketplaceId:
           type: string
           example: example string
+        portalBanner:
+          type: string
+          example: example string
+        proxyTenantId:
+          type: integer
+          format: int64
+          example: 1234567891011
         smallLogo:
           type: string
           example: example string
+        tokenExpiry:
+          $ref: '#/components/schemas/v1EnterprisesPatchRequestTokenExpiry'
       additionalProperties: false
       required:
-      - accountType
-      - companyName
-      - enterpriseContract
+      - enterpriseId
     iamEnterprise:
       type: object
       properties:
@@ -500,79 +570,23 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1EnterprisesEnterpriseIdDeviceStatusGetResponse:
+    v1EnterprisesPutRequest:
       type: object
       properties:
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
-      additionalProperties: false
-    pokedexDeviceMappingInfo:
-      type: object
-      properties:
-        connectTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        hostname:
-          type: string
-          example: example string
-        ipaddress:
-          type: string
-          example: example string
-        ttIdentity:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1EnterprisesPatchRequestTokenExpiry:
-      type: object
-      properties:
-        length:
-          type: integer
-          format: int32
-          example: 123
-        timeUnit:
+        accountType:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    iamCustomer:
-      type: object
-      properties:
+          description: ' (required)'
         adminEmail:
           type: string
           example: example string
-        companyName:
+        adminFirstName:
           type: string
           example: example string
-        counts:
-          $ref: '#/components/schemas/iamCounts'
-        description:
+        adminLastName:
           type: string
           example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        impersonationEnabled:
-          type: boolean
-          example: true
-        marketplaceId:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1EnterprisesPatchRequest:
-      type: object
-      properties:
-        adminEmail:
+        adminTimeZone:
           type: string
           example: example string
         cloudProvider:
@@ -581,6 +595,7 @@ components:
         companyName:
           type: string
           example: example string
+          description: ' (required)'
         creditLimit:
           type: integer
           format: int32
@@ -590,35 +605,20 @@ components:
           example: example string
         enterpriseContract:
           $ref: '#/components/schemas/commonBillingContract'
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: ' (required)'
-        impersonationEnabled:
-          type: boolean
-          example: true
         logo:
           type: string
           example: example string
         marketplaceId:
           type: string
           example: example string
-        portalBanner:
-          type: string
-          example: example string
-        proxyTenantId:
-          type: integer
-          format: int64
-          example: 1234567891011
         smallLogo:
           type: string
           example: example string
-        tokenExpiry:
-          $ref: '#/components/schemas/v1EnterprisesPatchRequestTokenExpiry'
       additionalProperties: false
       required:
-      - enterpriseId
+      - accountType
+      - companyName
+      - enterpriseContract
   securitySchemes:
     jwtAuth:
       type: apiKey

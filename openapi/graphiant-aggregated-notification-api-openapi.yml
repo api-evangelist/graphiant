@@ -66,6 +66,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v2AggregatedNotificationEnableDisablePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2AggregatedNotificationGetStateGetResponse:
+      type: object
+      properties:
+        state:
+          type: boolean
+          example: true
+      additionalProperties: false
     v2AggregatedNotificationEnableDisablePostRequest:
       type: object
       properties:
@@ -76,17 +87,6 @@ components:
       additionalProperties: false
       required:
       - enable
-    v2AggregatedNotificationGetStateGetResponse:
-      type: object
-      properties:
-        state:
-          type: boolean
-          example: true
-      additionalProperties: false
-    v2AggregatedNotificationEnableDisablePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

@@ -72,17 +72,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    googleProtobufTimestamp:
+    pokedexDeviceHistoryInfo:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
+        deviceId:
           type: integer
           format: int64
-          example: 1234567891011
+          example: 12345678910
+          minimum: 0
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        event:
+          type: string
+          example: ENUM_VALUE
+        eventTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        ipaddress:
+          type: string
+          example: example string
+        ttIdentity:
+          type: string
+          example: example string
       additionalProperties: false
     v1DeviceStatusHistoryPostResponse:
       type: object
@@ -131,30 +144,25 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    pokedexDeviceHistoryInfo:
+    googleProtobufTimestamp:
       type: object
       properties:
-        deviceId:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
           type: integer
           format: int64
-          example: 12345678910
-          minimum: 0
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        event:
-          type: string
-          example: ENUM_VALUE
-        eventTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        ipaddress:
-          type: string
-          example: example string
-        ttIdentity:
-          type: string
-          example: example string
+          example: 1234567891011
+      additionalProperties: false
+    v1DeviceStatusPostResponse:
+      type: object
+      properties:
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
       additionalProperties: false
     v1DeviceStatusPostRequest:
       type: object
@@ -169,14 +177,6 @@ components:
         role:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    v1DeviceStatusPostResponse:
-      type: object
-      properties:
-        mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/pokedexDeviceMappingInfo'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

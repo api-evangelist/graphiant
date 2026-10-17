@@ -52,6 +52,14 @@ components:
       additionalProperties: false
       required:
       - alertId
+    v2ChildalertlistPostResponse:
+      type: object
+      properties:
+        alertList:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAlertRecord'
+      additionalProperties: false
     alertserviceAlertRecord:
       type: object
       properties:
@@ -181,14 +189,6 @@ components:
           type: string
           example: example string
           description: Type of alert (required)
-      additionalProperties: false
-    v2ChildalertlistPostResponse:
-      type: object
-      properties:
-        alertList:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceAlertRecord'
       additionalProperties: false
     alertserviceChildrenAlertListResponse:
       type: object

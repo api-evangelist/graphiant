@@ -84,42 +84,19 @@ components:
         target:
           $ref: '#/components/schemas/auditTarget'
       additionalProperties: false
-    v1AuditLogsPostRequest:
+    auditmonSelector:
       type: object
       properties:
-        cursorRef:
+        field:
           type: string
-          example: example string
-        histogramBucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numLogs:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        selectors:
+          example: AuditFieldId
+          description: Field to search
+        values:
           type: array
           items:
-            $ref: '#/components/schemas/auditmonSelector'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+            type: string
+            example: xyz
+            description: Multiple values are treated as OR
       additionalProperties: false
     auditmonAuditLog:
       type: object
@@ -157,85 +134,17 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1AuditLogsPostResponse:
+    v1AuditLogsPostRequest:
       type: object
       properties:
         cursorRef:
           type: string
           example: example string
-        histogram:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditmonHistogram'
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditAuditEntry'
-        totalLogs:
+        histogramBucketSizeSec:
           type: integer
-          format: int64
-          example: 12345678910
+          format: int32
+          example: 123
           minimum: 0
-      additionalProperties: false
-    auditTarget:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        name:
-          type: string
-          example: example string
-      additionalProperties: false
-    auditActivityItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    auditmonAuditLogsV2Selector:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-        entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditActivityItem'
-        jobTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-        targets:
-          type: array
-          items:
-            $ref: '#/components/schemas/auditActivityItem'
-        users:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    v2AuditLogsPostRequest:
-      type: object
-      properties:
-        cursorRef:
-          type: string
-          example: example string
         numLogs:
           type: integer
           format: int32
@@ -245,22 +154,10 @@ components:
           $ref: '#/components/schemas/googleProtobufTimestamp'
         recentTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
-        selector:
-          $ref: '#/components/schemas/auditmonAuditLogsV2Selector'
-      additionalProperties: false
-    auditmonSelector:
-      type: object
-      properties:
-        field:
-          type: string
-          example: AuditFieldId
-          description: Field to search
-        values:
+        selectors:
           type: array
           items:
-            type: string
-            example: xyz
-            description: Multiple values are treated as OR
+            $ref: '#/components/schemas/auditmonSelector'
       additionalProperties: false
     auditAuditEntry:
       type: object
@@ -299,6 +196,70 @@ components:
           items:
             $ref: '#/components/schemas/auditTargetResult'
       additionalProperties: false
+    v1AuditLogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        histogram:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditmonHistogram'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditAuditEntry'
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
+    v2AuditLogsPostRequest:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        numLogs:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        selector:
+          $ref: '#/components/schemas/auditmonAuditLogsV2Selector'
+      additionalProperties: false
+    auditTarget:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
+    auditActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
     v2AuditLogsPostResponse:
       type: object
       properties:
@@ -314,6 +275,45 @@ components:
           format: int64
           example: 12345678910
           minimum: 0
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    auditmonAuditLogsV2Selector:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        jobTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/auditActivityItem'
+        users:
+          type: array
+          items:
+            type: string
+            example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

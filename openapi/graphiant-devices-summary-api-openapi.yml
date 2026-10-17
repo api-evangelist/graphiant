@@ -37,14 +37,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1DevicesSummaryGetResponse:
-      type: object
-      properties:
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
-      additionalProperties: false
     manaV2RegionCoordinates:
       type: object
       properties:
@@ -56,6 +48,25 @@ components:
           type: number
           format: double
           example: 123.45
+      additionalProperties: false
+    manaV2Region:
+      type: object
+      properties:
+        coordinates:
+          $ref: '#/components/schemas/manaV2RegionCoordinates'
+        id:
+          type: integer
+          format: int32
+          example: 123
+        name:
+          type: string
+          example: example string
+        regionIsoCode:
+          type: string
+          example: example string
+        unavailable:
+          type: boolean
+          example: true
       additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummaryDeviceSummary:
       type: object
@@ -84,24 +95,13 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    manaV2Region:
+    v1DevicesSummaryGetResponse:
       type: object
       properties:
-        coordinates:
-          $ref: '#/components/schemas/manaV2RegionCoordinates'
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
-        regionIsoCode:
-          type: string
-          example: example string
-        unavailable:
-          type: boolean
-          example: true
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
       additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummary:
       type: object

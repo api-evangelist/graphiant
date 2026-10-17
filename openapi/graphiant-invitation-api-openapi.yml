@@ -43,6 +43,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1InvitationEmailPostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     v1InvitationEmailPostRequest:
       type: object
       properties:
@@ -84,10 +88,6 @@ components:
       - matchId
       - serviceId
       - serviceName
-    v1InvitationEmailPostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

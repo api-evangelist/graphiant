@@ -36,14 +36,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v2AllowlistByEnterpriseGetResponse:
-      type: object
-      properties:
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
-      additionalProperties: false
     alertserviceAllowAlertNotifcationListRecord:
       type: object
       properties:
@@ -87,6 +79,14 @@ components:
         vrfId:
           type: string
           example: example string
+      additionalProperties: false
+    v2AllowlistByEnterpriseGetResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

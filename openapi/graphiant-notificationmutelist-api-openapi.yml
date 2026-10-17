@@ -147,20 +147,14 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v2NotificationmutelistCreatePostRequest:
+    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
       type: object
-      properties:
-        alertId:
-          type: string
-          example: example string
-          description: Alert id of the alert to create allowlist/mutelist for (required)
-        noteText:
-          type: string
-          example: example string
-          description: Optional note
+      properties: {}
       additionalProperties: false
-      required:
-      - alertId
+    v2NotificationmutelistCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
     alertserviceAllowAlertNotifcationListRecord:
       type: object
       properties:
@@ -205,14 +199,20 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
+    v2NotificationmutelistCreatePostRequest:
       type: object
-      properties: {}
+      properties:
+        alertId:
+          type: string
+          example: example string
+          description: Alert id of the alert to create allowlist/mutelist for (required)
+        noteText:
+          type: string
+          example: example string
+          description: Optional note
       additionalProperties: false
-    v2NotificationmutelistCreatePostResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
+      required:
+      - alertId
   securitySchemes:
     jwtAuth:
       type: apiKey
