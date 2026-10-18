@@ -1286,9 +1286,10 @@ apis:
   humanURL: https://docs.graphiant.com/docs/graphiant-portal-rest-api
   baseURL: https://api.graphiant.com
   tags:
-  - QoS
+  - Quality of Service
   tags_raw:
   - Qos
+  - QoS
   properties:
   - type: OpenAPI
     url: openapi/graphiant-qos-api-openapi.yml
