@@ -27,3 +27,63 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: graphiant-go-module-proxy
+  label: Go module proxy
+  partner_name: Go module proxy
+  category: official SDK (Go)
+  type: register
+  channel: package-registry
+  evidence: https://pkg.go.dev/github.com/Graphiant-Inc/graphiant-sdk-go
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/Graphiant-Inc/graphiant-sdk-go
+      version: v0.0.0-20260929021035-71c7b7608a4f
+      released: '2026-09-29'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/Graphiant-Inc/graphiant-sdk-go
+      repo_leg: github-org:graphiant-inc
+      publisher_leg: org:graphiant-inc
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: graphiant-peeringdb-interconnection-register
+  label: PeeringDB (interconnection register)
+  partner_name: PeeringDB (interconnection register)
+  category: network interconnection register
+  type: register
+  channel: standard-directory
+  evidence: https://www.peeringdb.com/net/33906
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: PeeringDB (peeringdb.com/api net, ix, fac, org)
+    standard: null
+    spec_file: null
+    role: peeringdb-network
+    registered_name: GRAPHIANT INC
+    register_id: https://www.peeringdb.com/net/33906
+    matched_domain: graphiant.com
+    matched_by: domain
+    asns:
+    - 30656
+    info_types: []
+    ix_presence: 0
+    exchanges_operated: []
+    facilities_operated: 0
+    signal_note: 'participation only: PeeringDB is self-registered by network operators; ASNs, IX presence and facility
+      counts are context, never counted'
+    detected_by: sweep-network-edge.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
