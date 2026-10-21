@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-data-assurance-assurances-applications-bucket-app-name-get-response-schema.json",
+  "title": "v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-data-assurance-api-openapi.yml#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse",
+  "type": "object",
+  "properties": {
+    "assurances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2AssuranceConfig": {
+      "type": "object",
+      "properties": {
+        "apps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BucketApp"
+          }
+        },
+        "flexAlgo": {
+          "type": "string"
+        },
+        "lanNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "siteListId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "useAllSites": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BucketApp": {
+      "type": "object",
+      "properties": {
+        "bucketId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "builtinAppId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customAppId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isDomain": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BucketAppServer"
+          }
+        },
+        "useAllServers": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BucketAppServer": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance": {
+      "type": "object",
+      "properties": {
+        "configs": {
+          "$ref": "#/$defs/manaV2AssuranceConfig"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-extranet-sites-usage-post-request-schema.json",
+  "title": "v2ExtranetSitesUsagePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranet-api-openapi.yml#/components/schemas/v2ExtranetSitesUsagePostRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "the id associated with an entity - consumer_id for consumer, or service_id for the producer/service (required)"
+    },
+    "isB2B": {
+      "type": "boolean",
+      "description": "whether the entity is a b2b entity (required)"
+    },
+    "isProvider": {
+      "type": "boolean",
+      "description": "whether the entity is a provider or consumer (required)"
+    },
+    "serviceId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "siteId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "a filter to get usage for a specific site (id of the site)"
+    },
+    "subscriptionName": {
+      "type": "string",
+      "description": "Optional subscription name for filter"
+    },
+    "timeWindow": {
+      "$ref": "#/$defs/statsmonTimeWindow"
+    },
+    "vrfId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "a filter to get usage for a specific lan segment (id of the lan segment)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "isB2B",
+    "isProvider",
+    "timeWindow"
+  ],
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

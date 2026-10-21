@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-auth-login-pre-get-response-schema.json",
+  "title": "v1AuthLoginPreGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-auth-api-openapi.yml#/components/schemas/v1AuthLoginPreGetResponse",
+  "type": "object",
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": [
+        "SSO",
+        "PASSWORD"
+      ],
+      "description": "Authentication method to use"
+    },
+    "email": {
+      "type": "string",
+      "description": "User email address"
+    },
+    "iam": {
+      "type": "string",
+      "description": "Identity provider name (Azure/Okta)"
+    },
+    "relayState": {
+      "type": "string",
+      "description": "State to relay after authentication"
+    },
+    "entryPoint": {
+      "type": "string",
+      "description": "SSO entry point URL"
+    }
+  },
+  "required": [
+    "method",
+    "email"
+  ]
+}

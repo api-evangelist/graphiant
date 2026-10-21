@@ -1,0 +1,391 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-pvif-post-response-schema.json",
+  "title": "v1PvifPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-pvif-api-openapi.yml#/components/schemas/v1PvifPostResponse",
+  "type": "object",
+  "properties": {
+    "advertiseAllSites": {
+      "type": "boolean",
+      "description": "True when consumer scope is all symmetric sites (snapshotted on create and update); false when advertisement lists explicit sites or site lists"
+    },
+    "advertisement": {
+      "$ref": "#/$defs/manaV2SiteInformation"
+    },
+    "consumerLanSegments": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2PublicVifGatewayConsumerLanDevices"
+      }
+    },
+    "coveringPrefixes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Prefixes monitored for this service"
+      }
+    },
+    "gatewayBgpNeighbors": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2BgpNeighbor"
+      }
+    },
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Producer service id"
+    },
+    "lanSegmentId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Producer LAN segment (VRF) id"
+    },
+    "natPrefixStrategy": {
+      "$ref": "#/$defs/manaV2PublicVifGatewayNatPrefixStrategy"
+    },
+    "regionId": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Graphiant region for gateway appliances"
+    },
+    "serviceName": {
+      "type": "string",
+      "description": "Service display name"
+    },
+    "storageProvider": {
+      "type": "string",
+      "description": "Storage provider for gateway appliances"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufDuration": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BfdInstance": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "minimumInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BfdNeighbor": {
+      "type": "object",
+      "properties": {
+        "desiredMinimumTxInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "ifIndex": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "interface": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "localDiag": {
+          "type": "string"
+        },
+        "peerAddress": {
+          "type": "string"
+        },
+        "remoteDiag": {
+          "type": "string"
+        },
+        "requiredMinimumRxInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "segmentName": {
+          "type": "string"
+        },
+        "sourceAddress": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "timeInState": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        },
+        "up": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpDynamicNeighborOperPeer": {
+      "type": "object",
+      "properties": {
+        "lastOperStatusChange": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "localAddress": {
+          "type": "string",
+          "description": "Local address used for this peer session, if known from oper"
+        },
+        "operStatus": {
+          "type": "boolean",
+          "description": "True when the BGP session to this peer is operationally up (e.g. established)"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Peer ASN from oper, if reported"
+        },
+        "remoteAddress": {
+          "type": "string",
+          "description": "Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)"
+        },
+        "state": {
+          "type": "string",
+          "description": "BGP FSM state for this peer session"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighbor": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpNeighborAddressFamily"
+          }
+        },
+        "allowAsIn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "asOverride": {
+          "type": "boolean"
+        },
+        "bfd": {
+          "$ref": "#/$defs/manaV2BfdInstance"
+        },
+        "bfdNeighbor": {
+          "$ref": "#/$defs/manaV2BfdNeighbor"
+        },
+        "bgpType": {
+          "type": "string"
+        },
+        "defaultOriginate": {
+          "type": "string",
+          "description": "Set when default route needs to be advertised in BGP domain"
+        },
+        "dynamicNeighborPeers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpDynamicNeighborOperPeer"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "localInterface": {
+          "type": "string"
+        },
+        "maxPrefix": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Maximum number of prefixes that can be received from neighbor"
+        },
+        "md5Password": {
+          "type": "string"
+        },
+        "multiHop": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Set when EBGP multi-hop functionality is enabled"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "removePrivateAs": {
+          "type": "boolean"
+        },
+        "sendCommunity": {
+          "type": "boolean",
+          "description": "Flag for sending standard, extended, and large communities"
+        },
+        "state": {
+          "type": "string"
+        },
+        "timeSinceLastOperChange": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        },
+        "up": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborAddressFamily": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inboundPolicy": {
+          "type": "string"
+        },
+        "outboundPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PublicVifGatewayCentralizedNat": {
+      "type": "object",
+      "properties": {
+        "consumerPrefix": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "consumerPrefix"
+      ]
+    },
+    "manaV2PublicVifGatewayConsumerLanDevices": {
+      "type": "object",
+      "properties": {
+        "consumerPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Allow prefixes for this consumer LAN; empty means 0.0.0.0/0"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PublicVifGatewayDecentralizedPrefixes": {
+      "type": "object",
+      "properties": {
+        "prefixes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "prefixes"
+      ]
+    },
+    "manaV2PublicVifGatewayNatPrefixStrategy": {
+      "type": "object",
+      "properties": {
+        "centralized": {
+          "$ref": "#/$defs/manaV2PublicVifGatewayCentralizedNat"
+        },
+        "decentralized": {
+          "$ref": "#/$defs/manaV2PublicVifGatewayDecentralizedPrefixes"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SiteInformation": {
+      "type": "object",
+      "properties": {
+        "siteLists": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

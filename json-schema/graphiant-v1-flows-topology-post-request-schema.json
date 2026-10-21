@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-flows-topology-post-request-schema.json",
+  "title": "v1FlowsTopologyPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-flows-api-openapi.yml#/components/schemas/v1FlowsTopologyPostRequest",
+  "type": "object",
+  "properties": {
+    "appSelector": {
+      "$ref": "#/$defs/ipfixAppTopologySelector"
+    },
+    "deviceId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "timeWindow": {
+      "$ref": "#/$defs/statsmonTimeWindow"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixAppTopologySelector": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Filter by app ID"
+        },
+        "appName": {
+          "type": "string",
+          "description": "Filter by application name"
+        },
+        "slaClass": {
+          "type": "string",
+          "description": "Filter by SLA class"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

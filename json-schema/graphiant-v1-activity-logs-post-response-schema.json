@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-activity-logs-post-response-schema.json",
+  "title": "v1ActivityLogsPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-activity-api-openapi.yml#/components/schemas/v1ActivityLogsPostResponse",
+  "type": "object",
+  "properties": {
+    "cursorRef": {
+      "type": "string"
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/auditmonActivityDetails"
+      }
+    },
+    "filterEntities": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/v1ActivityLogsPostResponseActivityItems"
+      }
+    },
+    "filterJobTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "totalLogs": {
+      "type": "integer",
+      "format": "int64",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "auditActivityItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditmonActivityDetails": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        },
+        "category": {
+          "type": "string"
+        },
+        "disableAutoTimeout": {
+          "type": "boolean"
+        },
+        "endTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string"
+        },
+        "initiatorType": {
+          "type": "string"
+        },
+        "jobEntities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        },
+        "jobType": {
+          "type": "string"
+        },
+        "originalEnterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "startTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "status": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditmonActivityDetailsTarget"
+          }
+        },
+        "traceSessionId": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditmonActivityDetailsTarget": {
+      "type": "object",
+      "properties": {
+        "detailedFailureReason": {
+          "type": "string"
+        },
+        "endTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditmonActivityDetailsTargetEvent"
+          }
+        },
+        "failureReason": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        },
+        "startTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditmonActivityDetailsTargetEvent": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "stateId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "traceSessionId": {
+          "type": "string"
+        },
+        "ts": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1ActivityLogsPostResponseActivityItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

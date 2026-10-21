@@ -1,0 +1,4456 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-devices-device-id-config-put-request-schema.json",
+  "title": "v1DevicesDeviceIdConfigPutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-devices-api-openapi.yml#/components/schemas/v1DevicesDeviceIdConfigPutRequest",
+  "type": "object",
+  "properties": {
+    "configurationMetadata": {
+      "$ref": "#/$defs/manaV2ConfigurationMetadata"
+    },
+    "core": {
+      "$ref": "#/$defs/manaV2CoreDeviceConfig"
+    },
+    "description": {
+      "type": "string"
+    },
+    "edge": {
+      "$ref": "#/$defs/manaV2EdgeDeviceConfig"
+    },
+    "localWebServerPassword": {
+      "type": "string"
+    },
+    "replace": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ApplicationMatchConfig": {
+      "type": "object",
+      "properties": {
+        "builtin": {
+          "type": "string"
+        },
+        "custom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BfdInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "localMultiplier": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "minimumInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpAggregationsConfig": {
+      "type": "object",
+      "properties": {
+        "asSet": {
+          "type": "boolean"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "summaryOnly": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "routeServer": {
+          "type": "boolean"
+        },
+        "routerId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpMultipathConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "inboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        },
+        "outboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborAddressFamilyConfig"
+          }
+        },
+        "allowAsIn": {
+          "$ref": "#/$defs/manaV2NullableAllowAsIn"
+        },
+        "asOverride": {
+          "type": "boolean"
+        },
+        "bfd": {
+          "$ref": "#/$defs/manaV2NullableBfdInstanceConfig"
+        },
+        "defaultOriginate": {
+          "type": "string"
+        },
+        "ebgpMultihopTtl": {
+          "$ref": "#/$defs/manaV2NullableEbgpConfig"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "holdTimerValue": {
+          "$ref": "#/$defs/manaV2NullableHoldTimer"
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "keepaliveTimerValue": {
+          "$ref": "#/$defs/manaV2NullableKeepAliveTimer"
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "localInterface": {
+          "$ref": "#/$defs/manaV2NullableInterfaceName"
+        },
+        "maxPrefixValue": {
+          "$ref": "#/$defs/manaV2NullableMaxPrefix"
+        },
+        "md5Password": {
+          "$ref": "#/$defs/manaV2NullableMd5Password"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "removePrivateAs": {
+          "type": "boolean"
+        },
+        "sendCommunity": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpRedistributeProtocolConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CircuitConfig": {
+      "type": "object",
+      "properties": {
+        "bgpAggregations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpAggregationsConfig"
+          }
+        },
+        "bgpMultipath": {
+          "$ref": "#/$defs/manaV2NullableBgpMultipathConfig"
+        },
+        "bgpNeighbors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborConfig"
+          }
+        },
+        "bgpRedistribution": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpRedistributeProtocolConfig"
+          }
+        },
+        "carrier": {
+          "type": "string"
+        },
+        "circuitType": {
+          "type": "string"
+        },
+        "connectionType": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "diaEnabled": {
+          "type": "boolean"
+        },
+        "dropMechanism": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "lastResort": {
+          "type": "boolean"
+        },
+        "linkDownSpeedMbps": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "linkUpSpeedMbps": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "loopback": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "patAddresses": {
+          "$ref": "#/$defs/manaV2NullableIpList"
+        },
+        "qosProfile": {
+          "type": "string"
+        },
+        "qosProfileType": {
+          "type": "string"
+        },
+        "staticRoutes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableStaticRouteConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CommunityContainer": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CommunityType": {
+      "type": "object",
+      "properties": {
+        "additive": {
+          "type": "boolean"
+        },
+        "communityList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ConfigurationMetadata": {
+      "type": "object",
+      "properties": {
+        "commitConfirm": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ContentFilterMatchConfig": {
+      "type": "object",
+      "properties": {
+        "domainCategoryIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CoreDeviceConfig": {
+      "type": "object",
+      "properties": {
+        "bgpInstance": {
+          "$ref": "#/$defs/manaV2BgpInstanceConfig"
+        },
+        "coreVrf": {
+          "$ref": "#/$defs/manaV2VrfConfig"
+        },
+        "interfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableInterfaceCoreConfig"
+          }
+        },
+        "ipfixExporters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableIpfixExporterConfig"
+          }
+        },
+        "ispVrfs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2VrfConfig"
+          }
+        },
+        "maintenanceMode": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "prefixSets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePrefixSetConfig"
+          }
+        },
+        "prometheus": {
+          "$ref": "#/$defs/manaV2PrometheusConfig"
+        },
+        "region": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        },
+        "routePolicies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableRoutingPolicyConfig"
+          }
+        },
+        "site": {
+          "$ref": "#/$defs/manaV2NewSite"
+        },
+        "trafficPolicy": {
+          "$ref": "#/$defs/manaV2ForwardingPolicyConfig"
+        },
+        "vrfs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2VrfConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CoreInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duplex": {
+          "type": "string"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "maxTransmissionUnit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "mplsEnabled": {
+          "type": "boolean"
+        },
+        "tcpMssV4": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV6": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "xTalkFilter": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CoreLinkCost": {
+      "type": "object",
+      "properties": {
+        "dynamic": {
+          "$ref": "#/$defs/manaV2LatencyBandwidth"
+        },
+        "static": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CoreVlanInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "coreNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToCorePeerConfig"
+        },
+        "default": {
+          "$ref": "#/$defs/manaV2InterfaceDefaultConfig"
+        },
+        "gatewayNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToGatewayPeerConfig"
+        },
+        "interface": {
+          "$ref": "#/$defs/manaV2CoreInterfaceConfig"
+        },
+        "interfaceType": {
+          "$ref": "#/$defs/manaV2interface_config_type"
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "wan": {
+          "$ref": "#/$defs/manaV2InterfaceWanConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DNSConfigCloudflare": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "manaV2DNSConfigDynamic": {
+      "type": "object",
+      "properties": {
+        "circuitName": {
+          "type": "string"
+        },
+        "interfaceName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DNSConfigStatic": {
+      "type": "object",
+      "properties": {
+        "primaryIpv4V2": {
+          "$ref": "#/$defs/manaV2NullableIPv4Address"
+        },
+        "primaryIpv6V2": {
+          "$ref": "#/$defs/manaV2NullableIPv6Address"
+        },
+        "secondaryIpv4V2": {
+          "$ref": "#/$defs/manaV2NullableIPv4Address"
+        },
+        "secondaryIpv6V2": {
+          "$ref": "#/$defs/manaV2NullableIPv6Address"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DhcpRelayConfig": {
+      "type": "object",
+      "properties": {
+        "relayServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DhcpServerDnsParametersConfig": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string"
+        },
+        "secondary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DhcpSubnetConfig": {
+      "type": "object",
+      "properties": {
+        "defaultLeaseTimeSecs": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "description": {
+          "type": "string"
+        },
+        "domainName": {
+          "type": "string"
+        },
+        "domainNameServer": {
+          "$ref": "#/$defs/manaV2DhcpServerDnsParametersConfig"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "ipGateway": {
+          "type": "string"
+        },
+        "ipPrefix": {
+          "type": "string"
+        },
+        "ipRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2DhcpipRangeConfig"
+          }
+        },
+        "ipRangesV2": {
+          "$ref": "#/$defs/manaV2NullableDhcpipRangeList"
+        },
+        "maxLeaseTimeSecs": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "minLeaseTimeSecs": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "staticLeases": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableDhcpSubnetStaticLeaseConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DhcpSubnetStaticLeaseConfig": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DhcpipRangeConfig": {
+      "type": "object",
+      "properties": {
+        "end": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DnsConfig": {
+      "type": "object",
+      "properties": {
+        "cloudflare": {
+          "$ref": "#/$defs/manaV2DNSConfigCloudflare"
+        },
+        "dynamic": {
+          "$ref": "#/$defs/manaV2DNSConfigDynamic"
+        },
+        "static": {
+          "$ref": "#/$defs/manaV2DNSConfigStatic"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DomainListMatchConfig": {
+      "type": "object",
+      "properties": {
+        "domainWildcards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "List of wildcard strings each representing a selection of domains to apply the policy action on"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DpiApplicationConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "destinationNetwork": {
+          "type": "string"
+        },
+        "destinationNetworkList": {
+          "type": "string"
+        },
+        "destinationNetworks": {
+          "$ref": "#/$defs/manaV2IpNetworkListConfig"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "destinationPortList": {
+          "type": "string"
+        },
+        "destinationPorts": {
+          "$ref": "#/$defs/manaV2L4PortListConfig"
+        },
+        "icmpType": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "ipProtocol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sourceNetwork": {
+          "type": "string"
+        },
+        "sourceNetworkList": {
+          "type": "string"
+        },
+        "sourceNetworks": {
+          "$ref": "#/$defs/manaV2IpNetworkListConfig"
+        },
+        "sourcePort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sourcePortList": {
+          "type": "string"
+        },
+        "sourcePorts": {
+          "$ref": "#/$defs/manaV2L4PortListConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Dscp": {
+      "type": "object",
+      "properties": {
+        "codePoint": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2EdgeDeviceConfig": {
+      "type": "object",
+      "properties": {
+        "bgpEnabled": {
+          "type": "boolean"
+        },
+        "bgpInstance": {
+          "$ref": "#/$defs/manaV2BgpInstanceConfig"
+        },
+        "circuits": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2CircuitConfig"
+          }
+        },
+        "dhcpServerEnabled": {
+          "type": "boolean"
+        },
+        "dns": {
+          "$ref": "#/$defs/manaV2NullableDnsConfig"
+        },
+        "interfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableInterfaceConfig"
+          }
+        },
+        "ipfixEnabled": {
+          "type": "boolean"
+        },
+        "ipfixExporters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableIpfixExporterConfig"
+          }
+        },
+        "lagInterfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableLagInterfaceConfig"
+          }
+        },
+        "lldpEnabled": {
+          "type": "boolean"
+        },
+        "localRouteTag": {
+          "$ref": "#/$defs/manaV2NullableRouteTagSet"
+        },
+        "localWebServerPassword": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/$defs/manaV2Location"
+        },
+        "maintenanceMode": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "natPolicy": {
+          "$ref": "#/$defs/manaV2NatPolicyConfig"
+        },
+        "ntpGlobalObject": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableNtpConfig"
+          }
+        },
+        "ospfv2Enabled": {
+          "type": "boolean"
+        },
+        "ospfv3Enabled": {
+          "type": "boolean"
+        },
+        "prefixSets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePrefixSetConfig"
+          }
+        },
+        "region": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        },
+        "routePolicies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableRoutingPolicyConfig"
+          }
+        },
+        "segments": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2VrfConfig"
+          }
+        },
+        "site": {
+          "$ref": "#/$defs/manaV2NewSite"
+        },
+        "siteToSiteVpn": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableIPsecTunnelConfig"
+          }
+        },
+        "slaConformance": {
+          "$ref": "#/$defs/manaV2NullableSlaConformance"
+        },
+        "snmp": {
+          "$ref": "#/$defs/manaV2NullableSnmpConfig"
+        },
+        "snmpGlobalObject": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpConfig"
+          }
+        },
+        "staticRoutesEnabled": {
+          "type": "boolean"
+        },
+        "trafficPolicy": {
+          "$ref": "#/$defs/manaV2ForwardingPolicyConfig"
+        },
+        "vrrpEnabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ForwardingPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "dpiApplications": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableDpiApplicationConfig"
+          }
+        },
+        "networkLists": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableIpNetworkListConfig"
+          }
+        },
+        "portLists": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableL4PortListConfig"
+          }
+        },
+        "securityRulesets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSecurityPolicyRulesetConfig"
+          }
+        },
+        "trafficRulesets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableTrafficPolicyRulesetConfig"
+          }
+        },
+        "zoneFirewalls": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableZoneFirewallConfig"
+          }
+        },
+        "zones": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSecurityZoneConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ForwardingPolicyMatchConfig": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/manaV2NullableApplicationMatchConfig"
+        },
+        "contentFilter": {
+          "$ref": "#/$defs/manaV2NullableContentFilterMatchConfig"
+        },
+        "destinationNetwork": {
+          "$ref": "#/$defs/manaV2NullableDestinationNetworkMatchConfig"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "destinationPortRange": {
+          "$ref": "#/$defs/manaV2PortRangeConfig"
+        },
+        "domainList": {
+          "$ref": "#/$defs/manaV2NullableDomainListMatchConfig"
+        },
+        "dscp": {
+          "$ref": "#/$defs/manaV2NullableDscpMatchConfig"
+        },
+        "icmpType": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "ipProtocol": {
+          "type": "string"
+        },
+        "protocol": {
+          "$ref": "#/$defs/manaV2NullableIpProtocol"
+        },
+        "sourceNetwork": {
+          "$ref": "#/$defs/manaV2NullableSourceNetworkMatchConfig"
+        },
+        "sourcePort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sourcePortRange": {
+          "$ref": "#/$defs/manaV2PortRangeConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2GlobalObjectOperationConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2NullableSiteInterfaceName"
+        },
+        "operation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecBgpRouteConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborAddressFamilyConfig"
+          }
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "md5Password": {
+          "$ref": "#/$defs/manaV2NullableMd5Password"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sendCommunity": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecStaticRouteConfig": {
+      "type": "object",
+      "properties": {
+        "destinationPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecTunnel": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "ikeInitiator": {
+          "type": "boolean"
+        },
+        "ipsecLabel": {
+          "type": "string"
+        },
+        "lan": {
+          "type": "string"
+        },
+        "localAddressV4": {
+          "type": "string"
+        },
+        "localAddressV6": {
+          "type": "string"
+        },
+        "localCircuit": {
+          "type": "string"
+        },
+        "localIkePeerIdentity": {
+          "type": "string"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "presharedKey": {
+          "type": "string"
+        },
+        "remoteAddressV4": {
+          "type": "string"
+        },
+        "remoteAddressV6": {
+          "type": "string"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/manaV2IpsecRoutingConfig"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "vpnProfile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "circuit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duplex": {
+          "type": "string"
+        },
+        "ipsec": {
+          "$ref": "#/$defs/manaV2InterfaceIPsecConfig"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "lan": {
+          "type": "string"
+        },
+        "lldpEnabled": {
+          "type": "boolean"
+        },
+        "loopback": {
+          "type": "boolean"
+        },
+        "macsec": {
+          "$ref": "#/$defs/manaV2NullableMaCsecConfiguration"
+        },
+        "maxTransmissionUnit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "securityZone": {
+          "type": "string"
+        },
+        "speed": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subinterfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableInterfaceVlanConfig"
+          }
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV4": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV6": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "v4TcpMss": {
+          "$ref": "#/$defs/manaV2NullableTcpMssV4"
+        },
+        "v6TcpMss": {
+          "$ref": "#/$defs/manaV2NullableTcpMssV6"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceCoreConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "circuit": {
+          "type": "string"
+        },
+        "coreNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToCorePeerConfig"
+        },
+        "coreToCoreTunnel": {
+          "$ref": "#/$defs/manaV2InterfaceWanManagementConfig"
+        },
+        "createLinkLocalAddress": {
+          "type": "boolean"
+        },
+        "default": {
+          "$ref": "#/$defs/manaV2InterfaceDefaultConfig"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duplex": {
+          "type": "string"
+        },
+        "dynamic": {
+          "$ref": "#/$defs/manaV2LatencyBandwidth"
+        },
+        "flexAlgos": {
+          "$ref": "#/$defs/manaV2InterfaceCoreFlexAlgoConfig"
+        },
+        "gatewayNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToGatewayPeerConfig"
+        },
+        "gw": {
+          "$ref": "#/$defs/manaV2NullableInterfaceIpConfig"
+        },
+        "interfaceType": {
+          "$ref": "#/$defs/manaV2interface_config_type"
+        },
+        "ipsec": {
+          "$ref": "#/$defs/manaV2InterfaceIPsecConfig"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "lan": {
+          "type": "string"
+        },
+        "lldpEnabled": {
+          "type": "boolean"
+        },
+        "loopback": {
+          "type": "boolean"
+        },
+        "maxTransmissionUnit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "mplsEnabled": {
+          "type": "boolean"
+        },
+        "ospfCost": {
+          "$ref": "#/$defs/manaV2CoreLinkCost"
+        },
+        "ospfInterface": {
+          "$ref": "#/$defs/manaV2NullableOspfInterfaceConfig"
+        },
+        "peerDeviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "peerHostname": {
+          "type": "string"
+        },
+        "securityZone": {
+          "type": "string"
+        },
+        "speed": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "static": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "subinterfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableCoreInterfaceVlanConfig"
+          }
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV4": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV6": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tunnelInterface": {
+          "type": "string"
+        },
+        "tunnelUnderlay": {
+          "type": "string"
+        },
+        "wan": {
+          "$ref": "#/$defs/manaV2InterfaceWanConfig"
+        },
+        "wanManagement": {
+          "$ref": "#/$defs/manaV2InterfaceWanManagementConfig"
+        },
+        "xTalkFilter": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceCoreFlexAlgoConfig": {
+      "type": "object",
+      "properties": {
+        "flexAlgoNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceCoreToCorePeerConfig": {
+      "type": "object",
+      "properties": {
+        "Cost": {
+          "$ref": "#/$defs/manaV2CoreLinkCost"
+        },
+        "ospfCost": {
+          "$ref": "#/$defs/manaV2CoreLinkCost"
+        },
+        "peerHostname": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceCoreToGatewayPeerConfig": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceDefaultConfig": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "manaV2InterfaceDhcpConfig": {
+      "type": "object",
+      "properties": {
+        "dhcpClient": {
+          "type": "boolean"
+        },
+        "dhcpRelay": {
+          "$ref": "#/$defs/manaV2DhcpRelayConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceIPsecConfig": {
+      "type": "object",
+      "properties": {
+        "antiReplayWindowSize": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "dhGroup": {
+          "type": "string"
+        },
+        "dpdInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "encryptionAlg": {
+          "type": "string"
+        },
+        "esn": {
+          "type": "boolean"
+        },
+        "ikeIntegrity": {
+          "type": "string"
+        },
+        "initiator": {
+          "type": "boolean"
+        },
+        "ipsecEncryptionAlg": {
+          "type": "string"
+        },
+        "ipsecIntegrity": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "localCircuit": {
+          "type": "string"
+        },
+        "localIkePeerIdentity": {
+          "type": "string"
+        },
+        "perfectForwardSecrecy": {
+          "type": "string"
+        },
+        "presharedKey": {
+          "type": "string"
+        },
+        "reauthInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "rekeyInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceIpConfig": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/$defs/manaV2NullableAddress"
+        },
+        "dhcp": {
+          "$ref": "#/$defs/manaV2InterfaceDhcpConfig"
+        },
+        "gw": {
+          "$ref": "#/$defs/manaV2NullableGatewayConfig"
+        },
+        "vrrp": {
+          "$ref": "#/$defs/manaV2NullableVrrpGroupConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceLagvlanConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "segment": {
+          "type": "string"
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceVlanConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "circuit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "lan": {
+          "type": "string"
+        },
+        "lldpEnabled": {
+          "type": "boolean"
+        },
+        "maxTransmissionUnit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "securityZone": {
+          "type": "string"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV4": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tcpMssV6": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "v4TcpMss": {
+          "$ref": "#/$defs/manaV2NullableTcpMssV4"
+        },
+        "v6TcpMss": {
+          "$ref": "#/$defs/manaV2NullableTcpMssV6"
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "vrrp": {
+          "$ref": "#/$defs/manaV2NullableVrrpGroupConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceWanConfig": {
+      "type": "object",
+      "properties": {
+        "gw": {
+          "$ref": "#/$defs/manaV2NullableInterfaceIpConfig"
+        },
+        "type": {
+          "type": "string"
+        },
+        "vrfName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InterfaceWanManagementConfig": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "manaV2IpNetworkListConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IpfixExporterConfig": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "monitoredSegments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "sampleMode": {
+          "type": "string"
+        },
+        "sampleRate": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sourceInterfaceName": {
+          "type": "string"
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IpsecRoutingConfig": {
+      "type": "object",
+      "properties": {
+        "bgp": {
+          "$ref": "#/$defs/manaV2IPsecBgpRouteConfig"
+        },
+        "static": {
+          "$ref": "#/$defs/manaV2IPsecStaticRouteConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2L4PortListConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2LacpConfig": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "timer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2LagInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "ipv4": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "ipv6": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        },
+        "lacp": {
+          "$ref": "#/$defs/manaV2LacpConfig"
+        },
+        "lagMembers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableLagMemberInterface"
+          }
+        },
+        "macsec": {
+          "$ref": "#/$defs/manaV2NullableMaCsecConfiguration"
+        },
+        "minimumMembers": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "segment": {
+          "type": "string"
+        },
+        "subinterfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableInterfaceLagvlanConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2LatencyBandwidth": {
+      "type": "object",
+      "properties": {
+        "bandwidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Location": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "provinceCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2MaCsecConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether MACsec is enabled or disabled (required)"
+        },
+        "encryptionEnforcementMode": {
+          "type": "string",
+          "description": "The encryption enforcement mode (required)"
+        },
+        "globalSakConfiguration": {
+          "$ref": "#/$defs/manaV2NullableSakConfiguration"
+        },
+        "keyServerPriority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The priority of the key server. Lower number means higher priority."
+        },
+        "pskConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2PskConfiguration"
+          }
+        },
+        "pskConfigurationsByNickname": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePskConfiguration"
+          }
+        },
+        "sakConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2SakConfiguration"
+          }
+        },
+        "sakConfigurationsByLagMemberInterfaceId": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSakConfiguration"
+          }
+        },
+        "splitSakConfigByLagMember": {
+          "type": "boolean",
+          "description": "Whether to allow individual SAK configurations for each lag member"
+        },
+        "transparentVlan": {
+          "type": "boolean",
+          "description": "Whether transparent VLAN is enabled or disabled"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "encryptionEnforcementMode",
+        "globalSakConfiguration",
+        "pskConfigurationsByNickname",
+        "sakConfigurationsByLagMemberInterfaceId"
+      ]
+    },
+    "manaV2NATPolicyRulesetConfigNullableRule": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/manaV2NATPolicyRulesetConfigNullableRuleRule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NATPolicyRulesetConfigNullableRuleRule": {
+      "type": "object",
+      "properties": {
+        "advertisePreNatPrefixes": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "originalDstIpPrefix": {
+          "type": "string"
+        },
+        "originalSrcIpPrefix": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "translatedDstIpPrefix": {
+          "type": "string"
+        },
+        "translatedSrcIpPrefix": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NatPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "natRulesets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableNatPolicyRulesetConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NatPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NATPolicyRulesetConfigNullableRule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NewSite": {
+      "type": "object",
+      "properties": {
+        "globalPrefixSetOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ipfixExporterOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ipfixExporterOpsV2": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2GlobalObjectOperationConfig"
+          }
+        },
+        "location": {
+          "$ref": "#/$defs/manaV2Location"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "ntpOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "prefixSetOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "routeTag": {
+          "$ref": "#/$defs/manaV2RouteTag"
+        },
+        "routingPolicyOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "snmpOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "syslogServerOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "syslogServerOpsV2": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2GlobalObjectOperationConfig"
+          }
+        },
+        "trafficPolicyOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NotifyFilterProfileIncludeConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NtpConfig": {
+      "type": "object",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableAddress": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableAdministrativeDistance": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableAllowAsIn": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableApplicationMatchConfig": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/manaV2ApplicationMatchConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableAsPathPrepend": {
+      "type": "object",
+      "properties": {
+        "repeat": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBfdInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "bfd": {
+          "$ref": "#/$defs/manaV2BfdInstanceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpAggregationsConfig": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/manaV2BgpAggregationsConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpMultipathConfig": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/manaV2BgpMultipathConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/manaV2BgpNeighborAddressFamilyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpNeighborConfig": {
+      "type": "object",
+      "properties": {
+        "neighbor": {
+          "$ref": "#/$defs/manaV2BgpNeighborConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpRedistributeProtocolConfig": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "$ref": "#/$defs/manaV2BgpRedistributeProtocolConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpSetNextHop": {
+      "type": "object",
+      "properties": {
+        "nextHop": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableCallPolicy": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableCommunities": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "$ref": "#/$defs/manaV2CommunityType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableCommunity": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "$ref": "#/$defs/manaV2CommunityContainer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableContentFilterMatchConfig": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/manaV2ContentFilterMatchConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableCoreInterfaceVlanConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2CoreVlanInterfaceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDestinationNetworkMatchConfig": {
+      "type": "object",
+      "properties": {
+        "destinationNetwork": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDhcpSubnetConfig": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "#/$defs/manaV2DhcpSubnetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDhcpSubnetStaticLeaseConfig": {
+      "type": "object",
+      "properties": {
+        "lease": {
+          "$ref": "#/$defs/manaV2DhcpSubnetStaticLeaseConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDhcpipRangeList": {
+      "type": "object",
+      "properties": {
+        "ipRange": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2DhcpipRangeConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDnsConfig": {
+      "type": "object",
+      "properties": {
+        "dns": {
+          "$ref": "#/$defs/manaV2DnsConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDomainListMatchConfig": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/manaV2DomainListMatchConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDpiApplicationConfig": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/manaV2DpiApplicationConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableDscpMatchConfig": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/manaV2Dscp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableEbgpConfig": {
+      "type": "object",
+      "properties": {
+        "multiHop": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableGatewayConfig": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableHoldTimer": {
+      "type": "object",
+      "properties": {
+        "timer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIPsecTunnelConfig": {
+      "type": "object",
+      "properties": {
+        "siteToSiteVpn": {
+          "$ref": "#/$defs/manaV2IPsecTunnel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIPv4Address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIPv6Address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2InterfaceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceCoreConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2InterfaceCoreConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceIpConfig": {
+      "type": "object",
+      "properties": {
+        "gw": {
+          "$ref": "#/$defs/manaV2InterfaceIpConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceLagvlanConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2InterfaceLagvlanConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceName": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfacePriorityDecrement": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "priorityDecrement": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceVlanConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2InterfaceVlanConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIpList": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIpNetworkListConfig": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/$defs/manaV2IpNetworkListConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIpProtocol": {
+      "type": "object",
+      "properties": {
+        "ipProtocol": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableIpfixExporterConfig": {
+      "type": "object",
+      "properties": {
+        "exporter": {
+          "$ref": "#/$defs/manaV2IpfixExporterConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableKeepAliveTimer": {
+      "type": "object",
+      "properties": {
+        "timer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableL4PortListConfig": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/$defs/manaV2L4PortListConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableLagInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2LagInterfaceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableLagMemberInterface": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableLocalPreferance": {
+      "type": "object",
+      "properties": {
+        "localPref": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMaCsecConfiguration": {
+      "type": "object",
+      "properties": {
+        "macsec": {
+          "$ref": "#/$defs/manaV2MaCsecConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMaCsecRekeyInterval": {
+      "type": "object",
+      "properties": {
+        "rekeyInterval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMaCsecReplayProtectionWindowSize": {
+      "type": "object",
+      "properties": {
+        "replayProtectionWindowSize": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMaxPrefix": {
+      "type": "object",
+      "properties": {
+        "maxPrefix": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMd5Password": {
+      "type": "object",
+      "properties": {
+        "md5Password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMeterRates": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMetric": {
+      "type": "object",
+      "properties": {
+        "absolute": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "modifier": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableNatPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "ruleset": {
+          "$ref": "#/$defs/manaV2NatPolicyRulesetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableNatPolicyRulesetName": {
+      "type": "object",
+      "properties": {
+        "ruleset": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableNtpConfig": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/manaV2NtpConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfAdminDistanceValue": {
+      "type": "object",
+      "properties": {
+        "adminDistance": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfAreaConfig": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/$defs/manaV2OspfAreaConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfAuthenticationConfig": {
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "$ref": "#/$defs/manaV2OspfAuthenticationConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfDeadIntervalValue": {
+      "type": "object",
+      "properties": {
+        "deadInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfHelloIntervalValue": {
+      "type": "object",
+      "properties": {
+        "helloInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2OspfInterfaceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfProcessConfig": {
+      "type": "object",
+      "properties": {
+        "process": {
+          "$ref": "#/$defs/manaV2OspfProcessConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfRedistributeProtocolConfig": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "$ref": "#/$defs/manaV2OspfRedistributeProtocolConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableOspfRetransmitIntervalValue": {
+      "type": "object",
+      "properties": {
+        "retransmitInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePolicyName": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrefixSet": {
+      "type": "object",
+      "properties": {
+        "prefixSet": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrefixSetConfig": {
+      "type": "object",
+      "properties": {
+        "prefixSet": {
+          "$ref": "#/$defs/manaV2PrefixSetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrometheusRemoteWriteSinkConfig": {
+      "type": "object",
+      "properties": {
+        "sink": {
+          "$ref": "#/$defs/manaV2PrometheusRemoteWriteSinkConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrometheusRuleConfig": {
+      "type": "object",
+      "properties": {
+        "ruleGroup": {
+          "$ref": "#/$defs/manaV2PrometheusRuleConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrometheusRuleGroupConfig": {
+      "type": "object",
+      "properties": {
+        "ruleGroup": {
+          "$ref": "#/$defs/manaV2PrometheusRuleGroupConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePrometheusSysDbMonitorConfig": {
+      "type": "object",
+      "properties": {
+        "sysdbMonitor": {
+          "$ref": "#/$defs/manaV2PrometheusSysDbMonitorConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableProtocolRouteType": {
+      "type": "object",
+      "properties": {
+        "routeType": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePskConfiguration": {
+      "type": "object",
+      "properties": {
+        "psk": {
+          "$ref": "#/$defs/manaV2PskConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableRouteTagSet": {
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/$defs/manaV2RouteTag"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableRoutingPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "$ref": "#/$defs/manaV2RoutingPolicyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableRoutingProtocol": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSakConfiguration": {
+      "type": "object",
+      "properties": {
+        "sak": {
+          "$ref": "#/$defs/manaV2SakConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSecurityPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "ruleset": {
+          "$ref": "#/$defs/manaV2SecurityPolicyRulesetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSecurityZoneConfig": {
+      "type": "object",
+      "properties": {
+        "zone": {
+          "$ref": "#/$defs/manaV2SecurityZoneConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSecurityZonePairConfig": {
+      "type": "object",
+      "properties": {
+        "pair": {
+          "$ref": "#/$defs/manaV2SecurityZonePairConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSessionLimit": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSetCircuitConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSetCircuitLabelConfig": {
+      "type": "object",
+      "properties": {
+        "ipsecLabel": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSetDscpConfig": {
+      "type": "object",
+      "properties": {
+        "val": {
+          "$ref": "#/$defs/manaV2Dscp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSetSlaClassConfig": {
+      "type": "object",
+      "properties": {
+        "class": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSiteInterfaceName": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSlaConformance": {
+      "type": "object",
+      "properties": {
+        "slaConformance": {
+          "$ref": "#/$defs/manaV2SlaConformance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpCommunityConfigValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpConfig": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/manaV2SnmpConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpEngineEndpointConfigValue": {
+      "type": "object",
+      "properties": {
+        "engineEndpoint": {
+          "$ref": "#/$defs/manaV2SnmpEngineEndpointConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpEngineEndpointsAddress": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpNotifyFilterProfileConfigValue": {
+      "type": "object",
+      "properties": {
+        "notifyFilterProfile": {
+          "$ref": "#/$defs/manaV2SnmpNotifyFilterProfileConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpTargetConfigValue": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/manaV2SnmpTargetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpVacmGroupAccessValue": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "#/$defs/manaV2SnmpVacmGroupAccessConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpVacmGroupMemberValue": {
+      "type": "object",
+      "properties": {
+        "member": {
+          "$ref": "#/$defs/manaV2SnmpVacmGroupMemberConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSnmpVacmViewValue": {
+      "type": "object",
+      "properties": {
+        "view": {
+          "$ref": "#/$defs/manaV2SnmpVacmViewConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSourceNetworkMatchConfig": {
+      "type": "object",
+      "properties": {
+        "sourceNetwork": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableStalePurge": {
+      "type": "object",
+      "properties": {
+        "stale": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableStaticRouteConfig": {
+      "type": "object",
+      "properties": {
+        "route": {
+          "$ref": "#/$defs/manaV2StaticRouteConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSyslogCollectorConfig": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/manaV2SyslogCollectorConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableTcpMssV4": {
+      "type": "object",
+      "properties": {
+        "tcpMssV4": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableTcpMssV6": {
+      "type": "object",
+      "properties": {
+        "tcpMssV6": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableTrafficPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "ruleset": {
+          "$ref": "#/$defs/manaV2TrafficPolicyRulesetConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableTrafficPolicyRulesetName": {
+      "type": "object",
+      "properties": {
+        "ruleset": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableUsmLocalUserConfigValue": {
+      "type": "object",
+      "properties": {
+        "localUser": {
+          "$ref": "#/$defs/manaV2SnmpUsmLocalUserConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableUsmRemoteUserConfigValue": {
+      "type": "object",
+      "properties": {
+        "remoteUser": {
+          "$ref": "#/$defs/manaV2SnmpUsmRemoteUserConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableVacmGroupValue": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/$defs/manaV2VacmGroupConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableVrrpGroupConfig": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/$defs/manaV2VrrpGroupConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableWeight": {
+      "type": "object",
+      "properties": {
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableZoneFirewallConfig": {
+      "type": "object",
+      "properties": {
+        "zoneFirewall": {
+          "$ref": "#/$defs/manaV2ZoneFirewallConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OspfAreaConfig": {
+      "type": "object",
+      "properties": {
+        "areaId": {
+          "type": "string"
+        },
+        "interfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableOspfInterfaceConfig"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OspfAuthenticationConfig": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "manaV2OspfInterfaceConfig": {
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "$ref": "#/$defs/manaV2NullableOspfAuthenticationConfig"
+        },
+        "bfd": {
+          "$ref": "#/$defs/manaV2NullableBfdInstanceConfig"
+        },
+        "cost": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "deadIntervalValue": {
+          "$ref": "#/$defs/manaV2NullableOspfDeadIntervalValue"
+        },
+        "drPriority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "helloIntervalValue": {
+          "$ref": "#/$defs/manaV2NullableOspfHelloIntervalValue"
+        },
+        "interfaceName": {
+          "type": "string"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "mtuIgnore": {
+          "type": "boolean"
+        },
+        "prefixSid": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "retransmitIntervalValue": {
+          "$ref": "#/$defs/manaV2NullableOspfRetransmitIntervalValue"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OspfProcessConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adminDistance": {
+          "$ref": "#/$defs/manaV2NullableOspfAdminDistanceValue"
+        },
+        "areas": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableOspfAreaConfig"
+          }
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "defaultOriginate": {
+          "type": "string"
+        },
+        "manual": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redistribution": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableOspfRedistributeProtocolConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OspfRedistributeProtocolConfig": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "metricType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OverlayFilterConfig": {
+      "type": "object",
+      "properties": {
+        "exportPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        },
+        "importPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PortRangeConfig": {
+      "type": "object",
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "upper": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrefixSetConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2PrefixSetConfigNullableEntry"
+          }
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrefixSetConfigNullableEntry": {
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/$defs/manaV2PrefixSetConfigNullableEntryEntry"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrefixSetConfigNullableEntryEntry": {
+      "type": "object",
+      "properties": {
+        "ipPrefix": {
+          "type": "string"
+        },
+        "maskLower": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "maskUpper": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrometheusConfig": {
+      "type": "object",
+      "properties": {
+        "ruleGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePrometheusRuleGroupConfig"
+          }
+        },
+        "sink": {
+          "$ref": "#/$defs/manaV2NullablePrometheusRemoteWriteSinkConfig"
+        },
+        "sysdbMonitors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePrometheusSysDbMonitorConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrometheusRemoteWriteSinkConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrometheusRuleConfig": {
+      "type": "object",
+      "properties": {
+        "alert": {
+          "type": "boolean"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "triggerSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrometheusRuleGroupConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullablePrometheusRuleConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PrometheusSysDbMonitorConfig": {
+      "type": "object",
+      "properties": {
+        "intervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "xpaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PskConfiguration": {
+      "type": "object",
+      "properties": {
+        "cak": {
+          "type": "string",
+          "description": "The Connection Authentication Key (CAK)"
+        },
+        "cakCryptographicAlgorithm": {
+          "type": "string",
+          "description": "The cryptographic algorithm for the CAK, SAK Cipher Suite is implicitly selected based on this field. (required)"
+        },
+        "ckn": {
+          "type": "string",
+          "description": "The Connection Key Name (CKN) (required)"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "The nickname of the PSK (required)"
+        },
+        "startTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "useXpnForCipherSuite": {
+          "type": "boolean",
+          "description": "Whether to use XPN for the cipher suite. If true, AES_128_GCM_XPN or AES_256_GCM_XPN is selected based on the cmac algorithm. If false, AES_128_GCM or AES_256_GCM is selected based on the cmac algorithm."
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RouteTag": {
+      "type": "object",
+      "properties": {
+        "levelOne": {
+          "type": "string"
+        },
+        "levelTwo": {
+          "type": "string"
+        },
+        "levelZero": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "attachPoint": {
+          "type": "string"
+        },
+        "defaultAction": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statements": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatement"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatement": {
+      "type": "object",
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatementStatement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatementStatement": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatementStatementNullableAction"
+          }
+        },
+        "matches": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch"
+          }
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatementStatementNullableAction": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatementStatementNullableActionAction"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatementStatementNullableActionAction": {
+      "type": "object",
+      "properties": {
+        "administrativeDistance": {
+          "$ref": "#/$defs/manaV2NullableAdministrativeDistance"
+        },
+        "aspathPrepend": {
+          "$ref": "#/$defs/manaV2NullableAsPathPrepend"
+        },
+        "bgpSetNextHop": {
+          "$ref": "#/$defs/manaV2NullableBgpSetNextHop"
+        },
+        "callPolicy": {
+          "$ref": "#/$defs/manaV2NullableCallPolicy"
+        },
+        "communities": {
+          "$ref": "#/$defs/manaV2NullableCommunities"
+        },
+        "localPref": {
+          "$ref": "#/$defs/manaV2NullableLocalPreferance"
+        },
+        "metric": {
+          "$ref": "#/$defs/manaV2NullableMetric"
+        },
+        "result": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "weight": {
+          "$ref": "#/$defs/manaV2NullableWeight"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatementStatementNullableMatch": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/manaV2RoutingPolicyConfigNullableStatementStatementNullableMatchMatch"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RoutingPolicyConfigNullableStatementStatementNullableMatchMatch": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "$ref": "#/$defs/manaV2NullableCommunity"
+        },
+        "prefixSet": {
+          "$ref": "#/$defs/manaV2NullablePrefixSet"
+        },
+        "protocolRouteType": {
+          "$ref": "#/$defs/manaV2NullableProtocolRouteType"
+        },
+        "routeTag": {
+          "$ref": "#/$defs/manaV2NullableRouteTagSet"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sourceInterface": {
+          "$ref": "#/$defs/manaV2NullableInterfaceName"
+        },
+        "sourceProtocol": {
+          "$ref": "#/$defs/manaV2NullableRoutingProtocol"
+        },
+        "stale": {
+          "$ref": "#/$defs/manaV2NullableStalePurge"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SakConfiguration": {
+      "type": "object",
+      "properties": {
+        "cipherSuite": {
+          "type": "string"
+        },
+        "lagMemberInterfaceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interface ID (required for when each lag member has a different MACsec configuration - when split_sak_config_by_lag_member is true) (required)"
+        },
+        "nullableRekeyInterval": {
+          "$ref": "#/$defs/manaV2NullableMaCsecRekeyInterval"
+        },
+        "nullableReplayProtectionWindowSize": {
+          "$ref": "#/$defs/manaV2NullableMaCsecReplayProtectionWindowSize"
+        },
+        "rekeyInterval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "replayProtectionWindowSize": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SecurityPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2SecurityPolicyRulesetConfigNullableRule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SecurityPolicyRulesetConfigNullableRule": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/manaV2SecurityPolicyRulesetConfigNullableRuleRule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SecurityPolicyRulesetConfigNullableRuleRule": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "downlinkBurstRate": {
+          "$ref": "#/$defs/manaV2NullableMeterRates"
+        },
+        "downlinkPolicerRate": {
+          "$ref": "#/$defs/manaV2NullableMeterRates"
+        },
+        "logging": {
+          "type": "boolean"
+        },
+        "match": {
+          "$ref": "#/$defs/manaV2ForwardingPolicyMatchConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "uplinkBurstRate": {
+          "$ref": "#/$defs/manaV2NullableMeterRates"
+        },
+        "uplinkPolicerRate": {
+          "$ref": "#/$defs/manaV2NullableMeterRates"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SecurityZoneConfig": {
+      "type": "object",
+      "properties": {
+        "inside": {
+          "type": "string"
+        },
+        "pairs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSecurityZonePairConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SecurityZonePairConfig": {
+      "type": "object",
+      "properties": {
+        "outside": {
+          "type": "string"
+        },
+        "ruleset": {
+          "type": "string"
+        },
+        "tcpProtection": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SlaConformance": {
+      "type": "object",
+      "properties": {
+        "dampeningFactor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpConfig": {
+      "type": "object",
+      "properties": {
+        "communities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpCommunityConfigValue"
+          }
+        },
+        "engineAuthenTraps": {
+          "type": "boolean"
+        },
+        "engineEnabled": {
+          "type": "boolean"
+        },
+        "engineEndpoints": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpEngineEndpointConfigValue"
+          }
+        },
+        "engineHighCpuTraps": {
+          "type": "boolean"
+        },
+        "engineHighMemoryTraps": {
+          "type": "boolean"
+        },
+        "engineIdAdminOctets": {
+          "type": "string"
+        },
+        "engineIdAdminText": {
+          "type": "string"
+        },
+        "engineIdIpv4": {
+          "type": "string"
+        },
+        "engineIdIpv6": {
+          "type": "string"
+        },
+        "engineIdMac": {
+          "type": "string"
+        },
+        "engineIdRaw": {
+          "type": "string"
+        },
+        "engineLocalAcessV4": {
+          "type": "boolean"
+        },
+        "engineLocalAcessV6": {
+          "type": "boolean"
+        },
+        "engineUserHints": {
+          "type": "boolean"
+        },
+        "engineUserValidation": {
+          "type": "boolean"
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notifyFilterProfiles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpNotifyFilterProfileConfigValue"
+          }
+        },
+        "snmpVersion": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpTargetConfigValue"
+          }
+        },
+        "usmLocalUsers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableUsmLocalUserConfigValue"
+          }
+        },
+        "usmRemoteUsers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableUsmRemoteUserConfigValue"
+          }
+        },
+        "v2cEnabled": {
+          "type": "boolean"
+        },
+        "v3Enabled": {
+          "type": "boolean"
+        },
+        "vacmGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableVacmGroupValue"
+          }
+        },
+        "vacmViews": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpVacmViewValue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpEngineEndpointConfig": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpEngineEndpointsAddress"
+          }
+        },
+        "autoIpv4": {
+          "type": "boolean"
+        },
+        "autoIpv6": {
+          "type": "boolean"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "lanSegment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpNotifyFilterProfileConfig": {
+      "type": "object",
+      "properties": {
+        "includeExcludeList": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NotifyFilterProfileIncludeConfig"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpTargetConfig": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "type": "string"
+        },
+        "lanSegment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notifyFilterProfile": {
+          "type": "string"
+        },
+        "notifyType": {
+          "type": "string"
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "targetIp": {
+          "type": "string"
+        },
+        "targetType": {
+          "type": "string"
+        },
+        "usmSecurityLevel": {
+          "type": "string"
+        },
+        "usmUserName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpUsmLocalUserConfig": {
+      "type": "object",
+      "properties": {
+        "authPassphrase": {
+          "type": "string"
+        },
+        "authProtocol": {
+          "type": "string"
+        },
+        "encryptionPassphrase": {
+          "type": "string"
+        },
+        "encryptionProtocol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpUsmRemoteUserConfig": {
+      "type": "object",
+      "properties": {
+        "authLocKey": {
+          "type": "string"
+        },
+        "authProtocol": {
+          "type": "string"
+        },
+        "encryptionLocKey": {
+          "type": "string"
+        },
+        "encryptionProtocol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpVacmGroupAccessConfig": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "string"
+        },
+        "contextMatch": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "readView": {
+          "type": "string"
+        },
+        "securityLevel": {
+          "type": "string"
+        },
+        "securityModel": {
+          "type": "string"
+        },
+        "writeView": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpVacmGroupMemberConfig": {
+      "type": "object",
+      "properties": {
+        "community": {
+          "type": "string"
+        },
+        "securityModel": {
+          "type": "string"
+        },
+        "securityName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpVacmViewConfig": {
+      "type": "object",
+      "properties": {
+        "includeExcludeList": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2SnmpVacmViewIncludeConfig"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SnmpVacmViewIncludeConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2StaticRouteConfig": {
+      "type": "object",
+      "properties": {
+        "adminDistance": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "administrativeDistance": {
+          "$ref": "#/$defs/manaV2NullableAdministrativeDistance"
+        },
+        "description": {
+          "type": "string"
+        },
+        "destinationPrefix": {
+          "type": "string"
+        },
+        "ipVersion": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "nextHop": {
+          "$ref": "#/$defs/manaV2StaticRouteNexthopConfig"
+        },
+        "nextHops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2StaticRouteNexthopConfig"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2StaticRouteNexthopConfig": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "circuit": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "nextHopAddress": {
+          "type": "string"
+        },
+        "thirdPartyIpsecTunnel": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SyslogCollectorConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "host": {
+          "type": "string"
+        },
+        "interfaceName": {
+          "type": "string"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "severity": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2TrafficPolicyRulesetConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "globalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isGlobalSync": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2TrafficPolicyRulesetConfigNullableRule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2TrafficPolicyRulesetConfigNullableRule": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/manaV2TrafficPolicyRulesetConfigNullableRuleRule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2TrafficPolicyRulesetConfigNullableRuleRule": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction"
+        },
+        "description": {
+          "type": "string"
+        },
+        "match": {
+          "$ref": "#/$defs/manaV2ForwardingPolicyMatchConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2TrafficPolicyRulesetConfigNullableRuleRuleAction": {
+      "type": "object",
+      "properties": {
+        "backupCircuit": {
+          "$ref": "#/$defs/manaV2NullableSetCircuitConfig"
+        },
+        "backupCircuitLabel": {
+          "$ref": "#/$defs/manaV2NullableSetCircuitLabelConfig"
+        },
+        "egress": {
+          "type": "string"
+        },
+        "logging": {
+          "type": "boolean"
+        },
+        "primaryCircuit": {
+          "$ref": "#/$defs/manaV2NullableSetCircuitConfig"
+        },
+        "primaryCircuitLabel": {
+          "$ref": "#/$defs/manaV2NullableSetCircuitLabelConfig"
+        },
+        "remark": {
+          "$ref": "#/$defs/manaV2NullableSetDscpConfig"
+        },
+        "setSlaClass": {
+          "$ref": "#/$defs/manaV2NullableSetSlaClassConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2VacmGroupConfig": {
+      "type": "object",
+      "properties": {
+        "accesses": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpVacmGroupAccessValue"
+          }
+        },
+        "members": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSnmpVacmGroupMemberValue"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2VrfConfig": {
+      "type": "object",
+      "properties": {
+        "bgpAggregations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpAggregationsConfig"
+          }
+        },
+        "bgpNeighbors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborConfig"
+          }
+        },
+        "bgpRedistribution": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpRedistributeProtocolConfig"
+          }
+        },
+        "dhcpSubnets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableDhcpSubnetConfig"
+          }
+        },
+        "ebgpMultipath": {
+          "$ref": "#/$defs/manaV2NullableBgpMultipathConfig"
+        },
+        "ipfixExporters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableIpfixExporterConfig"
+          }
+        },
+        "natRuleset": {
+          "$ref": "#/$defs/manaV2NullableNatPolicyRulesetName"
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ospfv2": {
+          "$ref": "#/$defs/manaV2NullableOspfProcessConfig"
+        },
+        "ospfv3": {
+          "$ref": "#/$defs/manaV2NullableOspfProcessConfig"
+        },
+        "overlayFilters": {
+          "$ref": "#/$defs/manaV2OverlayFilterConfig"
+        },
+        "staticRoutes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableStaticRouteConfig"
+          }
+        },
+        "syslogTargets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableSyslogCollectorConfig"
+          }
+        },
+        "trafficRuleset": {
+          "$ref": "#/$defs/manaV2NullableTrafficPolicyRulesetName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2VrrpGroupConfig": {
+      "type": "object",
+      "properties": {
+        "acceptMode": {
+          "type": "boolean"
+        },
+        "allowInterOperability": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "preempt": {
+          "type": "boolean"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "trackedInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2NullableInterfacePriorityDecrement"
+          }
+        },
+        "virtualIp": {
+          "type": "string"
+        },
+        "virtualRouterId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ZoneFirewallConfig": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "$ref": "#/$defs/manaV2ZoneFirewallIpPolicyConfig"
+        },
+        "udp": {
+          "$ref": "#/$defs/manaV2ZoneFirewallUdpPolicyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ZoneFirewallIpPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "blockLandAttacks": {
+          "type": "boolean"
+        },
+        "sessionLimit": {
+          "$ref": "#/$defs/manaV2NullableSessionLimit"
+        },
+        "urpf": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ZoneFirewallUdpPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "unidirectionalFlowLimit": {
+          "$ref": "#/$defs/manaV2NullableSessionLimit"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2interface_config_type": {
+      "type": "object",
+      "properties": {
+        "coreNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToCorePeerConfig"
+        },
+        "coreToCoreTunnel": {
+          "$ref": "#/$defs/manaV2InterfaceWanManagementConfig"
+        },
+        "default": {
+          "$ref": "#/$defs/manaV2InterfaceDefaultConfig"
+        },
+        "gatewayNeighbor": {
+          "$ref": "#/$defs/manaV2InterfaceCoreToGatewayPeerConfig"
+        },
+        "wan": {
+          "$ref": "#/$defs/manaV2InterfaceWanConfig"
+        },
+        "wanManagement": {
+          "$ref": "#/$defs/manaV2InterfaceWanManagementConfig"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

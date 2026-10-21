@@ -37,6 +37,20 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    manaV2QoSProfile:
+      type: object
+      properties:
+        kind:
+          type: string
+          example: ENUM_VALUE
+        profile:
+          type: string
+          example: ENUM_VALUE
+        queues:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2QoSProfileQueue'
+      additionalProperties: false
     v1QosCircuitProfilesGetResponse:
       type: object
       properties:
@@ -59,20 +73,6 @@ components:
         slaClass:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    manaV2QoSProfile:
-      type: object
-      properties:
-        kind:
-          type: string
-          example: ENUM_VALUE
-        profile:
-          type: string
-          example: ENUM_VALUE
-        queues:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2QoSProfileQueue'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

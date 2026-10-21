@@ -1,0 +1,12 @@
+name: Graphiant pricing
+generated: '2026-10-20'
+method: searched
+source: https://docs.graphiant.com/docs/purchasing-graphiant-service-credits-on-aws-marketplace.md
+audience: business-product
+pricing_basis: tiered-subscription
+published: false
+delivery:
+  delivery: managed
+plan_count: 0
+plans: []
+note: Graphiant sells its NaaS as a subscription "based on service credits" purchased through AWS Marketplace; the docs page shows contract and pricing details only as screenshots, and www.graphiant.com/pricing returned 404 on 2026-10-20, so no tier or price is published as text.

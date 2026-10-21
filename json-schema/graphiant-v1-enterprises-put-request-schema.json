@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprises-put-request-schema.json",
+  "title": "v1EnterprisesPutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprises-api-openapi.yml#/components/schemas/v1EnterprisesPutRequest",
+  "type": "object",
+  "properties": {
+    "accountType": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "adminEmail": {
+      "type": "string"
+    },
+    "adminFirstName": {
+      "type": "string"
+    },
+    "adminLastName": {
+      "type": "string"
+    },
+    "adminTimeZone": {
+      "type": "string"
+    },
+    "cloudProvider": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "creditLimit": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "description": {
+      "type": "string"
+    },
+    "enterpriseContract": {
+      "$ref": "#/$defs/commonBillingContract"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "marketplaceId": {
+      "type": "string"
+    },
+    "smallLogo": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "accountType",
+    "companyName",
+    "enterpriseContract"
+  ],
+  "$defs": {
+    "commonBillingContract": {
+      "type": "object",
+      "properties": {
+        "contractedCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of credits agreed upon for the entirety of the current contract"
+        },
+        "expirationDate": {
+          "$ref": "#/$defs/commonBillingTimePeriod"
+        }
+      },
+      "additionalProperties": false
+    },
+    "commonBillingTimePeriod": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

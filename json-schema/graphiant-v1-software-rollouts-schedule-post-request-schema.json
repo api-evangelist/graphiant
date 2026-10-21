@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-software-rollouts-schedule-post-request-schema.json",
+  "title": "v1SoftwareRolloutsSchedulePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-software-api-openapi.yml#/components/schemas/v1SoftwareRolloutsSchedulePostRequest",
+  "type": "object",
+  "properties": {
+    "failedOnly": {
+      "type": "boolean",
+      "description": "When true, only devices previously marked failed are rescheduled."
+    },
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Rollout identifier to schedule. (required)"
+    },
+    "ts": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id"
+  ],
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

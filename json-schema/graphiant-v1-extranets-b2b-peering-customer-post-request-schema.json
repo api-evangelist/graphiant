@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-extranets-b2b-peering-customer-post-request-schema.json",
+  "title": "v1ExtranetsB2bPeeringCustomerPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranets-b2b-peering-api-openapi.yml#/components/schemas/v1ExtranetsB2bPeeringCustomerPostRequest",
+  "type": "object",
+  "properties": {
+    "invite": {
+      "$ref": "#/$defs/manaV2B2bExtranetPeeringServiceCustomerInvite"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the peering service customer (required)"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the peerings servicecustomer whether it is a graphiant or non-graphiant (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "invite",
+    "name",
+    "type"
+  ],
+  "$defs": {
+    "manaV2B2bExtranetPeeringServiceCustomerInvite": {
+      "type": "object",
+      "properties": {
+        "adminEmail": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Admin emails for the peering service customer (required)"
+          }
+        },
+        "maximumNumberOfSites": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Maximum number of sites for the peering service customer (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "adminEmail",
+        "maximumNumberOfSites"
+      ]
+    }
+  }
+}

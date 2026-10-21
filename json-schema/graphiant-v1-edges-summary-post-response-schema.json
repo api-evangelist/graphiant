@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-edges-summary-post-response-schema.json",
+  "title": "v1EdgesSummaryPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-edges-summary-api-openapi.yml#/components/schemas/v1EdgesSummaryPostResponse",
+  "type": "object",
+  "properties": {
+    "edgesSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/searchEdgeSummary"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Location": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "provinceCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "searchEdgeSummary": {
+      "type": "object",
+      "properties": {
+        "assignedOn": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "canaryMode": {
+          "type": "string"
+        },
+        "connectedRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discoveredLocation": {
+          "type": "string"
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enterpriseName": {
+          "type": "string"
+        },
+        "firstAppearedOn": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "ipDetected": {
+          "type": "string"
+        },
+        "isHardware": {
+          "type": "boolean"
+        },
+        "isNew": {
+          "type": "boolean"
+        },
+        "isRequested": {
+          "type": "boolean"
+        },
+        "isRequestedStatus": {
+          "type": "string"
+        },
+        "lastBootedAt": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "location": {
+          "$ref": "#/$defs/manaV2Location"
+        },
+        "model": {
+          "type": "string"
+        },
+        "overrideRegion": {
+          "type": "string"
+        },
+        "parentEnterpriseName": {
+          "type": "string"
+        },
+        "portalStatus": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "serialNum": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "swName": {
+          "type": "string"
+        },
+        "swVersion": {
+          "type": "string"
+        },
+        "ttConnCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "upgradeSummary": {
+          "$ref": "#/$defs/upgradeUpgradeSummary"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeSchedule": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "downloadProgress": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "failureReason": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "ts": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "version": {
+          "$ref": "#/$defs/upgradeSwVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeSwVersion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeUpgradeSummary": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "endOfLife": {
+          "type": "boolean"
+        },
+        "lastDiscoveredTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "lastRunningVersion": {
+          "$ref": "#/$defs/upgradeSwVersion"
+        },
+        "lastUpgradeTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "readyForActivationVersion": {
+          "$ref": "#/$defs/upgradeSwVersion"
+        },
+        "rolloutId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "rolloutName": {
+          "type": "string"
+        },
+        "runningVersion": {
+          "$ref": "#/$defs/upgradeSwVersion"
+        },
+        "schedule": {
+          "$ref": "#/$defs/upgradeSchedule"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

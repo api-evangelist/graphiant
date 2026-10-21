@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-backbone-health-filter-get-response-schema.json",
+  "title": "v1BackboneHealthFilterGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-backbone-health-api-openapi.yml#/components/schemas/v1BackboneHealthFilterGetResponse",
+  "type": "object",
+  "properties": {
+    "circuits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingCircuitFilter"
+      }
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingDeviceFilter"
+      }
+    },
+    "lanSegments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingLanSegmentFilter"
+      }
+    },
+    "regions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingRegionFilter"
+      }
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingSiteFilter"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "statsmonTroubleshootingCircuitFilter": {
+      "type": "object",
+      "properties": {
+        "circuitName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingDeviceFilter": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingLanSegmentFilter": {
+      "type": "object",
+      "properties": {
+        "lanSegment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingRegion": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingRegionFilter": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSiteFilter": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "siteName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

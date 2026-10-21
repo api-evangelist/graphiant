@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-integration-post-request-schema.json",
+  "title": "v2IntegrationPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-integration-api-openapi.yml#/components/schemas/v2IntegrationPostRequest",
+  "type": "object",
+  "properties": {
+    "integrationBody": {
+      "$ref": "#/$defs/alertserviceCreateIntegrationBody"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "integrationBody"
+  ],
+  "$defs": {
+    "alertserviceCreateIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "ID of the user who created the integration"
+        },
+        "createdOn": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "details": {
+          "$ref": "#/$defs/alertserviceIntegrationDetails"
+        },
+        "enterprise": {
+          "type": "integer",
+          "format": "int64",
+          "description": "ID of the enterprise (required)"
+        },
+        "integrationType": {
+          "type": "string",
+          "description": "Type of integration (required)"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Indicates whether the integration is active"
+        },
+        "nickName": {
+          "type": "string",
+          "description": "Name of the integration (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "enterprise",
+        "integrationType",
+        "nickName"
+      ]
+    },
+    "alertserviceIntegrationDetails": {
+      "type": "object",
+      "properties": {
+        "opsgenieKey": {
+          "type": "string"
+        },
+        "opsrampDetails": {
+          "type": "string"
+        },
+        "pagerdutyRoutingKey": {
+          "type": "string"
+        },
+        "webhookUrl": {
+          "type": "string"
+        },
+        "zendeskDetails": {
+          "$ref": "#/$defs/alertserviceZendeskDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "alertserviceZendeskDetails": {
+      "type": "object",
+      "properties": {
+        "zendeskApiToken": {
+          "type": "string",
+          "description": "zendesk api token (required)"
+        },
+        "zendeskAssigneeId": {
+          "type": "string",
+          "description": "zendesk assignee id (required)"
+        },
+        "zendeskBaseUrl": {
+          "type": "string",
+          "description": "zendesk base url (required)"
+        },
+        "zendeskEmail": {
+          "type": "string",
+          "description": "zendesk email (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "zendeskApiToken",
+        "zendeskAssigneeId",
+        "zendeskBaseUrl",
+        "zendeskEmail"
+      ]
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

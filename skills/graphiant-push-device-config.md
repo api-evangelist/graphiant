@@ -1,18 +1,21 @@
 ---
-name: Push a Graphiant device configuration safely
-description: Validate device readiness, submit a declarative configuration fragment, and resolve the returned job to confirm the change actually applied. This skill mutates production network state.
+name: graphiant-push-device-config
+description: Validate device readiness, submit a declarative configuration fragment,
+  and resolve the returned job to confirm the change actually applied. This skill
+  mutates production network state.
 api: openapi/graphiant-portal-openapi-original.json
 generated: '2026-08-01'
 method: generated
 risk: high
 operations:
-  - GET /v1/edges-summary
-  - GET /v1/devices/{deviceId}/interfaces
-  - PUT /v1/devices/{deviceId}/config
-  - GET /v1/devices/{deviceId}/jobs/{jobId}
-  - GET /v1/devices/{deviceId}/draft
-  - POST /v1/devices/{deviceId}/draft
-  - DELETE /v1/devices/{deviceId}/draft
+- getV1EdgesSummary
+- getV1DevicesByDeviceIdInterfaces
+- putV1DevicesByDeviceIdConfig
+- getV1DevicesByDeviceIdJobsByJobId
+- getV1DevicesByDeviceIdDraft
+- postV1DevicesByDeviceIdDraft
+- deleteV1DevicesByDeviceIdDraft
+title: Push a Graphiant device configuration safely
 ---
 
 # Push a Graphiant device configuration safely

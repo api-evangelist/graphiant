@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-groups-put-request-schema.json",
+  "title": "v1GroupsPutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-groups-api-openapi.yml#/components/schemas/v1GroupsPutRequest",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "groupId": {
+      "type": "string",
+      "description": "Only supply if enterprise uses an idp"
+    },
+    "groupType": {
+      "type": "string"
+    },
+    "managesEnterprises": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "permissions": {
+      "$ref": "#/$defs/commonPermissions"
+    },
+    "timeWindowEnd": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "timeWindowStart": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "description",
+    "name"
+  ],
+  "$defs": {
+    "commonPermissions": {
+      "type": "object",
+      "properties": {
+        "assetManager": {
+          "type": "string"
+        },
+        "b2b": {
+          "type": "string"
+        },
+        "b2bSecurityProfileExternal": {
+          "type": "string"
+        },
+        "billingAndInvoicing": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "string"
+        },
+        "developerTools": {
+          "type": "string"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "globalServices": {
+          "type": "string"
+        },
+        "insights": {
+          "type": "string"
+        },
+        "licensing": {
+          "type": "string"
+        },
+        "logs": {
+          "type": "string"
+        },
+        "monitoringAndTroubleshooting": {
+          "type": "string"
+        },
+        "networkConfiguration": {
+          "type": "string"
+        },
+        "orderStatus": {
+          "type": "string"
+        },
+        "reports": {
+          "type": "string"
+        },
+        "safetyAndSecurity": {
+          "type": "string"
+        },
+        "servicePolicies": {
+          "type": "string"
+        },
+        "support": {
+          "type": "string"
+        },
+        "userAndTenantManagement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

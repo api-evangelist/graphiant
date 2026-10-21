@@ -89,65 +89,44 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1EdgesSummaryGetResponse:
+    manaV2Location:
       type: object
       properties:
-        edgesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchEdgeSummary'
-        isNewCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1EdgesSummaryPostResponse:
-      type: object
-      properties:
-        edgesSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/searchEdgeSummary'
-      additionalProperties: false
-    upgradeSwVersion:
-      type: object
-      properties:
-        name:
+        addressLine1:
           type: string
           example: example string
-        release:
-          type: string
-          example: ENUM_VALUE
-        version:
+        addressLine2:
           type: string
           example: example string
-      additionalProperties: false
-    upgradeSchedule:
-      type: object
-      properties:
-        action:
+        city:
           type: string
-          example: ENUM_VALUE
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        downloadProgress:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        failureReason:
+          example: example string
+        country:
+          type: string
+          example: example string
+        countryCode:
+          type: string
+          example: example string
+        latitude:
+          type: number
+          format: double
+          example: 123.45
+        longitude:
+          type: number
+          format: double
+          example: 123.45
+        notes:
+          type: string
+          example: example string
+        provinceCode:
           type: string
           example: example string
         state:
           type: string
-          example: ENUM_VALUE
-        ts:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        version:
-          $ref: '#/components/schemas/upgradeSwVersion'
+          example: example string
+        stateCode:
+          type: string
+          example: example string
       additionalProperties: false
     searchEdgeSummary:
       type: object
@@ -248,17 +227,26 @@ components:
         upgradeSummary:
           $ref: '#/components/schemas/upgradeUpgradeSummary'
       additionalProperties: false
-    googleProtobufTimestamp:
+    v1EdgesSummaryPostResponse:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+      additionalProperties: false
+    upgradeSwVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          example: example string
+        release:
+          type: string
+          example: ENUM_VALUE
+        version:
+          type: string
+          example: example string
       additionalProperties: false
     v1EdgesSummaryPostRequest:
       type: object
@@ -286,44 +274,44 @@ components:
             type: string
             example: ENUM_VALUE
       additionalProperties: false
-    manaV2Location:
+    upgradeSchedule:
       type: object
       properties:
-        addressLine1:
+        action:
           type: string
-          example: example string
-        addressLine2:
-          type: string
-          example: example string
-        city:
-          type: string
-          example: example string
-        country:
-          type: string
-          example: example string
-        countryCode:
-          type: string
-          example: example string
-        latitude:
-          type: number
-          format: double
-          example: 123.45
-        longitude:
-          type: number
-          format: double
-          example: 123.45
-        notes:
-          type: string
-          example: example string
-        provinceCode:
+          example: ENUM_VALUE
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        downloadProgress:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        failureReason:
           type: string
           example: example string
         state:
           type: string
-          example: example string
-        stateCode:
-          type: string
-          example: example string
+          example: ENUM_VALUE
+        ts:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        version:
+          $ref: '#/components/schemas/upgradeSwVersion'
+      additionalProperties: false
+    v1EdgesSummaryGetResponse:
+      type: object
+      properties:
+        edgesSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchEdgeSummary'
+        isNewCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
     upgradeUpgradeSummary:
       type: object
@@ -357,6 +345,18 @@ components:
         status:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -148,57 +148,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1ExtranetsMonitoringNatUsageGetResponseAllocation:
+    manaV2TrafficPolicyRuleRow:
       type: object
       properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        hostname:
-          type: string
-          example: example string
-        ipAddress:
-          type: string
-          example: example string
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteName:
+        device:
+          $ref: '#/components/schemas/manaV2SiteDeviceStub'
+        trafficPolicyRule:
+          $ref: '#/components/schemas/manaV2TrafficPolicyRule'
+        vrfName:
           type: string
           example: example string
       additionalProperties: false
-    v1ExtranetsMonitoringLanSegmentsGetResponseVrf:
+    manaV2SecurityPolicyRuleRow:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
+        device:
+          $ref: '#/components/schemas/manaV2SiteDeviceStub'
+        securityPolicyRule:
+          $ref: '#/components/schemas/manaV2SecurityPolicyRule'
+        vrfName:
           type: string
           example: example string
-      additionalProperties: false
-    v1ExtranetsMonitoringTrafficSecurityPolicyPostResponse:
-      type: object
-      properties:
-        securityRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRuleRow'
-        trafficRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRuleRow'
-      additionalProperties: false
-    v1ExtranetsMonitoringLanSegmentsGetResponse:
-      type: object
-      properties:
-        vrfs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ExtranetsMonitoringLanSegmentsGetResponseVrf'
       additionalProperties: false
     manaV2TrafficPolicyAction:
       type: object
@@ -220,34 +190,6 @@ components:
           example: ENUM_VALUE
           description: Result for the traffic policy action
       additionalProperties: false
-    manaV2TrafficPolicyRule:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/manaV2TrafficPolicyAction'
-        match:
-          $ref: '#/components/schemas/manaV2PolicyMatch'
-        policyRuleIndex:
-          type: integer
-          format: int64
-          example: 1234567891011
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    manaV2TrafficPolicyRuleRow:
-      type: object
-      properties:
-        device:
-          $ref: '#/components/schemas/manaV2SiteDeviceStub'
-        trafficPolicyRule:
-          $ref: '#/components/schemas/manaV2TrafficPolicyRule'
-        vrfName:
-          type: string
-          example: example string
-      additionalProperties: false
     manaV2Consumer:
       type: object
       properties:
@@ -265,26 +207,48 @@ components:
             format: int64
             example: 1234567891011
       additionalProperties: false
-    v1ExtranetsMonitoringTrafficSecurityPolicyPostRequest:
+    v1ExtranetsMonitoringNatUsageGetResponse:
       type: object
       properties:
+        allocatedCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ExtranetsMonitoringNatUsageGetResponseAllocation'
+        usageCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+    v1ExtranetsMonitoringLanSegmentsGetResponse:
+      type: object
+      properties:
+        vrfs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ExtranetsMonitoringLanSegmentsGetResponseVrf'
+      additionalProperties: false
+    manaV2SiteDeviceStub:
+      type: object
+      properties:
+        hostname:
+          type: string
+          example: example string
         id:
           type: integer
           format: int64
           example: 1234567891011
-        isProvider:
-          type: boolean
-          example: true
       additionalProperties: false
-    manaV2SecurityPolicyRule:
+    manaV2TrafficPolicyRule:
       type: object
       properties:
         action:
-          type: string
-          example: ENUM_VALUE
-        implicit:
-          type: boolean
-          example: true
+          $ref: '#/components/schemas/manaV2TrafficPolicyAction'
         match:
           $ref: '#/components/schemas/manaV2PolicyMatch'
         policyRuleIndex:
@@ -297,16 +261,36 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    manaV2SiteDeviceStub:
+    v1ExtranetsMonitoringTrafficSecurityPolicyPostResponse:
       type: object
       properties:
-        hostname:
-          type: string
-          example: example string
+        securityRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRuleRow'
+        trafficRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRuleRow'
+      additionalProperties: false
+    v2ExtranetsMonitoringConsumersPostRequest:
+      type: object
+      properties:
         id:
           type: integer
           format: int64
           example: 1234567891011
+      additionalProperties: false
+    v1ExtranetsMonitoringLanSegmentsGetResponseVrf:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
       additionalProperties: false
     manaV2PolicyMatch:
       type: object
@@ -338,42 +322,47 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    manaV2SecurityPolicyRuleRow:
+    v1ExtranetsMonitoringNatUsageGetResponseAllocation:
       type: object
       properties:
-        device:
-          $ref: '#/components/schemas/manaV2SiteDeviceStub'
-        securityPolicyRule:
-          $ref: '#/components/schemas/manaV2SecurityPolicyRule'
-        vrfName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ExtranetsMonitoringNatUsageGetResponse:
-      type: object
-      properties:
-        allocatedCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        allocations:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ExtranetsMonitoringNatUsageGetResponseAllocation'
-        usageCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v2ExtranetsMonitoringConsumersPostRequest:
-      type: object
-      properties:
-        id:
+        deviceId:
           type: integer
           format: int64
           example: 1234567891011
+        hostname:
+          type: string
+          example: example string
+        ipAddress:
+          type: string
+          example: example string
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2SecurityPolicyRule:
+      type: object
+      properties:
+        action:
+          type: string
+          example: ENUM_VALUE
+        implicit:
+          type: boolean
+          example: true
+        match:
+          $ref: '#/components/schemas/manaV2PolicyMatch'
+        policyRuleIndex:
+          type: integer
+          format: int64
+          example: 1234567891011
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
     v2ExtranetsMonitoringConsumersPostResponse:
       type: object
@@ -382,6 +371,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2Consumer'
+      additionalProperties: false
+    v1ExtranetsMonitoringTrafficSecurityPolicyPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isProvider:
+          type: boolean
+          example: true
       additionalProperties: false
   securitySchemes:
     jwtAuth:

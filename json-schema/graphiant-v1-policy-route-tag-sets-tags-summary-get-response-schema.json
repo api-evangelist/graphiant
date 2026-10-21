@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-policy-route-tag-sets-tags-summary-get-response-schema.json",
+  "title": "v1PolicyRouteTagSetsTagsSummaryGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-policy-api-openapi.yml#/components/schemas/v1PolicyRouteTagSetsTagsSummaryGetResponse",
+  "type": "object",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2RouteTagSummary"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2RouteTagSummary": {
+      "type": "object",
+      "properties": {
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "levelOne": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "levelOneTag": {
+          "type": "string"
+        },
+        "levelTwo": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "levelTwoTag": {
+          "type": "string"
+        },
+        "levelZero": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "levelZeroTag": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

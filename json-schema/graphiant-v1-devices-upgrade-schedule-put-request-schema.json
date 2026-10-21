@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-devices-upgrade-schedule-put-request-schema.json",
+  "title": "v1DevicesUpgradeSchedulePutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-devices-api-openapi.yml#/components/schemas/v1DevicesUpgradeSchedulePutRequest",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string"
+    },
+    "deviceIds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "deviceVersions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1DevicesUpgradeSchedulePutRequestDeviceVersion"
+      }
+    },
+    "ts": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "version": {
+      "$ref": "#/$defs/upgradeSwVersion"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeSwVersion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1DevicesUpgradeSchedulePutRequestDeviceVersion": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "version": {
+          "$ref": "#/$defs/upgradeSwVersion"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

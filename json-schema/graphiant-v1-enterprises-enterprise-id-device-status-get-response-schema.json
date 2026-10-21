@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprises-enterprise-id-device-status-get-response-schema.json",
+  "title": "v1EnterprisesEnterpriseIdDeviceStatusGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprises-api-openapi.yml#/components/schemas/v1EnterprisesEnterpriseIdDeviceStatusGetResponse",
+  "type": "object",
+  "properties": {
+    "mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pokedexDeviceMappingInfo"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pokedexDeviceMappingInfo": {
+      "type": "object",
+      "properties": {
+        "connectTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "ttIdentity": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

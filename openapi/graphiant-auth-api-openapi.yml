@@ -646,58 +646,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1AuthMfaTypesPutRequest:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - allowedMfaTypes
-    v1AuthErrorPostResponse:
-      type: object
-      properties:
-        auth:
-          type: boolean
-          example: false
-        token:
-          type:
-          - string
-          - 'null'
-          example: null
-        error:
-          type: string
-          example: email not provided
-      required:
-      - auth
-      - token
-      - error
-    v1AuthRefreshGetEntryPointResponse:
-      type: object
-      properties:
-        entryPoint:
-          type: string
-          example: https://saml.example.com/sso
-    v1AuthLoginTempPostRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: user@example.com
-        tempPassword:
-          type: string
-          example: temp123456
-        matchId:
-          type: number
-          example: 12345
-      required:
-      - email
-      - tempPassword
-      - matchId
     authPermissions:
       type: object
       properties:
@@ -813,6 +761,56 @@ components:
           - read
           - read_write
           example: read
+    v1AuthErrorPostResponse:
+      type: object
+      properties:
+        auth:
+          type: boolean
+          example: false
+        token:
+          type:
+          - string
+          - 'null'
+          example: null
+        error:
+          type: string
+          example: email not provided
+      required:
+      - auth
+      - token
+      - error
+    v1AuthMfaTypesGetResponse:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+      additionalProperties: false
+    v1AuthUserGetResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: user-12345
+          description: User identifier
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: Enterprise identifier
+        permissions:
+          $ref: '#/components/schemas/authPermissions'
+        timeZone:
+          type: string
+          example: America/New_York
+          description: User timezone
+      required:
+      - userId
+      - enterpriseId
+      - permissions
+      - timeZone
     v1AuthLoginCallbackPostRequest:
       type: object
       properties:
@@ -824,6 +822,63 @@ components:
           example: information-to-relay
       required:
       - SAMLResponse
+    v1AuthLoginTempPostRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        tempPassword:
+          type: string
+          example: temp123456
+        matchId:
+          type: number
+          example: 12345
+      required:
+      - email
+      - tempPassword
+      - matchId
+    v1AuthMfaTypesPutRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - allowedMfaTypes
+    v1AuthLoginPreGetResponse:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - SSO
+          - PASSWORD
+          example: PASSWORD
+          description: Authentication method to use
+        email:
+          type: string
+          example: user@example.com
+          description: User email address
+        iam:
+          type: string
+          example: Azure
+          description: Identity provider name (Azure/Okta)
+        relayState:
+          type: string
+          example: information-to-relay
+          description: State to relay after authentication
+        entryPoint:
+          type: string
+          example: https://saml.example.com/sso
+          description: SSO entry point URL
+      required:
+      - method
+      - email
     v1AuthLoginPostResponse:
       type: object
       properties:
@@ -858,27 +913,6 @@ components:
           type: string
           example: AwaitingMfa
           description: Authentication status (returned for MFA users)
-    v1AuthLoginPostRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          example: user@example.com
-        password:
-          type: string
-          example: password123
-      required:
-      - username
-      - password
-    v1AuthMfaTypesGetResponse:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-      additionalProperties: false
     v1AuthGcsPostRequest:
       type: object
       properties:
@@ -891,45 +925,24 @@ components:
       required:
       - gcsName
       - apiKey
-    v1AuthUserGetResponse:
+    v1AuthRefreshGetEntryPointResponse:
       type: object
       properties:
-        userId:
-          type: string
-          example: user-12345
-          description: User identifier
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: Enterprise identifier
-        permissions:
-          $ref: '#/components/schemas/authPermissions'
-        timeZone:
-          type: string
-          example: America/New_York
-          description: User timezone
-      required:
-      - userId
-      - enterpriseId
-      - permissions
-      - timeZone
-    v1AuthGetResponse:
-      type: object
-      properties:
-        cert:
-          type: string
-          example: example string
         entryPoint:
           type: string
-          example: example string
-        iamType:
-          type: string
-          example: ENUM_VALUE
-        issuer:
-          type: string
-          example: example string
+          example: https://saml.example.com/sso
+    v1AuthMfaPatchRequest:
+      type: object
+      properties:
+        allowedMfaTypes:
+          type: array
+          items:
+            type: string
+            example: ENUM_VALUE
+            description: ' (required)'
       additionalProperties: false
+      required:
+      - allowedMfaTypes
     v1AuthPatchRequest:
       type: object
       properties:
@@ -955,35 +968,53 @@ components:
       - entryPoint
       - iamType
       - issuer
-    v1AuthLoginPreGetResponse:
+    v1AuthGetResponse:
       type: object
       properties:
-        method:
+        cert:
           type: string
-          enum:
-          - SSO
-          - PASSWORD
-          example: PASSWORD
-          description: Authentication method to use
+          example: example string
+        entryPoint:
+          type: string
+          example: example string
+        iamType:
+          type: string
+          example: ENUM_VALUE
+        issuer:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1AuthLoginPostRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@example.com
+        password:
+          type: string
+          example: password123
+      required:
+      - username
+      - password
+    v1AuthMfaPostRequest:
+      type: object
+      properties:
         email:
           type: string
           example: user@example.com
-          description: User email address
-        iam:
+        mfaType:
           type: string
-          example: Azure
-          description: Identity provider name (Azure/Okta)
-        relayState:
+          example: TOTP
+        code:
           type: string
-          example: information-to-relay
-          description: State to relay after authentication
-        entryPoint:
+          example: 123456
+        stateToken:
           type: string
-          example: https://saml.example.com/sso
-          description: SSO entry point URL
+          example: state-token-12345
       required:
-      - method
       - email
+      - mfaType
+      - code
     v1AuthPutRequest:
       type: object
       properties:
@@ -1009,37 +1040,6 @@ components:
       - entryPoint
       - iamType
       - issuer
-    v1AuthMfaPatchRequest:
-      type: object
-      properties:
-        allowedMfaTypes:
-          type: array
-          items:
-            type: string
-            example: ENUM_VALUE
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - allowedMfaTypes
-    v1AuthMfaPostRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          example: user@example.com
-        mfaType:
-          type: string
-          example: TOTP
-        code:
-          type: string
-          example: 123456
-        stateToken:
-          type: string
-          example: state-token-12345
-      required:
-      - email
-      - mfaType
-      - code
   securitySchemes:
     jwtAuth:
       type: apiKey

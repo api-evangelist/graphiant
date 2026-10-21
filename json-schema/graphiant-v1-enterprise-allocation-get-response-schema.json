@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprise-allocation-get-response-schema.json",
+  "title": "v1EnterpriseAllocationGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprise-api-openapi.yml#/components/schemas/v1EnterpriseAllocationGetResponse",
+  "type": "object",
+  "properties": {
+    "consumptionSummary": {
+      "$ref": "#/$defs/manaV2BandwidthConsumptionSummary"
+    },
+    "conversionHolders": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2AllocationConversionHolder"
+      }
+    },
+    "regionalAllocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2RegionalAllocation"
+      }
+    },
+    "zeroTrustSummary": {
+      "$ref": "#/$defs/manaV2ZeroTrustConsumptionSummary"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2AllocationConversionHolder": {
+      "type": "object",
+      "properties": {
+        "bins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2AllocationConversionHolderBin"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AllocationConversionHolderBin": {
+      "type": "object",
+      "properties": {
+        "allocationUpperBound": {
+          "type": "number",
+          "format": "float",
+          "description": "Int32 value indicating the conversion rates apply from the prior highest upper bound to this upper bound"
+        },
+        "coreConversionFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Conversion rate from gigabytes per second to Graphiant credits for connections to core devices"
+        },
+        "coreConversionRate": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "gwConversionFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Conversion rate from gigabytes per second to Graphiant credits for connections to gateway devices"
+        },
+        "gwConversionRate": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "True-only flag indicating the conversion rates apply within a private context such as in-country"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BandwidthConsumptionSummary": {
+      "type": "object",
+      "properties": {
+        "contractualSummary": {
+          "$ref": "#/$defs/manaV2ContractualBandwidthConsumptionSummary"
+        },
+        "globalSummary": {
+          "$ref": "#/$defs/manaV2GlobalBandwidthConsumptionSummary"
+        },
+        "regionalSummaries": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2RegionalBandwidthConsumptionSummary"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BandwidthInfo": {
+      "type": "object",
+      "properties": {
+        "combinedCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Sum of the credits associated with cloud and gateway networks"
+        },
+        "coreBandwidth": {
+          "type": "number",
+          "format": "float",
+          "description": "Soft-upper-bounded max speed in gigabytes per second associated with core network connections"
+        },
+        "coreCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits derived from bandwidth on core network connections"
+        },
+        "gwBandwidth": {
+          "type": "number",
+          "format": "float",
+          "description": "Soft-upper-bounded max speed in gigabytes per second associated with gateway connections"
+        },
+        "gwCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits derived from bandwidth on gateway network connections"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ContractualBandwidthConsumptionSummary": {
+      "type": "object",
+      "properties": {
+        "expirationDate": {
+          "$ref": "#/$defs/manaV2TimePeriod"
+        },
+        "totalConsumedCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "All credits consumed over the entirety the enterprise's contracts"
+        },
+        "totalContractedCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of credits agreed upon for the entirety of the current contract"
+        },
+        "totalRemainingCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of unused credits remaining under the current contract"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2GlobalBandwidthConsumptionSummary": {
+      "type": "object",
+      "properties": {
+        "allocatedMonthlyCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits allocated for the current month"
+        },
+        "consumedMonthlyCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits billed for the current month. It equals the the higher value between the credits allocated and used for the month"
+        },
+        "priorAllocatedMonthlyCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits allocated for the prior month"
+        },
+        "priorConsumedMonthlyCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits billed for the prior month."
+        },
+        "recommendedMonthlyCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Expected amount of credits to allocate for the month to match the overall contracted amount. For monthly-contracted enterprises, this is equivalent to the monthly number of credits being billed while for term-based-contracted enterprises, this is equivalent to the number of credits to use up in this and the following months to use up exactly the number of credits remaining in the contract."
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2InternetAccessBandwidthInfo": {
+      "type": "object",
+      "properties": {
+        "internetBandwidth": {
+          "type": "number",
+          "format": "float",
+          "description": "Bandwidth value associated with dia gateways. This should either be 0, 10, or 100."
+        },
+        "internetCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Additional credits to support the provided DIA bandwidth"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RegionalAllocation": {
+      "type": "object",
+      "properties": {
+        "allocationCore": {
+          "type": "number",
+          "format": "float",
+          "description": "Gigabytes per second allowed for core network connections on this region"
+        },
+        "allocationGw": {
+          "type": "number",
+          "format": "float",
+          "description": "Gigabytes per second allowed for gateway connections on this region"
+        },
+        "allocationInternet": {
+          "type": "number",
+          "format": "float",
+          "description": "Gigabytes per second allowed for dia gateway internet access on this region. Must be 0, 10, or 100"
+        },
+        "creditCore": {
+          "type": "number",
+          "format": "float"
+        },
+        "creditGw": {
+          "type": "number",
+          "format": "float"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RegionalBandwidthConsumptionSummary": {
+      "type": "object",
+      "properties": {
+        "allocation": {
+          "$ref": "#/$defs/manaV2BandwidthInfo"
+        },
+        "consumedCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Credits billed for the region. It equals the higher value between total credits allocated and used plus any additional dia consumption"
+        },
+        "coreConversionFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Conversion rate from gigabytes per second to Graphiant credits used for calculating credits on core networks for this region"
+        },
+        "gwConversionFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Conversion rate from gigabytes per second to Graphiant credits used for calculating credits on core networks for this region"
+        },
+        "internetConsumption": {
+          "$ref": "#/$defs/manaV2InternetAccessBandwidthInfo"
+        },
+        "usage": {
+          "$ref": "#/$defs/manaV2BandwidthInfo"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2TimePeriod": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ZeroTrustConsumptionSummary": {
+      "type": "object",
+      "properties": {
+        "userAgentCredits": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of devices that have been installed with the zero trust agent"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-gateways-status-post-request-schema.json",
+  "title": "v1GatewaysStatusPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-gateways-api-openapi.yml#/components/schemas/v1GatewaysStatusPostRequest",
+  "type": "object",
+  "properties": {
+    "deviceInfo": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1GatewaysStatusPostRequestDeviceInfo"
+      }
+    },
+    "id": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "status": {
+      "type": "string"
+    },
+    "supportStatus": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v1GatewaysStatusPostRequestDeviceInfo": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interfaceId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

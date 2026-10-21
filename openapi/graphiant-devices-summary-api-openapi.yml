@@ -68,6 +68,21 @@ components:
           type: boolean
           example: true
       additionalProperties: false
+    v1DevicesSummaryGetResponseSiteSummary:
+      type: object
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummaryDeviceSummary'
+        siteId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteName:
+          type: string
+          example: example string
+      additionalProperties: false
     v1DevicesSummaryGetResponseSiteSummaryDeviceSummary:
       type: object
       properties:
@@ -102,21 +117,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummary'
-      additionalProperties: false
-    v1DevicesSummaryGetResponseSiteSummary:
-      type: object
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DevicesSummaryGetResponseSiteSummaryDeviceSummary'
-        siteId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        siteName:
-          type: string
-          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

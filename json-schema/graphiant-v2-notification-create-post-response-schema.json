@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-notification-create-post-response-schema.json",
+  "title": "v2NotificationCreatePostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-notification-api-openapi.yml#/components/schemas/v2NotificationCreatePostResponse",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

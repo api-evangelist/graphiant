@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-backbone-health-etet-sla-matrix-get-response-schema.json",
+  "title": "v1BackboneHealthEtetSlaMatrixGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-backbone-health-api-openapi.yml#/components/schemas/v1BackboneHealthEtetSlaMatrixGetResponse",
+  "type": "object",
+  "properties": {
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1BackboneHealthEtetSlaMatrixGetResponseDevicesSummary"
+      }
+    },
+    "regionStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1BackboneHealthEtetSlaMatrixGetResponseRegionStatus"
+      }
+    },
+    "slaMatrix": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1BackboneHealthEtetSlaMatrixGetResponseSlaSummary"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "statsmonTroubleshootingRegion": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthEtetSlaMatrixGetResponseDevicesSummary": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthEtetSlaMatrixGetResponseRegionStatus": {
+      "type": "object",
+      "properties": {
+        "peerRegion": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthEtetSlaMatrixGetResponseSlaSummary": {
+      "type": "object",
+      "properties": {
+        "delayStatus": {
+          "type": "string"
+        },
+        "delayValue": {
+          "type": "number",
+          "format": "float"
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "jitterStatus": {
+          "type": "string"
+        },
+        "jitterValue": {
+          "type": "number",
+          "format": "float"
+        },
+        "lossStatus": {
+          "type": "string"
+        },
+        "lossValue": {
+          "type": "number",
+          "format": "float"
+        },
+        "mosValue": {
+          "type": "number",
+          "format": "float"
+        },
+        "peerDeviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "peerDeviceName": {
+          "type": "string"
+        },
+        "peerRegion": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

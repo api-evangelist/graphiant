@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-monitoring-extranet-status-details-get-response-schema.json",
+  "title": "v2MonitoringExtranetStatusDetailsGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-monitoring-api-openapi.yml#/components/schemas/v2MonitoringExtranetStatusDetailsGetResponse",
+  "type": "object",
+  "properties": {
+    "edgeStatuses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonExtranetEdgeStatus"
+      }
+    },
+    "location": {
+      "type": "string",
+      "description": "the location of the site"
+    },
+    "region": {
+      "type": "string",
+      "description": "the region of the site"
+    },
+    "siteStatus": {
+      "$ref": "#/$defs/statsmonExtranetSiteStatus"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonExtranetEdgeStatus": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "disconnectedReason": {
+          "type": "string",
+          "description": "the reason for the edge being disconnected"
+        },
+        "hostname": {
+          "type": "string",
+          "description": "the hostname of the edge"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the id of the edge/device"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "the name of the site"
+        },
+        "status": {
+          "type": "string",
+          "description": "the health status of the edge (Healthy, Impaired, Down)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonExtranetServerStatus": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "the IP address of the server"
+        },
+        "status": {
+          "type": "string",
+          "description": "the health status of the server (Healthy, Impaired, Down)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonExtranetSiteStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the id of the site"
+        },
+        "name": {
+          "type": "string",
+          "description": "the name of the site"
+        },
+        "status": {
+          "type": "string",
+          "description": "the status of the site (Healthy, Impaired, Down)"
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonExtranetServerStatus"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

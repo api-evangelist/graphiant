@@ -83,6 +83,10 @@ components:
           example: example string
           description: Name of the rule (required)
       additionalProperties: false
+    v2RulelistPostRequest:
+      type: object
+      properties: {}
+      additionalProperties: false
     v2RulelistPostResponse:
       type: object
       properties:
@@ -90,10 +94,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/alertserviceRuleRecord'
-      additionalProperties: false
-    v2RulelistPostRequest:
-      type: object
-      properties: {}
       additionalProperties: false
   securitySchemes:
     jwtAuth:

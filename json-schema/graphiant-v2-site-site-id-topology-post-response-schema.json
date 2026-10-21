@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-site-site-id-topology-post-response-schema.json",
+  "title": "v2SiteSiteIdTopologyPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-site-api-openapi.yml#/components/schemas/v2SiteSiteIdTopologyPostResponse",
+  "type": "object",
+  "properties": {
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonV2Edge"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonV2Node"
+      }
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v2SiteSiteIdTopologyPostResponseSnapshot"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufDuration": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2Connection": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "circuitCarrier": {
+          "type": "string"
+        },
+        "circuitName": {
+          "type": "string"
+        },
+        "destinationIp": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "lastEstablishedTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "lastResort": {
+          "type": "boolean"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "sourcePublicIp": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2Edge": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "b": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "circuitsInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2EdgeedgeCircuitInfo"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2Connection"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "quality": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2EdgeedgeCircuitInfo": {
+      "type": "object",
+      "properties": {
+        "circuitCarrier": {
+          "type": "string"
+        },
+        "circuitName": {
+          "type": "string"
+        },
+        "deviceHostname": {
+          "type": "string"
+        },
+        "interfaceName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "lastResortCircuit": {
+          "type": "boolean"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "sourcePublicIp": {
+          "type": "string"
+        },
+        "uptime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2Node": {
+      "type": "object",
+      "properties": {
+        "circuitInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2NodeCircuitInfo"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2NodeConnection"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodeInfo": {
+          "$ref": "#/$defs/statsmonV2NodeDeviceInfo"
+        },
+        "preferredRegionName": {
+          "type": "string"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2NodeCircuitInfo": {
+      "type": "object",
+      "properties": {
+        "averageDownlinkUtilization": {
+          "type": "number",
+          "format": "double"
+        },
+        "averageUplinkUtilization": {
+          "type": "number",
+          "format": "double"
+        },
+        "circuitCarrier": {
+          "type": "string"
+        },
+        "circuitName": {
+          "type": "string"
+        },
+        "connectedRegionName": {
+          "type": "string"
+        },
+        "currentDownlinkUtilization": {
+          "type": "number",
+          "format": "double"
+        },
+        "currentUplinkUtilization": {
+          "type": "number",
+          "format": "double"
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interfaceName": {
+          "type": "string"
+        },
+        "jitter": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "label": {
+          "type": "string"
+        },
+        "lastResort": {
+          "type": "boolean"
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "loss": {
+          "type": "number",
+          "format": "float"
+        },
+        "qoe": {
+          "type": "number",
+          "format": "float"
+        },
+        "quality": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2NodeConnection": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "circuitCarrier": {
+          "type": "string"
+        },
+        "circuitName": {
+          "type": "string"
+        },
+        "destinationIp": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "lastEstablishedTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "lastResort": {
+          "type": "boolean"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "sourcePublicIp": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2NodeDeviceInfo": {
+      "type": "object",
+      "properties": {
+        "controlQuality": {
+          "type": "string"
+        },
+        "cpu": {
+          "type": "number",
+          "format": "float"
+        },
+        "dataQuality": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "maintenanceMode": {
+          "type": "boolean"
+        },
+        "memory": {
+          "type": "number",
+          "format": "float"
+        },
+        "mgmtIp": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "portalQuality": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "softwareVersion": {
+          "type": "string"
+        },
+        "stagingMode": {
+          "type": "boolean"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float"
+        },
+        "uptime": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v2SiteSiteIdTopologyPostResponseSnapshot": {
+      "type": "object",
+      "properties": {
+        "quality": {
+          "type": "string"
+        },
+        "snapshotTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

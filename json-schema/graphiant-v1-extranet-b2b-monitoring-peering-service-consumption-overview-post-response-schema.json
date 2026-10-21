@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-extranet-b2b-monitoring-peering-service-consumption-overview-post-response-schema.json",
+  "title": "v1ExtranetB2bMonitoringPeeringServiceConsumptionOverviewPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranet-b2b-monitoring-api-openapi.yml#/components/schemas/v1ExtranetB2bMonitoringPeeringServiceConsumptionOverviewPostResponse",
+  "type": "object",
+  "properties": {
+    "firstLevel": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixConnectionMap"
+      }
+    },
+    "secondLevel": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixConnectionMap"
+      }
+    },
+    "thirdLevel": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixConnectionMap"
+      }
+    },
+    "totalUsage": {
+      "type": "number",
+      "format": "double",
+      "description": "total service usage in kilo bytes"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ipfixConnectionMap": {
+      "type": "object",
+      "properties": {
+        "connections": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        },
+        "connectionsV2": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "the name of the connection"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-invitation-email-post-request-schema.json",
+  "title": "v1InvitationEmailPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-invitation-api-openapi.yml#/components/schemas/v1InvitationEmailPostRequest",
+  "type": "object",
+  "properties": {
+    "adminEmail": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "customerName": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "isGraphiant": {
+      "type": "boolean"
+    },
+    "matchId": {
+      "type": "integer",
+      "format": "int64",
+      "description": " (required)"
+    },
+    "serviceId": {
+      "type": "integer",
+      "format": "int64",
+      "description": " (required)"
+    },
+    "serviceName": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "serviceType": {
+      "type": "string",
+      "description": "Extranet service type URL segment (e.g. peering_service, client_to_server)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "customerName",
+    "matchId",
+    "serviceId",
+    "serviceName"
+  ]
+}

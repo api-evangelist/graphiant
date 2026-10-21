@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-account-mfa-confirmation-post-request-schema.json",
+  "title": "v1AccountMfaConfirmationPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaConfirmationPostRequest",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "confirmed": {
+      "type": "boolean",
+      "description": " (required)"
+    },
+    "id": {
+      "type": "string",
+      "description": " (required)"
+    },
+    "type": {
+      "type": "string",
+      "description": " (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "confirmed",
+    "id",
+    "type"
+  ]
+}

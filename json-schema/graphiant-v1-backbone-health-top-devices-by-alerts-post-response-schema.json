@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-backbone-health-top-devices-by-alerts-post-response-schema.json",
+  "title": "v1BackboneHealthTopDevicesByAlertsPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-backbone-health-api-openapi.yml#/components/schemas/v1BackboneHealthTopDevicesByAlertsPostResponse",
+  "type": "object",
+  "properties": {
+    "controlPlane": {
+      "$ref": "#/$defs/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts"
+    },
+    "dataPlane": {
+      "$ref": "#/$defs/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts"
+    },
+    "systemPlane": {
+      "$ref": "#/$defs/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCounts": {
+      "type": "object",
+      "properties": {
+        "deviceCounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCountsDeviceCount"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthTopDevicesByAlertsPostResponseDeviceCountsDeviceCount": {
+      "type": "object",
+      "properties": {
+        "deviceName": {
+          "type": "string"
+        },
+        "numAlerts": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

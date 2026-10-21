@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-device-routing-vrf-bgp-eibgp-route-count-get-response-schema.json",
+  "title": "v1DeviceRoutingVrfBgpEibgpRouteCountGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-device-api-openapi.yml#/components/schemas/v1DeviceRoutingVrfBgpEibgpRouteCountGetResponse",
+  "type": "object",
+  "properties": {
+    "ebgpRouteCount": {
+      "$ref": "#/$defs/routingAfiRouteCount"
+    },
+    "graphiantRouteCount": {
+      "$ref": "#/$defs/routingAfiRouteCount"
+    },
+    "ibgpRouteCount": {
+      "$ref": "#/$defs/routingAfiRouteCount"
+    },
+    "localSourcedRouteCount": {
+      "$ref": "#/$defs/routingAfiRouteCount"
+    },
+    "totalRouteCount": {
+      "$ref": "#/$defs/routingAfiRouteCount"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "routingAfiRouteCount": {
+      "type": "object",
+      "properties": {
+        "ipv4": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IPv4 route count"
+        },
+        "ipv6": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IPv6 route count"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

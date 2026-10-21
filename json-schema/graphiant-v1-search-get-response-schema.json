@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-search-get-response-schema.json",
+  "title": "v1SearchGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-search-api-openapi.yml#/components/schemas/v1SearchGetResponse",
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/searchSearchResult"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "searchSearchResult": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "A search context from the SearchContext enum (required)"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "A search context from the SearchContext enum (required)"
+        },
+        "result": {
+          "type": "string",
+          "description": "A search result (required)"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

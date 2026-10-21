@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-childalertlist-post-request-schema.json",
+  "title": "v2ChildalertlistPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-childalertlist-api-openapi.yml#/components/schemas/v2ChildalertlistPostRequest",
+  "type": "object",
+  "properties": {
+    "alertId": {
+      "type": "string",
+      "description": "Alert id of the parent alert (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "alertId"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-integration-post-response-schema.json",
+  "title": "v2IntegrationPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-integration-api-openapi.yml#/components/schemas/v2IntegrationPostResponse",
+  "type": "object",
+  "properties": {
+    "integration": {
+      "$ref": "#/$defs/alertserviceIntegration"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "alertserviceIntegration": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdOn": {
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/alertserviceIntegrationDetails"
+        },
+        "enterpriseId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "lastScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "last scanned time for integrations (zendesk)"
+        },
+        "nickName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "alertserviceIntegrationDetails": {
+      "type": "object",
+      "properties": {
+        "opsgenieKey": {
+          "type": "string"
+        },
+        "opsrampDetails": {
+          "type": "string"
+        },
+        "pagerdutyRoutingKey": {
+          "type": "string"
+        },
+        "webhookUrl": {
+          "type": "string"
+        },
+        "zendeskDetails": {
+          "$ref": "#/$defs/alertserviceZendeskDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "alertserviceZendeskDetails": {
+      "type": "object",
+      "properties": {
+        "zendeskApiToken": {
+          "type": "string",
+          "description": "zendesk api token (required)"
+        },
+        "zendeskAssigneeId": {
+          "type": "string",
+          "description": "zendesk assignee id (required)"
+        },
+        "zendeskBaseUrl": {
+          "type": "string",
+          "description": "zendesk base url (required)"
+        },
+        "zendeskEmail": {
+          "type": "string",
+          "description": "zendesk email (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "zendeskApiToken",
+        "zendeskAssigneeId",
+        "zendeskBaseUrl",
+        "zendeskEmail"
+      ]
+    }
+  }
+}

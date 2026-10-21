@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-regions-region-id-gateways-get-response-schema.json",
+  "title": "v1RegionsRegionIdGatewaysGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-regions-api-openapi.yml#/components/schemas/v1RegionsRegionIdGatewaysGetResponse",
+  "type": "object",
+  "properties": {
+    "gateways": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1RegionsRegionIdGatewaysGetResponseGateway"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v1RegionsRegionIdGatewaysGetResponseGateway": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hostname": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

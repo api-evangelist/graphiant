@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-troubleshooting-top-sites-by-alerts-post-response-schema.json",
+  "title": "v1TroubleshootingTopSitesByAlertsPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-troubleshooting-api-openapi.yml#/components/schemas/v1TroubleshootingTopSitesByAlertsPostResponse",
+  "type": "object",
+  "properties": {
+    "controlPlane": {
+      "$ref": "#/$defs/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts"
+    },
+    "dataPlane": {
+      "$ref": "#/$defs/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts"
+    },
+    "systemPlane": {
+      "$ref": "#/$defs/v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v1TroubleshootingTopSitesByAlertsPostResponseSiteCounts": {
+      "type": "object",
+      "properties": {
+        "siteCounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/v1TroubleshootingTopSitesByAlertsPostResponseSiteCountsSiteCount"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1TroubleshootingTopSitesByAlertsPostResponseSiteCountsSiteCount": {
+      "type": "object",
+      "properties": {
+        "numAlerts": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "siteName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

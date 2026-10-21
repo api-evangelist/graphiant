@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-sites-map-details-get-response-schema.json",
+  "title": "v1SitesMapDetailsGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-sites-api-openapi.yml#/components/schemas/v1SitesMapDetailsGetResponse",
+  "type": "object",
+  "properties": {
+    "lanSegmentIds": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2LanSegmentSitesMap"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2LanSegmentSitesMap": {
+      "type": "object",
+      "properties": {
+        "siteIds": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2SiteLanSegmentDeviceBuckets"
+          }
+        },
+        "siteListIds": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2SiteLanSegmentDeviceBuckets"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SiteDeviceSummary": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SiteLanSegmentDeviceBuckets": {
+      "type": "object",
+      "properties": {
+        "lanSegmentExists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2SiteDeviceSummary"
+          }
+        },
+        "lanSegmentMissing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2SiteDeviceSummary"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

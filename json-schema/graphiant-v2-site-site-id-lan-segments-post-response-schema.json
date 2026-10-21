@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-site-site-id-lan-segments-post-response-schema.json",
+  "title": "v2SiteSiteIdLanSegmentsPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-site-api-openapi.yml#/components/schemas/v2SiteSiteIdLanSegmentsPostResponse",
+  "type": "object",
+  "properties": {
+    "deviceSegments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonV2DeviceSegments"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2DeviceSegments": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "vrfRoutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2VrfRoutes"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2VrfRoute": {
+      "type": "object",
+      "properties": {
+        "ipv4Routes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipv6Routes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalRoutes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "vrfName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonV2VrfRoutes": {
+      "type": "object",
+      "properties": {
+        "ts": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "vrfRoute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonV2VrfRoute"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

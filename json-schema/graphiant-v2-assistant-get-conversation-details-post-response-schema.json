@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-assistant-get-conversation-details-post-response-schema.json",
+  "title": "v2AssistantGetConversationDetailsPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantGetConversationDetailsPostResponse",
+  "type": "object",
+  "properties": {
+    "conversationId": {
+      "type": "string"
+    },
+    "responseList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assistantAssistantResponse"
+      }
+    },
+    "userId": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "assistantAssistantQuestion": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "questionLanguage": {
+          "type": "string"
+        },
+        "questionText": {
+          "type": "string"
+        },
+        "questionTimestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assistantAssistantResponse": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "dataframeDictionary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assistantDataframeDictionary"
+          }
+        },
+        "originalQuestion": {
+          "$ref": "#/$defs/assistantAssistantQuestion"
+        },
+        "responseId": {
+          "type": "string"
+        },
+        "responseLanguage": {
+          "type": "string"
+        },
+        "responseText": {
+          "type": "string"
+        },
+        "responseTimestamp": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "responseType": {
+          "type": "string"
+        },
+        "visualizationSummary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assistantDataframeDictionary": {
+      "type": "object",
+      "properties": {
+        "dataframeDictionaryMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "xAxis": {
+          "type": "string"
+        },
+        "yAxis": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

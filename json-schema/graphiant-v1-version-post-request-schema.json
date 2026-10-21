@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-version-post-request-schema.json",
+  "title": "v1VersionPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-version-api-openapi.yml#/components/schemas/v1VersionPostRequest",
+  "type": "object",
+  "properties": {
+    "configurationMetadata": {
+      "$ref": "#/$defs/manaV2ConfigurationMetadata"
+    },
+    "deviceId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "version": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2ConfigurationMetadata": {
+      "type": "object",
+      "properties": {
+        "commitConfirm": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

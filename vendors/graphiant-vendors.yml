@@ -1,0 +1,58 @@
+generated: '2026-10-20'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: www.graphiant.com
+  evidence: header:cf-ray
+  signal: header
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+- vendor: zendesk
+  name: Zendesk
+  area: support
+  host: support.graphiant.com
+  evidence: cname:zendesk.com
+  signal: cname
+  confidence: high
+  kin_score:
+  - support_channel
+reliance:
+  areas_vendor_served:
+  - cdn
+  - support
+  vendor_count: 2
+  areas_observed: 12
+  share_of_observable_areas: 0.167
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: custom'
+- www.graphiant.com (Website)
+- docs.graphiant.com (DeveloperPortal)
+- portal.graphiant.com (Portal)
+- docs.graphiant.com (Documentation)
+- docs.graphiant.com (APIReference)
+- docs.graphiant.com (GettingStarted)
+- support.graphiant.com (Support)
+- portal.graphiant.com (SignUp)
+- status.graphiant.io (StatusPage)
+- api.graphiant.com (baseURL)

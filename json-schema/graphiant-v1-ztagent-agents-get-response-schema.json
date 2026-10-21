@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-ztagent-agents-get-response-schema.json",
+  "title": "v1ZtagentAgentsGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-ztagent-api-openapi.yml#/components/schemas/v1ZtagentAgentsGetResponse",
+  "type": "object",
+  "properties": {
+    "agents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/concealAgent"
+      }
+    },
+    "count": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "concealAgent": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "lastCheckin": {
+          "type": "string"
+        },
+        "machine": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

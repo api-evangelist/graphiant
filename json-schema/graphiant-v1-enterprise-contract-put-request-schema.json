@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprise-contract-put-request-schema.json",
+  "title": "v1EnterpriseContractPutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprise-api-openapi.yml#/components/schemas/v1EnterpriseContractPutRequest",
+  "type": "object",
+  "properties": {
+    "contractedCredits": {
+      "type": "number",
+      "format": "float",
+      "description": "Amount of credits billed for a contract term or per month when no expiration is provided. For an MSP tenant, this is the total credits in the MSP billing pool (from which credits are allocated to managed enterprises)."
+    },
+    "expirationDate": {
+      "$ref": "#/$defs/manaV2TimePeriod"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2TimePeriod": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

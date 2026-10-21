@@ -227,43 +227,70 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2BucketApp:
+    v1DataAssuranceAssurancesGlobalIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2BucketAppServer:
       type: object
       properties:
-        bucketId:
+        ip:
+          type: string
+          example: example string
+        port:
           type: integer
           format: int32
           example: 123
-        builtinAppId:
+        protocol:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v1DataAssuranceFlexAlgosGetResponseEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        id:
           type: integer
-          format: int64
-          example: 1234567891011
-        customAppId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isDomain:
-          type: boolean
-          example: true
+          format: int32
+          example: 123
         name:
           type: string
           example: example string
-        servers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2BucketAppServer'
-        useAllServers:
-          type: boolean
-          example: true
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdPutRequest:
+    v1DataAssuranceAssurancesGlobalGetResponse:
       type: object
       properties:
-        appRemovalReason:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRow'
+      additionalProperties: false
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance:
+      type: object
+      properties:
+        configs:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
+      type: object
+      properties:
+        assurances:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
+      type: object
+      properties:
+        siteName:
           type: string
           example: example string
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
       additionalProperties: false
     v1DataAssuranceAssurancesGlobalGetResponseRow:
       type: object
@@ -295,12 +322,6 @@ components:
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdGetResponse:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
-      additionalProperties: false
     v1DataAssuranceAssurancesGlobalPostResponse:
       type: object
       properties:
@@ -314,16 +335,6 @@ components:
             type: string
             example: example string
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalPostRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/manaV2AssuranceConfig'
-      additionalProperties: false
     v1DataAssuranceAssurancesGlobalIdPutResponse:
       type: object
       properties:
@@ -333,6 +344,51 @@ components:
             type: string
             example: example string
       additionalProperties: false
+    manaV2BucketApp:
+      type: object
+      properties:
+        bucketId:
+          type: integer
+          format: int32
+          example: 123
+        builtinAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        customAppId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDomain:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: example string
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2BucketAppServer'
+        useAllServers:
+          type: boolean
+          example: true
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
+      type: object
+      properties:
+        appName:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1DataAssuranceAssurancesGlobalIdPutRequest:
+      type: object
+      properties:
+        appRemovalReason:
+          type: string
+          example: example string
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
+      additionalProperties: false
     v1DataAssuranceAssurancesGlobalGetResponseRowLanEntry:
       type: object
       properties:
@@ -340,31 +396,19 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponse:
+    v1DataAssuranceAssurancesGlobalIdGetResponse:
       type: object
       properties:
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesGlobalGetResponseRow'
-      additionalProperties: false
-    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance:
-      type: object
-      properties:
-        configs:
+        config:
           $ref: '#/components/schemas/manaV2AssuranceConfig'
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
       additionalProperties: false
-    v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponse:
+    v1DataAssuranceFlexAlgosGetResponse:
       type: object
       properties:
-        assurances:
+        entries:
           type: array
           items:
-            $ref: '#/components/schemas/v1DataAssuranceAssurancesApplicationsBucketAppNameGetResponseAssurance'
+            $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
       additionalProperties: false
     manaV2AssuranceConfig:
       type: object
@@ -392,41 +436,11 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    manaV2BucketAppServer:
+    v1DataAssuranceAssurancesGlobalPostRequest:
       type: object
       properties:
-        ip:
-          type: string
-          example: example string
-        port:
-          type: integer
-          format: int32
-          example: 123
-        protocol:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowSiteEntry:
-      type: object
-      properties:
-        siteName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1DataAssuranceAssurancesGlobalGetResponseRowAppEntry:
-      type: object
-      properties:
-        appName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1DataAssuranceFlexAlgosGetResponse:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataAssuranceFlexAlgosGetResponseEntry'
+        config:
+          $ref: '#/components/schemas/manaV2AssuranceConfig'
       additionalProperties: false
     googleProtobufTimestamp:
       type: object
@@ -439,20 +453,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v1DataAssuranceFlexAlgosGetResponseEntry:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int32
-          example: 123
-        name:
-          type: string
-          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

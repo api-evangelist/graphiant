@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-users-get-response-schema.json",
+  "title": "v1UsersGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-users-api-openapi.yml#/components/schemas/v1UsersGetResponse",
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commonUser"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commonUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastActiveAt": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "mfaFactor": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

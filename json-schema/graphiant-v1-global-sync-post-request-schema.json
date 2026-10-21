@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-global-sync-post-request-schema.json",
+  "title": "v1GlobalSyncPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-global-api-openapi.yml#/components/schemas/v1GlobalSyncPostRequest",
+  "type": "object",
+  "properties": {
+    "deviceIds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "ipfixExportedId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "ntpId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "prefixSetId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "routingPolicyId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "snmpId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "syslogServerId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "trafficPolicyId": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false
+}

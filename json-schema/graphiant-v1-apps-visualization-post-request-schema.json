@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-apps-visualization-post-request-schema.json",
+  "title": "v1AppsVisualizationPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsVisualizationPostRequest",
+  "type": "object",
+  "properties": {
+    "circuitName": {
+      "type": "string",
+      "description": "Circuit name is specified if circuit apps utilization data is desired."
+    },
+    "deviceId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "isDia": {
+      "type": "boolean"
+    },
+    "slaClass": {
+      "type": "string",
+      "description": "SLA class is specified if queue apps utilization data is desired. Circuit name must be provided."
+    },
+    "timeWindow": {
+      "$ref": "#/$defs/statsmonTimeWindow"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

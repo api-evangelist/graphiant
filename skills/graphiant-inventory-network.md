@@ -1,19 +1,21 @@
 ---
-name: Inventory a Graphiant network
-description: Build a read-only picture of an enterprise's Graphiant estate — devices, sites, regions, LAN segments, gateways and their health — without changing anything.
+name: graphiant-inventory-network
+description: Build a read-only picture of an enterprise's Graphiant estate — devices,
+  sites, regions, LAN segments, gateways and their health — without changing anything.
 api: openapi/graphiant-portal-openapi-original.json
 generated: '2026-08-01'
 method: generated
 operations:
-  - GET /v1/edges-summary
-  - GET /v1/devices/{deviceId}
-  - GET /v1/devices/{deviceId}/interfaces
-  - GET /v1/sites
-  - GET /v1/sites/map/details
-  - GET /v1/regions
-  - GET /v1/lan-segments
-  - GET /v1/gateways/summary
-  - POST /v1/backbone-health/overview
+- getV1EdgesSummary
+- getV1DevicesByDeviceId
+- getV1DevicesByDeviceIdInterfaces
+- getV1Sites
+- getV1SitesMapDetails
+- getV1Regions
+- getV1LanSegments
+- getV1GatewaysSummary
+- postV1BackboneHealthOverview
+title: Inventory a Graphiant network
 ---
 
 # Inventory a Graphiant network

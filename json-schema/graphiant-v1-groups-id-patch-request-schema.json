@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-groups-id-patch-request-schema.json",
+  "title": "v1GroupsIdPatchRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-groups-api-openapi.yml#/components/schemas/v1GroupsIdPatchRequest",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "groupType": {
+      "type": "string"
+    },
+    "permissions": {
+      "$ref": "#/$defs/commonPermissions"
+    },
+    "timeWindowEnd": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "timeWindowStart": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commonPermissions": {
+      "type": "object",
+      "properties": {
+        "assetManager": {
+          "type": "string"
+        },
+        "b2b": {
+          "type": "string"
+        },
+        "b2bSecurityProfileExternal": {
+          "type": "string"
+        },
+        "billingAndInvoicing": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "string"
+        },
+        "developerTools": {
+          "type": "string"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "globalServices": {
+          "type": "string"
+        },
+        "insights": {
+          "type": "string"
+        },
+        "licensing": {
+          "type": "string"
+        },
+        "logs": {
+          "type": "string"
+        },
+        "monitoringAndTroubleshooting": {
+          "type": "string"
+        },
+        "networkConfiguration": {
+          "type": "string"
+        },
+        "orderStatus": {
+          "type": "string"
+        },
+        "reports": {
+          "type": "string"
+        },
+        "safetyAndSecurity": {
+          "type": "string"
+        },
+        "servicePolicies": {
+          "type": "string"
+        },
+        "support": {
+          "type": "string"
+        },
+        "userAndTenantManagement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

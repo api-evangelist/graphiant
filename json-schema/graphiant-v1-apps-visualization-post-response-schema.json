@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-apps-visualization-post-response-schema.json",
+  "title": "v1AppsVisualizationPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsVisualizationPostResponse",
+  "type": "object",
+  "properties": {
+    "appHealth": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      }
+    },
+    "appsOnDeviceCount": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "appsVisualization": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixAppVisualization"
+      }
+    },
+    "averageQoe": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ipfixAppVisualization": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "appName": {
+          "type": "string"
+        },
+        "circuitAvailability": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        },
+        "circuitMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ipfixCircuitMetrics"
+          }
+        },
+        "currentStatus": {
+          "type": "string",
+          "description": "current status of the app."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixCircuitMetrics": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "circuit name"
+        },
+        "slaClass": {
+          "type": "string"
+        },
+        "stats": {
+          "$ref": "#/$defs/ipfixTwampMetrics"
+        },
+        "usage": {
+          "type": "number",
+          "format": "double",
+          "description": "usage of the circuit by the application in kilo bytes"
+        },
+        "usagePct": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixTwampMetrics": {
+      "type": "object",
+      "properties": {
+        "healthAvg": {
+          "type": "string",
+          "description": "calculated health average (over time window) "
+        },
+        "jitter": {
+          "type": "number",
+          "format": "double",
+          "description": "Jitter in ms"
+        },
+        "latency": {
+          "type": "number",
+          "format": "double",
+          "description": "Latency in  ms"
+        },
+        "loss": {
+          "type": "number",
+          "format": "float",
+          "description": "Loss in percentage"
+        },
+        "mos": {
+          "type": "number",
+          "format": "float"
+        },
+        "status": {
+          "type": "string",
+          "description": "calculated status (last measured value)"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

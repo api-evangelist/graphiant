@@ -504,134 +504,209 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1ExtranetsB2bConsumerIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v1ExtranetsB2bConsumerPostResponse:
+    manaV2Policer:
       type: object
       properties:
-        device:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ConsumerDeviceInformation'
+        burstSize:
+          type: integer
+          format: int32
+          example: 123
+          description: Burst size for the policer (required)
+        bw:
+          type: integer
+          format: int32
+          example: 123
+          description: Bandwidth for the policer (required)
+      additionalProperties: false
+      required:
+      - burstSize
+      - bw
+    manaV2GlobalObjectSummary:
+      type: object
+      properties:
+        attachPoint:
+          type: string
+          example: ENUM_VALUE
         id:
           type: integer
           format: int64
           example: 1234567891011
-        policy:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetConsumerLanSegmentPolicyResponse'
-        siteInformation:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bSiteInformation'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
+        ipVersion:
           type: integer
           format: int32
           example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    manaV2B2bExtranetPolicyResponse:
-      type: object
-      properties:
-        dnsName:
+          minimum: 0
+        name:
           type: string
           example: example string
-        inboundSecurityRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
-        policy:
-          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
-        serviceName:
+        numAttachedDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numAttachedSites:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numFailures:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numInSyncDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numOverrideDevices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numPolicies:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numPrefixes:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numRules:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        numStatements:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        trafficPolicyType:
           type: string
-          example: example string
-        trafficRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRule'
+          example: ENUM_VALUE
       additionalProperties: false
-    manaV2ConsumerDeviceInformation:
+    manaV2B2bExtranetProducerPolicy:
       type: object
       properties:
-        deviceId:
+        description:
+          type: string
+          example: example string
+          description: Description for the service
+        globalObjectDeviceSummaries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
+        globalObjectSummaries:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
+        natPools:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: NAT pools for the service (required)
+        prefixTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ApplicationProfile'
+        serviceLanSegment:
           type: integer
           format: int64
           example: 1234567891011
-        lastUpdated:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        site:
-          type: integer
-          format: int64
-          example: 1234567891011
+          description: LAN segment for the service (required)
+        servicePrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: Prefixes advertised by the service (required)
+        sites:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bSiteInformation'
+        sla:
+          $ref: '#/components/schemas/manaV2SlaInformation'
         status:
           type: string
           example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetsB2bConsumerDeviceStatusIdGetResponse:
-      type: object
-      properties:
-        serviceStatus:
+        type:
           type: string
           example: ENUM_VALUE
+          description: Type of the service whether it is application or peering (required)
+        unmatchedCustomers:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+      additionalProperties: false
+      required:
+      - natPools
+      - serviceLanSegment
+      - servicePrefixes
+      - sites
+      - type
+    v1ExtranetsB2bIdCustomerPostResponse:
+      type: object
+      properties:
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetApplicationInviteResponse'
+      additionalProperties: false
+    v1ExtranetsB2bCustomerIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v1ExtranetsB2bProducerDeviceStatusIdGetResponse:
+      type: object
+      properties:
         summary:
           type: array
           items:
             $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
       additionalProperties: false
-    manaV2ExtranetConsumerLanSegmentPolicyResponse:
+    manaV2TrafficPolicyRule:
       type: object
       properties:
-        consumerLanSegment:
+        action:
+          $ref: '#/components/schemas/manaV2TrafficPolicyAction'
+        match:
+          $ref: '#/components/schemas/manaV2PolicyMatch'
+        policyRuleIndex:
           type: integer
           format: int64
           example: 1234567891011
-        inboundSecurityRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
-        outboundSecurityRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
-        restrictedPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetConsumerNatRule'
-        trafficRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2TrafficPolicyRule'
+        seq:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
       additionalProperties: false
-    v1ExtranetsB2bIdCustomerSummaryGetResponse:
+    v1ExtranetsB2bCustomerInfoIdGetResponse:
       type: object
       properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bApplicationCustomerSummary'
-      additionalProperties: false
-    v1ExtranetsB2bConsumerSummaryGetResponse:
-      type: object
-      properties:
-        summary:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetConsumersSummary'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        providerEnterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        serviceName:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
       additionalProperties: false
     manaV2B2bExtranetApplicationInvite:
       type: object
@@ -708,46 +783,235 @@ components:
             example: 1234567891011
             description: Site IDs where the service is deployed
       additionalProperties: false
-    v1ExtranetsB2bCustomerIdDeleteResponse:
+    v1ExtranetsB2bIdDeleteResponse:
       type: object
       properties: {}
       additionalProperties: false
-    v1ExtranetsB2bConsumerIdGetResponse:
+    v1ExtranetsB2bIdCustomerPostRequest:
       type: object
       properties:
-        consumerId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
+        invites:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2ExtranetConsumerLanSegmentPolicyResponse'
-        serviceName:
-          type: string
-          example: example string
-        siteInformation:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bSiteInformation'
+            $ref: '#/components/schemas/manaV2B2bExtranetApplicationInvite'
       additionalProperties: false
-    v1ExtranetsB2bCustomerInfoIdGetResponse:
+      required:
+      - invites
+    v1ExtranetsB2bPostResponse:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1234567891011
-        providerEnterpriseId:
+        policy:
+          $ref: '#/components/schemas/manaV2B2bExtranetPolicyResponse'
+      additionalProperties: false
+    manaV2B2bExtranetApplicationInviteResponse:
+      type: object
+      properties:
+        adminEmail:
+          type: string
+          example: example string
+        consumerBurstSize:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        consumerBwSite:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        enterpriseId:
           type: integer
           format: int64
           example: 1234567891011
-        serviceName:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        maximumSiteCount:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        servicePrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
+    v1ExtranetsB2bConsumerSummaryGetResponse:
+      type: object
+      properties:
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetConsumersSummary'
+      additionalProperties: false
+    manaV2PolicyMatch:
+      type: object
+      properties:
+        destinationPort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        destinationPrefix:
           type: string
           example: example string
+        icmpType:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        protocol:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourcePort:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        sourcePrefix:
+          type: string
+          example: example string
+      additionalProperties: false
+    manaV2B2bExtranetPrefixTag:
+      type: object
+      properties:
+        prefix:
+          type: string
+          example: 10.1.2.0/24
+          description: Prefix advertised by the service (required)
+        tag:
+          type: string
+          example: example string
+          description: Tag for the prefix
+      additionalProperties: false
+      required:
+      - prefix
+    manaV2B2bExtranetStatusSummary:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        deviceStatus:
+          type: string
+          example: ENUM_VALUE
+        location:
+          type: integer
+          format: int64
+          example: 1234567891011
         status:
           type: string
           example: ENUM_VALUE
+      additionalProperties: false
+    v1ExtranetsB2bPostRequest:
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
+        serviceName:
+          type: string
+          example: example string
+          description: Name of the service (required)
+        type:
+          type: string
+          example: ENUM_VALUE
+          description: Type of the service whether it is application or peering (required)
+      additionalProperties: false
+      required:
+      - policy
+      - serviceName
+      - type
+    manaV2ExtranetConsumerLanSegmentPolicy:
+      type: object
+      properties:
+        consumerLanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+        restrictedPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetConsumerNatRule'
+      additionalProperties: false
+    v1ExtranetsB2bConsumerIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    manaV2ExtranetConsumerNatRule:
+      type: object
+      properties:
+        outsideNatPrefix:
+          type: string
+          example: example string
+          description: Optional nat prefix associated with a service prefix with an empty string indicating no NATing
+        servicePrefix:
+          type: string
+          example: 10.1.2.0/24
+          description: Service prefix for the NAT rule (required)
+      additionalProperties: false
+      required:
+      - servicePrefix
+    manaV2B2bExtranetPolicyResponse:
+      type: object
+      properties:
+        dnsName:
+          type: string
+          example: example string
+        inboundSecurityRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
+        policy:
+          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
+        serviceName:
+          type: string
+          example: example string
+        trafficRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRule'
+      additionalProperties: false
+    manaV2SlaInformation:
+      type: object
+      properties:
+        backupCircuit:
+          type: string
+          example: ENUM_VALUE
+          description: Backup circuit for the SLA information
+        class:
+          type: string
+          example: ENUM_VALUE
+          description: Class for the SLA information
+        primaryCircuit:
+          type: string
+          example: ENUM_VALUE
+          description: Primary circuit for the SLA information
+      additionalProperties: false
+    v1ExtranetsB2bIdProducerGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          $ref: '#/components/schemas/manaV2B2bExtranetPolicyResponse'
       additionalProperties: false
     manaV2B2bExtranetConsumersSummary:
       type: object
@@ -792,22 +1056,42 @@ components:
           type: string
           example: ENUM_VALUE
       additionalProperties: false
-    manaV2B2bExtranetApplicationInviteResponse:
+    v1ExtranetsB2bConsumerIdGetResponse:
+      type: object
+      properties:
+        consumerId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetConsumerLanSegmentPolicyResponse'
+        serviceName:
+          type: string
+          example: example string
+        siteInformation:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bSiteInformation'
+      additionalProperties: false
+    v1ExtranetsB2bConsumerDeviceStatusIdGetResponse:
+      type: object
+      properties:
+        serviceStatus:
+          type: string
+          example: ENUM_VALUE
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
+      additionalProperties: false
+    manaV2B2bApplicationCustomerSummary:
       type: object
       properties:
         adminEmail:
           type: string
           example: example string
-        consumerBurstSize:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        consumerBwSite:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
         enterpriseId:
           type: integer
           format: int64
@@ -816,75 +1100,14 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-        maximumSiteCount:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        servicePrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
-    manaV2TrafficPolicyAction:
-      type: object
-      properties:
-        backup:
-          type: string
-          example: ENUM_VALUE
-          description: Backup circuit for the traffic policy action
-        class:
-          type: string
-          example: ENUM_VALUE
-          description: Class for the traffic policy action
-        primary:
-          type: string
-          example: ENUM_VALUE
-          description: Primary circuit for the traffic policy action
-        result:
-          type: string
-          example: ENUM_VALUE
-          description: Result for the traffic policy action
-      additionalProperties: false
-    manaV2B2bExtranetPrefixTag:
-      type: object
-      properties:
-        prefix:
-          type: string
-          example: 10.1.2.0/24
-          description: Prefix advertised by the service (required)
-        tag:
+        name:
           type: string
           example: example string
-          description: Tag for the prefix
-      additionalProperties: false
-      required:
-      - prefix
-    v1ExtranetsB2bIdPutRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
-      additionalProperties: false
-      required:
-      - policy
-    manaV2ExtranetConsumerLanSegmentPolicy:
-      type: object
-      properties:
-        consumerLanSegment:
-          type: integer
-          format: int64
-          example: 1234567891011
-        restrictedPrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ExtranetConsumerNatRule'
+        status:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
     manaV2B2bExtranetApplication:
       type: object
@@ -934,76 +1157,15 @@ components:
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    v1ExtranetsB2bProducersSummaryGetResponse:
+    v1ExtranetsB2bIdPutRequest:
       type: object
       properties:
-        info:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
-      additionalProperties: false
-    manaV2ExtranetConsumerNatRule:
-      type: object
-      properties:
-        outsideNatPrefix:
-          type: string
-          example: example string
-          description: Optional nat prefix associated with a service prefix with an empty string indicating no NATing
-        servicePrefix:
-          type: string
-          example: 10.1.2.0/24
-          description: Service prefix for the NAT rule (required)
+        policy:
+          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
       additionalProperties: false
       required:
-      - servicePrefix
-    manaV2ApplicationProfile:
-      type: object
-      properties:
-        portRange:
-          type: string
-          example: example string
-          description: Port Range
-        ports:
-          type: array
-          items:
-            type: integer
-            format: int32
-            example: 123
-            description: Ports for the application profile (required)
-        protocol:
-          type: integer
-          format: int32
-          example: 123
-          description: Protocol for the application profile (required)
-      additionalProperties: false
-      required:
-      - ports
-      - protocol
-    v1ExtranetsB2bProducerDeviceStatusIdGetResponse:
-      type: object
-      properties:
-        summary:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetStatusSummary'
-      additionalProperties: false
-    manaV2SlaInformation:
-      type: object
-      properties:
-        backupCircuit:
-          type: string
-          example: ENUM_VALUE
-          description: Backup circuit for the SLA information
-        class:
-          type: string
-          example: ENUM_VALUE
-          description: Class for the SLA information
-        primaryCircuit:
-          type: string
-          example: ENUM_VALUE
-          description: Primary circuit for the SLA information
-      additionalProperties: false
-    v1ExtranetsB2bIdProducerGetResponse:
+      - policy
+    v1ExtranetsB2bIdPutResponse:
       type: object
       properties:
         id:
@@ -1013,72 +1175,33 @@ components:
         policy:
           $ref: '#/components/schemas/manaV2B2bExtranetPolicyResponse'
       additionalProperties: false
-    manaV2GlobalObjectSummary:
+    manaV2GlobalObjectServiceSummaries:
       type: object
       properties:
-        attachPoint:
+        routingPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
+      additionalProperties: false
+    manaV2TrafficPolicyAction:
+      type: object
+      properties:
+        backup:
           type: string
           example: ENUM_VALUE
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        ipVersion:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        numAttachedDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numAttachedSites:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numFailures:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numInSyncDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numOverrideDevices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numPolicies:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numPrefixes:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numRules:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        numStatements:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        trafficPolicyType:
+          description: Backup circuit for the traffic policy action
+        class:
           type: string
           example: ENUM_VALUE
+          description: Class for the traffic policy action
+        primary:
+          type: string
+          example: ENUM_VALUE
+          description: Primary circuit for the traffic policy action
+        result:
+          type: string
+          example: ENUM_VALUE
+          description: Result for the traffic policy action
       additionalProperties: false
     v1ExtranetsB2bConsumerPostRequest:
       type: object
@@ -1094,6 +1217,80 @@ components:
         serviceName:
           type: string
           example: example string
+        siteInformation:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bSiteInformation'
+      additionalProperties: false
+    v1ExtranetsB2bIdCustomerSummaryGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bApplicationCustomerSummary'
+      additionalProperties: false
+    manaV2ConsumerDeviceInformation:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        lastUpdated:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        site:
+          type: integer
+          format: int64
+          example: 1234567891011
+        status:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    manaV2ExtranetConsumerLanSegmentPolicyResponse:
+      type: object
+      properties:
+        consumerLanSegment:
+          type: integer
+          format: int64
+          example: 1234567891011
+        inboundSecurityRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
+        outboundSecurityRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2SecurityPolicyRule'
+        restrictedPrefixes:
+          type: array
+          items:
+            type: string
+            example: example string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetConsumerNatRule'
+        trafficRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2TrafficPolicyRule'
+      additionalProperties: false
+    v1ExtranetsB2bConsumerPostResponse:
+      type: object
+      properties:
+        device:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConsumerDeviceInformation'
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        policy:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ExtranetConsumerLanSegmentPolicyResponse'
         siteInformation:
           type: array
           items:
@@ -1120,246 +1317,49 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    manaV2Policer:
+    manaV2ApplicationProfile:
       type: object
       properties:
-        burstSize:
-          type: integer
-          format: int32
-          example: 123
-          description: Burst size for the policer (required)
-        bw:
-          type: integer
-          format: int32
-          example: 123
-          description: Bandwidth for the policer (required)
-      additionalProperties: false
-      required:
-      - burstSize
-      - bw
-    v1ExtranetsB2bIdCustomerPostResponse:
-      type: object
-      properties:
-        responses:
+        portRange:
+          type: string
+          example: example string
+          description: Port Range
+        ports:
           type: array
           items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplicationInviteResponse'
-      additionalProperties: false
-    manaV2GlobalObjectServiceSummaries:
-      type: object
-      properties:
-        routingPolicies:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2GlobalObjectSummary'
-      additionalProperties: false
-    manaV2B2bApplicationCustomerSummary:
-      type: object
-      properties:
-        adminEmail:
-          type: string
-          example: example string
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    manaV2B2bExtranetStatusSummary:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        deviceId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        deviceStatus:
-          type: string
-          example: ENUM_VALUE
-        location:
-          type: integer
-          format: int64
-          example: 1234567891011
-        status:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1ExtranetsB2bPostResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2B2bExtranetPolicyResponse'
-      additionalProperties: false
-    v1ExtranetsB2bIdCustomerPostRequest:
-      type: object
-      properties:
-        invites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplicationInvite'
-      additionalProperties: false
-      required:
-      - invites
-    manaV2TrafficPolicyRule:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/manaV2TrafficPolicyAction'
-        match:
-          $ref: '#/components/schemas/manaV2PolicyMatch'
-        policyRuleIndex:
-          type: integer
-          format: int64
-          example: 1234567891011
-        seq:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-      additionalProperties: false
-    v1ExtranetsB2bPostRequest:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/manaV2B2bExtranetProducerPolicy'
-        serviceName:
-          type: string
-          example: example string
-          description: Name of the service (required)
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: Type of the service whether it is application or peering (required)
-      additionalProperties: false
-      required:
-      - policy
-      - serviceName
-      - type
-    manaV2PolicyMatch:
-      type: object
-      properties:
-        destinationPort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        destinationPrefix:
-          type: string
-          example: example string
-        icmpType:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
+            type: integer
+            format: int32
+            example: 123
+            description: Ports for the application profile (required)
         protocol:
           type: integer
           format: int32
           example: 123
-          minimum: 0
-        sourcePort:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        sourcePrefix:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1ExtranetsB2bIdPutResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        policy:
-          $ref: '#/components/schemas/manaV2B2bExtranetPolicyResponse'
-      additionalProperties: false
-    v1ExtranetsB2bIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    manaV2B2bExtranetProducerPolicy:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-          description: Description for the service
-        globalObjectDeviceSummaries:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
-        globalObjectSummaries:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/manaV2GlobalObjectServiceSummaries'
-        natPools:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: NAT pools for the service (required)
-        prefixTags:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetPrefixTag'
-        profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ApplicationProfile'
-        serviceLanSegment:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: LAN segment for the service (required)
-        servicePrefixes:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: Prefixes advertised by the service (required)
-        sites:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bSiteInformation'
-        sla:
-          $ref: '#/components/schemas/manaV2SlaInformation'
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-          description: Type of the service whether it is application or peering (required)
-        unmatchedCustomers:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
+          description: Protocol for the application profile (required)
       additionalProperties: false
       required:
-      - natPools
-      - serviceLanSegment
-      - servicePrefixes
-      - sites
-      - type
+      - ports
+      - protocol
+    v1ExtranetsB2bProducersSummaryGetResponse:
+      type: object
+      properties:
+        info:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
+      additionalProperties: false
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
   securitySchemes:
     jwtAuth:
       type: apiKey

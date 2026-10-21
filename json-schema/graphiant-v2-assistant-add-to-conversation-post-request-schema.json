@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-assistant-add-to-conversation-post-request-schema.json",
+  "title": "v2AssistantAddToConversationPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantAddToConversationPostRequest",
+  "type": "object",
+  "properties": {
+    "conversationId": {
+      "type": "string"
+    },
+    "question": {
+      "$ref": "#/$defs/assistantAssistantQuestion"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "assistantAssistantQuestion": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "questionLanguage": {
+          "type": "string"
+        },
+        "questionText": {
+          "type": "string"
+        },
+        "questionTimestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

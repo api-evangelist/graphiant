@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-rulelist-post-response-schema.json",
+  "title": "v2RulelistPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-rulelist-api-openapi.yml#/components/schemas/v2RulelistPostResponse",
+  "type": "object",
+  "properties": {
+    "ruleList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alertserviceRuleRecord"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "alertserviceRuleRecord": {
+      "type": "object",
+      "properties": {
+        "alarmClear": {
+          "type": "string",
+          "description": "Condition for triggering recovery"
+        },
+        "alarmSet": {
+          "type": "string",
+          "description": "Condition for triggering alert (required)"
+        },
+        "allowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of entities  allowed/excluded (required)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the rule (required)"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the rule is enabled or disabled (required)"
+        },
+        "plane": {
+          "type": "string",
+          "description": "Plane of the rule (required)"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority of taking action against the rule (required)"
+        },
+        "ruleId": {
+          "type": "string",
+          "description": "Unique id of the rule (required)"
+        },
+        "ruleName": {
+          "type": "string",
+          "description": "Name of the rule (required)"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

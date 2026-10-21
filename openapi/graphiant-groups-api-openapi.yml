@@ -378,14 +378,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1GroupsRootGetResponse:
+    v1GroupsIdEnterprisesPostRequest:
       type: object
       properties:
-        groups:
+        enterpriseIds:
           type: array
           items:
-            $ref: '#/components/schemas/iamGroup'
+            type: integer
+            format: int64
+            example: 1234567891011
+            description: ' (required)'
       additionalProperties: false
+      required:
+      - enterpriseIds
     commonUser:
       type: object
       properties:
@@ -420,18 +425,6 @@ components:
           type: boolean
           example: true
       additionalProperties: false
-    v1GroupsIdMembersDeletePostRequest:
-      type: object
-      properties:
-        memberIds:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - memberIds
     v1GroupsIdMembersGetResponse:
       type: object
       properties:
@@ -440,6 +433,29 @@ components:
           items:
             $ref: '#/components/schemas/commonUser'
       additionalProperties: false
+    v1GroupsGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    v1GroupsIdMembersPostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+        replaceExisting:
+          type: boolean
+          example: true
+      additionalProperties: false
+      required:
+      - memberIds
     v1GroupsPutRequest:
       type: object
       properties:
@@ -475,6 +491,67 @@ components:
       required:
       - description
       - name
+    v1GroupsEnterprisesGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
+    iamEnterprisePermissions:
+      type: object
+      properties:
+        groupType:
+          type: string
+          example: ENUM_VALUE
+          description: ' (required)'
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+      additionalProperties: false
+    v1GroupsIdPatchRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          example: example string
+        displayName:
+          type: string
+          example: example string
+        groupType:
+          type: string
+          example: ENUM_VALUE
+        permissions:
+          $ref: '#/components/schemas/commonPermissions'
+        timeWindowEnd:
+          type: integer
+          format: int64
+          example: 1234567891011
+        timeWindowStart:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    v1GroupsIdMembersDeletePostRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          items:
+            type: string
+            example: example string
+            description: ' (required)'
+      additionalProperties: false
+      required:
+      - memberIds
+    v1GroupsRootGetResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/iamGroup'
+      additionalProperties: false
     iamGroup:
       type: object
       properties:
@@ -511,83 +588,6 @@ components:
           format: int64
           example: 1234567891011
       additionalProperties: false
-    v1GroupsIdEnterprisesPostRequest:
-      type: object
-      properties:
-        enterpriseIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 1234567891011
-            description: ' (required)'
-      additionalProperties: false
-      required:
-      - enterpriseIds
-    v1GroupsIdPatchRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          example: example string
-        displayName:
-          type: string
-          example: example string
-        groupType:
-          type: string
-          example: ENUM_VALUE
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-        timeWindowEnd:
-          type: integer
-          format: int64
-          example: 1234567891011
-        timeWindowStart:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    v1GroupsEnterprisesGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    iamEnterprisePermissions:
-      type: object
-      properties:
-        groupType:
-          type: string
-          example: ENUM_VALUE
-          description: ' (required)'
-        permissions:
-          $ref: '#/components/schemas/commonPermissions'
-      additionalProperties: false
-    v1GroupsGetResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/iamGroup'
-      additionalProperties: false
-    v1GroupsIdMembersPostRequest:
-      type: object
-      properties:
-        memberIds:
-          type: array
-          items:
-            type: string
-            example: example string
-            description: ' (required)'
-        replaceExisting:
-          type: boolean
-          example: true
-      additionalProperties: false
-      required:
-      - memberIds
     googleProtobufTimestamp:
       type: object
       properties:

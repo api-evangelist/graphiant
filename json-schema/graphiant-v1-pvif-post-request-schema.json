@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-pvif-post-request-schema.json",
+  "title": "v1PvifPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-pvif-api-openapi.yml#/components/schemas/v1PvifPostRequest",
+  "type": "object",
+  "properties": {
+    "advertisement": {
+      "$ref": "#/$defs/manaV2SiteInformation"
+    },
+    "consumerLanSegments": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2PublicVifGatewayConsumerLanDevices"
+      }
+    },
+    "coveringPrefixes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Prefixes monitored for this service; empty means 0.0.0.0/0"
+      }
+    },
+    "gatewayBgpNeighbors": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2BgpNeighborConfig"
+      }
+    },
+    "lanSegmentId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Producer LAN segment (VRF) on gateway appliances (required)"
+    },
+    "natPrefixStrategy": {
+      "$ref": "#/$defs/manaV2PublicVifGatewayNatPrefixStrategy"
+    },
+    "regionId": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Graphiant region for gateway appliances (required)"
+    },
+    "serviceName": {
+      "type": "string",
+      "description": "Service display name (required)"
+    },
+    "storageProvider": {
+      "type": "string",
+      "description": "Storage provider; each gateway appliance must match region and provider (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "consumerLanSegments",
+    "gatewayBgpNeighbors",
+    "lanSegmentId",
+    "natPrefixStrategy",
+    "regionId",
+    "serviceName",
+    "storageProvider"
+  ],
+  "$defs": {
+    "manaV2BfdInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "localMultiplier": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "minimumInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "inboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        },
+        "outboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborAddressFamilyConfig"
+          }
+        },
+        "allowAsIn": {
+          "$ref": "#/$defs/manaV2NullableAllowAsIn"
+        },
+        "asOverride": {
+          "type": "boolean"
+        },
+        "bfd": {
+          "$ref": "#/$defs/manaV2NullableBfdInstanceConfig"
+        },
+        "defaultOriginate": {
+          "type": "string"
+        },
+        "ebgpMultihopTtl": {
+          "$ref": "#/$defs/manaV2NullableEbgpConfig"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "holdTimerValue": {
+          "$ref": "#/$defs/manaV2NullableHoldTimer"
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "keepaliveTimerValue": {
+          "$ref": "#/$defs/manaV2NullableKeepAliveTimer"
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "localInterface": {
+          "$ref": "#/$defs/manaV2NullableInterfaceName"
+        },
+        "maxPrefixValue": {
+          "$ref": "#/$defs/manaV2NullableMaxPrefix"
+        },
+        "md5Password": {
+          "$ref": "#/$defs/manaV2NullableMd5Password"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "removePrivateAs": {
+          "type": "boolean"
+        },
+        "sendCommunity": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableAllowAsIn": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBfdInstanceConfig": {
+      "type": "object",
+      "properties": {
+        "bfd": {
+          "$ref": "#/$defs/manaV2BfdInstanceConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/manaV2BgpNeighborAddressFamilyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableEbgpConfig": {
+      "type": "object",
+      "properties": {
+        "multiHop": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableHoldTimer": {
+      "type": "object",
+      "properties": {
+        "timer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableInterfaceName": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableKeepAliveTimer": {
+      "type": "object",
+      "properties": {
+        "timer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMaxPrefix": {
+      "type": "object",
+      "properties": {
+        "maxPrefix": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMd5Password": {
+      "type": "object",
+      "properties": {
+        "md5Password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePolicyName": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PublicVifGatewayCentralizedNat": {
+      "type": "object",
+      "properties": {
+        "consumerPrefix": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "consumerPrefix"
+      ]
+    },
+    "manaV2PublicVifGatewayConsumerLanDevices": {
+      "type": "object",
+      "properties": {
+        "consumerPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Allow prefixes for this consumer LAN; empty means 0.0.0.0/0"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2PublicVifGatewayDecentralizedPrefixes": {
+      "type": "object",
+      "properties": {
+        "prefixes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "prefixes"
+      ]
+    },
+    "manaV2PublicVifGatewayNatPrefixStrategy": {
+      "type": "object",
+      "properties": {
+        "centralized": {
+          "$ref": "#/$defs/manaV2PublicVifGatewayCentralizedNat"
+        },
+        "decentralized": {
+          "$ref": "#/$defs/manaV2PublicVifGatewayDecentralizedPrefixes"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SiteInformation": {
+      "type": "object",
+      "properties": {
+        "siteLists": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

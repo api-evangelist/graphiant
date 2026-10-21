@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-diagnostic-ping-post-request-schema.json",
+  "title": "v1DiagnosticPingPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-diagnostic-api-openapi.yml#/components/schemas/v1DiagnosticPingPostRequest",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "integer",
+      "format": "int64",
+      "minimum": 0,
+      "description": "Valid Provisioned device ID (required)"
+    },
+    "params": {
+      "$ref": "#/$defs/diagnosticToolsDiagnosticParams"
+    },
+    "token": {
+      "type": "string",
+      "description": "Identifier which was received in initial response"
+    },
+    "transportType": {
+      "type": "string",
+      "description": "ICMP or TCP (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "deviceId",
+    "transportType"
+  ],
+  "$defs": {
+    "diagnosticToolsDiagnosticParams": {
+      "type": "object",
+      "properties": {
+        "destAddress": {
+          "type": "string",
+          "description": "IPv4 or IPv6 Destination address (required)"
+        },
+        "hopStatsCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Per hop probes needed for traceroute hop stats"
+        },
+        "interface": {
+          "type": "string",
+          "description": "Source Interface name"
+        },
+        "payloadSize": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Size of  packet to be sent"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Valid in case of TCP ping (required)"
+        },
+        "probeCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Number of probes to send"
+        },
+        "srcAddress": {
+          "type": "string",
+          "description": "IPv4 or IPv6 address (required)"
+        },
+        "tos": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Type of service"
+        },
+        "vrfName": {
+          "type": "string",
+          "description": "configure VRF Name (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "destAddress",
+        "port",
+        "srcAddress",
+        "vrfName"
+      ]
+    }
+  }
+}

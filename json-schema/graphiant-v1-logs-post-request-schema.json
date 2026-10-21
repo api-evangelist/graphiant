@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-logs-post-request-schema.json",
+  "title": "v1LogsPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-logs-api-openapi.yml#/components/schemas/v1LogsPostRequest",
+  "type": "object",
+  "properties": {
+    "cursorRef": {
+      "type": "string"
+    },
+    "customerView": {
+      "type": "boolean"
+    },
+    "deviceIds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      }
+    },
+    "histogramBucketSizeSec": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "numLogs": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "oldTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "recentTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "selectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/syslogmonSyslogsSelector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "syslogmonSyslogsSelector": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

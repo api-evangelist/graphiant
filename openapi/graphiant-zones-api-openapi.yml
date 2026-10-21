@@ -37,6 +37,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    manaV2Zone:
+      type: object
+      properties:
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        name:
+          type: string
+          example: example string
+      additionalProperties: false
     commonPageInfo:
       type: object
       properties:
@@ -84,21 +99,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/manaV2Zone'
-      additionalProperties: false
-    manaV2Zone:
-      type: object
-      properties:
-        enterpriseId:
-          type: integer
-          format: int64
-          example: 1234567891011
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        name:
-          type: string
-          example: example string
       additionalProperties: false
   securitySchemes:
     jwtAuth:

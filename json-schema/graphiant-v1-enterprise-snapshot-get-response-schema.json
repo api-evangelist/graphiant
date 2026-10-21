@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprise-snapshot-get-response-schema.json",
+  "title": "v1EnterpriseSnapshotGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprise-api-openapi.yml#/components/schemas/v1EnterpriseSnapshotGetResponse",
+  "type": "object",
+  "properties": {
+    "deviceSnapshotRecords": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2deviceSnapshotRow"
+      }
+    },
+    "deviceSnapshotMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2DeviceSnapshotList"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commonPermissions": {
+      "type": "object",
+      "properties": {
+        "assetManager": {
+          "type": "string"
+        },
+        "b2b": {
+          "type": "string"
+        },
+        "b2bSecurityProfileExternal": {
+          "type": "string"
+        },
+        "billingAndInvoicing": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "string"
+        },
+        "developerTools": {
+          "type": "string"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "globalServices": {
+          "type": "string"
+        },
+        "insights": {
+          "type": "string"
+        },
+        "licensing": {
+          "type": "string"
+        },
+        "logs": {
+          "type": "string"
+        },
+        "monitoringAndTroubleshooting": {
+          "type": "string"
+        },
+        "networkConfiguration": {
+          "type": "string"
+        },
+        "orderStatus": {
+          "type": "string"
+        },
+        "reports": {
+          "type": "string"
+        },
+        "safetyAndSecurity": {
+          "type": "string"
+        },
+        "servicePolicies": {
+          "type": "string"
+        },
+        "support": {
+          "type": "string"
+        },
+        "userAndTenantManagement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "commonUserInfo": {
+      "type": "object",
+      "properties": {
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "originalEnterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "permissions": {
+          "$ref": "#/$defs/commonPermissions"
+        },
+        "timeZone": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufDuration": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DeviceSnapshot": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "$ref": "#/$defs/commonUserInfo"
+        },
+        "category": {
+          "type": "string"
+        },
+        "createdOn": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "data": {
+          "$ref": "#/$defs/manaV2DeviceSnapshotData"
+        },
+        "golden": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "name for the snapshot"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DeviceSnapshotData": {
+      "type": "object",
+      "properties": {
+        "OSPFInstalledRouteCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "T2SessionCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "TWAMPSessionCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "bfdSessionCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bgpNeighborIpList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bgpSessionCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deviceRole": {
+          "type": "string"
+        },
+        "failedServicesCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "graphnosVersion": {
+          "type": "string"
+        },
+        "installedLabels": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipsecSessionCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ongoingAlerts": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ospfNeighborIpList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ospfSessionCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2DeviceSnapshotList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2DeviceSnapshot"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2deviceSnapshotRow": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "snapshotCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2DeviceSnapshot"
+          }
+        },
+        "uptime": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

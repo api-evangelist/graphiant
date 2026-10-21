@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-troubleshooting-device-device-id-post-response-schema.json",
+  "title": "v1TroubleshootingDeviceDeviceIdPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-troubleshooting-api-openapi.yml#/components/schemas/v1TroubleshootingDeviceDeviceIdPostResponse",
+  "type": "object",
+  "properties": {
+    "MaintenanceMode": {
+      "type": "boolean"
+    },
+    "colrActive": {
+      "type": "boolean"
+    },
+    "controlPlane": {
+      "$ref": "#/$defs/statsmonTroubleshootingControlPlane"
+    },
+    "dataPlane": {
+      "$ref": "#/$defs/statsmonTroubleshootingDataPlane"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingIssue"
+      }
+    },
+    "lifecycleStatus": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "swVersion": {
+      "type": "string"
+    },
+    "swVersionV2": {
+      "$ref": "#/$defs/upgradeSwVersion"
+    },
+    "systemPlane": {
+      "$ref": "#/$defs/statsmonTroubleshootingSystemPlane"
+    },
+    "upSinceTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingControlPlane": {
+      "type": "object",
+      "properties": {
+        "controlTransitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingTransitions"
+          }
+        },
+        "managementTransitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingTransitions"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingCrash": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingDataPlane": {
+      "type": "object",
+      "properties": {
+        "downTransitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingTransitions"
+          }
+        },
+        "sessionSlas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSessionSla"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingIssue": {
+      "type": "object",
+      "properties": {
+        "alertId": {
+          "type": "string"
+        },
+        "allowListed": {
+          "type": "boolean"
+        },
+        "component": {
+          "type": "string"
+        },
+        "endTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "entity": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "string"
+        },
+        "muteListed": {
+          "type": "boolean"
+        },
+        "notificationCreated": {
+          "type": "boolean"
+        },
+        "plane": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "startTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingLastCrash": {
+      "type": "object",
+      "properties": {
+        "crashDetails": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "upSinceTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingMaintenanceWindow": {
+      "type": "object",
+      "properties": {
+        "timeWindow": {
+          "$ref": "#/$defs/statsmonTroubleshootingTimeWindow"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingOverheating": {
+      "type": "object",
+      "properties": {
+        "timeWindow": {
+          "$ref": "#/$defs/statsmonTroubleshootingTimeWindow"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSessionSla": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSlaValue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSlaValue": {
+      "type": "object",
+      "properties": {
+        "delayValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "jitterValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "lossValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        },
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSystemPlane": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "crashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingCrash"
+          }
+        },
+        "disk": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "lastCrash": {
+          "$ref": "#/$defs/statsmonTroubleshootingLastCrash"
+        },
+        "maintenanceWindows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingMaintenanceWindow"
+          }
+        },
+        "memory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingOverheating"
+          }
+        },
+        "temperatureSeries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSystemStat": {
+      "type": "object",
+      "properties": {
+        "interfaceName": {
+          "type": "string"
+        },
+        "peerName": {
+          "type": "string"
+        },
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingTransitions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeSwVersion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-diagnostic-packetcapture-start-post-request-schema.json",
+  "title": "v1DiagnosticPacketcaptureStartPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-diagnostic-api-openapi.yml#/components/schemas/v1DiagnosticPacketcaptureStartPostRequest",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unique identifier for a specific device (required)"
+    },
+    "duration": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Packet capture duration. Accepted values are 30, 60, 180 (required)"
+    },
+    "filter": {
+      "$ref": "#/$defs/diagnosticToolsPCapFilter"
+    },
+    "maxPacketCounter": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Packet capture limit."
+    },
+    "target": {
+      "$ref": "#/$defs/diagnosticToolsTargetType"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "deviceId",
+    "duration",
+    "target"
+  ],
+  "$defs": {
+    "diagnosticToolsPCapFilter": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "$ref": "#/$defs/diagnosticToolsPrefixPort"
+        },
+        "dscp": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Filters the packet capture for the specified DSCP field"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Filters the packet capture for the specified protocol"
+        },
+        "source": {
+          "$ref": "#/$defs/diagnosticToolsPrefixPort"
+        }
+      },
+      "additionalProperties": false
+    },
+    "diagnosticToolsPrefixPort": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Filters the capture for the specified port"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Filters the capture for the specified prefix"
+        }
+      },
+      "additionalProperties": false
+    },
+    "diagnosticToolsTargetType": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string",
+          "description": "Source Interface name"
+        },
+        "vrfName": {
+          "type": "string",
+          "description": "Configured VRF Name"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

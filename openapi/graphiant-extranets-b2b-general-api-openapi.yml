@@ -62,34 +62,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    manaV2B2bExtranetCustomerServicesSummary:
+    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
       type: object
       properties:
-        adminEmails:
+        info:
           type: array
           items:
-            type: string
-            example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        matchedServices:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        name:
-          type: string
-          example: example string
-        status:
-          type: string
-          example: ENUM_VALUE
-        type:
-          type: string
-          example: ENUM_VALUE
-        updatedAt:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
+      additionalProperties: false
+    v1ExtranetsB2bGeneralCustomersSummaryGetResponse:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
       additionalProperties: false
     manaV2B2bExtranetApplication:
       type: object
@@ -139,6 +126,35 @@ components:
         updatedAt:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
+    manaV2B2bExtranetCustomerServicesSummary:
+      type: object
+      properties:
+        adminEmails:
+          type: array
+          items:
+            type: string
+            example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        matchedServices:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        name:
+          type: string
+          example: example string
+        status:
+          type: string
+          example: ENUM_VALUE
+        type:
+          type: string
+          example: ENUM_VALUE
+        updatedAt:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -150,22 +166,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v1ExtranetsB2bGeneralServicesSummaryGetResponse:
-      type: object
-      properties:
-        info:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetApplication'
-      additionalProperties: false
-    v1ExtranetsB2bGeneralCustomersSummaryGetResponse:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2B2bExtranetCustomerServicesSummary'
       additionalProperties: false
   securitySchemes:
     jwtAuth:

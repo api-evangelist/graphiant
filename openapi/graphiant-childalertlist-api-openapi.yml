@@ -42,17 +42,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v2ChildalertlistPostRequest:
-      type: object
-      properties:
-        alertId:
-          type: string
-          example: example string
-          description: Alert id of the parent alert (required)
-      additionalProperties: false
-      required:
-      - alertId
-    v2ChildalertlistPostResponse:
+    alertserviceChildrenAlertListResponse:
       type: object
       properties:
         alertList:
@@ -190,7 +180,7 @@ components:
           example: example string
           description: Type of alert (required)
       additionalProperties: false
-    alertserviceChildrenAlertListResponse:
+    v2ChildalertlistPostResponse:
       type: object
       properties:
         alertList:
@@ -198,6 +188,16 @@ components:
           items:
             $ref: '#/components/schemas/alertserviceAlertRecord'
       additionalProperties: false
+    v2ChildalertlistPostRequest:
+      type: object
+      properties:
+        alertId:
+          type: string
+          example: example string
+          description: Alert id of the parent alert (required)
+      additionalProperties: false
+      required:
+      - alertId
   securitySchemes:
     jwtAuth:
       type: apiKey

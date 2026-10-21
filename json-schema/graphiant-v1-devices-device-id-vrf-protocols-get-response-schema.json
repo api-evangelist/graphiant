@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-devices-device-id-vrf-protocols-get-response-schema.json",
+  "title": "v1DevicesDeviceIdVrfProtocolsGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-devices-api-openapi.yml#/components/schemas/v1DevicesDeviceIdVrfProtocolsGetResponse",
+  "type": "object",
+  "properties": {
+    "bgp": {
+      "type": "boolean"
+    },
+    "connected": {
+      "type": "boolean"
+    },
+    "graphiant": {
+      "type": "boolean"
+    },
+    "ospfv2": {
+      "type": "boolean"
+    },
+    "ospfv3": {
+      "type": "boolean"
+    },
+    "static": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

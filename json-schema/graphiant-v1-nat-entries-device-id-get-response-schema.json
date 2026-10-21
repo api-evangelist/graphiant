@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-nat-entries-device-id-get-response-schema.json",
+  "title": "v1NatEntriesDeviceIdGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-nat-api-openapi.yml#/components/schemas/v1NatEntriesDeviceIdGetResponse",
+  "type": "object",
+  "properties": {
+    "natEntries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixNatEntry"
+      }
+    },
+    "pageInfo": {
+      "$ref": "#/$defs/commonPageInfo"
+    },
+    "ts": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commonPageInfo": {
+      "type": "object",
+      "properties": {
+        "currentPage": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The page number we are currently on (required)"
+        },
+        "endCursor": {
+          "type": "string",
+          "description": "Cursor pointing to the last record on the current page"
+        },
+        "hasNextPage": {
+          "type": "boolean",
+          "description": "An indicator whether there is a page after this one in the resultset based on current position"
+        },
+        "hasPrevPage": {
+          "type": "boolean",
+          "description": "An indicator whether there is a page before this one in the resultset based on current position"
+        },
+        "startCursor": {
+          "type": "string",
+          "description": "Cursor pointing to the first record on the current page"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The number of pages in the complete resultset based on the current length of the page (required)"
+        },
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Describes the total number of records in the complete resultset (required)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixNatEntry": {
+      "type": "object",
+      "properties": {
+        "destinationIpAddress": {
+          "type": "string"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "insideGlobalIpAddress": {
+          "type": "string"
+        },
+        "insideGlobalPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "insideLocalIpAddress": {
+          "type": "string"
+        },
+        "insideLocalPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "natType": {
+          "type": "string"
+        },
+        "outsideGlobalIpAddress": {
+          "type": "string"
+        },
+        "outsideGlobalPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "preDestinationIpAddress": {
+          "type": "string"
+        },
+        "preDestinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

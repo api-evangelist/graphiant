@@ -1,0 +1,202 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 15
+  own: 7
+  other_domain: 4
+  platform: 4
+  roles:
+  - api
+  - identity
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.go.dev
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: go.dev
+  role: api
+  relation: other-domain
+- host: api.graphiant.com
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: graphiant.com
+  role: api
+  relation: own
+- host: api.graphiant.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: graphiant.io
+  role: api
+  relation: other-domain
+- host: docs.graphiant.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - SLA
+  serves:
+  - docs
+  registrable_domain: graphiant.com
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - IssueTracker
+  - Releases
+  - SecurityPolicy
+  - CodeOfConduct
+  - ContributionGuide
+  - License
+  - GitHubOrganization
+  - ChangeLog
+  - SourceCode
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: graphiant.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: graphiant.com
+  role: other
+  relation: own
+- host: pkg.go.dev
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - GoSDK
+  serves: []
+  registrable_domain: go.dev
+  role: other
+  relation: other-domain
+- host: portal.graphiant.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - Portal
+  - SignUp
+  serves:
+  - docs
+  registrable_domain: graphiant.com
+  role: identity
+  relation: own
+- host: pypi.org
+  found_by:
+  - pointer
+  types:
+  - PythonSDK
+  serves: []
+  registrable_domain: pypi.org
+  role: other
+  relation: platform
+- host: status.graphiant.io
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: graphiant.io
+  role: status
+  relation: other-domain
+- host: support.graphiant.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  - vendor-detect
+  types:
+  - Support
+  serves:
+  - support
+  vendor: zendesk
+  registrable_domain: graphiant.com
+  role: support
+  relation: own
+- host: trust.graphiant.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Compliance
+  serves: []
+  registrable_domain: graphiant.com
+  role: other
+  relation: own
+- host: www.graphiant.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - Blog
+  - PrivacyPolicy
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: graphiant.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.youtube.com
+  found_by:
+  - pointer
+  types:
+  - YouTube
+  serves: []
+  registrable_domain: youtube.com
+  role: other
+  relation: platform

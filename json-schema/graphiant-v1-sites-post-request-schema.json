@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-sites-post-request-schema.json",
+  "title": "v1SitesPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-sites-api-openapi.yml#/components/schemas/v1SitesPostRequest",
+  "type": "object",
+  "properties": {
+    "enterpriseId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "site": {
+      "$ref": "#/$defs/manaV2NewSite"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2GlobalObjectOperationConfig": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "$ref": "#/$defs/manaV2NullableSiteInterfaceName"
+        },
+        "operation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Location": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "provinceCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NewSite": {
+      "type": "object",
+      "properties": {
+        "globalPrefixSetOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ipfixExporterOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ipfixExporterOpsV2": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2GlobalObjectOperationConfig"
+          }
+        },
+        "location": {
+          "$ref": "#/$defs/manaV2Location"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "ntpOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "prefixSetOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "routeTag": {
+          "$ref": "#/$defs/manaV2RouteTag"
+        },
+        "routingPolicyOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "snmpOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "syslogServerOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "syslogServerOpsV2": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2GlobalObjectOperationConfig"
+          }
+        },
+        "trafficPolicyOps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableSiteInterfaceName": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RouteTag": {
+      "type": "object",
+      "properties": {
+        "levelOne": {
+          "type": "string"
+        },
+        "levelTwo": {
+          "type": "string"
+        },
+        "levelZero": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

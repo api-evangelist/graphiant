@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-assurance-topology-inventory-post-response-schema.json",
+  "title": "v2AssuranceTopologyInventoryPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceTopologyInventoryPostResponse",
+  "type": "object",
+  "properties": {
+    "appNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "clientSites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assuranceSite"
+      }
+    },
+    "regions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assuranceRegion"
+      }
+    },
+    "serverSites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assuranceSite"
+      }
+    },
+    "topologyChangeTs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/googleProtobufTimestamp"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "assuranceRegion": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionIsoCode": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assuranceSite": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "siteEnterpriseName": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "siteName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

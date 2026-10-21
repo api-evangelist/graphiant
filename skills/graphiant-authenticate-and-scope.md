@@ -1,17 +1,19 @@
 ---
-name: Authenticate against the Graphiant Portal API and establish tenant scope
-description: Obtain a bearer token, discover the caller's permission matrix, and (for MSP users) switch into the correct enterprise tenant before doing any other work.
+name: graphiant-authenticate-and-scope
+description: Obtain a bearer token, discover the caller's permission matrix, and (for
+  MSP users) switch into the correct enterprise tenant before doing any other work.
 api: openapi/graphiant-portal-openapi-original.json
 generated: '2026-08-01'
 method: generated
 operations:
-  - POST /v1/auth/login
-  - GET /v1/auth/user
-  - GET /v1/enterprises
-  - GET /v1/users/{id}/enterprises
-  - GET /v1/auth/session
-  - GET /v1/auth/session/root
-  - GET /v1/auth/refresh
+- postV1AuthLogin
+- getV1AuthUser
+- getV1Enterprises
+- getV1UsersByIdEnterprises
+- getV1AuthSession
+- getV1AuthSessionRoot
+- getV1AuthRefresh
+title: Authenticate against the Graphiant Portal API and establish tenant scope
 ---
 
 # Authenticate and establish tenant scope

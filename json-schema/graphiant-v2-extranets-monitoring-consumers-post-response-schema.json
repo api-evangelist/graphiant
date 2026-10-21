@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-extranets-monitoring-consumers-post-response-schema.json",
+  "title": "v2ExtranetsMonitoringConsumersPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranets-monitoring-api-openapi.yml#/components/schemas/v2ExtranetsMonitoringConsumersPostResponse",
+  "type": "object",
+  "properties": {
+    "consumers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2Consumer"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2Consumer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vrfs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

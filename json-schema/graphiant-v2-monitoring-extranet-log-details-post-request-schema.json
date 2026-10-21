@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-monitoring-extranet-log-details-post-request-schema.json",
+  "title": "v2MonitoringExtranetLogDetailsPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-monitoring-api-openapi.yml#/components/schemas/v2MonitoringExtranetLogDetailsPostRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)"
+    },
+    "isB2B": {
+      "type": "boolean",
+      "description": "whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)"
+    },
+    "isProvider": {
+      "type": "boolean",
+      "description": "whether the entity is a provider or consumer (required)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "isB2B",
+    "isProvider"
+  ]
+}

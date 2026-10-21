@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-groups-id-members-post-request-schema.json",
+  "title": "v1GroupsIdMembersPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-groups-api-openapi.yml#/components/schemas/v1GroupsIdMembersPostRequest",
+  "type": "object",
+  "properties": {
+    "memberIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": " (required)"
+      }
+    },
+    "replaceExisting": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "memberIds"
+  ]
+}

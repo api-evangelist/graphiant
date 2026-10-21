@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-diagnostic-packetcapture-pcap-id-get-response-schema.json",
+  "title": "v1DiagnosticPacketcapturePcapIdGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-diagnostic-api-openapi.yml#/components/schemas/v1DiagnosticPacketcapturePcapIdGetResponse",
+  "type": "object",
+  "properties": {
+    "failureReason": {
+      "type": "string",
+      "description": "Error message if the packet capture generation/upload failed"
+    },
+    "fileName": {
+      "type": "string",
+      "description": "The PCap file name."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the requested packet capture"
+    },
+    "uploadProgress": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "upload progress in percentage"
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL to download this packet capture."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-gateways-reference-consumer-get-response-schema.json",
+  "title": "v1GatewaysReferenceConsumerGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-gateways-api-openapi.yml#/components/schemas/v1GatewaysReferenceConsumerGetResponse",
+  "type": "object",
+  "properties": {
+    "ipsecGatewayDetails": {
+      "$ref": "#/$defs/manaV2IPsecGatewayDetails"
+    },
+    "ipsecGatewayPeers": {
+      "$ref": "#/$defs/manaV2IPsecGatewayPeersConfig"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2BgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "inboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        },
+        "outboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecBgpRouteConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborAddressFamilyConfig"
+          }
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "md5Password": {
+          "$ref": "#/$defs/manaV2NullableMd5Password"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sendCommunity": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "ikeInitiator": {
+          "type": "boolean"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/manaV2IpsecRoutingConfig"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tunnel1": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "tunnel2": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "vpnProfile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayPeersConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the IPsec gateway service"
+        },
+        "remotePeers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2IPsecGatewayRemotePeer"
+          }
+        },
+        "routing": {
+          "$ref": "#/$defs/manaV2IpsecRoutingConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayRemotePeer": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "ikeInitiator": {
+          "type": "boolean",
+          "description": "When true, Graphiant initiates IKE for this peer"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional display name or label for this peer; used when generating tunnel names"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string",
+          "description": "IKE identity of the remote peer"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tunnel1": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "tunnel2": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "vpnProfile": {
+          "type": "string",
+          "description": "Enterprise IPsec VPN profile name for this peer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayTunnelDetails": {
+      "type": "object",
+      "properties": {
+        "insideIpv4Cidr": {
+          "type": "string"
+        },
+        "insideIpv6Cidr": {
+          "type": "string"
+        },
+        "localIkePeerIdentity": {
+          "type": "string"
+        },
+        "psk": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecStaticRouteConfig": {
+      "type": "object",
+      "properties": {
+        "destinationPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IpsecRoutingConfig": {
+      "type": "object",
+      "properties": {
+        "bgp": {
+          "$ref": "#/$defs/manaV2IPsecBgpRouteConfig"
+        },
+        "static": {
+          "$ref": "#/$defs/manaV2IPsecStaticRouteConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/manaV2BgpNeighborAddressFamilyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMd5Password": {
+      "type": "object",
+      "properties": {
+        "md5Password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePolicyName": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

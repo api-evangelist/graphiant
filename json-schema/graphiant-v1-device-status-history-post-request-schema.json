@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-device-status-history-post-request-schema.json",
+  "title": "v1DeviceStatusHistoryPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-device-status-api-openapi.yml#/components/schemas/v1DeviceStatusHistoryPostRequest",
+  "type": "object",
+  "properties": {
+    "deviceIds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      }
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

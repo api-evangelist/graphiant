@@ -1,0 +1,467 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-backbone-health-device-device-id-post-response-schema.json",
+  "title": "v1BackboneHealthDeviceDeviceIdPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-backbone-health-api-openapi.yml#/components/schemas/v1BackboneHealthDeviceDeviceIdPostResponse",
+  "type": "object",
+  "properties": {
+    "controlPlane": {
+      "$ref": "#/$defs/statsmonBackbonehealthControlPlane"
+    },
+    "dataPlane": {
+      "$ref": "#/$defs/statsmonBackbonehealthDataPlane"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/statsmonTroubleshootingIssue"
+      }
+    },
+    "qoeMatrix": {
+      "$ref": "#/$defs/statsmonBackbonehealthGetQoeMatrixResponse"
+    },
+    "role": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "swVersion": {
+      "type": "string"
+    },
+    "swVersionV2": {
+      "$ref": "#/$defs/upgradeSwVersion"
+    },
+    "systemPlane": {
+      "$ref": "#/$defs/statsmonBackbonehealthSystemPlane"
+    },
+    "upSinceTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthControlPlane": {
+      "type": "object",
+      "properties": {
+        "controlTransitions": {
+          "$ref": "#/$defs/statsmonBackbonehealthTransitionSeries"
+        },
+        "managementTransitions": {
+          "$ref": "#/$defs/statsmonBackbonehealthTransitionSeries"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthDataPlane": {
+      "type": "object",
+      "properties": {
+        "downTransitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonBackbonehealthTransitions"
+          }
+        },
+        "sessionSlas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSessionSla"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummary": {
+      "type": "object",
+      "properties": {
+        "box": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummaryQoeSessionBox"
+          }
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceRegion": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "peerDeviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "peerDeviceRegion": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "sessionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummaryQoeSessionBox": {
+      "type": "object",
+      "properties": {
+        "delayValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "endTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "jitterValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "lossValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "startTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "status": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthGetQoeMatrixResponse": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonBackbonehealthGetQOEMatrixResponseDevicesSummary"
+          }
+        },
+        "qoeMatrix": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonBackbonehealthGetQOEMatrixResponseQoeSessionSummary"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthSystemPlane": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "crashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingCrash"
+          }
+        },
+        "disk": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "lastCrash": {
+          "$ref": "#/$defs/statsmonTroubleshootingLastCrash"
+        },
+        "maintenanceWindows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingMaintenanceWindow"
+          }
+        },
+        "memory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        },
+        "overheating": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingOverheating"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "temperatureSeries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthTransitionSeries": {
+      "type": "object",
+      "properties": {
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonBackbonehealthTransitions"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonBackbonehealthTransitions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSystemStat"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingCrash": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingIssue": {
+      "type": "object",
+      "properties": {
+        "alertId": {
+          "type": "string"
+        },
+        "allowListed": {
+          "type": "boolean"
+        },
+        "component": {
+          "type": "string"
+        },
+        "endTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "entity": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "string"
+        },
+        "muteListed": {
+          "type": "boolean"
+        },
+        "notificationCreated": {
+          "type": "boolean"
+        },
+        "plane": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "startTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingLastCrash": {
+      "type": "object",
+      "properties": {
+        "crashDetails": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "upSinceTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingMaintenanceWindow": {
+      "type": "object",
+      "properties": {
+        "timeWindow": {
+          "$ref": "#/$defs/statsmonTroubleshootingTimeWindow"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingOverheating": {
+      "type": "object",
+      "properties": {
+        "timeWindow": {
+          "$ref": "#/$defs/statsmonTroubleshootingTimeWindow"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingRegion": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSessionSla": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statsmonTroubleshootingSlaValue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSlaValue": {
+      "type": "object",
+      "properties": {
+        "delayValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "jitterValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "lossValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        },
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingSystemStat": {
+      "type": "object",
+      "properties": {
+        "interfaceName": {
+          "type": "string"
+        },
+        "peerName": {
+          "type": "string"
+        },
+        "time": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTroubleshootingTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgradeSwVersion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

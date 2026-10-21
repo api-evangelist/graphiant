@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-extranets-b2b-general-services-summary-get-response-schema.json",
+  "title": "v1ExtranetsB2bGeneralServicesSummaryGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranets-b2b-general-api-openapi.yml#/components/schemas/v1ExtranetsB2bGeneralServicesSummaryGetResponse",
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2B2bExtranetApplication"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2B2bExtranetApplication": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isPublisher": {
+          "type": "boolean"
+        },
+        "lanSegment": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "matchedCustomers": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "serverIpAddress": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "totalCustomers": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "totalSites": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "type": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-extranet-b2b-monitoring-peering-service-consumption-overview-post-request-schema.json",
+  "title": "v1ExtranetB2bMonitoringPeeringServiceConsumptionOverviewPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranet-b2b-monitoring-api-openapi.yml#/components/schemas/v1ExtranetB2bMonitoringPeeringServiceConsumptionOverviewPostRequest",
+  "type": "object",
+  "properties": {
+    "customerName": {
+      "type": "string",
+      "description": "a filter to get usage for a specific customer"
+    },
+    "flippedView": {
+      "type": "boolean",
+      "description": "whether to view the data from the consumer's perspective (true) or the provider's perspective (false) (required)"
+    },
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "the id associated with an entity - consumer_id for consumer, and service_id for the producer/service (required)"
+    },
+    "isB2B": {
+      "type": "boolean",
+      "description": "whether the entity is a b2b entity (true for b2b entity, false for local extranet entity) (required)"
+    },
+    "isProvider": {
+      "type": "boolean",
+      "description": "whether the entity is a provider or consumer (required)"
+    },
+    "siteId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "a filter to get usage for a specific site"
+    },
+    "timeWindow": {
+      "$ref": "#/$defs/statsmonTimeWindow"
+    },
+    "vrfId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "a filter to get usage for a specific vrf"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "flippedView",
+    "id",
+    "isB2B",
+    "isProvider",
+    "timeWindow"
+  ],
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-activity-logs-post-request-schema.json",
+  "title": "v1ActivityLogsPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-activity-api-openapi.yml#/components/schemas/v1ActivityLogsPostRequest",
+  "type": "object",
+  "properties": {
+    "cursorRef": {
+      "type": "string"
+    },
+    "numLogs": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "oldTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "recentTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "selector": {
+      "$ref": "#/$defs/auditmonActivityLogsSelector"
+    },
+    "selectorV2": {
+      "$ref": "#/$defs/auditmonActivityLogsSelectorV2"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "auditActivityItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditmonActivityLogsSelector": {
+      "type": "object",
+      "properties": {
+        "deviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "inProgress": {
+          "type": "boolean"
+        },
+        "jobEntity": {
+          "$ref": "#/$defs/auditActivityItem"
+        },
+        "targetIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auditmonActivityLogsSelectorV2": {
+      "type": "object",
+      "properties": {
+        "deviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/auditActivityItem"
+          }
+        },
+        "siteIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

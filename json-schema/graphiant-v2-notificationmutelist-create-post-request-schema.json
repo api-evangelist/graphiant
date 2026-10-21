@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-notificationmutelist-create-post-request-schema.json",
+  "title": "v2NotificationmutelistCreatePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-notificationmutelist-api-openapi.yml#/components/schemas/v2NotificationmutelistCreatePostRequest",
+  "type": "object",
+  "properties": {
+    "alertId": {
+      "type": "string",
+      "description": "Alert id of the alert to create allowlist/mutelist for (required)"
+    },
+    "noteText": {
+      "type": "string",
+      "description": "Optional note"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "alertId"
+  ]
+}

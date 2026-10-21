@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-audit-logs-post-request-schema.json",
+  "title": "v1AuditLogsPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-audit-api-openapi.yml#/components/schemas/v1AuditLogsPostRequest",
+  "type": "object",
+  "properties": {
+    "cursorRef": {
+      "type": "string"
+    },
+    "histogramBucketSizeSec": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "numLogs": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0
+    },
+    "oldTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "recentTs": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "selectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/auditmonSelector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "auditmonSelector": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Field to search"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Multiple values are treated as OR"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

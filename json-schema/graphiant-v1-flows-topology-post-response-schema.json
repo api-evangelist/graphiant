@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-flows-topology-post-response-schema.json",
+  "title": "v1FlowsTopologyPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-flows-api-openapi.yml#/components/schemas/v1FlowsTopologyPostResponse",
+  "type": "object",
+  "properties": {
+    "networkTopology": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ipfixNetworkTopology"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixNetworkTopology": {
+      "type": "object",
+      "properties": {
+        "circuitStatus": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        },
+        "delta": {
+          "$ref": "#/$defs/ipfixNetworkTopologyDelta"
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphEdge"
+          }
+        },
+        "flows": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Application flow count"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphNode"
+          }
+        },
+        "timeWindow": {
+          "$ref": "#/$defs/statsmonTimeWindow"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixNetworkTopologyDelta": {
+      "type": "object",
+      "properties": {
+        "edgesAdded": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphEdge"
+          }
+        },
+        "edgesDeleted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphEdge"
+          }
+        },
+        "nodesAdded": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphNode"
+          }
+        },
+        "nodesDeleted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ConnectivityGraphNode"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ConnectivityGraphEdge": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "b": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "connections": {
+          "$ref": "#/$defs/manaV2GraphiantConnections"
+        },
+        "quality": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ConnectivityGraphNode": {
+      "type": "object",
+      "properties": {
+        "connections": {
+          "$ref": "#/$defs/manaV2GraphiantConnections"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "overrideRegion": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2GraphiantConnections": {
+      "type": "object",
+      "properties": {
+        "controlConnection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2IpsecConnection"
+          }
+        },
+        "coreConnection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2IpsecConnection"
+          }
+        },
+        "managementConnection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2IpsecConnection"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IpsecConnection": {
+      "type": "object",
+      "properties": {
+        "destIp": {
+          "type": "string"
+        },
+        "destPort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "lastEstablishedTime": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "sourcePort": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

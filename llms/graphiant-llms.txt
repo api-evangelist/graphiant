@@ -10,109 +10,117 @@
 - [What Can Graphiant Do for You?  Secure Connectivity, Data Control, and Real-World Use Cases](https://docs.graphiant.com/docs/what-can-graphiant-do-for-you-secure-connectivity-data-control.md): Graphiant is The Cost Efficient Infrastructure For Secure AI Networking. Graphiant is the value driven NaaS platform for secure AI, cloud and distributed environments. Graphiant securely connects users, applications, and clouds, offering full control over data movement and visibility.
 - [The Need for an Evolution of Networking Standards](https://docs.graphiant.com/docs/the-need-for-an-evolution-of-networking-standards.md): Explore the future of private AI with Graphiant's distributed stateless core architecture, ensuring data security, efficiency, and agility for business growth.
 - [Graphiant Solution Overview](https://docs.graphiant.com/docs/graphiant-solution-overview.md): Graphiant's Network-as-a-Service offers secure, agile, and cost-effective networking solutions, enhancing enterprise performance and simplifying cloud connectivity.
-- [Solution Architecture](https://docs.graphiant.com/docs/solution-architecture.md)
-- [Graphiant Solution Architecture](https://docs.graphiant.com/docs/graphiant-solution-architecture-summary.md)
-- [Graphiant Solution Components](https://docs.graphiant.com/docs/graphiant-solution-components.md)
-- [Graphiant Stateless Core Architecture](https://docs.graphiant.com/docs/graphiant-stateless-core-architecture.md)
-- [Graphiant Post Quantum Cryptography](https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography.md)
-- [Graphiant: Secure by Design Software Development Lifecycle](https://docs.graphiant.com/docs/graphiant-secure-by-design-sdl.md)
-- [Graphiant Stateless Core Patent Summary](https://docs.graphiant.com/docs/graphiant-stateless-core-patent-summary.md)
-- [Graphiant Data Exchange Patent Summary](https://docs.graphiant.com/docs/graphiant-data-exchange-patent-summary.md)
-- [Graphiant NAT Conflict Free IP Patent Summary](https://docs.graphiant.com/docs/graphiant-nat-conflict-free-ip-patent-summary.md)
-- [Tunnel Selection to the Graphiant Core](https://docs.graphiant.com/docs/tunnel-selection-to-the-graphiant-core.md)
+- [Solution Architecture](https://docs.graphiant.com/docs/solution-architecture.md): Explore Graphiant architecture, including Edge devices, the stateless core, management, security, and connectivity services.
+- [Graphiant Solution Architecture](https://docs.graphiant.com/docs/graphiant-solution-architecture-summary.md): Graphiant revolutionizes network services with advanced SDN principles, ensuring end-to-end encryption, scalability, and smart traffic management for modern enterprises.
+- [Graphiant Solution Components](https://docs.graphiant.com/docs/graphiant-solution-components.md): Explore Graphiant solution components, including Graphiant Edge, the stateless core, Portal, and supporting network services.
+- [Graphiant Stateless Core Architecture](https://docs.graphiant.com/docs/graphiant-stateless-core-architecture.md): Learn how Graphiant’s stateless core delivers scalable, secure, and resilient connectivity without traditional routing complexity.
+- [Graphiant Post Quantum Cryptography](https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography.md): Learn how Graphiant uses post-quantum cryptography to protect network traffic against current and future decryption threats.
+- [Graphiant: Secure by Design Software Development Lifecycle](https://docs.graphiant.com/docs/graphiant-secure-by-design-sdl.md): Learn how Graphiant integrates security controls, testing, and validation throughout its software development lifecycle.
+- [Graphiant AI-Ready Automation as a Service](https://docs.graphiant.com/docs/graphiant-ai-ready-automation-as-a-service.md)
+- [Graphiant Stateless Core Patent Summary](https://docs.graphiant.com/docs/graphiant-stateless-core-patent-summary.md): Review the patented architecture and technical innovations behind the Graphiant stateless network core.
+- [Graphiant Data Exchange Patent Summary](https://docs.graphiant.com/docs/graphiant-data-exchange-patent-summary.md): Review the patented technology behind Graphiant Data Exchange and its approach to secure, dynamic partner connectivity.
+- [Graphiant NAT Conflict Free IP Patent Summary](https://docs.graphiant.com/docs/graphiant-nat-conflict-free-ip-patent-summary.md): Explore Graphiant’s patented approach to resolving overlapping IP address conflicts without complex network renumbering.
+- [Tunnel Selection to the Graphiant Core](https://docs.graphiant.com/docs/tunnel-selection-to-the-graphiant-core.md): Learn how Graphiant Edge devices select and maintain tunnels to the Graphiant Core for reliable network connectivity.
 - [SLA-Based Routing](https://docs.graphiant.com/docs/sla-based-routing-graphiant-support.md): Learn about Graphiant SLA-Based Routing, a method for prioritizing data packets to ensure reliable transmission with minimal loss, latency, and jitter.
 - [Deep Packet Inspection (DPI) and Application Classification](https://docs.graphiant.com/docs/deep-packet-inspection-dpi-and-application-classification.md): The Graphiant Edge uses deep packet inspection for application classification, enabling custom traffic and security policies for network flows.
-- [Graphiant Network Connectivity Regions](https://docs.graphiant.com/docs/graphiant-network-connectivity-regions.md)
+- [Graphiant Network Connectivity Regions](https://docs.graphiant.com/docs/graphiant-network-connectivity-regions.md): View the geographic regions where Graphiant provides network connectivity, cloud access, and service coverage.
 - [Network Data Classification](https://docs.graphiant.com/docs/network-data-classification.md): Simplify enterprise connectivity with Graphiant's unique solution, enabling traffic monitoring, data collection, and advanced policy implementation.
-- [Use Cases](https://docs.graphiant.com/docs/use-cases.md)
+- [Adaptive FEC at the Graphiant Edge](https://docs.graphiant.com/docs/adaptive-fec-at-the-graphiant-edge.md)
+- [Use Cases](https://docs.graphiant.com/docs/use-cases.md): Explore Graphiant use cases for enterprise networking, cloud connectivity, security, data exchange, and managed services.
+- [Graphiant Private AI Fabric - How Graphiant Creates Containment for Agents](https://docs.graphiant.com/docs/private-ai-fabric.md): Graphiant enhances AI security by controlling reachability, ensuring agents can't manipulate paths, and enforcing human-defined policies for data safety.
+- [Immediate Post-Quantum Protection with Network-Layer Encryption](https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography-pqc-use-case.md): Explore how Graphiant network-layer encryption provides immediate protection against harvest-now, decrypt-later quantum security risks.
+- [Securing Your Remote Workforce with Graphiant SASE](https://docs.graphiant.com/docs/securing-your-remote-workforce-with-graphiant-sase.md): Learn how Graphiant SASE provides secure, identity-based access and network protection for remote and distributed workforces.
+- [Graphiant Cybersecurity Enhancement for US Government](https://docs.graphiant.com/docs/graphiant-cybersecurity-enhancement-for-us-government.md): Learn how Graphiant strengthens network security, resilience, and data protection for United States government environments.
+- [Graphiant Zero Trust Architecture for US Government](https://docs.graphiant.com/docs/graphiant-zero-trust-alignment.md): Graphiant's Zero Trust architecture enhances security for federal agencies by ensuring encrypted, policy-driven connectivity across all environments.
+- [Executive Order 14413: Ushering in the Next Frontier of Quantum Innovation](https://docs.graphiant.com/docs/executive-order-14413-ushering-in-the-next-frontier-of-quantum-innovation.md): Graphiant is able to address all the requirements of Executive Order 14413 that accelerates U.S. quantum innovation, enhancing security and infrastructure for post-quantum cryptography and data protection.
 - [Branch To Cloud Connectivity](https://docs.graphiant.com/docs/site-to-cloud-connectivity.md): Explore branch-to-cloud connectivity for secure, reliable access to cloud applications, optimizing performance and simplifying operations across hybrid environments.
 - [DC To Cloud Connectivity](https://docs.graphiant.com/docs/cloud-to-cloud-connectivity.md): Enhance your DC-to-cloud connectivity with Graphiant's network-as-a-service, simplifying operations and ensuring reliable, scalable access across cloud environments.
 - [Multi-cloud Connectivity](https://docs.graphiant.com/docs/multi-cloud-connectivity.md): Explore multi-cloud networking to connect applications securely across AWS, Azure, and GCP, enhancing resilience and simplifying management with Graphiant.
 - [Enterprise WAN Connectivity](https://docs.graphiant.com/docs/enterprise-wan-connectivity.md): Graphiant Secure WAN offers private network performance, integrated security, and simplified operations, overcoming SD-WAN's challenges for modern enterprises.
-- [Immediate Post-Quantum Protection with Network-Layer Encryption](https://docs.graphiant.com/docs/graphiant-post-quantum-cryptography-pqc-use-case.md)
-- [Executive Order 14413: Ushering in the Next Frontier of Quantum Innovation](https://docs.graphiant.com/docs/executive-order-14413-ushering-in-the-next-frontier-of-quantum-innovation.md): Graphiant is able to address all the requirements of Executive Order 14413 that accelerates U.S. quantum innovation, enhancing security and infrastructure for post-quantum cryptography and data protection.
-- [Securing Your Remote Workforce with Graphiant SASE](https://docs.graphiant.com/docs/securing-your-remote-workforce-with-graphiant-sase.md)
-- [Graphiant Cybersecurity Enhancement for US Government](https://docs.graphiant.com/docs/graphiant-cybersecurity-enhancement-for-us-government.md)
-- [Graphiant Zero Trust Architecture for US Government](https://docs.graphiant.com/docs/graphiant-zero-trust-alignment.md): Graphiant's Zero Trust architecture enhances security for federal agencies by ensuring encrypted, policy-driven connectivity across all environments.
 - [FAQ](https://docs.graphiant.com/docs/faq.md): A page for frequently asked questions for Graphiant and its services.
-- [Custom Branding](https://docs.graphiant.com/docs/custom-branding.md)
-- [Graphiant Service Level Agreements (SLA)](https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla.md)
-- [Graphiant Service Definitions](https://docs.graphiant.com/docs/graphiant-service-definitions.md)
-- [Graphiant Cryptography](https://docs.graphiant.com/docs/graphiant-cryptography.md)
-- [Graphiant Test Plan](https://docs.graphiant.com/docs/graphiant-test-plan.md)
-- [Graphiant & Partner RACI Matrix](https://docs.graphiant.com/docs/graphiant-partner-raci-matrix.md)
-- [Zero-Impact Infrastructure Upgrades (Canary Mode)](https://docs.graphiant.com/docs/zero-impact-infrastructure-upgrades-canary-mode.md)
+- [Custom Branding](https://docs.graphiant.com/docs/custom-branding.md): Learn how to customize Graphiant Portal branding with your organization’s logo, colors, and other visual identity settings.
+- [Graphiant Service Level Agreements (SLA)](https://docs.graphiant.com/docs/graphiant-service-level-agreements-sla.md): Review Graphiant service-level commitments for network availability, latency, performance, support, and service reliability.
+- [Graphiant Service Definitions](https://docs.graphiant.com/docs/graphiant-service-definitions.md): Review definitions and descriptions of Graphiant services, capabilities, components, and supported connectivity options.
+- [Graphiant Cryptography](https://docs.graphiant.com/docs/graphiant-cryptography.md): Explore the cryptographic technologies Graphiant uses to protect data in motion across its network infrastructure.
+- [Graphiant Test Plan](https://docs.graphiant.com/docs/graphiant-test-plan.md): Explore the Graphiant Network Services test plan for functionality, SLA-based connectivity, and edge device management in a scalable private network.
+- [Graphiant & Partner RACI Matrix](https://docs.graphiant.com/docs/graphiant-partner-raci-matrix.md): Review Graphiant and partner responsibilities for deployment, support, operations, service management, and customer engagement.
+- [How does Graphiant deliver SDWAN, SASE & ZTNA?](https://docs.graphiant.com/docs/graphiant-sdwan-sase-naas-toolkit.md): Graphiant makes SD-WAN, SASE and ZTNA free for consumers and enables partners to increase their margins.
+- [Zero-Impact Infrastructure Upgrades (Canary Mode)](https://docs.graphiant.com/docs/zero-impact-infrastructure-upgrades-canary-mode.md): Learn how Graphiant Canary Mode reduces upgrade risk by validating infrastructure changes before broader deployment.
 - [Comparisons & Cost Analysis](https://docs.graphiant.com/docs/comparisons-cost-analysis.md): Comparing Graphiant and its competitors on architecture, operations and cost.
-- [Cost Comparison: Graphiant vs. Cisco](https://docs.graphiant.com/docs/graphiant-vs-cisco-cost-architecture.md)
+- [Cost Comparison: Graphiant vs. Cisco](https://docs.graphiant.com/docs/graphiant-vs-cisco-cost-architecture.md): Compare the infrastructure, licensing, operational, and connectivity costs of Graphiant and Cisco network architectures.
 - [Multi-Cloud Architecture: Graphiant vs Cisco](https://docs.graphiant.com/docs/graphiantvsciscomulticloudtechnicalcomparison.md): Cisco Multicloud Fabric and Graphiant tackle multicloud complexity, offering unique solutions for secure, efficient cloud connectivity and cost management with Graphiant providing a superior architecture that reduces operational complexity for MCN Multi-Cloud Networking.
+- [Architecture Comparison: Graphiant vs Tailscale](https://docs.graphiant.com/docs/architecture-comparison-graphiant-vs-tailscale.md)
+- [Architecture Comparison for Telco NaaS: Graphiant vs Cisco](https://docs.graphiant.com/docs/architecture-comparison-for-telco-naas-graphiant-vs-cisco.md): Graphiant gives telcos a cloud control plane to own customers, boost margins, cut costs, and deliver secure, sovereign AI networking beyond Cisco.
 - [Getting Started](https://docs.graphiant.com/docs/user-guide.md)
-- [How to Log In to the Graphiant Portal](https://docs.graphiant.com/docs/how-to-log-in-to-the-graphiant-portal.md)
-- [Supported Hardware Families](https://docs.graphiant.com/docs/supported-hardware-families.md)
+- [How to Log In to the Graphiant Portal](https://docs.graphiant.com/docs/how-to-log-in-to-the-graphiant-portal.md): Follow the steps to securely sign in to the Graphiant Portal and access network services and account settings.
+- [Supported Hardware Families](https://docs.graphiant.com/docs/supported-hardware-families.md): View the hardware platforms and device families officially supported for Graphiant Edge deployments.
 - [Network Edge Hardware - Dell VEP1425N](https://docs.graphiant.com/docs/network-edge-hardware-family-b-dell-vep1425n.md): Explore the Dell VEP-1425N desktop network appliance with Intel Atom, offering robust performance and advanced connectivity features. A fully supported platform to run Graphiant Network-as-a-Service.
 - [Network Edge Hardware - Dell XR5610](https://docs.graphiant.com/docs/network-edge-hardware-family-d-dell-xr5610.md): Explore the Dell PowerEdge XR5610, a 1U server with Intel Xeon processors, ideal for network edge solutions in various industries. A fully supported platform to run Graphiant Network-as-a-Service.
-- [Network Edge Hardware - Silicom Edge](https://docs.graphiant.com/docs/silicom-edge.md)
-- [Network Edge Hardware - Lanner NCA-5530](https://docs.graphiant.com/docs/network-edge-hardware-family-d-lanner-nca-5530.md)
-- [Network Edge Hardware - Lanner NCA-1515B](https://docs.graphiant.com/docs/network-edge-hardware-family-b-lanner-nca-1515b.md)
-- [Officially Supported Transceivers](https://docs.graphiant.com/docs/officially-supported-transceivers.md)
+- [Network Edge Hardware - Dell R360](https://docs.graphiant.com/docs/network-edge-hardware-dell-r360.md)
+- [Network Edge Hardware - Silicom Edge](https://docs.graphiant.com/docs/silicom-edge.md): Review specifications, interfaces, installation requirements, and support information for the Silicom Graphiant Network Edge.
+- [Network Edge Hardware - Lanner NCA-5530](https://docs.graphiant.com/docs/network-edge-hardware-family-d-lanner-nca-5530.md): Review specifications, interfaces, deployment guidance, and support information for the Lanner NCA-5530 Graphiant Network Edge.
+- [Network Edge Hardware - Lanner NCA-1515B](https://docs.graphiant.com/docs/network-edge-hardware-family-b-lanner-nca-1515b.md): Review specifications, interfaces, deployment guidance, and support information for the Lanner NCA-1515B Graphiant Network Edge.
+- [Officially Supported Transceivers](https://docs.graphiant.com/docs/officially-supported-transceivers.md): View the optical and network transceivers officially supported for use with Graphiant Edge hardware platforms.
 - [Deploying the Network Edge](https://docs.graphiant.com/docs/deploying-the-network-edge.md): A guide on how to get started with deploying your Graphiant Network Edge.
 - [Bringup a Graphiant Edge](https://docs.graphiant.com/docs/bringup-a-graphiant-edge.md): Learn about Zero Touch Provisioning, automating device onboarding in Graphiant networks, and explore Cloud and Hardware Edge components for seamless deployment.
-- [Deploying Hardware Edges](https://docs.graphiant.com/docs/deploying-hardware-edges.md)
+- [Deploying Hardware Edges](https://docs.graphiant.com/docs/deploying-hardware-edges.md): Follow the procedures for installing, onboarding, and configuring Graphiant Hardware Edge devices at physical locations.
 - [Deploying a Hardware Edge Using Static WAN IP](https://docs.graphiant.com/docs/deploying-a-hardware-edge-using-static-wan-ip.md): Learn how to deploy Graphiant on a hardware edge with a static WAN IP addressing on Dell, Lanner, and Silicom devices.
-- [Deploying a Hardware Edge Using Zero Touch Provisioning](https://docs.graphiant.com/docs/deploying-a-hardware-edge-using-zero-touch-provisioning.md)
-- [Deploying Virtual Edges](https://docs.graphiant.com/docs/deploying-virtual-edges.md)
-- [Virtual Machine Formats for Graphiant Service](https://docs.graphiant.com/docs/virtual-machine-formats-for-graphiant-service-1.md)
+- [Deploying a Hardware Edge Using Zero Touch Provisioning](https://docs.graphiant.com/docs/deploying-a-hardware-edge-using-zero-touch-provisioning.md): Deploy a Graphiant Hardware Edge quickly using Zero Touch Provisioning with minimal on-site configuration or manual intervention.
+- [Deploying Virtual Edges](https://docs.graphiant.com/docs/deploying-virtual-edges.md): Learn how to deploy Graphiant Virtual Edges in supported virtual environments to extend secure network connectivity.
+- [Virtual Machine Formats for Graphiant Service](https://docs.graphiant.com/docs/virtual-machine-formats-for-graphiant-service-1.md): Review supported virtual machine formats and deployment requirements for Graphiant Virtual Edge services.
 - [Deploying a Virtual Edge on VMware ESXi](https://docs.graphiant.com/docs/deploying-a-virtual-edge-on-vmware-esxi.md): Learn how to deploy and manage a Graphiant Edge on VMware ESXi 7.0+, including downloading virtual images and configuring interfaces.
 - [Deploying a Virtual Edge on VMware Workstation](https://docs.graphiant.com/docs/deploying-a-virtual-edge-on-wmware-workstation.md): Learn how to create a custom virtual machine for Graphiant services in VMware Workstation, configure hardware, select Linux OS, and deploy your virtual edge with ease.
-- [Deploying Cloud Edges](https://docs.graphiant.com/docs/deploying-cloud-edges.md)
+- [Deploying a Virtual Edge on KVM](https://docs.graphiant.com/docs/deploying-a-virtual-edge-on-kvm.md)
+- [Deploying Cloud Edges](https://docs.graphiant.com/docs/deploying-cloud-edges.md): Learn how to deploy Graphiant Cloud Edges to securely connect cloud workloads, virtual networks, and distributed environments.
 - [Deploying a Cloud Edge in Microsoft Azure](https://docs.graphiant.com/docs/deploying-a-cloud-edge-in-microsoft-azure.md): Learn how to deploy a Graphiant Edge VM in Microsoft Azure, including supported sizes, setup steps, and registration in the Graphiant Portal.
 - [Deploying a Cloud Edge in AWS](https://docs.graphiant.com/docs/deploying-a-cloud-edge-in-aws.md): Deploy a Graphiant Edge in AWS with supported VM sizes. Follow our guide to create, configure, and register your virtual machine seamlessly.
-- [Onboarding](https://docs.graphiant.com/docs/onboarding.md)
+- [Onboarding](https://docs.graphiant.com/docs/onboarding.md): Access instructions and recommended workflows for onboarding organizations, sites, services, and Graphiant Edge devices.
 - [Onboarding Your Graphiant Edge](https://docs.graphiant.com/docs/onboarding-a-graphiant-edge.md): Activate and configure your Graphiant Edge with our onboarding guide. Learn to manage device lifecycle and ensure operational readiness efficiently.
-- [Onboarding Your Graphiant Edge Using the Local Web Server](https://docs.graphiant.com/docs/local-web-server.md)
-- [Onboarding Your Graphiant Edge By Adding Device to Inventory](https://docs.graphiant.com/docs/onboarding-a-graphiant-edge-using-add-device-to-inventory-method.md)
-- [Onboarding Your Graphiant Edge Using Zero-Touch Provisioning (ZTP)](https://docs.graphiant.com/docs/onboarding-your-graphiant-edge-using-ztp.md)
-- [Graphiant Service IPs and Ports for Firewall Rules](https://docs.graphiant.com/docs/graphiant-service-ips-and-ports-for-firewall-rules.md)
-- [Reimaging Your Graphiant Edge Factory Image Before Onboarding](https://docs.graphiant.com/docs/reimaging-your-graphiant-edge-factory-image-before-onboarding.md)
-- [Performance](https://docs.graphiant.com/docs/performance.md)
-- [Edge Performance Results](https://docs.graphiant.com/docs/edge-performance-results.md)
-- [Graphiant Stateless Core Performance](https://docs.graphiant.com/docs/graphiant-stateless-core-performance.md)
-- [Graphiant Failover Testing Performance Results](https://docs.graphiant.com/docs/graphiant-backbone-resiliency-results.md)
-- [Deployment Guides](https://docs.graphiant.com/docs/deployment-guides.md)
-- [Graphiant Business Planning Guide for Managed Service Providers](https://docs.graphiant.com/docs/graphiant-technical-overview.md)
-- [Implementing a Graphiant Network with AI Security Models](https://docs.graphiant.com/docs/implementing-a-graphiant-network-with-ai-security-models.md)
-- [Graphiant Secure Cloud Interconnection for Hospital Access to Epic EMR](https://docs.graphiant.com/docs/graphiant-secure-cloud-interconnection-for-hospital-access-to-epic-emr.md)
-- [Connecting Graphiant to Cisco Umbrella](https://docs.graphiant.com/docs/3rd-party-ipsec-to-umbrella.md)
+- [Onboarding Your Graphiant Edge Using the Local Web Server](https://docs.graphiant.com/docs/local-web-server.md): Learn how to onboard and configure a Graphiant Edge through its local web server interface.
+- [Onboarding Your Graphiant Edge By Adding Device to Inventory](https://docs.graphiant.com/docs/onboarding-a-graphiant-edge-using-add-device-to-inventory-method.md): Learn how to onboard a Graphiant Edge by adding it to inventory and completing the required configuration steps.
+- [Onboarding Your Graphiant Edge Using Zero-Touch Provisioning (ZTP)](https://docs.graphiant.com/docs/onboarding-your-graphiant-edge-using-ztp.md): Follow the steps to onboard a Graphiant Edge automatically using Zero-Touch Provisioning.
+- [Graphiant Service IPs and Ports for Firewall Rules](https://docs.graphiant.com/docs/graphiant-service-ips-and-ports-for-firewall-rules.md): View the Graphiant service IP addresses, protocols, and ports required when configuring enterprise firewall rules.
+- [Reimaging Your Graphiant Edge Factory Image Before Onboarding](https://docs.graphiant.com/docs/reimaging-your-graphiant-edge-factory-image-before-onboarding.md): Follow the steps to restore the factory image on a Graphiant Edge before beginning the onboarding process.
+- [Performance](https://docs.graphiant.com/docs/performance.md): Explore Graphiant network and Edge performance documentation, testing results, capacity information, and optimization guidance.
+- [Edge Performance Results](https://docs.graphiant.com/docs/edge-performance-results.md): Review performance testing results for Graphiant Edge devices, including throughput, latency, resiliency, and traffic handling.
+- [Graphiant Stateless Core Performance](https://docs.graphiant.com/docs/graphiant-stateless-core-performance.md): Review performance characteristics and testing results for Graphiant’s stateless core network architecture.
+- [Graphiant Failover Testing Performance Results](https://docs.graphiant.com/docs/graphiant-backbone-resiliency-results.md): Review Graphiant backbone failover testing results and learn how the platform maintains connectivity during network disruptions.
+- [Deployment Guides](https://docs.graphiant.com/docs/deployment-guides.md): Access Graphiant deployment guides for hardware, virtual, and cloud Edge installations across supported network environments.
+- [Graphiant Business Planning Guide for Managed Service Providers](https://docs.graphiant.com/docs/graphiant-technical-overview.md): Explore the technical and business considerations for managed service providers planning to offer Graphiant services.
+- [Implementing a Graphiant Network with AI Security Models](https://docs.graphiant.com/docs/implementing-a-graphiant-network-with-ai-security-models.md): Learn how to deploy Graphiant connectivity with AI security models for traffic analysis, policy enforcement, and threat protection.
+- [Graphiant Secure Cloud Interconnection for Hospital Access to Epic EMR](https://docs.graphiant.com/docs/graphiant-secure-cloud-interconnection-for-hospital-access-to-epic-emr.md): Learn how Graphiant provides secure cloud interconnection for reliable hospital access to Epic electronic medical record systems.
+- [Connecting Graphiant to Cisco Umbrella](https://docs.graphiant.com/docs/3rd-party-ipsec-to-umbrella.md): Securely route traffic to Cisco Umbrella with Graphiant, enabling flexible security service integration while maintaining a simplified network architecture.
 - [Gina AI](https://docs.graphiant.com/docs/gina-ai.md): The new Graphiant agentic AI platform, with specific agents like Gina AI for driving network optimization.
 - [Introducing Gina AI](https://docs.graphiant.com/docs/introducing-gina-ai.md): Gina AI, the agentic partner for your Graphiant Network transforms network operations with actionable insights, automated reporting, and robust security, ensuring your data remains private and secure.
-- [Configuration](https://docs.graphiant.com/docs/configuration.md)
-- [Network](https://docs.graphiant.com/docs/network.md)
+- [Configuration](https://docs.graphiant.com/docs/configuration.md): Access guidance for configuring Graphiant network services, devices, system objects, policies, and connectivity settings.
+- [Network](https://docs.graphiant.com/docs/network.md): Access documentation for configuring, operating, and monitoring Graphiant network connectivity, routing, circuits, and services.
 - [Configuring VRRP](https://docs.graphiant.com/docs/configuring-vrrp.md): Learn about VRRP, a protocol ensuring gateway redundancy for uninterrupted network communication, even during router failures.
 - [Configuring Interfaces](https://docs.graphiant.com/docs/configuring-interfaces.md): Explore Graphiant Edge router interfaces: WAN, LAN, Ethernet, Subinterface, Loopback, and IPsec for seamless network management and configuration.
-- [Configuring WAN Circuits](https://docs.graphiant.com/docs/configuring-wan-circuits.md)
+- [Configuring WAN Circuits](https://docs.graphiant.com/docs/configuring-wan-circuits.md): Learn how to configure WAN circuits for Graphiant Edges, including circuit settings, connectivity parameters, and service options.
 - [Configuring BGP Locally on the Graphiant Edge](https://docs.graphiant.com/docs/configuring-bgp-locally-on-the-graphiant-edge.md): Learn about BGP, the Border Gateway Protocol, and how to configure it in the Graphiant Portal for efficient Internet traffic routing and management.
 - [Configuring OSPFv2](https://docs.graphiant.com/docs/configuring-ospfv2.md): Learn about OSPF, a link-state routing protocol, and how to configure OSPFv2 in the Graphiant Portal for efficient network routing.
-- [Edge Services](https://docs.graphiant.com/docs/edge-services.md)
+- [Edge Services](https://docs.graphiant.com/docs/edge-services.md): Explore the network, security, routing, and connectivity services available through Graphiant Edge devices.
 - [Configuring Custom Applications](https://docs.graphiant.com/docs/configuring-custom-applications.md): Learn how to define and configure custom applications in the Graphiant Portal, enhancing traffic mapping and security policies for enterprise needs.
 - [Configuring DHCP](https://docs.graphiant.com/docs/configuring-dhcp.md): Learn about DHCP, a protocol that automates IP address assignment and management in networks, and how to configure it using the Graphiant Portal.
 - [Configuring DHCP Relay](https://docs.graphiant.com/docs/configuring-dhcp-relay.md): Learn how to establish a DHCP Relay on your Edge device using the Graphiant Portal for efficient IP address management in your network.
 - [Configuring IPFIX](https://docs.graphiant.com/docs/configuring-ipfix.md): Learn about IPFIX, a protocol for exporting IP flow data from routers, and how to configure IPFIX collectors in the Graphiant Portal for network analysis.
 - [Configuring Syslog](https://docs.graphiant.com/docs/configuring-syslog.md): Learn how to configure Syslog in the Graphiant Portal for centralized log management, enhancing network troubleshooting and device monitoring.
-- [Configuring SNMP](https://docs.graphiant.com/docs/configuring-snmp.md)
-- [Configuring NTP](https://docs.graphiant.com/docs/configuring-ntp.md)
-- [Policies](https://docs.graphiant.com/docs/policies.md)
+- [Configuring SNMP](https://docs.graphiant.com/docs/configuring-snmp.md): Learn how to configure SNMP on Graphiant devices for network monitoring, performance visibility, and management platform integration.
+- [Configuring NTP](https://docs.graphiant.com/docs/configuring-ntp.md): Learn how to configure Network Time Protocol settings to maintain accurate and consistent time across Graphiant network devices.
+- [Policies](https://docs.graphiant.com/docs/policies.md): Learn how to create and manage Graphiant policies for connectivity, routing, security, access, and data movement.
 - [Configuring NAT](https://docs.graphiant.com/docs/configuring-nat.md): Learn how NAT in the Graphiant solution enables seamless IP address translation for private networks, ensuring connectivity without conflicts.
 - [Configuring DIA](https://docs.graphiant.com/docs/configuring-dia.md): Learn about Direct Internet Access (DIA) and how it optimizes SaaS traffic, reduces DC bandwidth, and improves application latency with Graphiant Edge.
 - [Configuring Security Policies](https://docs.graphiant.com/docs/configuring-security-policies.md): Manage your Graphiant Edge's security policies with ease. Control traffic flow, set rules, and enhance your network's firewall protection effectively.
 - [Configuring Traffic Policies](https://docs.graphiant.com/docs/configuring-traffic-policies.md): Configure and deploy Traffic Policies in the Graphiant Portal to manage your network Edge and WAN effectively with detailed setup instructions.
-- [Services](https://docs.graphiant.com/docs/services.md)
+- [Services](https://docs.graphiant.com/docs/services.md): Explore the connectivity, networking, security, cloud, and managed service capabilities available through Graphiant.
 - [Configuring Extranet (Now Data Exchange Local Services)](https://docs.graphiant.com/docs/configuring-extranet.md)
-- [System Objects](https://docs.graphiant.com/docs/system-objects.md)
-- [What is a System Object?](https://docs.graphiant.com/docs/what-is-a-system-object.md)
+- [System Objects](https://docs.graphiant.com/docs/system-objects.md): Learn how Graphiant system objects simplify the reuse and management of network addresses, services, and configuration values.
+- [What is a System Object?](https://docs.graphiant.com/docs/what-is-a-system-object.md): Learn what a Graphiant system object is and how reusable objects simplify network configurations and policies.
 - [When to Use System v/s Local Configuration?](https://docs.graphiant.com/docs/when-to-use-system-vs-local-configuration.md): Learn how to configure System Objects and Edge devices in Graphiant, managing LAN segments, Syslog, and IPFIX for efficient network management.
-- [What is a Site?](https://docs.graphiant.com/docs/what-is-a-site.md)
+- [What is a Site?](https://docs.graphiant.com/docs/what-is-a-site.md): Learn how Graphiant defines a site and how sites are used to organize locations, Edge devices, and network services.
 - [System Objects Site Creation and Management](https://docs.graphiant.com/docs/system-objects-site-creation-and-management.md): Learn how to create, edit, and manage Sites and Edges in the Graphiant Portal for efficient network configuration and monitoring.
 - [Attaching a Graphiant Edge to a Site](https://docs.graphiant.com/docs/attaching-a-graphiant-edge-to-a-site.md): Learn how to attach and edit Graphiant Edges to a Site for optimal configuration management, ensuring seamless connectivity and performance.
-- [Configuring System Objects](https://docs.graphiant.com/docs/configuring-system-objects.md)
+- [Configuring System Objects](https://docs.graphiant.com/docs/configuring-system-objects.md): Learn how to create and configure reusable system objects for Graphiant network policies, services, and device configurations.
 - [System Objects Tags](https://docs.graphiant.com/docs/system-objects-tags.md): Learn how to create and assign Tags in Graphiant for effective Edge organization, utilizing hierarchical levels for streamlined configuration and policies.
 - [System Objects Site List](https://docs.graphiant.com/docs/system-objects-site-list.md): Learn how to create, edit, and manage Site Lists in the Graphiant Portal, enhancing your configurations and policies efficiently.
 - [System Objects LAN Segments](https://docs.graphiant.com/docs/system-objects-lan-segments.md): Learn how LAN Segments work in System Objects, including creation, management, and deletion in the Graphiant Portal for efficient network configuration.
@@ -120,68 +128,75 @@
 - [System Objects SNMPv3](https://docs.graphiant.com/docs/system-objects-snmpv3.md): Explore SNMPv3 for secure network management, featuring strong authentication, encryption, and efficient monitoring of devices for optimal performance.
 - [System Objects Syslog](https://docs.graphiant.com/docs/system-objects-syslog.md): Learn about Syslog servers, their role in centralizing log data, and how to manage, create, and troubleshoot them for efficient network monitoring.
 - [System Objects Prefix Lists and Routing Filters](https://docs.graphiant.com/docs/configuring-system-objects-prefix-lists-and-routing-filters.md): Learn the step-by-step process for configuring System Object Prefix Lists and Routing Filters in Graphiant, enhancing your network management efficiency.
-- [System Objects NTP Server](https://docs.graphiant.com/docs/system-objects-ntp-server.md)
-- [Automation](https://docs.graphiant.com/docs/automation.md)
+- [System Objects NTP Server](https://docs.graphiant.com/docs/system-objects-ntp-server.md): Learn how to create and use an NTP server system object within Graphiant configurations and policies.
+- [Automation](https://docs.graphiant.com/docs/automation.md): Explore Graphiant automation capabilities for simplifying network provisioning, configuration, management, and operational workflows.
+- [Graphiant Automation Workflows](https://docs.graphiant.com/docs/graphiant-automation-workflows.md)
 - [Graphiant CLI](https://docs.graphiant.com/docs/graphiant-cli.md)
-- [Graphiant REST API](https://docs.graphiant.com/docs/graphiant-portal-rest-api.md)
+- [Graphiant REST API](https://docs.graphiant.com/docs/graphiant-portal-rest-api.md): Explore Graphiant REST API documentation, authentication, and SDKs for seamless integration and management of resources in the Graphiant Portal.
 - [Graphiant SDK Python](https://docs.graphiant.com/docs/graphiant-sdk-python.md)
 - [Graphiant SDK Go](https://docs.graphiant.com/docs/graphiant-sdk-go.md)
+- [Graphiant Terraform Provider](https://docs.graphiant.com/docs/graphiant-terraform-provider.md)
 - [Graphiant Playbooks](https://docs.graphiant.com/docs/graphiant-playbooks.md)
-- [Service Management](https://docs.graphiant.com/docs/service-management.md)
-- [Service Maintenance](https://docs.graphiant.com/docs/service-maintenance.md)
+- [Service Management](https://docs.graphiant.com/docs/service-management.md): Learn how to provision, update, monitor, and administer Graphiant network services throughout their operational lifecycle.
+- [Service Maintenance](https://docs.graphiant.com/docs/service-maintenance.md): Review Graphiant service maintenance procedures, notifications, maintenance windows, and potential customer impacts.
 - [Software Release Information for Service Upgrades](https://docs.graphiant.com/docs/software-release-information-for-service-upgrades.md): Graphiant's Software Release Life Cycle ensures continuous delivery of stable upgrades, featuring Latest, Recommended, and Stable Releases for optimal performance.
-- [Device Lifecycle](https://docs.graphiant.com/docs/device-lifecycle.md)
-- [Software End of Maintenance and End of Life Information](https://docs.graphiant.com/docs/software-end-of-maintenance-and-end-of-life-information.md)
+- [Device Lifecycle](https://docs.graphiant.com/docs/device-lifecycle.md): Learn how to manage Graphiant devices throughout their lifecycle, from onboarding and operation to replacement and retirement.
+- [Software End of Maintenance and End of Life Information](https://docs.graphiant.com/docs/software-end-of-maintenance-and-end-of-life-information.md): Review Graphiant software maintenance timelines, end-of-life milestones, upgrade guidance, and support availability.
 - [Maintenance Mode](https://docs.graphiant.com/docs/maintenance-mode.md): Learn about Maintenance Mode, a Graphiant feature that allows Edge maintenance without disrupting network traffic, ensuring seamless communication.
-- [Graphiant Gateway Service](https://docs.graphiant.com/docs/graphiant-gateway-service.md)
+- [Graphiant Gateway Service](https://docs.graphiant.com/docs/graphiant-gateway-service.md): Learn how Graphiant Gateway Service connects Graphiant networks to external services, applications, clouds, and destinations.
 - [Gateway Overview](https://docs.graphiant.com/docs/gateway-overview.md): Connect your on-premise and cloud environments securely with Graphiant Gateway, simplifying hybrid network management and enhancing performance.
 - [Creating the Graphiant Gateway Service for AWS](https://docs.graphiant.com/docs/creating-the-graphiant-gateway-service-for-aws-graphiant-support.md): Connect your on-premise Graphiant network to AWS with the Graphiant Gateway Service for seamless hybrid cloud integration and private connections.
 - [Creating The Graphiant Gateway Service For Azure](https://docs.graphiant.com/docs/creating-the-graphiant-gateway-service-for-azure-graphiant-support.md): Connect your on-premise Graphiant network to Azure with the Graphiant Gateway service for seamless hybrid cloud integration.
 - [Creating the Graphiant Gateway Service for Google Cloud Platform](https://docs.graphiant.com/docs/creating-the-graphiant-gateway-service-for-google-cloud-platform-graphiant-support.md): Connect your on-premise Graphiant network to Google Cloud with the Graphiant Gateway Service for seamless hybrid cloud integration.
 - [Creating the Graphiant Gateway Service for Oracle Cloud Infrastructure – Graphiant Support](https://docs.graphiant.com/docs/creating-the-graphiant-gateway-service-for-oracle-cloud-infrastructure-graphiant-support.md): Connect your on-premise Graphiant network to Oracle Cloud with the Graphiant Gateway Service for seamless hybrid cloud integration.
-- [Creating Site-to-Site VPN](https://docs.graphiant.com/docs/creating-site-to-site-vpn.md)
-- [Data Exchange](https://docs.graphiant.com/docs/data-exchange-1.md)
-- [Data Exchange Partner Services](https://docs.graphiant.com/docs/data-exchange.md)
-- [Data Exchange Local Services](https://docs.graphiant.com/docs/data-exchange-local-services.md)
-- [Monitoring](https://docs.graphiant.com/docs/monitoring.md)
-- [Edge Monitoring Dashboard](https://docs.graphiant.com/docs/edge-monitoring.md)
+- [Creating Site-to-Site VPN](https://docs.graphiant.com/docs/creating-site-to-site-vpn.md): Follow the steps to create a secure site-to-site VPN connection between Graphiant locations and external network environments.
+- [Data Exchange](https://docs.graphiant.com/docs/data-exchange-1.md): Learn how Graphiant Data Exchange enables secure, policy-driven connectivity between enterprises, customers, partners, and clouds.
+- [Data Exchange Partner Services](https://docs.graphiant.com/docs/data-exchange.md): Graphiant’s Data Exchange Partner Services securely connect peers to services, enabling collaboration and growth through private service invitations.
+- [Data Exchange Partner Services Monitoring](https://docs.graphiant.com/docs/data-exchange-partner-services-monitoring.md)
+- [Data Exchange Local Services](https://docs.graphiant.com/docs/data-exchange-local-services.md): Connect your business with Data Exchange Local Services for secure collaboration and access to trusted partners through the Graphiant Portal.
+- [Monitoring](https://docs.graphiant.com/docs/monitoring.md): Learn how to monitor Graphiant network health, Edge devices, circuits, services, performance, and operational events.
+- [Edge Monitoring Dashboard](https://docs.graphiant.com/docs/edge-monitoring.md): Use the Edge Monitoring Dashboard to review Graphiant Edge health, connectivity, status, alarms, and operational performance.
+- [Gateway Monitoring](https://docs.graphiant.com/docs/gateway-monitoring.md)
 - [Graphiant Observability](https://docs.graphiant.com/docs/graphiant-observability.md): Graphiant Observability enhances network management with real-time insights, alarms, and a Site Health Dashboard for swift issue resolution and efficiency.
-- [Data Assurance](https://docs.graphiant.com/docs/data-assurance.md)
+- [Data Assurance](https://docs.graphiant.com/docs/data-assurance.md): Explore Graphiant Data Assurance capabilities for controlling, protecting, and verifying how data moves across distributed networks.
 - [Site Health Dashboard](https://docs.graphiant.com/docs/site-health-dashboard.md): Explore the Graphiant Site Health Dashboard for real-time insights into your network's health, with customizable views and color-coded status indicators.
 - [Alarms and Notifications](https://docs.graphiant.com/docs/alarms-and-notifications.md): Learn how Graphiant Alarms and Notifications work together to monitor your network, providing timely alerts and detailed troubleshooting options.
-- [BGP Soft Reset](https://docs.graphiant.com/docs/bgp-soft-reset.md)
-- [Graphiant SNMP MIBs](https://docs.graphiant.com/docs/graphiant-snmp-mibs.md)
-- [Troubleshooting](https://docs.graphiant.com/docs/troubleshooting.md)
+- [BGP Soft Reset](https://docs.graphiant.com/docs/bgp-soft-reset.md): Learn how to perform a BGP soft reset to apply routing policy changes without interrupting established BGP sessions.
+- [Graphiant SNMP MIBs](https://docs.graphiant.com/docs/graphiant-snmp-mibs.md): Access Graphiant SNMP MIB information for integrating Edge devices and network services with monitoring platforms.
+- [AI Usage Dashboard](https://docs.graphiant.com/docs/ai-adoption-dashboard.md)
+- [Global Health Dashboard](https://docs.graphiant.com/docs/global-health-dashboard.md)
+- [Forward Error Correction Monitoring](https://docs.graphiant.com/docs/forward-error-monitoring.md)
+- [Troubleshooting](https://docs.graphiant.com/docs/troubleshooting.md): Access troubleshooting procedures for diagnosing and resolving Graphiant network, Edge, service, and connectivity issues.
 - [Running a Ping Command](https://docs.graphiant.com/docs/running-a-ping-command.md): Learn about the Ping command for testing network connectivity, identifying packet loss, and using it within the Graphiant Portal for effective monitoring.
-- [Troubleshooting Using the Local Web Server](https://docs.graphiant.com/docs/troubleshooting-using-the-local-web-server.md)
-- [Troubleshooting Dell XR5610 Hardware Issues](https://docs.graphiant.com/docs/troubleshooting-dell-xr5610-hardware-issues.md)
+- [Troubleshooting Using the Local Web Server](https://docs.graphiant.com/docs/troubleshooting-using-the-local-web-server.md): Learn how to use the Graphiant Edge local web server to diagnose connectivity and onboarding issues.
+- [Troubleshooting Dell XR5610 Hardware Issues](https://docs.graphiant.com/docs/troubleshooting-dell-xr5610-hardware-issues.md): Review troubleshooting procedures for diagnosing hardware, system, and operational issues on Dell XR5610 devices.
 - [Running a Traceroute Command](https://docs.graphiant.com/docs/running-a-traceroute-command.md): Learn how to use Traceroute in the Graphiant Portal to monitor network routes, identify bottlenecks, and troubleshoot connectivity issues effectively.
-- [Managed Service Providers](https://docs.graphiant.com/docs/managed-service-providers.md)
-- [What is a Managed Service Provider (MSP)?](https://docs.graphiant.com/docs/what-is-a-managed-service-provider.md)
-- [Graphiant MSP Technical Partnership Document](https://docs.graphiant.com/docs/graphiant-msp-technical-partnership-document.md)
-- [MSP Pilot Test Plan - Enterprise Use Cases (Phase 1)](https://docs.graphiant.com/docs/msp-pilot-test-plan-enterprise-use-cases.md)
-- [MSP Network Topology](https://docs.graphiant.com/docs/network-topology.md)
-- [Requesting a Return of Your Customer's Graphiant Hardware Edge](https://docs.graphiant.com/docs/requesting-a-return-of-your-customer-s-graphiant-edge.md)
-- [MSP Pilot Plan](https://docs.graphiant.com/docs/msp-pilot-plan.md)
+- [Managed Service Providers](https://docs.graphiant.com/docs/managed-service-providers.md): Explore Graphiant capabilities, tools, and operational resources designed for managed service providers and their customers.
+- [What is a Managed Service Provider (MSP)?](https://docs.graphiant.com/docs/what-is-a-managed-service-provider.md): Learn what a managed service provider is and how MSPs use Graphiant to deliver and manage network services for customers.
+- [Graphiant Technical Partnership Document](https://docs.graphiant.com/docs/graphiant-msp-technical-partnership-document.md): Review the technical requirements, responsibilities, and integration considerations for managed service providers partnering with Graphiant.
+- [MSP Network Topology](https://docs.graphiant.com/docs/network-topology.md): Explore recommended network topology designs for managed service providers deploying and operating Graphiant services.
+- [MSP Pilot Plan](https://docs.graphiant.com/docs/msp-pilot-plan.md): Review the recommended steps, requirements, responsibilities, and success criteria for conducting a Graphiant MSP pilot.
+- [MSP Pilot Test Plan - Enterprise Use Cases (Phase 1)](https://docs.graphiant.com/docs/msp-pilot-test-plan-enterprise-use-cases.md): Explore 50+ end-to-end test cases for Graphiant's NaaS solution, ensuring seamless enterprise connectivity and cloud integration across multiple sites.
 - [MSP Pilot Test Plan - Backbone Use Cases (Phase 2)](https://docs.graphiant.com/docs/msp-pilot-test-plan-backbone-use-cases.md)
-- [MSP Dashboard](https://docs.graphiant.com/docs/msp-dashboard.md)
-- [Account Management](https://docs.graphiant.com/docs/account-management.md)
-- [Identity and Access Management (IAM)](https://docs.graphiant.com/docs/identity-access-management-iam.md)
-- [Billing](https://docs.graphiant.com/docs/bandwidth-allocation-dashboard.md)
+- [MSP Dashboard](https://docs.graphiant.com/docs/msp-dashboard.md): Use the Graphiant MSP Dashboard to manage customers, monitor services, review network health, and oversee multiple environments.
+- [Requesting a Return of Your Customer's Graphiant Hardware Edge](https://docs.graphiant.com/docs/requesting-a-return-of-your-customer-s-graphiant-edge.md): Learn how partners can request the return of a customer’s Graphiant Hardware Edge and complete the required process.
+- [Account Management](https://docs.graphiant.com/docs/account-management.md): Learn how to manage Graphiant accounts, user access, account settings, and administrative responsibilities within the Graphiant Portal.
+- [Identity and Access Management (IAM)](https://docs.graphiant.com/docs/identity-access-management-iam.md): Learn how Graphiant IAM controls user identities, roles, permissions, authentication, and access to network resources.
+- [Billing](https://docs.graphiant.com/docs/bandwidth-allocation-dashboard.md): View bandwidth allocation, service consumption, and billing information for your Graphiant services through the Graphiant Portal.
 - [Settings](https://docs.graphiant.com/docs/organization-settings.md): Explore the Graphiant Portal's Settings for user and company info, security options, and billing management, tailored for administrators.
 - [SSO Setup Using Okta SAML](https://docs.graphiant.com/docs/sso-setup-using-okta-saml.md): Learn about Graphiant Single Sign-On (SSO) with Okta, including setup steps for integrating Graphiant and configuring SAML for seamless authentication.
 - [Multi-Factor Authentification (MFA)](https://docs.graphiant.com/docs/multi-factor-authentification-mfa.md): Enhance your account security with multi-factor authentication (MFA) in the Graphiant Portal. Set up SMS or Google Authenticator easily for all users.
-- [Purchasing Graphiant Service Credits on AWS Marketplace](https://docs.graphiant.com/docs/purchasing-graphiant-service-credits-on-aws-marketplace.md)
-- [Support](https://docs.graphiant.com/docs/support.md)
-- [About Graphiant Support](https://docs.graphiant.com/docs/about-graphiant-support.md)
-- [Graphiant Support Levels for Partners](https://docs.graphiant.com/docs/graphiant-support-levels-for-partners.md)
+- [Purchasing Graphiant Service Credits on AWS Marketplace](https://docs.graphiant.com/docs/purchasing-graphiant-service-credits-on-aws-marketplace.md): Learn how to purchase Graphiant service credits through AWS Marketplace and apply them to your Graphiant account.
+- [Support](https://docs.graphiant.com/docs/support.md): Access Graphiant support resources, troubleshooting guidance, service information, and technical assistance options.
+- [About Graphiant Support](https://docs.graphiant.com/docs/about-graphiant-support.md): Learn how Graphiant Support helps customers resolve technical issues, access assistance, and maintain reliable network services.
+- [Graphiant Support Levels for Partners](https://docs.graphiant.com/docs/graphiant-support-levels-for-partners.md): Learn about Graphiant partner support levels, escalation paths, responsibilities, and available technical assistance.
 - [Release Notes in the Graphiant Portal](https://docs.graphiant.com/docs/release-notes-in-the-graphiant-portal.md): Access Graphiant's Release Notes easily via the Portal for updates on features, fixes, and issues. Stay informed with the latest changes!
-- [RMA Process](https://docs.graphiant.com/docs/rma-process.md)
+- [RMA Process](https://docs.graphiant.com/docs/rma-process.md): Review the Graphiant return merchandise authorization process for replacing or returning eligible hardware devices.
 
 ## v1-api (API Reference)
 
-- [/v2/allowlist/create](https://docs.graphiant.com/apidocs/v2-allowlist-create-1.md)
 - [Introduction](https://docs.graphiant.com/apidocs/introduction-1.md)
+- [/v2/allowlist/create](https://docs.graphiant.com/apidocs/v2-allowlist-create-1.md)
 - [/v2/integration/](https://docs.graphiant.com/apidocs/v2-integration-1.md)
 - [/v2/notificationmutelist/create](https://docs.graphiant.com/apidocs/v2-notificationmutelist-create-1.md)
 - [/v2/notification/create](https://docs.graphiant.com/apidocs/v2-notification-create-1.md)
@@ -371,7 +386,9 @@
 - [/v1/extranets](https://docs.graphiant.com/apidocs/v1-extranets-3.md)
 - [/v1/gateways](https://docs.graphiant.com/apidocs/v1-gateways-3.md)
 - [/v1/gateways](https://docs.graphiant.com/apidocs/v1-gateways-4.md)
+- [/v1/extranet/b2b/producer](https://docs.graphiant.com/apidocs/v1-extranet-b2b-producer.md)
 - [/v1/gateways](https://docs.graphiant.com/apidocs/v1-gateways-5.md)
+- [/v1/extranet/b2b/matches/{matchId}/consumer](https://docs.graphiant.com/apidocs/v1-extranet-b2b-matches-matchid-consumer.md)
 - [/v1/global/apps/custom](https://docs.graphiant.com/apidocs/v1-global-apps-custom-2.md)
 - [/v1/global/apps/custom](https://docs.graphiant.com/apidocs/v1-global-apps-custom-3.md)
 - [/v1/global/content-filters](https://docs.graphiant.com/apidocs/v1-global-content-filters-2.md)
@@ -422,6 +439,7 @@
 - [/v1/global/site-lists/{id}](https://docs.graphiant.com/apidocs/v1-global-site-lists-id-4.md)
 - [/v1/global/site-lists/{id}](https://docs.graphiant.com/apidocs/v1-global-site-lists-id-5.md)
 - [/v1/extranets/source-segments](https://docs.graphiant.com/apidocs/v1-extranets-source-segments-1.md)
+- [/v1/extranet/b2b/matches/{matchId}](https://docs.graphiant.com/apidocs/v1-extranet-b2b-matches-matchid-2.md)
 - [/v1/enterprise/snapshot](https://docs.graphiant.com/apidocs/v1-enterprise-snapshot-1.md)
 - [/v1/enterprise/allocation](https://docs.graphiant.com/apidocs/v1-enterprise-allocation-1.md)
 - [/v1/global/apps/categories](https://docs.graphiant.com/apidocs/v1-global-apps-categories-1.md)
@@ -495,6 +513,7 @@
 - [/v1/global/snmps/site](https://docs.graphiant.com/apidocs/v1-global-snmps-site-1.md)
 - [/v1/global/syslogs](https://docs.graphiant.com/apidocs/v1-global-syslogs-1.md)
 - [/v1/global/syslogs/site](https://docs.graphiant.com/apidocs/v1-global-syslogs-site-1.md)
+- [/v1/extranet/b2b/services/summary](https://docs.graphiant.com/apidocs/v1-extranet-b2b-services-summary.md)
 - [/v1/global/traffic-policies](https://docs.graphiant.com/apidocs/v1-global-traffic-policies-1.md)
 - [/v1/global/apps/graphiant](https://docs.graphiant.com/apidocs/v1-global-apps-graphiant-1.md)
 - [/v1/gateways/guest-consumer/{matchId}](https://docs.graphiant.com/apidocs/v1-gateways-guest-consumer-matchid-1.md)
@@ -552,6 +571,7 @@
 - [/v1/devices/bringup](https://docs.graphiant.com/apidocs/v1-devices-bringup-2.md)
 - [/v1/devices/bringup](https://docs.graphiant.com/apidocs/v1-devices-bringup-3.md)
 - [/v1/devices/rma](https://docs.graphiant.com/apidocs/v1-devices-rma-1.md)
+- [/v1/extranet/b2b/matches/pause](https://docs.graphiant.com/apidocs/v1-extranet-b2b-matches-pause.md)
 - [/v1/devices/inventory/serial-num](https://docs.graphiant.com/apidocs/v1-devices-inventory-serial-num-1.md)
 - [/v1/devices/inventory/request-return](https://docs.graphiant.com/apidocs/v1-devices-inventory-request-return-1.md)
 - [/v1/device-status/history](https://docs.graphiant.com/apidocs/v1-device-status-history-1.md)
@@ -564,7 +584,9 @@
 - [/v1/device/routing/odp/nbrid](https://docs.graphiant.com/apidocs/v1-device-routing-odp-nbrid-1.md)
 - [/v1/device/routing/bgp/nbrs/per-afi-prefix](https://docs.graphiant.com/apidocs/v1-device-routing-bgp-nbrs-per-afi-prefix-1.md)
 - [/v1/device/routing/vrf/bgp/route-count](https://docs.graphiant.com/apidocs/v1-device-routing-vrf-bgp-route-count-1.md)
+- [/v1/extranet/b2b/consumers/{id}/prefixes](https://docs.graphiant.com/apidocs/v1-extranet-b2b-consumers-id-prefixes.md)
 - [/v1/device/routing/vrf/bgp/eibgp-route-count](https://docs.graphiant.com/apidocs/v1-device-routing-vrf-bgp-eibgp-route-count-1.md)
+- [/v1/extranet/b2b/matches/{matchId}/status](https://docs.graphiant.com/apidocs/v1-extranet-b2b-matches-matchid-status.md)
 - [/v1/devices/routing/vrf/protocol-route-count](https://docs.graphiant.com/apidocs/v1-devices-routing-vrf-protocol-route-count-1.md)
 - [/v1/device/routing/rib/route-count](https://docs.graphiant.com/apidocs/v1-device-routing-rib-route-count-1.md)
 - [/v1/device/routing/ospfv2/areaid](https://docs.graphiant.com/apidocs/v1-device-routing-ospfv2-areaid-1.md)

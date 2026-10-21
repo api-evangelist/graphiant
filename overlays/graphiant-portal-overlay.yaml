@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for the Graphiant Portal REST API
   version: 1.0.0
-extends: openapi/graphiant-portal-openapi-original.json
+extends: ../openapi/_original/graphiant-portal-openapi-original.json
 x-provenance:
   generated: '2026-08-01'
   method: generated

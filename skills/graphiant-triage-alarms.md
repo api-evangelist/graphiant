@@ -1,24 +1,26 @@
 ---
-name: Triage Graphiant alarms and route notifications
-description: Read parent and child alarms, acknowledge them, suppress noise with allowlists and mute lists, and wire notification rules to email or an outbound integration.
+name: graphiant-triage-alarms
+description: Read parent and child alarms, acknowledge them, suppress noise with allowlists
+  and mute lists, and wire notification rules to email or an outbound integration.
 api: openapi/graphiant-portal-openapi-original.json
 generated: '2026-08-01'
 method: generated
 operations:
-  - POST /v2/parentalertlist
-  - POST /v2/childalertlist
-  - POST /v2/ack/createupdate
-  - POST /v2/rulelist
-  - POST /v2/rule/enabledisable
-  - POST /v2/allowlist/create
-  - GET /v2/allowlist-by-enterprise
-  - POST /v2/notificationmutelist/create
-  - POST /v2/notification/create
-  - POST /v2/notificationlist
-  - POST /v2/notification/enabledisable
-  - POST /v2/integration/
-  - GET /v2/integration/getall/{enterpriseId}
-  - GET /v2/integration/test/{enterpriseId}/{integrationId}
+- postV2Parentalertlist
+- postV2Childalertlist
+- postV2AckCreateupdate
+- postV2Rulelist
+- postV2RuleEnabledisable
+- postV2AllowlistCreate
+- getV2AllowlistByEnterprise
+- postV2NotificationmutelistCreate
+- postV2NotificationCreate
+- postV2Notificationlist
+- postV2NotificationEnabledisable
+- postV2Integration
+- getV2IntegrationGetallByEnterpriseId
+- getV2IntegrationTestByEnterpriseIdByIntegrationId
+title: Triage Graphiant alarms and route notifications
 ---
 
 # Triage Graphiant alarms and route notifications

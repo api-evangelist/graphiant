@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-policy-route-tag-sets-tag-detail-get-response-schema.json",
+  "title": "v1PolicyRouteTagSetsTagDetailGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-policy-api-openapi.yml#/components/schemas/v1PolicyRouteTagSetsTagDetailGetResponse",
+  "type": "object",
+  "properties": {
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2RouteTagDevice"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2RouteTag": {
+      "type": "object",
+      "properties": {
+        "levelOne": {
+          "type": "string"
+        },
+        "levelTwo": {
+          "type": "string"
+        },
+        "levelZero": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2RouteTagDevice": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "locationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "siteId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tag": {
+          "$ref": "#/$defs/manaV2RouteTag"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

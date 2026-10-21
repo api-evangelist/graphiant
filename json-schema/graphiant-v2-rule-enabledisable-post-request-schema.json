@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-rule-enabledisable-post-request-schema.json",
+  "title": "v2RuleEnabledisablePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-rule-api-openapi.yml#/components/schemas/v2RuleEnabledisablePostRequest",
+  "type": "object",
+  "properties": {
+    "enable": {
+      "type": "boolean",
+      "description": "Enable or disable. True means enable (required)"
+    },
+    "ruleIdList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "List of rule ids to enable/disable (required)"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "enable",
+    "ruleIdList"
+  ]
+}

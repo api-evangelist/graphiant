@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-lan-segments-interfaces-public-get-response-schema.json",
+  "title": "v1LanSegmentsInterfacesPublicGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-lan-segments-api-openapi.yml#/components/schemas/v1LanSegmentsInterfacesPublicGetResponse",
+  "type": "object",
+  "properties": {
+    "lanSegmentIds": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/manaV2LanSegmentPublicInterfacesLists"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2LanSegmentPublicInterfaceEntry": {
+      "type": "object",
+      "properties": {
+        "interfaceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "network.interface id (required)"
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "IPv4 host/prefix strings from interface_ip_address (non-stale rows)"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Device interface name (BGP local_interface uses this) (required)"
+        },
+        "storageProvider": {
+          "type": "string",
+          "description": "Interface storage provider (cloud provider for gateway LAN interfaces)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2LanSegmentPublicInterfacesLists": {
+      "type": "object",
+      "properties": {
+        "privateInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2LanSegmentPublicInterfaceEntry"
+          }
+        },
+        "publicInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2LanSegmentPublicInterfaceEntry"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

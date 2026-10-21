@@ -1,0 +1,573 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-sites-site-id-circuits-get-response-schema.json",
+  "title": "v1SitesSiteIdCircuitsGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-sites-api-openapi.yml#/components/schemas/v1SitesSiteIdCircuitsGetResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1SitesSiteIdCircuitsGetResponseData"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufDuration": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BfdInstance": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "minimumInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BfdNeighbor": {
+      "type": "object",
+      "properties": {
+        "desiredMinimumTxInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "ifIndex": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "interface": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "localDiag": {
+          "type": "string"
+        },
+        "peerAddress": {
+          "type": "string"
+        },
+        "remoteDiag": {
+          "type": "string"
+        },
+        "requiredMinimumRxInterval": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "segmentName": {
+          "type": "string"
+        },
+        "sourceAddress": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "timeInState": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        },
+        "up": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpAggregation": {
+      "type": "object",
+      "properties": {
+        "asSet": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "summaryOnly": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpDynamicNeighborOperPeer": {
+      "type": "object",
+      "properties": {
+        "lastOperStatusChange": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "localAddress": {
+          "type": "string",
+          "description": "Local address used for this peer session, if known from oper"
+        },
+        "operStatus": {
+          "type": "boolean",
+          "description": "True when the BGP session to this peer is operationally up (e.g. established)"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Peer ASN from oper, if reported"
+        },
+        "remoteAddress": {
+          "type": "string",
+          "description": "Peer address from device oper state (IPv4/IPv6; may include IPv6 zone id)"
+        },
+        "state": {
+          "type": "string",
+          "description": "BGP FSM state for this peer session"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpMultipath": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighbor": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpNeighborAddressFamily"
+          }
+        },
+        "allowAsIn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "asOverride": {
+          "type": "boolean"
+        },
+        "bfd": {
+          "$ref": "#/$defs/manaV2BfdInstance"
+        },
+        "bfdNeighbor": {
+          "$ref": "#/$defs/manaV2BfdNeighbor"
+        },
+        "bgpType": {
+          "type": "string"
+        },
+        "defaultOriginate": {
+          "type": "string",
+          "description": "Set when default route needs to be advertised in BGP domain"
+        },
+        "dynamicNeighborPeers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpDynamicNeighborOperPeer"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "localInterface": {
+          "type": "string"
+        },
+        "maxPrefix": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Maximum number of prefixes that can be received from neighbor"
+        },
+        "md5Password": {
+          "type": "string"
+        },
+        "multiHop": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Set when EBGP multi-hop functionality is enabled"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "removePrivateAs": {
+          "type": "boolean"
+        },
+        "sendCommunity": {
+          "type": "boolean",
+          "description": "Flag for sending standard, extended, and large communities"
+        },
+        "state": {
+          "type": "string"
+        },
+        "timeSinceLastOperChange": {
+          "$ref": "#/$defs/googleProtobufDuration"
+        },
+        "up": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborAddressFamily": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inboundPolicy": {
+          "type": "string"
+        },
+        "outboundPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpRedistribute": {
+      "type": "object",
+      "properties": {
+        "bgp": {
+          "type": "boolean"
+        },
+        "connected": {
+          "type": "boolean"
+        },
+        "dia": {
+          "type": "boolean"
+        },
+        "ospfv2": {
+          "type": "boolean"
+        },
+        "static": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Circuit": {
+      "type": "object",
+      "properties": {
+        "bgpAggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpAggregation"
+          }
+        },
+        "bgpMultipath": {
+          "$ref": "#/$defs/manaV2BgpMultipath"
+        },
+        "bgpNeighbors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2BgpNeighbor"
+          }
+        },
+        "bgpRedistributions": {
+          "$ref": "#/$defs/manaV2BgpRedistribute"
+        },
+        "carrier": {
+          "type": "string"
+        },
+        "circuitType": {
+          "type": "string"
+        },
+        "connectionType": {
+          "type": "string"
+        },
+        "coreLogicalInterfacesV2": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2CircuitInterface"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "diaEnabled": {
+          "type": "boolean"
+        },
+        "diaSnmpIndex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discoveredPublicIp": {
+          "type": "string"
+        },
+        "dropMechanism": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interfaceName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "lastResort": {
+          "type": "boolean"
+        },
+        "linkDownSpeedMbps": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "linkUpSpeedMbps": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "loopback": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "patAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privateIp": {
+          "type": "string"
+        },
+        "profile": {
+          "$ref": "#/$defs/manaV2QoSProfile"
+        },
+        "qosProfile": {
+          "type": "string"
+        },
+        "qosProfileType": {
+          "type": "string"
+        },
+        "snmpIndex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "staticRoutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2StaticRoute"
+          }
+        },
+        "wanInterfaceV2": {
+          "$ref": "#/$defs/manaV2CircuitInterface"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2CircuitInterface": {
+      "type": "object",
+      "properties": {
+        "adminStatus": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operStatus": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2QoSProfile": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "queues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2QoSProfileQueue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2QoSProfileQueue": {
+      "type": "object",
+      "properties": {
+        "bandwidthPercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "defaultQueue": {
+          "type": "boolean"
+        },
+        "slaClass": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2StaticRoute": {
+      "type": "object",
+      "properties": {
+        "administrativeDistance": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nextHop": {
+          "$ref": "#/$defs/manaV2StaticRouteNexthop"
+        },
+        "nextHops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2StaticRouteNexthop"
+          }
+        },
+        "prefix": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2StaticRouteNexthop": {
+      "type": "object",
+      "properties": {
+        "circuit": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metric": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "nextHopAddress": {
+          "type": "string"
+        },
+        "nexthop": {
+          "type": "string"
+        },
+        "outgoingInterface": {
+          "type": "string"
+        },
+        "thirdPartyIpsecTunnel": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1SitesSiteIdCircuitsGetResponseData": {
+      "type": "object",
+      "properties": {
+        "circuits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2Circuit"
+          }
+        },
+        "deviceId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

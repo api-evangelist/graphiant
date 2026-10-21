@@ -1,0 +1,1263 @@
+{
+  "@context": {
+    "@vocab": "https://graphiant.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "graphiant": "https://graphiant.com/schema#",
+    "v1AccountMfaConfirmationPostRequest": "graphiant:v1AccountMfaConfirmationPostRequest",
+    "code": {
+      "@id": "graphiant:code",
+      "@type": "xsd:string"
+    },
+    "confirmed": {
+      "@id": "graphiant:confirmed",
+      "@type": "xsd:boolean"
+    },
+    "id": {
+      "@id": "graphiant:id",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "graphiant:type",
+      "@type": "xsd:string"
+    },
+    "v1AccountMfaPutResponse": "graphiant:v1AccountMfaPutResponse",
+    "qrCode": {
+      "@id": "graphiant:qrCode",
+      "@type": "xsd:string"
+    },
+    "sharedSecret": {
+      "@id": "graphiant:sharedSecret",
+      "@type": "xsd:string"
+    },
+    "v1AccountMfaGetResponse": "graphiant:v1AccountMfaGetResponse",
+    "v1AccountMfaPutRequest": "graphiant:v1AccountMfaPutRequest",
+    "phoneNumber": {
+      "@id": "graphiant:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "v1AccountInfoPatchRequest": "graphiant:v1AccountInfoPatchRequest",
+    "firstName": {
+      "@id": "graphiant:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "graphiant:lastName",
+      "@type": "xsd:string"
+    },
+    "timeZone": {
+      "@id": "graphiant:timeZone",
+      "@type": "xsd:string"
+    },
+    "v1AccountPasswordPatchRequest": "graphiant:v1AccountPasswordPatchRequest",
+    "oldPassword": {
+      "@id": "graphiant:oldPassword",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "graphiant:password",
+      "@type": "xsd:string"
+    },
+    "v1AccountEmailPatchRequest": "graphiant:v1AccountEmailPatchRequest",
+    "email": {
+      "@id": "graphiant:email",
+      "@type": "xsd:string"
+    },
+    "v1AccountMfaConfirmationPostResponse": "graphiant:v1AccountMfaConfirmationPostResponse",
+    "affectedUsers": {
+      "@id": "graphiant:affectedUsers",
+      "@container": "@list"
+    },
+    "v2AckCreateupdatePostRequest": "graphiant:v2AckCreateupdatePostRequest",
+    "alertIdList": {
+      "@id": "graphiant:alertIdList",
+      "@container": "@list"
+    },
+    "reason": {
+      "@id": "graphiant:reason",
+      "@type": "xsd:string"
+    },
+    "v1ActivityLogsPostResponse": "graphiant:v1ActivityLogsPostResponse",
+    "cursorRef": {
+      "@id": "graphiant:cursorRef",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "graphiant:details",
+      "@container": "@list"
+    },
+    "filterEntities": {
+      "@id": "graphiant:filterEntities"
+    },
+    "filterJobTypes": {
+      "@id": "graphiant:filterJobTypes",
+      "@container": "@list"
+    },
+    "totalLogs": {
+      "@id": "graphiant:totalLogs",
+      "@type": "xsd:integer"
+    },
+    "auditmonActivityDetailsTargetEvent": "graphiant:auditmonActivityDetailsTargetEvent",
+    "state": {
+      "@id": "graphiant:state",
+      "@type": "xsd:string"
+    },
+    "stateId": {
+      "@id": "graphiant:stateId",
+      "@type": "xsd:integer"
+    },
+    "traceSessionId": {
+      "@id": "graphiant:traceSessionId",
+      "@type": "xsd:string"
+    },
+    "ts": {
+      "@id": "graphiant:ts",
+      "@type": "@id"
+    },
+    "auditmonActivityDetails": "graphiant:auditmonActivityDetails",
+    "action": {
+      "@id": "graphiant:action",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "graphiant:attributes",
+      "@container": "@list"
+    },
+    "category": {
+      "@id": "graphiant:category",
+      "@type": "xsd:string"
+    },
+    "disableAutoTimeout": {
+      "@id": "graphiant:disableAutoTimeout",
+      "@type": "xsd:boolean"
+    },
+    "endTs": {
+      "@id": "graphiant:endTs",
+      "@type": "@id"
+    },
+    "enterpriseId": {
+      "@id": "graphiant:enterpriseId",
+      "@type": "xsd:integer"
+    },
+    "initiatorType": {
+      "@id": "graphiant:initiatorType",
+      "@type": "xsd:string"
+    },
+    "jobEntities": {
+      "@id": "graphiant:jobEntities",
+      "@container": "@list"
+    },
+    "jobType": {
+      "@id": "graphiant:jobType",
+      "@type": "xsd:string"
+    },
+    "originalEnterpriseId": {
+      "@id": "graphiant:originalEnterpriseId",
+      "@type": "xsd:integer"
+    },
+    "startTs": {
+      "@id": "graphiant:startTs",
+      "@type": "@id"
+    },
+    "status": {
+      "@id": "graphiant:status",
+      "@type": "xsd:string"
+    },
+    "targets": {
+      "@id": "graphiant:targets",
+      "@container": "@list"
+    },
+    "usage": {
+      "@id": "graphiant:usage",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "graphiant:user",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "graphiant:userId",
+      "@type": "xsd:string"
+    },
+    "v1ActivityLogsPostRequest": "graphiant:v1ActivityLogsPostRequest",
+    "numLogs": {
+      "@id": "graphiant:numLogs",
+      "@type": "xsd:integer"
+    },
+    "oldTs": {
+      "@id": "graphiant:oldTs",
+      "@type": "@id"
+    },
+    "recentTs": {
+      "@id": "graphiant:recentTs",
+      "@type": "@id"
+    },
+    "selector": {
+      "@id": "graphiant:selector",
+      "@type": "@id"
+    },
+    "selectorV2": {
+      "@id": "graphiant:selectorV2",
+      "@type": "@id"
+    },
+    "auditActivityItem": "graphiant:auditActivityItem",
+    "name": {
+      "@id": "graphiant:name",
+      "@type": "xsd:string"
+    },
+    "auditmonActivityLogsSelectorV2": "graphiant:auditmonActivityLogsSelectorV2",
+    "deviceIds": {
+      "@id": "graphiant:deviceIds",
+      "@container": "@list"
+    },
+    "entities": {
+      "@id": "graphiant:entities",
+      "@container": "@list"
+    },
+    "siteIds": {
+      "@id": "graphiant:siteIds",
+      "@container": "@list"
+    },
+    "statuses": {
+      "@id": "graphiant:statuses",
+      "@container": "@list"
+    },
+    "types": {
+      "@id": "graphiant:types",
+      "@container": "@list"
+    },
+    "userIds": {
+      "@id": "graphiant:userIds",
+      "@container": "@list"
+    },
+    "v1ActivityLogsPostResponseActivityItems": "graphiant:v1ActivityLogsPostResponseActivityItems",
+    "items": {
+      "@id": "graphiant:items",
+      "@container": "@list"
+    },
+    "googleProtobufTimestamp": "graphiant:googleProtobufTimestamp",
+    "nanos": {
+      "@id": "graphiant:nanos",
+      "@type": "xsd:integer"
+    },
+    "seconds": {
+      "@id": "graphiant:seconds",
+      "@type": "xsd:integer"
+    },
+    "auditmonActivityLogsSelector": "graphiant:auditmonActivityLogsSelector",
+    "inProgress": {
+      "@id": "graphiant:inProgress",
+      "@type": "xsd:boolean"
+    },
+    "jobEntity": {
+      "@id": "graphiant:jobEntity",
+      "@type": "@id"
+    },
+    "targetIds": {
+      "@id": "graphiant:targetIds",
+      "@container": "@list"
+    },
+    "auditmonActivityDetailsTarget": "graphiant:auditmonActivityDetailsTarget",
+    "detailedFailureReason": {
+      "@id": "graphiant:detailedFailureReason",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "graphiant:events",
+      "@container": "@list"
+    },
+    "failureReason": {
+      "@id": "graphiant:failureReason",
+      "@type": "xsd:string"
+    },
+    "ids": {
+      "@id": "graphiant:ids",
+      "@container": "@list"
+    },
+    "v2AggregatedNotificationGetStateGetResponse": "graphiant:v2AggregatedNotificationGetStateGetResponse",
+    "v2AggregatedNotificationEnableDisablePostRequest": "graphiant:v2AggregatedNotificationEnableDisablePostRequest",
+    "enable": {
+      "@id": "graphiant:enable",
+      "@type": "xsd:boolean"
+    },
+    "v2AllowlistRuleIdGetResponse": "graphiant:v2AllowlistRuleIdGetResponse",
+    "records": {
+      "@id": "graphiant:records",
+      "@container": "@list"
+    },
+    "v2AllowlistCreatePostRequest": "graphiant:v2AllowlistCreatePostRequest",
+    "alertId": {
+      "@id": "graphiant:alertId",
+      "@type": "xsd:string"
+    },
+    "noteText": {
+      "@id": "graphiant:noteText",
+      "@type": "xsd:string"
+    },
+    "alertserviceAllowAlertNotifcationListRecord": "graphiant:alertserviceAllowAlertNotifcationListRecord",
+    "createTime": {
+      "@id": "graphiant:createTime",
+      "@type": "xsd:integer"
+    },
+    "deviceInterface": {
+      "@id": "graphiant:deviceInterface",
+      "@type": "xsd:string"
+    },
+    "deviceName": {
+      "@id": "graphiant:deviceName",
+      "@type": "xsd:string"
+    },
+    "enterpriseName": {
+      "@id": "graphiant:enterpriseName",
+      "@type": "xsd:string"
+    },
+    "entityId": {
+      "@id": "graphiant:entityId",
+      "@type": "xsd:string"
+    },
+    "isWanCircuit": {
+      "@id": "graphiant:isWanCircuit",
+      "@type": "xsd:boolean"
+    },
+    "peerDeviceInterface": {
+      "@id": "graphiant:peerDeviceInterface",
+      "@type": "xsd:string"
+    },
+    "peerDeviceName": {
+      "@id": "graphiant:peerDeviceName",
+      "@type": "xsd:string"
+    },
+    "ruleId": {
+      "@id": "graphiant:ruleId",
+      "@type": "xsd:string"
+    },
+    "ruleName": {
+      "@id": "graphiant:ruleName",
+      "@type": "xsd:string"
+    },
+    "siteName": {
+      "@id": "graphiant:siteName",
+      "@type": "xsd:string"
+    },
+    "vrfId": {
+      "@id": "graphiant:vrfId",
+      "@type": "xsd:string"
+    },
+    "v2AllowlistByEnterpriseGetResponse": "graphiant:v2AllowlistByEnterpriseGetResponse",
+    "ipfixAppStateSummaryCount": "graphiant:ipfixAppStateSummaryCount",
+    "appHealth": {
+      "@id": "graphiant:appHealth"
+    },
+    "appIncidents": {
+      "@id": "graphiant:appIncidents",
+      "@type": "@id"
+    },
+    "appsOnDeviceCount": {
+      "@id": "graphiant:appsOnDeviceCount",
+      "@type": "xsd:integer"
+    },
+    "averageQoe": {
+      "@id": "graphiant:averageQoe",
+      "@type": "xsd:decimal"
+    },
+    "circuitsIncidents": {
+      "@id": "graphiant:circuitsIncidents",
+      "@container": "@list"
+    },
+    "circuitsIncidentsv2": {
+      "@id": "graphiant:circuitsIncidentsv2",
+      "@container": "@list"
+    },
+    "statsmonCircuitIncidents": "graphiant:statsmonCircuitIncidents",
+    "numFairIncidents": {
+      "@id": "graphiant:numFairIncidents",
+      "@type": "xsd:integer"
+    },
+    "numPoorIncidents": {
+      "@id": "graphiant:numPoorIncidents",
+      "@type": "xsd:integer"
+    },
+    "v1AppsDeviceDeviceIdTopPostRequest": "graphiant:v1AppsDeviceDeviceIdTopPostRequest",
+    "numApps": {
+      "@id": "graphiant:numApps",
+      "@type": "xsd:integer"
+    },
+    "timeWindow": {
+      "@id": "graphiant:timeWindow",
+      "@type": "@id"
+    },
+    "v1AppsAppSummaryPostRequest": "graphiant:v1AppsAppSummaryPostRequest",
+    "deviceId": {
+      "@id": "graphiant:deviceId",
+      "@type": "xsd:integer"
+    },
+    "isDia": {
+      "@id": "graphiant:isDia",
+      "@type": "xsd:boolean"
+    },
+    "ipfixAppUtilizationSummary": "graphiant:ipfixAppUtilizationSummary",
+    "appId": {
+      "@id": "graphiant:appId",
+      "@type": "xsd:integer"
+    },
+    "appName": {
+      "@id": "graphiant:appName",
+      "@type": "xsd:string"
+    },
+    "statsmonCircuitsIncidents": "graphiant:statsmonCircuitsIncidents",
+    "data": {
+      "@id": "graphiant:data",
+      "@container": "@list"
+    },
+    "ipfixAppBandwidthStats": "graphiant:ipfixAppBandwidthStats",
+    "dlBw": {
+      "@id": "graphiant:dlBw",
+      "@type": "xsd:decimal"
+    },
+    "ulBw": {
+      "@id": "graphiant:ulBw",
+      "@type": "xsd:decimal"
+    },
+    "ipfixTimeWindow": "graphiant:ipfixTimeWindow",
+    "bucketSizeSec": {
+      "@id": "graphiant:bucketSizeSec",
+      "@type": "xsd:integer"
+    },
+    "statsmonV2CircuitIncidentsSelector": "graphiant:statsmonV2CircuitIncidentsSelector",
+    "circuitName": {
+      "@id": "graphiant:circuitName",
+      "@type": "xsd:string"
+    },
+    "ipfixTwampMetrics": "graphiant:ipfixTwampMetrics",
+    "healthAvg": {
+      "@id": "graphiant:healthAvg",
+      "@type": "xsd:string"
+    },
+    "jitter": {
+      "@id": "graphiant:jitter",
+      "@type": "xsd:decimal"
+    },
+    "latency": {
+      "@id": "graphiant:latency",
+      "@type": "xsd:decimal"
+    },
+    "loss": {
+      "@id": "graphiant:loss",
+      "@type": "xsd:decimal"
+    },
+    "mos": {
+      "@id": "graphiant:mos",
+      "@type": "xsd:decimal"
+    },
+    "v1AppsDeviceDeviceIdTopPostResponse": "graphiant:v1AppsDeviceDeviceIdTopPostResponse",
+    "appsUtilization": {
+      "@id": "graphiant:appsUtilization",
+      "@container": "@list"
+    },
+    "totalCount": {
+      "@id": "graphiant:totalCount",
+      "@type": "xsd:integer"
+    },
+    "v1AppsSiteSiteIdTopPostResponse": "graphiant:v1AppsSiteSiteIdTopPostResponse",
+    "statsmonV2CircuitIncidentsData": "graphiant:statsmonV2CircuitIncidentsData",
+    "samples": {
+      "@id": "graphiant:samples",
+      "@container": "@list"
+    },
+    "statsmonV2CircuitIncidentsDataSampleIncidents": "graphiant:statsmonV2CircuitIncidentsDataSampleIncidents",
+    "v1AppsBandwidthPostResponse": "graphiant:v1AppsBandwidthPostResponse",
+    "stats": {
+      "@id": "graphiant:stats",
+      "@container": "@list"
+    },
+    "ipfixCircuitMetrics": "graphiant:ipfixCircuitMetrics",
+    "slaClass": {
+      "@id": "graphiant:slaClass",
+      "@type": "xsd:string"
+    },
+    "usagePct": {
+      "@id": "graphiant:usagePct",
+      "@type": "xsd:decimal"
+    },
+    "v1AppsVisualizationPostResponse": "graphiant:v1AppsVisualizationPostResponse",
+    "appsVisualization": {
+      "@id": "graphiant:appsVisualization",
+      "@container": "@list"
+    },
+    "statsmonCircuitsIncidentsData": "graphiant:statsmonCircuitsIncidentsData",
+    "dlIncidents": {
+      "@id": "graphiant:dlIncidents",
+      "@type": "@id"
+    },
+    "overallStatus": {
+      "@id": "graphiant:overallStatus",
+      "@type": "xsd:string"
+    },
+    "totalIncidents": {
+      "@id": "graphiant:totalIncidents",
+      "@type": "@id"
+    },
+    "ulIncidents": {
+      "@id": "graphiant:ulIncidents",
+      "@type": "@id"
+    },
+    "v1AppsBandwidthPostRequest": "graphiant:v1AppsBandwidthPostRequest",
+    "dlCircuitName": {
+      "@id": "graphiant:dlCircuitName",
+      "@type": "xsd:string"
+    },
+    "ulCircuitName": {
+      "@id": "graphiant:ulCircuitName",
+      "@type": "xsd:string"
+    },
+    "statsmonV2CircuitIncidentsDataSample": "graphiant:statsmonV2CircuitIncidentsDataSample",
+    "ipfixAppVisualization": "graphiant:ipfixAppVisualization",
+    "circuitAvailability": {
+      "@id": "graphiant:circuitAvailability"
+    },
+    "circuitMap": {
+      "@id": "graphiant:circuitMap"
+    },
+    "currentStatus": {
+      "@id": "graphiant:currentStatus",
+      "@type": "xsd:string"
+    },
+    "ipfixAppIncidents": "graphiant:ipfixAppIncidents",
+    "ipfixAppIncidentsData": "graphiant:ipfixAppIncidentsData",
+    "appCount": {
+      "@id": "graphiant:appCount",
+      "@type": "xsd:integer"
+    },
+    "appStatus": {
+      "@id": "graphiant:appStatus",
+      "@type": "xsd:string"
+    },
+    "v1AppsAppSummaryPostResponse": "graphiant:v1AppsAppSummaryPostResponse",
+    "appSummary": {
+      "@id": "graphiant:appSummary",
+      "@type": "@id"
+    },
+    "v1AppsSiteSiteIdTopPostRequest": "graphiant:v1AppsSiteSiteIdTopPostRequest",
+    "v1AppsVisualizationPostRequest": "graphiant:v1AppsVisualizationPostRequest",
+    "statsmonV2CircuitIncidents": "graphiant:statsmonV2CircuitIncidents",
+    "statsmonTimeWindow": "graphiant:statsmonTimeWindow",
+    "v2AssistantVersionPostResponse": "graphiant:v2AssistantVersionPostResponse",
+    "versionId": {
+      "@id": "graphiant:versionId",
+      "@type": "xsd:string"
+    },
+    "v2AssistantGetConversationDetailsPostResponse": "graphiant:v2AssistantGetConversationDetailsPostResponse",
+    "conversationId": {
+      "@id": "graphiant:conversationId",
+      "@type": "xsd:string"
+    },
+    "responseList": {
+      "@id": "graphiant:responseList",
+      "@container": "@list"
+    },
+    "assistantAssistantConversation": "graphiant:assistantAssistantConversation",
+    "conversationHeader": {
+      "@id": "graphiant:conversationHeader",
+      "@type": "xsd:string"
+    },
+    "conversationRecentTimestamp": {
+      "@id": "graphiant:conversationRecentTimestamp",
+      "@type": "xsd:integer"
+    },
+    "enableContextHistory": {
+      "@id": "graphiant:enableContextHistory",
+      "@type": "xsd:boolean"
+    },
+    "v2AssistantConversationContextHistoryPostRequest": "graphiant:v2AssistantConversationContextHistoryPostRequest",
+    "v2AssistantAddToConversationPostRequest": "graphiant:v2AssistantAddToConversationPostRequest",
+    "question": {
+      "@id": "graphiant:question",
+      "@type": "@id"
+    },
+    "v2AssistantConversationInterfaceEnableDisablePostRequest": "graphiant:v2AssistantConversationInterfaceEnableDisablePostRequest",
+    "v2AssistantGetConversationDetailsPostRequest": "graphiant:v2AssistantGetConversationDetailsPostRequest",
+    "v2AssistantConversationInterfaceStateGetResponse": "graphiant:v2AssistantConversationInterfaceStateGetResponse",
+    "enabled": {
+      "@id": "graphiant:enabled",
+      "@type": "xsd:boolean"
+    },
+    "v2AssistantUpdateConversationNamePostRequest": "graphiant:v2AssistantUpdateConversationNamePostRequest",
+    "v2AssistantGetConversationsPostResponse": "graphiant:v2AssistantGetConversationsPostResponse",
+    "conversationList": {
+      "@id": "graphiant:conversationList",
+      "@container": "@list"
+    },
+    "v2AssistantAddToConversationPostResponse": "graphiant:v2AssistantAddToConversationPostResponse",
+    "dataframeDictionary": {
+      "@id": "graphiant:dataframeDictionary",
+      "@container": "@list"
+    },
+    "originalQuestion": {
+      "@id": "graphiant:originalQuestion",
+      "@type": "@id"
+    },
+    "responseId": {
+      "@id": "graphiant:responseId",
+      "@type": "xsd:string"
+    },
+    "responseLanguage": {
+      "@id": "graphiant:responseLanguage",
+      "@type": "xsd:string"
+    },
+    "responseText": {
+      "@id": "graphiant:responseText",
+      "@type": "xsd:string"
+    },
+    "responseTimestamp": {
+      "@id": "graphiant:responseTimestamp",
+      "@type": "xsd:integer"
+    },
+    "responseType": {
+      "@id": "graphiant:responseType",
+      "@type": "xsd:string"
+    },
+    "visualizationSummary": {
+      "@id": "graphiant:visualizationSummary",
+      "@type": "xsd:string"
+    },
+    "assistantAssistantQuestion": "graphiant:assistantAssistantQuestion",
+    "questionLanguage": {
+      "@id": "graphiant:questionLanguage",
+      "@type": "xsd:string"
+    },
+    "questionText": {
+      "@id": "graphiant:questionText",
+      "@type": "xsd:string"
+    },
+    "questionTimestamp": {
+      "@id": "graphiant:questionTimestamp",
+      "@type": "xsd:integer"
+    },
+    "assistantTimeWindow": "graphiant:assistantTimeWindow",
+    "assistantAssistantResponse": "graphiant:assistantAssistantResponse",
+    "assistantDataframeDictionary": "graphiant:assistantDataframeDictionary",
+    "dataframeDictionaryMap": {
+      "@id": "graphiant:dataframeDictionaryMap"
+    },
+    "xAxis": {
+      "@id": "graphiant:xAxis",
+      "@type": "xsd:string"
+    },
+    "yAxis": {
+      "@id": "graphiant:yAxis",
+      "@type": "xsd:string"
+    },
+    "v2AssistantGetConversationsPostRequest": "graphiant:v2AssistantGetConversationsPostRequest",
+    "v2AssuranceGetclassifiedapplicationlistGetResponse": "graphiant:v2AssuranceGetclassifiedapplicationlistGetResponse",
+    "classifiedApplicationList": {
+      "@id": "graphiant:classifiedApplicationList",
+      "@container": "@list"
+    },
+    "assuranceWhereWidget": "graphiant:assuranceWhereWidget",
+    "topSitesByUsers": {
+      "@id": "graphiant:topSitesByUsers",
+      "@container": "@list"
+    },
+    "topUsersByDataTransferred": {
+      "@id": "graphiant:topUsersByDataTransferred",
+      "@container": "@list"
+    },
+    "topVrfsByUsers": {
+      "@id": "graphiant:topVrfsByUsers",
+      "@container": "@list"
+    },
+    "v2AssuranceTopologyClientSummariesPostResponse": "graphiant:v2AssuranceTopologyClientSummariesPostResponse",
+    "summaries": {
+      "@id": "graphiant:summaries",
+      "@container": "@list"
+    },
+    "assuranceDnsProxyEntry": "graphiant:assuranceDnsProxyEntry",
+    "dnsproxyEntryId": {
+      "@id": "graphiant:dnsproxyEntryId",
+      "@type": "xsd:string"
+    },
+    "ipList": {
+      "@id": "graphiant:ipList",
+      "@container": "@list"
+    },
+    "nameText": {
+      "@id": "graphiant:nameText",
+      "@type": "xsd:string"
+    },
+    "portList": {
+      "@id": "graphiant:portList",
+      "@container": "@list"
+    },
+    "protocol": {
+      "@id": "graphiant:protocol",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceUpdateAiAdoptionApproveEntryPostRequest": "graphiant:v2AssuranceUpdateAiAdoptionApproveEntryPostRequest",
+    "approvedAppEntry": {
+      "@id": "graphiant:approvedAppEntry",
+      "@type": "@id"
+    },
+    "assuranceClientSessionEndpointLink": "graphiant:assuranceClientSessionEndpointLink",
+    "popName": {
+      "@id": "graphiant:popName",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceTopologySiteSummariesPostResponse": "graphiant:v2AssuranceTopologySiteSummariesPostResponse",
+    "v2AssuranceReadDnsproxyListGetResponse": "graphiant:v2AssuranceReadDnsproxyListGetResponse",
+    "dnsproxyList": {
+      "@id": "graphiant:dnsproxyList",
+      "@container": "@list"
+    },
+    "v2AssuranceCreateDnsproxyEntryPostResponse": "graphiant:v2AssuranceCreateDnsproxyEntryPostResponse",
+    "assuranceTopologyFilter": "graphiant:assuranceTopologyFilter",
+    "clientSiteIds": {
+      "@id": "graphiant:clientSiteIds",
+      "@container": "@list"
+    },
+    "regionIds": {
+      "@id": "graphiant:regionIds",
+      "@container": "@list"
+    },
+    "serverSiteIds": {
+      "@id": "graphiant:serverSiteIds",
+      "@container": "@list"
+    },
+    "v2AssuranceBucketdetailsPostResponse": "graphiant:v2AssuranceBucketdetailsPostResponse",
+    "bucketDetails": {
+      "@id": "graphiant:bucketDetails",
+      "@type": "@id"
+    },
+    "v2AssuranceBucketTopologiesPostResponse": "graphiant:v2AssuranceBucketTopologiesPostResponse",
+    "topologies": {
+      "@id": "graphiant:topologies",
+      "@container": "@list"
+    },
+    "v2AssuranceTopologyOverviewPostRequestTopologyFilter": "graphiant:v2AssuranceTopologyOverviewPostRequestTopologyFilter",
+    "assuranceClientSession": "graphiant:assuranceClientSession",
+    "bucket": {
+      "@id": "graphiant:bucket",
+      "@type": "xsd:string"
+    },
+    "clientEndpoint": {
+      "@id": "graphiant:clientEndpoint",
+      "@type": "@id"
+    },
+    "clientFlexAlgo": {
+      "@id": "graphiant:clientFlexAlgo",
+      "@type": "xsd:string"
+    },
+    "clientIp": {
+      "@id": "graphiant:clientIp",
+      "@type": "xsd:string"
+    },
+    "clientLinks": {
+      "@id": "graphiant:clientLinks",
+      "@container": "@list"
+    },
+    "clientUsername": {
+      "@id": "graphiant:clientUsername",
+      "@type": "xsd:string"
+    },
+    "exchangeServiceName": {
+      "@id": "graphiant:exchangeServiceName",
+      "@type": "xsd:string"
+    },
+    "firstSeenTs": {
+      "@id": "graphiant:firstSeenTs",
+      "@type": "@id"
+    },
+    "lanSegment": {
+      "@id": "graphiant:lanSegment",
+      "@container": "@list"
+    },
+    "lastSeenTs": {
+      "@id": "graphiant:lastSeenTs",
+      "@type": "@id"
+    },
+    "localDiaLinks": {
+      "@id": "graphiant:localDiaLinks",
+      "@container": "@list"
+    },
+    "popLinks": {
+      "@id": "graphiant:popLinks",
+      "@container": "@list"
+    },
+    "remoteDiaLinks": {
+      "@id": "graphiant:remoteDiaLinks",
+      "@container": "@list"
+    },
+    "riskStatus": {
+      "@id": "graphiant:riskStatus",
+      "@type": "xsd:string"
+    },
+    "serverEndpoint": {
+      "@id": "graphiant:serverEndpoint",
+      "@type": "@id"
+    },
+    "serverFlexAlgos": {
+      "@id": "graphiant:serverFlexAlgos",
+      "@container": "@list"
+    },
+    "serverIp": {
+      "@id": "graphiant:serverIp",
+      "@type": "xsd:string"
+    },
+    "serverLinks": {
+      "@id": "graphiant:serverLinks",
+      "@container": "@list"
+    },
+    "serverPort": {
+      "@id": "graphiant:serverPort",
+      "@type": "xsd:integer"
+    },
+    "sessionId": {
+      "@id": "graphiant:sessionId",
+      "@type": "xsd:string"
+    },
+    "sla": {
+      "@id": "graphiant:sla",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceTopologyRegionSummaryPostResponseSiteEntry": "graphiant:v2AssuranceTopologyRegionSummaryPostResponseSiteEntry",
+    "edgeCount": {
+      "@id": "graphiant:edgeCount",
+      "@type": "xsd:integer"
+    },
+    "lanSegments": {
+      "@id": "graphiant:lanSegments",
+      "@container": "@list"
+    },
+    "popNames": {
+      "@id": "graphiant:popNames",
+      "@container": "@list"
+    },
+    "regionName": {
+      "@id": "graphiant:regionName",
+      "@type": "xsd:string"
+    },
+    "siteId": {
+      "@id": "graphiant:siteId",
+      "@type": "xsd:integer"
+    },
+    "tags": {
+      "@id": "graphiant:tags",
+      "@container": "@list"
+    },
+    "v2AssuranceTopologySiteSummariesPostResponseSummary": "graphiant:v2AssuranceTopologySiteSummariesPostResponseSummary",
+    "sessionCount": {
+      "@id": "graphiant:sessionCount",
+      "@type": "xsd:integer"
+    },
+    "site": {
+      "@id": "graphiant:site",
+      "@type": "@id"
+    },
+    "v2AssuranceCreateDnsproxyEntryPostRequest": "graphiant:v2AssuranceCreateDnsproxyEntryPostRequest",
+    "dnsproxyEntry": {
+      "@id": "graphiant:dnsproxyEntry",
+      "@type": "@id"
+    },
+    "assuranceClassifiedApplication": "graphiant:assuranceClassifiedApplication",
+    "classificationEntryId": {
+      "@id": "graphiant:classificationEntryId",
+      "@type": "xsd:string"
+    },
+    "ipPrefixList": {
+      "@id": "graphiant:ipPrefixList",
+      "@container": "@list"
+    },
+    "protocolList": {
+      "@id": "graphiant:protocolList",
+      "@container": "@list"
+    },
+    "v2AssuranceUnclassifiedapplicationprofilesummaryPostRequest": "graphiant:v2AssuranceUnclassifiedapplicationprofilesummaryPostRequest",
+    "assuranceTopology": "graphiant:assuranceTopology",
+    "edges": {
+      "@id": "graphiant:edges",
+      "@container": "@list"
+    },
+    "nodes": {
+      "@id": "graphiant:nodes",
+      "@container": "@list"
+    },
+    "paths": {
+      "@id": "graphiant:paths",
+      "@container": "@list"
+    },
+    "v2AssuranceApplicationprofilesummaryPostRequest": "graphiant:v2AssuranceApplicationprofilesummaryPostRequest",
+    "assuranceBucketSummary": "graphiant:assuranceBucketSummary",
+    "assuranceBucket": {
+      "@id": "graphiant:assuranceBucket",
+      "@type": "xsd:string"
+    },
+    "bucketColor": {
+      "@id": "graphiant:bucketColor",
+      "@type": "xsd:string"
+    },
+    "bucketNameToDisplay": {
+      "@id": "graphiant:bucketNameToDisplay",
+      "@type": "xsd:string"
+    },
+    "bucketStats": {
+      "@id": "graphiant:bucketStats",
+      "@type": "@id"
+    },
+    "childBucketList": {
+      "@id": "graphiant:childBucketList",
+      "@container": "@list"
+    },
+    "childBucketStatsList": {
+      "@id": "graphiant:childBucketStatsList",
+      "@container": "@list"
+    },
+    "isRoot": {
+      "@id": "graphiant:isRoot",
+      "@type": "xsd:boolean"
+    },
+    "isTerminal": {
+      "@id": "graphiant:isTerminal",
+      "@type": "xsd:boolean"
+    },
+    "parentBucketList": {
+      "@id": "graphiant:parentBucketList",
+      "@container": "@list"
+    },
+    "v2AssuranceTopologyClientSessionDetailsPostRequest": "graphiant:v2AssuranceTopologyClientSessionDetailsPostRequest",
+    "assuranceBucketDetails": "graphiant:assuranceBucketDetails",
+    "appCountThreatHigh": {
+      "@id": "graphiant:appCountThreatHigh",
+      "@type": "xsd:integer"
+    },
+    "appCountThreatLow": {
+      "@id": "graphiant:appCountThreatLow",
+      "@type": "xsd:integer"
+    },
+    "appCountThreatMedium": {
+      "@id": "graphiant:appCountThreatMedium",
+      "@type": "xsd:integer"
+    },
+    "appIdRecords": {
+      "@id": "graphiant:appIdRecords",
+      "@container": "@list"
+    },
+    "appNameRecords": {
+      "@id": "graphiant:appNameRecords",
+      "@container": "@list"
+    },
+    "description": {
+      "@id": "graphiant:description",
+      "@type": "xsd:string"
+    },
+    "displayIpPort": {
+      "@id": "graphiant:displayIpPort",
+      "@type": "xsd:boolean"
+    },
+    "flowCount": {
+      "@id": "graphiant:flowCount",
+      "@type": "xsd:integer"
+    },
+    "newIpHint": {
+      "@id": "graphiant:newIpHint",
+      "@type": "xsd:boolean"
+    },
+    "recommendation": {
+      "@id": "graphiant:recommendation",
+      "@type": "xsd:string"
+    },
+    "trendValueList": {
+      "@id": "graphiant:trendValueList",
+      "@container": "@list"
+    },
+    "uniqueAppCount": {
+      "@id": "graphiant:uniqueAppCount",
+      "@type": "xsd:integer"
+    },
+    "assuranceWhenWidget": "graphiant:assuranceWhenWidget",
+    "dayOfWeek": {
+      "@id": "graphiant:dayOfWeek",
+      "@container": "@list"
+    },
+    "hourOfDay": {
+      "@id": "graphiant:hourOfDay",
+      "@container": "@list"
+    },
+    "monthlyActiveUsers": {
+      "@id": "graphiant:monthlyActiveUsers",
+      "@container": "@list"
+    },
+    "monthlyBandwidthTransferred": {
+      "@id": "graphiant:monthlyBandwidthTransferred",
+      "@container": "@list"
+    },
+    "v2AssuranceTopologyInventoryPostResponse": "graphiant:v2AssuranceTopologyInventoryPostResponse",
+    "appNames": {
+      "@id": "graphiant:appNames",
+      "@container": "@list"
+    },
+    "clientSites": {
+      "@id": "graphiant:clientSites",
+      "@container": "@list"
+    },
+    "regions": {
+      "@id": "graphiant:regions",
+      "@container": "@list"
+    },
+    "serverSites": {
+      "@id": "graphiant:serverSites",
+      "@container": "@list"
+    },
+    "topologyChangeTs": {
+      "@id": "graphiant:topologyChangeTs",
+      "@container": "@list"
+    },
+    "assuranceClientSessionPopLink": "graphiant:assuranceClientSessionPopLink",
+    "firstPopName": {
+      "@id": "graphiant:firstPopName",
+      "@type": "xsd:string"
+    },
+    "secondPopName": {
+      "@id": "graphiant:secondPopName",
+      "@type": "xsd:string"
+    },
+    "assuranceEnterpriseSummary": "graphiant:assuranceEnterpriseSummary",
+    "flowsAnalyzed": {
+      "@id": "graphiant:flowsAnalyzed",
+      "@type": "xsd:integer"
+    },
+    "gapScore": {
+      "@id": "graphiant:gapScore",
+      "@type": "xsd:integer"
+    },
+    "prevGapScore": {
+      "@id": "graphiant:prevGapScore",
+      "@type": "xsd:integer"
+    },
+    "riskBin": {
+      "@id": "graphiant:riskBin",
+      "@type": "xsd:integer"
+    },
+    "threatCount": {
+      "@id": "graphiant:threatCount",
+      "@type": "xsd:integer"
+    },
+    "uniqueAppsCount": {
+      "@id": "graphiant:uniqueAppsCount",
+      "@type": "xsd:integer"
+    },
+    "assuranceApprovedAppEntry": "graphiant:assuranceApprovedAppEntry",
+    "activeUsers": {
+      "@id": "graphiant:activeUsers",
+      "@type": "xsd:integer"
+    },
+    "dataSentKbps": {
+      "@id": "graphiant:dataSentKbps",
+      "@type": "xsd:decimal"
+    },
+    "tool": {
+      "@id": "graphiant:tool",
+      "@type": "xsd:string"
+    },
+    "assuranceScoreDetails": "graphiant:assuranceScoreDetails",
+    "scoreBucketList": {
+      "@id": "graphiant:scoreBucketList",
+      "@container": "@list"
+    },
+    "v2AssuranceCreateAiAdoptionApproveEntryPostResponse": "graphiant:v2AssuranceCreateAiAdoptionApproveEntryPostResponse",
+    "v2AssuranceUpdateclassifiedapplicationPostRequest": "graphiant:v2AssuranceUpdateclassifiedapplicationPostRequest",
+    "v2AssuranceTopologyClientSummariesPostResponseSummary": "graphiant:v2AssuranceTopologyClientSummariesPostResponseSummary",
+    "appServerKey": {
+      "@id": "graphiant:appServerKey",
+      "@type": "xsd:string"
+    },
+    "serverSiteEnterpriseName": {
+      "@id": "graphiant:serverSiteEnterpriseName",
+      "@type": "xsd:string"
+    },
+    "serverSiteName": {
+      "@id": "graphiant:serverSiteName",
+      "@type": "xsd:string"
+    },
+    "assuranceSite": "graphiant:assuranceSite",
+    "regionId": {
+      "@id": "graphiant:regionId",
+      "@type": "xsd:integer"
+    },
+    "siteEnterpriseName": {
+      "@id": "graphiant:siteEnterpriseName",
+      "@type": "xsd:string"
+    },
+    "assuranceClientSessionEndpointDetails": "graphiant:assuranceClientSessionEndpointDetails",
+    "circuits": {
+      "@id": "graphiant:circuits",
+      "@container": "@list"
+    },
+    "isGateway": {
+      "@id": "graphiant:isGateway",
+      "@type": "xsd:boolean"
+    },
+    "totalDownlinkUsage": {
+      "@id": "graphiant:totalDownlinkUsage",
+      "@type": "xsd:integer"
+    },
+    "totalUplinkUsage": {
+      "@id": "graphiant:totalUplinkUsage",
+      "@type": "xsd:integer"
+    },
+    "assuranceClientSessionDiaLink": "graphiant:assuranceClientSessionDiaLink",
+    "v2AssuranceScoredetailsPostResponse": "graphiant:v2AssuranceScoredetailsPostResponse",
+    "scoreDetails": {
+      "@id": "graphiant:scoreDetails",
+      "@type": "@id"
+    },
+    "v2AssuranceTopologyRegionSummaryPostResponse": "graphiant:v2AssuranceTopologyRegionSummaryPostResponse",
+    "sites": {
+      "@id": "graphiant:sites",
+      "@container": "@list"
+    },
+    "v2AssuranceBucketServicesPostRequest": "graphiant:v2AssuranceBucketServicesPostRequest",
+    "bucketId": {
+      "@id": "graphiant:bucketId",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceCreateclassifiedapplicationPostResponse": "graphiant:v2AssuranceCreateclassifiedapplicationPostResponse",
+    "assuranceTopologyNode": "graphiant:assuranceTopologyNode",
+    "active": {
+      "@id": "graphiant:active",
+      "@type": "xsd:boolean"
+    },
+    "location": {
+      "@id": "graphiant:location",
+      "@type": "@id"
+    },
+    "nodeId": {
+      "@id": "graphiant:nodeId",
+      "@type": "xsd:string"
+    },
+    "nodeType": {
+      "@id": "graphiant:nodeType",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceTopologyClientSessionDetailsPostResponse": "graphiant:v2AssuranceTopologyClientSessionDetailsPostResponse",
+    "session": {
+      "@id": "graphiant:session",
+      "@type": "@id"
+    },
+    "v2AssuranceReadAiAdoptionApproveEntriesGetResponse": "graphiant:v2AssuranceReadAiAdoptionApproveEntriesGetResponse",
+    "approvedAppList": {
+      "@id": "graphiant:approvedAppList",
+      "@container": "@list"
+    },
+    "assuranceWhatWidget": "graphiant:assuranceWhatWidget",
+    "bubbleCategories": {
+      "@id": "graphiant:bubbleCategories",
+      "@container": "@list"
+    },
+    "topToolsByActiveUsers": {
+      "@id": "graphiant:topToolsByActiveUsers",
+      "@container": "@list"
+    },
+    "topToolsByDataTransferred": {
+      "@id": "graphiant:topToolsByDataTransferred",
+      "@container": "@list"
+    },
+    "v2AssuranceCreateUserReportPostRequest": "graphiant:v2AssuranceCreateUserReportPostRequest",
+    "createdOn": {
+      "@id": "graphiant:createdOn",
+      "@type": "xsd:integer"
+    },
+    "emailList": {
+      "@id": "graphiant:emailList",
+      "@container": "@list"
+    },
+    "pdfContent": {
+      "@id": "graphiant:pdfContent",
+      "@type": "xsd:string"
+    },
+    "rawContent": {
+      "@id": "graphiant:rawContent",
+      "@container": "@list"
+    },
+    "reportName": {
+      "@id": "graphiant:reportName",
+      "@type": "xsd:string"
+    },
+    "reportType": {
+      "@id": "graphiant:reportType",
+      "@type": "xsd:string"
+    },
+    "timePeriod": {
+      "@id": "graphiant:timePeriod",
+      "@type": "xsd:string"
+    },
+    "assuranceTopologyEdgeLinkPerformance": "graphiant:assuranceTopologyEdgeLinkPerformance",
+    "assuranceRegion": "graphiant:assuranceRegion",
+    "regionIsoCode": {
+      "@id": "graphiant:regionIsoCode",
+      "@type": "xsd:string"
+    },
+    "assuranceTopologyPath": "graphiant:assuranceTopologyPath",
+    "nodeIds": {
+      "@id": "graphiant:nodeIds",
+      "@container": "@list"
+    },
+    "assuranceBucketApp": "graphiant:assuranceBucketApp",
+    "builtinAppId": {
+      "@id": "graphiant:builtinAppId",
+      "@type": "xsd:integer"
+    },
+    "customAppId": {
+      "@id": "graphiant:customAppId",
+      "@type": "xsd:integer"
+    },
+    "exchangeService": {
+      "@id": "graphiant:exchangeService",
+      "@type": "@id"
+    },
+    "flexAlgo": {
+      "@id": "graphiant:flexAlgo",
+      "@type": "@id"
+    },
+    "isDomain": {
+      "@id": "graphiant:isDomain",
+      "@type": "xsd:boolean"
+    },
+    "v2AssuranceTopologyOverviewPostRequest": "graphiant:v2AssuranceTopologyOverviewPostRequest",
+    "exchangeServiceId": {
+      "@id": "graphiant:exchangeServiceId",
+      "@type": "xsd:integer"
+    },
+    "filter": {
+      "@id": "graphiant:filter",
+      "@type": "@id"
+    },
+    "flexAlgoId": {
+      "@id": "graphiant:flexAlgoId",
+      "@type": "xsd:integer"
+    },
+    "sliderTimeWindow": {
+      "@id": "graphiant:sliderTimeWindow",
+      "@type": "@id"
+    },
+    "topologyTs": {
+      "@id": "graphiant:topologyTs",
+      "@type": "@id"
+    },
+    "topologyType": {
+      "@id": "graphiant:topologyType",
+      "@type": "xsd:string"
+    },
+    "v2AssuranceScoredetailsPostRequest": "graphiant:v2AssuranceScoredetailsPostRequest"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Graphiant API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Graphiant's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/graphiant-account-api-openapi.yml, openapi/graphiant-ack-api-openapi.yml, openapi/graphiant-activity-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/graphiant-account-api-openapi.yml",
+    "openapi/graphiant-ack-api-openapi.yml",
+    "openapi/graphiant-activity-api-openapi.yml",
+    "openapi/graphiant-aggregated-notification-api-openapi.yml",
+    "openapi/graphiant-allowlist-api-openapi.yml"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-global-site-lists-post-request-schema.json",
+  "title": "v1GlobalSiteListsPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-global-api-openapi.yml#/components/schemas/v1GlobalSiteListsPostRequest",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2SiteListEntry"
+      }
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2RouteTagId": {
+      "type": "object",
+      "properties": {
+        "levelOne": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "levelTwo": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "levelZero": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2SiteListEntry": {
+      "type": "object",
+      "properties": {
+        "regular": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tag": {
+          "$ref": "#/$defs/manaV2RouteTagId"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

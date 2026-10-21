@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-auth-user-get-response-schema.json",
+  "title": "v1AuthUserGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-auth-api-openapi.yml#/components/schemas/v1AuthUserGetResponse",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "User identifier"
+    },
+    "enterpriseId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Enterprise identifier"
+    },
+    "permissions": {
+      "$ref": "#/$defs/authPermissions"
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "User timezone"
+    }
+  },
+  "required": [
+    "userId",
+    "enterpriseId",
+    "permissions",
+    "timeZone"
+  ],
+  "$defs": {
+    "authPermissions": {
+      "type": "object",
+      "properties": {
+        "billingAndInvoicing": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "licensing": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "orderStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "userAndTenantManagement": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "assetManager": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "globalServices": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "networkConfigurations": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "safetyAndSecurity": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "servicePolicies": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "compliance": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "developerTools": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "insights": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "logs": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "monitoringAndTroubleshooting": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        },
+        "reports": {
+          "type": "string",
+          "enum": [
+            "none",
+            "read",
+            "read_write"
+          ]
+        }
+      }
+    }
+  }
+}

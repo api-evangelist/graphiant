@@ -1,0 +1,419 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/graphiant-account-api-openapi.yml
+- openapi/graphiant-ack-api-openapi.yml
+- openapi/graphiant-activity-api-openapi.yml
+- openapi/graphiant-aggregated-notification-api-openapi.yml
+- openapi/graphiant-allowlist-api-openapi.yml
+vocabulary:
+  name: Graphiant Domain Vocabulary
+  description: 'Terms declared by Graphiant''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: v1AccountMfaConfirmationPostRequest
+    definition: 'Object declared by the contract with fields: code, confirmed, id, type.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaConfirmationPostRequest
+  - term: v1AccountMfaPutResponse
+    definition: 'Object declared by the contract with fields: confirmed, id, qrCode, sharedSecret.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaPutResponse
+  - term: v1AccountMfaGetResponse
+    definition: 'Object declared by the contract with fields: type.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaGetResponse
+  - term: v1AccountMfaPutRequest
+    definition: 'Object declared by the contract with fields: phoneNumber, type.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaPutRequest
+  - term: v1AccountInfoPatchRequest
+    definition: 'Object declared by the contract with fields: firstName, lastName, timeZone.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountInfoPatchRequest
+  - term: v1AccountPasswordPatchRequest
+    definition: 'Object declared by the contract with fields: oldPassword, password.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountPasswordPatchRequest
+  - term: v1AccountEmailPatchRequest
+    definition: 'Object declared by the contract with fields: email.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountEmailPatchRequest
+  - term: v1AccountMfaConfirmationPostResponse
+    definition: 'Object declared by the contract with fields: affectedUsers.'
+    tags:
+    - Object
+    source: openapi/graphiant-account-api-openapi.yml#/components/schemas/v1AccountMfaConfirmationPostResponse
+  - term: v2AckCreateupdatePostRequest
+    definition: 'Object declared by the contract with fields: alertIdList, reason.'
+    tags:
+    - Object
+    source: openapi/graphiant-ack-api-openapi.yml#/components/schemas/v2AckCreateupdatePostRequest
+  - term: v1ActivityLogsPostResponse
+    definition: 'Object declared by the contract with fields: cursorRef, details, filterEntities, filterJobTypes, totalLogs.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/v1ActivityLogsPostResponse
+  - term: auditmonActivityDetailsTargetEvent
+    definition: 'Object declared by the contract with fields: state, stateId, traceSessionId, ts.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditmonActivityDetailsTargetEvent
+  - term: auditmonActivityDetails
+    definition: 'Object declared by the contract with fields: action, attributes, category, disableAutoTimeout, endTs, enterpriseId, id, initiatorType,
+      jobEntities, jobType, originalEnterpriseId, startTs. (6 more)'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditmonActivityDetails
+  - term: v1ActivityLogsPostRequest
+    definition: 'Object declared by the contract with fields: cursorRef, numLogs, oldTs, recentTs, selector, selectorV2.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/v1ActivityLogsPostRequest
+  - term: auditActivityItem
+    definition: 'Object declared by the contract with fields: id, name, type.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditActivityItem
+  - term: auditmonActivityLogsSelectorV2
+    definition: 'Object declared by the contract with fields: deviceIds, entities, siteIds, statuses, types, userIds.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditmonActivityLogsSelectorV2
+  - term: v1ActivityLogsPostResponseActivityItems
+    definition: 'Object declared by the contract with fields: items.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/v1ActivityLogsPostResponseActivityItems
+  - term: googleProtobufTimestamp
+    definition: 'Object declared by the contract with fields: nanos, seconds.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/googleProtobufTimestamp
+  - term: auditmonActivityLogsSelector
+    definition: 'Object declared by the contract with fields: deviceIds, id, inProgress, jobEntity, targetIds, type.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditmonActivityLogsSelector
+  - term: auditmonActivityDetailsTarget
+    definition: 'Object declared by the contract with fields: detailedFailureReason, endTs, events, failureReason, ids, startTs, status.'
+    tags:
+    - Object
+    source: openapi/graphiant-activity-api-openapi.yml#/components/schemas/auditmonActivityDetailsTarget
+  - term: v2AggregatedNotificationGetStateGetResponse
+    definition: 'Object declared by the contract with fields: state.'
+    tags:
+    - Object
+    source: openapi/graphiant-aggregated-notification-api-openapi.yml#/components/schemas/v2AggregatedNotificationGetStateGetResponse
+  - term: v2AggregatedNotificationEnableDisablePostRequest
+    definition: 'Object declared by the contract with fields: enable.'
+    tags:
+    - Object
+    source: openapi/graphiant-aggregated-notification-api-openapi.yml#/components/schemas/v2AggregatedNotificationEnableDisablePostRequest
+  - term: v2AllowlistRuleIdGetResponse
+    definition: 'Object declared by the contract with fields: records.'
+    tags:
+    - Object
+    source: openapi/graphiant-allowlist-api-openapi.yml#/components/schemas/v2AllowlistRuleIdGetResponse
+  - term: v2AllowlistCreatePostRequest
+    definition: 'Object declared by the contract with fields: alertId, noteText.'
+    tags:
+    - Object
+    source: openapi/graphiant-allowlist-api-openapi.yml#/components/schemas/v2AllowlistCreatePostRequest
+  - term: alertserviceAllowAlertNotifcationListRecord
+    definition: 'Object declared by the contract with fields: createTime, deviceInterface, deviceName, enterpriseName, entityId, isWanCircuit,
+      noteText, peerDeviceInterface, peerDeviceName, ruleId, ruleName, siteName. (1 more)'
+    tags:
+    - Object
+    source: openapi/graphiant-allowlist-api-openapi.yml#/components/schemas/alertserviceAllowAlertNotifcationListRecord
+  - term: v2AllowlistByEnterpriseGetResponse
+    definition: 'Object declared by the contract with fields: records.'
+    tags:
+    - Object
+    source: openapi/graphiant-allowlist-by-enterprise-api-openapi.yml#/components/schemas/v2AllowlistByEnterpriseGetResponse
+  - term: ipfixAppStateSummaryCount
+    definition: 'Object declared by the contract with fields: appHealth, appIncidents, appsOnDeviceCount, averageQoe, circuitsIncidents, circuitsIncidentsv2.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppStateSummaryCount
+  - term: statsmonCircuitIncidents
+    definition: 'Object declared by the contract with fields: numFairIncidents, numPoorIncidents.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonCircuitIncidents
+  - term: v1AppsDeviceDeviceIdTopPostRequest
+    definition: 'Object declared by the contract with fields: numApps, timeWindow.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsDeviceDeviceIdTopPostRequest
+  - term: v1AppsAppSummaryPostRequest
+    definition: 'Object declared by the contract with fields: deviceId, isDia, timeWindow.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsAppSummaryPostRequest
+  - term: ipfixAppUtilizationSummary
+    definition: 'Object declared by the contract with fields: appId, appName, usage.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppUtilizationSummary
+  - term: statsmonCircuitsIncidents
+    definition: 'Object declared by the contract with fields: data, name.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonCircuitsIncidents
+  - term: ipfixAppBandwidthStats
+    definition: 'Object declared by the contract with fields: dlBw, ts, ulBw.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppBandwidthStats
+  - term: ipfixTimeWindow
+    definition: 'Object declared by the contract with fields: bucketSizeSec, oldTs, recentTs.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixTimeWindow
+  - term: statsmonV2CircuitIncidentsSelector
+    definition: 'Object declared by the contract with fields: circuitName.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonV2CircuitIncidentsSelector
+  - term: ipfixTwampMetrics
+    definition: 'Object declared by the contract with fields: healthAvg, jitter, latency, loss, mos, status.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixTwampMetrics
+  - term: v1AppsDeviceDeviceIdTopPostResponse
+    definition: 'Object declared by the contract with fields: appsUtilization, totalCount.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsDeviceDeviceIdTopPostResponse
+  - term: v1AppsSiteSiteIdTopPostResponse
+    definition: 'Object declared by the contract with fields: appsUtilization, totalCount.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsSiteSiteIdTopPostResponse
+  - term: statsmonV2CircuitIncidentsData
+    definition: 'Object declared by the contract with fields: samples, selector.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonV2CircuitIncidentsData
+  - term: statsmonV2CircuitIncidentsDataSampleIncidents
+    definition: 'Object declared by the contract with fields: numFairIncidents, numPoorIncidents.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonV2CircuitIncidentsDataSampleIncidents
+  - term: v1AppsBandwidthPostResponse
+    definition: 'Object declared by the contract with fields: stats.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsBandwidthPostResponse
+  - term: ipfixCircuitMetrics
+    definition: 'Object declared by the contract with fields: name, slaClass, stats, usage, usagePct.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixCircuitMetrics
+  - term: v1AppsVisualizationPostResponse
+    definition: 'Object declared by the contract with fields: appHealth, appsOnDeviceCount, appsVisualization, averageQoe.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsVisualizationPostResponse
+  - term: statsmonCircuitsIncidentsData
+    definition: 'Object declared by the contract with fields: dlIncidents, overallStatus, totalIncidents, ts, ulIncidents.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonCircuitsIncidentsData
+  - term: v1AppsBandwidthPostRequest
+    definition: 'Object declared by the contract with fields: appId, deviceId, dlCircuitName, isDia, slaClass, timeWindow, ulCircuitName.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsBandwidthPostRequest
+  - term: statsmonV2CircuitIncidentsDataSample
+    definition: 'Object declared by the contract with fields: dlIncidents, overallStatus, totalIncidents, ts, ulIncidents.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonV2CircuitIncidentsDataSample
+  - term: ipfixAppVisualization
+    definition: 'Object declared by the contract with fields: appId, appName, circuitAvailability, circuitMap, currentStatus.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppVisualization
+  - term: ipfixAppIncidents
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppIncidents
+  - term: ipfixAppIncidentsData
+    definition: 'Object declared by the contract with fields: appCount, appStatus, ts.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/ipfixAppIncidentsData
+  - term: v1AppsAppSummaryPostResponse
+    definition: 'Object declared by the contract with fields: appSummary.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsAppSummaryPostResponse
+  - term: v1AppsSiteSiteIdTopPostRequest
+    definition: 'Object declared by the contract with fields: numApps, timeWindow.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsSiteSiteIdTopPostRequest
+  - term: v1AppsVisualizationPostRequest
+    definition: 'Object declared by the contract with fields: circuitName, deviceId, isDia, slaClass, timeWindow.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/v1AppsVisualizationPostRequest
+  - term: statsmonV2CircuitIncidents
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonV2CircuitIncidents
+  - term: statsmonTimeWindow
+    definition: 'Object declared by the contract with fields: bucketSizeSec, oldTs, recentTs.'
+    tags:
+    - Object
+    source: openapi/graphiant-apps-api-openapi.yml#/components/schemas/statsmonTimeWindow
+  - term: v2AssistantVersionPostResponse
+    definition: 'Object declared by the contract with fields: versionId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantVersionPostResponse
+  - term: v2AssistantGetConversationDetailsPostResponse
+    definition: 'Object declared by the contract with fields: conversationId, responseList, userId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantGetConversationDetailsPostResponse
+  - term: assistantAssistantConversation
+    definition: 'Object declared by the contract with fields: conversationHeader, conversationId, conversationRecentTimestamp, enableContextHistory.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/assistantAssistantConversation
+  - term: v2AssistantConversationContextHistoryPostRequest
+    definition: 'Object declared by the contract with fields: enable.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantConversationContextHistoryPostRequest
+  - term: v2AssistantAddToConversationPostRequest
+    definition: 'Object declared by the contract with fields: conversationId, question.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantAddToConversationPostRequest
+  - term: v2AssistantConversationInterfaceEnableDisablePostRequest
+    definition: 'Object declared by the contract with fields: enable.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantConversationInterfaceEnableDisablePostRequest
+  - term: v2AssistantGetConversationDetailsPostRequest
+    definition: 'Object declared by the contract with fields: conversationId, timeWindow, userId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantGetConversationDetailsPostRequest
+  - term: v2AssistantConversationInterfaceStateGetResponse
+    definition: 'Object declared by the contract with fields: enabled.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantConversationInterfaceStateGetResponse
+  - term: v2AssistantUpdateConversationNamePostRequest
+    definition: 'Object declared by the contract with fields: conversationHeader, conversationId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantUpdateConversationNamePostRequest
+  - term: v2AssistantGetConversationsPostResponse
+    definition: 'Object declared by the contract with fields: conversationList, enableContextHistory.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantGetConversationsPostResponse
+  - term: v2AssistantAddToConversationPostResponse
+    definition: 'Object declared by the contract with fields: conversationId, dataframeDictionary, originalQuestion, responseId, responseLanguage,
+      responseText, responseTimestamp, responseType, visualizationSummary.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantAddToConversationPostResponse
+  - term: assistantAssistantQuestion
+    definition: 'Object declared by the contract with fields: conversationId, questionLanguage, questionText, questionTimestamp.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/assistantAssistantQuestion
+  - term: assistantTimeWindow
+    definition: 'Object declared by the contract with fields: bucketSizeSec, oldTs, recentTs.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/assistantTimeWindow
+  - term: assistantAssistantResponse
+    definition: 'Object declared by the contract with fields: conversationId, dataframeDictionary, originalQuestion, responseId, responseLanguage,
+      responseText, responseTimestamp, responseType, visualizationSummary.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/assistantAssistantResponse
+  - term: assistantDataframeDictionary
+    definition: 'Object declared by the contract with fields: dataframeDictionaryMap, xAxis, yAxis.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/assistantDataframeDictionary
+  - term: v2AssistantGetConversationsPostRequest
+    definition: 'Object declared by the contract with fields: timeWindow, userId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantGetConversationsPostRequest
+  - term: v2AssuranceGetclassifiedapplicationlistGetResponse
+    definition: 'Object declared by the contract with fields: classifiedApplicationList.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceGetclassifiedapplicationlistGetResponse
+  - term: assuranceWhereWidget
+    definition: 'Object declared by the contract with fields: topSitesByUsers, topUsersByDataTransferred, topVrfsByUsers.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/assuranceWhereWidget
+  - term: v2AssuranceTopologyClientSummariesPostResponse
+    definition: 'Object declared by the contract with fields: summaries.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceTopologyClientSummariesPostResponse
+  - term: assuranceDnsProxyEntry
+    definition: 'Object declared by the contract with fields: dnsproxyEntryId, ipList, name, nameText, portList, protocol.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/assuranceDnsProxyEntry
+  - term: v2AssuranceUpdateAiAdoptionApproveEntryPostRequest
+    definition: 'Object declared by the contract with fields: approvedAppEntry.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceUpdateAiAdoptionApproveEntryPostRequest
+  - term: assuranceClientSessionEndpointLink
+    definition: 'Object declared by the contract with fields: circuitName, jitter, latency, loss, popName.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/assuranceClientSessionEndpointLink
+  - term: v2AssuranceTopologySiteSummariesPostResponse
+    definition: 'Object declared by the contract with fields: summaries.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceTopologySiteSummariesPostResponse
+  - term: v2AssuranceReadDnsproxyListGetResponse
+    definition: 'Object declared by the contract with fields: dnsproxyList.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceReadDnsproxyListGetResponse
+  - term: v2AssuranceCreateDnsproxyEntryPostResponse
+    definition: 'Object declared by the contract with fields: dnsproxyEntryId.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceCreateDnsproxyEntryPostResponse
+  - term: assuranceTopologyFilter
+    definition: 'Object declared by the contract with fields: clientSiteIds, regionIds, serverSiteIds.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/assuranceTopologyFilter
+  - term: v2AssuranceBucketdetailsPostResponse
+    definition: 'Object declared by the contract with fields: bucketDetails.'
+    tags:
+    - Object
+    source: openapi/graphiant-assurance-api-openapi.yml#/components/schemas/v2AssuranceBucketdetailsPostResponse

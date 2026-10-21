@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-device-routing-ospfv3-areaid-get-response-schema.json",
+  "title": "v1DeviceRoutingOspfv3AreaidGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-device-api-openapi.yml#/components/schemas/v1DeviceRoutingOspfv3AreaidGetResponse",
+  "type": "object",
+  "properties": {
+    "areas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Area IDs (required)"
+      }
+    },
+    "pageInfo": {
+      "$ref": "#/$defs/commonPageInfo"
+    },
+    "token": {
+      "type": "string",
+      "description": "Reference to the resultset being queried, this should be sent by the service as part of a previous request and so can be opaque to the client."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "commonPageInfo": {
+      "type": "object",
+      "properties": {
+        "currentPage": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The page number we are currently on (required)"
+        },
+        "endCursor": {
+          "type": "string",
+          "description": "Cursor pointing to the last record on the current page"
+        },
+        "hasNextPage": {
+          "type": "boolean",
+          "description": "An indicator whether there is a page after this one in the resultset based on current position"
+        },
+        "hasPrevPage": {
+          "type": "boolean",
+          "description": "An indicator whether there is a page before this one in the resultset based on current position"
+        },
+        "startCursor": {
+          "type": "string",
+          "description": "Cursor pointing to the first record on the current page"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The number of pages in the complete resultset based on the current length of the page (required)"
+        },
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Describes the total number of records in the complete resultset (required)"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

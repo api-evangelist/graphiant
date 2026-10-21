@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-extranets-b2b-consumer-post-request-schema.json",
+  "title": "v1ExtranetsB2bConsumerPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-extranets-b2b-api-openapi.yml#/components/schemas/v1ExtranetsB2bConsumerPostRequest",
+  "type": "object",
+  "properties": {
+    "policy": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2ExtranetConsumerLanSegmentPolicy"
+      }
+    },
+    "providerEnterpriseId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "serviceName": {
+      "type": "string"
+    },
+    "siteInformation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/manaV2B2bSiteInformation"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2B2bSiteInformation": {
+      "type": "object",
+      "properties": {
+        "bwAllocationSiteLists": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Bandwidth allocation for the service on these site lists"
+        },
+        "bwAllocationSites": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Bandwidth allocation for the service on these sites"
+        },
+        "policerSiteLists": {
+          "$ref": "#/$defs/manaV2Policer"
+        },
+        "policerSites": {
+          "$ref": "#/$defs/manaV2Policer"
+        },
+        "siteLists": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Site list IDs where the service is deployed"
+          }
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Site IDs where the service is deployed"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ExtranetConsumerLanSegmentPolicy": {
+      "type": "object",
+      "properties": {
+        "consumerLanSegment": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "restrictedPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2ExtranetConsumerNatRule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2ExtranetConsumerNatRule": {
+      "type": "object",
+      "properties": {
+        "outsideNatPrefix": {
+          "type": "string",
+          "description": "Optional nat prefix associated with a service prefix with an empty string indicating no NATing"
+        },
+        "servicePrefix": {
+          "type": "string",
+          "description": "Service prefix for the NAT rule (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "servicePrefix"
+      ]
+    },
+    "manaV2Policer": {
+      "type": "object",
+      "properties": {
+        "burstSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Burst size for the policer (required)"
+        },
+        "bw": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bandwidth for the policer (required)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "burstSize",
+        "bw"
+      ]
+    }
+  }
+}

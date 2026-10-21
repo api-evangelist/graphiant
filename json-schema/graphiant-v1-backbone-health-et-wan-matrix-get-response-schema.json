@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-backbone-health-et-wan-matrix-get-response-schema.json",
+  "title": "v1BackboneHealthEtWanMatrixGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-backbone-health-api-openapi.yml#/components/schemas/v1BackboneHealthEtWanMatrixGetResponse",
+  "type": "object",
+  "properties": {
+    "deviceEtwanSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1BackboneHealthEtWanMatrixGetResponseDeviceEtWanSummary"
+      }
+    },
+    "regionSlaStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1BackboneHealthEtWanMatrixGetResponseRegionStatus"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "statsmonTroubleshootingRegion": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthEtWanMatrixGetResponseDeviceEtWanSummary": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "v1BackboneHealthEtWanMatrixGetResponseRegionStatus": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/$defs/statsmonTroubleshootingRegion"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

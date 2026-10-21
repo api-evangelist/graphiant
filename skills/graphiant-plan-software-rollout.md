@@ -1,21 +1,23 @@
 ---
-name: Plan and schedule a Graphiant software rollout
-description: Read the current software state of an estate, understand which release train each device is on, and schedule an upgrade rollout against a device set.
+name: graphiant-plan-software-rollout
+description: Read the current software state of an estate, understand which release
+  train each device is on, and schedule an upgrade rollout against a device set.
 api: openapi/graphiant-portal-openapi-original.json
 generated: '2026-08-01'
 method: generated
 risk: high
 operations:
-  - GET /v1/edges-summary
-  - GET /v1/software/rollouts
-  - POST /v1/software/rollouts
-  - PUT /v1/software/rollouts
-  - GET /v1/software/rollouts/{id}
-  - DELETE /v1/software/rollouts/{id}
-  - POST /v1/software/rollouts/schedule
-  - GET /v1/software/auto-upgrade/default
-  - PUT /v1/software/auto-upgrade/default
-  - GET /v1/software/releases/download
+- getV1EdgesSummary
+- getV1SoftwareRollouts
+- postV1SoftwareRollouts
+- putV1SoftwareRollouts
+- getV1SoftwareRolloutsById
+- deleteV1SoftwareRolloutsById
+- postV1SoftwareRolloutsSchedule
+- getV1SoftwareAutoUpgradeDefault
+- putV1SoftwareAutoUpgradeDefault
+- getV1SoftwareReleasesDownload
+title: Plan and schedule a Graphiant software rollout
 ---
 
 # Plan and schedule a Graphiant software rollout

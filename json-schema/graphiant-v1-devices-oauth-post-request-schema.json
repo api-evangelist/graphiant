@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-devices-oauth-post-request-schema.json",
+  "title": "v1DevicesOauthPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-devices-api-openapi.yml#/components/schemas/v1DevicesOauthPostRequest",
+  "type": "object",
+  "properties": {
+    "grant_type": {
+      "type": "string",
+      "enum": [
+        "client_credentials"
+      ],
+      "description": "OAuth grant type"
+    },
+    "scope": {
+      "type": "string",
+      "description": "OAuth scope containing device type, UUID, and hostname"
+    },
+    "state": {
+      "type": "string",
+      "description": "OAuth state parameter"
+    },
+    "code_verify": {
+      "type": "string",
+      "description": "OAuth code verifier"
+    },
+    "pt": {
+      "type": "string",
+      "description": "Platform type"
+    },
+    "bm": {
+      "type": "string",
+      "description": "Boot mode"
+    }
+  },
+  "required": [
+    "grant_type",
+    "scope"
+  ]
+}

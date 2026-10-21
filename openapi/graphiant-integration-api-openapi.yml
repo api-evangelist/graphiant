@@ -183,119 +183,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    alertserviceZendeskDetails:
-      type: object
-      properties:
-        zendeskApiToken:
-          type: string
-          example: example string
-          description: zendesk api token (required)
-        zendeskAssigneeId:
-          type: string
-          example: example string
-          description: zendesk assignee id (required)
-        zendeskBaseUrl:
-          type: string
-          example: example string
-          description: zendesk base url (required)
-        zendeskEmail:
-          type: string
-          example: example string
-          description: zendesk email (required)
-      additionalProperties: false
-      required:
-      - zendeskApiToken
-      - zendeskAssigneeId
-      - zendeskBaseUrl
-      - zendeskEmail
-    alertserviceIntegration:
-      type: object
-      properties:
-        createdBy:
-          type: string
-          example: example string
-        createdOn:
-          type: string
-          example: example string
-        details:
-          $ref: '#/components/schemas/alertserviceIntegrationDetails'
-        enterpriseId:
-          type: string
-          example: example string
-        id:
-          type: integer
-          format: int64
-          example: 1234567891011
-        isActive:
-          type: boolean
-          example: true
-        lastScanned:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: last scanned time for integrations (zendesk)
-        nickName:
-          type: string
-          example: example string
-        type:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    alertserviceUpdateIntegrationBody:
-      type: object
-      properties:
-        details:
-          $ref: '#/components/schemas/alertserviceIntegrationDetails'
-        enterprise:
-          type: integer
-          format: int64
-          example: 1234567891011
-          description: ID of the enterprise (required)
-        integrationType:
-          type: string
-          example: ENUM_VALUE
-          description: Type of integration (required)
-        isActive:
-          type: boolean
-          example: true
-          description: Indicates whether the integration is active
-        nickName:
-          type: string
-          example: example string
-          description: nick name of the integration (required)
-        updatedBy:
-          type: string
-          example: example string
-          description: ID of the user who updated the integration
-      additionalProperties: false
-      required:
-      - enterprise
-      - integrationType
-      - nickName
-    v2IntegrationPostRequest:
-      type: object
-      properties:
-        integrationBody:
-          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
-      additionalProperties: false
-      required:
-      - integrationBody
-    v2IntegrationGetallEnterpriseIdGetResponse:
-      type: object
-      properties:
-        integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/alertserviceIntegration'
-      additionalProperties: false
-    v2IntegrationIntegrationIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2IntegrationIntegrationIdPutResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
     v2IntegrationTestEnterpriseIdIntegrationIdGetResponse:
       type: object
       properties: {}
@@ -326,17 +213,17 @@ components:
         zendeskDetails:
           $ref: '#/components/schemas/alertserviceZendeskDetails'
       additionalProperties: false
-    googleProtobufTimestamp:
+    v2IntegrationIntegrationIdPutResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationGetallEnterpriseIdGetResponse:
       type: object
       properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/alertserviceIntegration'
       additionalProperties: false
     v2IntegrationPostResponse:
       type: object
@@ -377,6 +264,119 @@ components:
       - enterprise
       - integrationType
       - nickName
+    alertserviceUpdateIntegrationBody:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterprise:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: ID of the enterprise (required)
+        integrationType:
+          type: string
+          example: ENUM_VALUE
+          description: Type of integration (required)
+        isActive:
+          type: boolean
+          example: true
+          description: Indicates whether the integration is active
+        nickName:
+          type: string
+          example: example string
+          description: nick name of the integration (required)
+        updatedBy:
+          type: string
+          example: example string
+          description: ID of the user who updated the integration
+      additionalProperties: false
+      required:
+      - enterprise
+      - integrationType
+      - nickName
+    alertserviceIntegration:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          example: example string
+        createdOn:
+          type: string
+          example: example string
+        details:
+          $ref: '#/components/schemas/alertserviceIntegrationDetails'
+        enterpriseId:
+          type: string
+          example: example string
+        id:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isActive:
+          type: boolean
+          example: true
+        lastScanned:
+          type: integer
+          format: int64
+          example: 1234567891011
+          description: last scanned time for integrations (zendesk)
+        nickName:
+          type: string
+          example: example string
+        type:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
+    v2IntegrationIntegrationIdDeleteResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2IntegrationPostRequest:
+      type: object
+      properties:
+        integrationBody:
+          $ref: '#/components/schemas/alertserviceCreateIntegrationBody'
+      additionalProperties: false
+      required:
+      - integrationBody
+    googleProtobufTimestamp:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          format: int32
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
+      additionalProperties: false
+    alertserviceZendeskDetails:
+      type: object
+      properties:
+        zendeskApiToken:
+          type: string
+          example: example string
+          description: zendesk api token (required)
+        zendeskAssigneeId:
+          type: string
+          example: example string
+          description: zendesk assignee id (required)
+        zendeskBaseUrl:
+          type: string
+          example: example string
+          description: zendesk base url (required)
+        zendeskEmail:
+          type: string
+          example: example string
+          description: zendesk email (required)
+      additionalProperties: false
+      required:
+      - zendeskApiToken
+      - zendeskAssigneeId
+      - zendeskBaseUrl
+      - zendeskEmail
   securitySchemes:
     jwtAuth:
       type: apiKey

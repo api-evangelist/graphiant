@@ -582,13 +582,162 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    v1BwtrackerRegionEdgeSummaryPostResponse:
+    v1BwtrackerRegionGatewaySummaryPostResponse:
       type: object
       properties:
         bwusageSummary:
           $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeSummary'
       additionalProperties: false
-    v1BwtrackerRegionGatewayDetailsPostRequest:
+    statsmonBandwidthtrackerBwUsageByTopRegions:
+      type: object
+      properties:
+        bwusageRoleSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRoleSummary'
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionName:
+          type: string
+          example: example string
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageChartValue:
+      type: object
+      properties:
+        avgValue:
+          type: number
+          format: double
+          example: 123.45
+        duration:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        maxValue:
+          type: number
+          format: double
+          example: 123.45
+        startTime:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRegionEdgeDetails:
+      type: object
+      properties:
+        bwuageSites:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+      additionalProperties: false
+    statsmonBandwidthtrackerTimeWindow:
+      type: object
+      properties:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        oldTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageChart:
+      type: object
+      properties:
+        bwusageChart:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChartValue'
+        percentileUsageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionSiteDetailsPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByTopSites:
+      type: object
+      properties:
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRoleSummary:
+      type: object
+      properties:
+        roleId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        roleName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionGatewaySummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerSiteGatewayCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerEnterpriseSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseSummary'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayChartPostRequest:
       type: object
       properties:
         regionId:
@@ -605,7 +754,46 @@ components:
         bwusageDetails:
           $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteDetails'
       additionalProperties: false
-    v1BwtrackerSiteCsvPostRequest:
+    v1BwtrackerRegionEdgeSummaryPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewaySummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteSummary:
+      type: object
+      properties:
+        bwuageRegion:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
+        edgeCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        providerCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionSiteChartPostRequest:
       type: object
       properties:
         regionId:
@@ -620,6 +808,42 @@ components:
           minimum: 0
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerEnterpriseDetailsPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeSummary'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySiteEdgeProvider:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        deviceName:
+          type: string
+          example: example string
+        providerId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        providerName:
+          type: string
+          example: example string
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
       additionalProperties: false
     statsmonBandwidthtrackerBwUsageByEnterpriseSummary:
       type: object
@@ -658,18 +882,7 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    v1BwtrackerRegionGatewayChartPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerSiteGatewayCsvPostRequest:
+    v1BwtrackerRegionSiteGatewaySummaryPostRequest:
       type: object
       properties:
         regionId:
@@ -685,78 +898,27 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
-    v1BwtrackerRegionSiteGatewaySummaryPostResponse:
-      type: object
-      properties:
-        bwusageSummary:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageBySiteEdgeProvider:
-      type: object
-      properties:
-        deviceId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        deviceName:
-          type: string
-          example: example string
-        providerId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        providerName:
-          type: string
-          example: example string
-        usageKbps:
-          type: number
-          format: double
-          example: 123.45
-      additionalProperties: false
-    v1BwtrackerRegionEdgeCsvPostResponse:
-      type: object
-      properties:
-        bwusageCsvDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
-      additionalProperties: false
-    v1BwtrackerRegionGatewaySummaryPostResponse:
-      type: object
-      properties:
-        bwusageSummary:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeSummary'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageCsvDetails:
-      type: object
-      properties:
-        bwusageCsvRecord:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvRecord'
-      additionalProperties: false
-    v1BwtrackerRegionSiteGatewayDetailsPostResponse:
-      type: object
-      properties:
-        bwusageDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteDetails'
-      additionalProperties: false
-    v1BwtrackerRegionGatewaySummaryPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerRegionSiteChartPostResponse:
+    v1BwtrackerRegionGatewayChartPostResponse:
       type: object
       properties:
         bwusageChart:
           $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByEnterpriseDetails:
+      type: object
+      properties:
+        bwusageRegion:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
+        bwusageSite:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+        bwusageSiteGateway:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
       additionalProperties: false
     v1BwtrackerRegionGatewayCsvPostRequest:
       type: object
@@ -769,9 +931,108 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByTopSites:
+    statsmonBandwidthtrackerBwUsageBySiteDetails:
       type: object
       properties:
+        bwuageEdgeProvider:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteEdgeProvider'
+        bwuageProvider:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteProvider'
+      additionalProperties: false
+    v1BwtrackerSiteCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageByRegion:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        regionName:
+          type: string
+          example: example string
+        siteCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        usageKbps:
+          type: number
+          format: double
+          example: 123.45
+      additionalProperties: false
+    v1BwtrackerRegionEdgeCsvPostRequest:
+      type: object
+      properties:
+        regionId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerEnterpriseCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerEnterpriseSummaryPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageCsvDetails:
+      type: object
+      properties:
+        bwusageCsvRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvRecord'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    statsmonBandwidthtrackerBwUsageBySite:
+      type: object
+      properties:
+        edgeCount:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        locationId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        locationName:
+          type: string
+          example: example string
         siteId:
           type: integer
           format: int64
@@ -785,24 +1046,69 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    statsmonBandwidthtrackerBwUsageChartValue:
+    v1BwtrackerRegionSiteGatewayDetailsPostResponse:
       type: object
       properties:
-        avgValue:
-          type: number
-          format: double
-          example: 123.45
-        duration:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteDetails'
+      additionalProperties: false
+    v1BwtrackerRegionGatewayDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewayChartPostRequest:
+      type: object
+      properties:
+        regionId:
           type: integer
           format: int64
           example: 12345678910
           minimum: 0
-        maxValue:
-          type: number
-          format: double
-          example: 123.45
-        startTime:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+        siteId:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+      additionalProperties: false
+    v1BwtrackerRegionSiteSummaryPostResponse:
+      type: object
+      properties:
+        bwusageSummary:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
+      additionalProperties: false
+    v1BwtrackerRegionSiteGatewayChartPostResponse:
+      type: object
+      properties:
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeDetailsPostResponse:
+      type: object
+      properties:
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
+      additionalProperties: false
+    v1BwtrackerSiteGatewayCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerRegionEdgeCsvPostResponse:
+      type: object
+      properties:
+        bwusageCsvDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+      additionalProperties: false
+    v1BwtrackerEnterpriseCsvPostRequest:
+      type: object
+      properties:
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
     statsmonBandwidthtrackerBwUsageCsvRecord:
       type: object
@@ -838,71 +1144,7 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByEnterpriseDetails:
-      type: object
-      properties:
-        bwusageRegion:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
-        bwusageSite:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
-        bwusageSiteGateway:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
-      additionalProperties: false
-    v1BwtrackerSiteGatewayCsvPostResponse:
-      type: object
-      properties:
-        bwusageCsvDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
-      additionalProperties: false
-    v1BwtrackerRegionEdgeChartPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerEnterpriseDetailsPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerRegionSiteSummaryPostResponse:
-      type: object
-      properties:
-        bwusageSummary:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteSummary'
-      additionalProperties: false
-    v1BwtrackerEnterpriseDetailsPostResponse:
-      type: object
-      properties:
-        bwusageDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseDetails'
-      additionalProperties: false
-    statsmonBandwidthtrackerTimeWindow:
-      type: object
-      properties:
-        bucketSizeSec:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-      additionalProperties: false
-    v1BwtrackerRegionSiteDetailsPostRequest:
+    v1BwtrackerRegionSiteSummaryPostRequest:
       type: object
       properties:
         regionId:
@@ -918,67 +1160,11 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
-    v1BwtrackerRegionSiteGatewaySummaryPostRequest:
+    v1BwtrackerRegionEdgeChartPostResponse:
       type: object
       properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerRegionEdgeDetailsPostResponse:
-      type: object
-      properties:
-        bwusageDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
-      additionalProperties: false
-    v1BwtrackerRegionGatewayDetailsPostResponse:
-      type: object
-      properties:
-        bwusageDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegionEdgeDetails'
-      additionalProperties: false
-    v1BwtrackerRegionSiteChartPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerEnterpriseSummaryPostResponse:
-      type: object
-      properties:
-        bwusageSummary:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseSummary'
-      additionalProperties: false
-    v1BwtrackerEnterpriseCsvPostResponse:
-      type: object
-      properties:
-        bwusageCsvDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
-      additionalProperties: false
-    v1BwtrackerRegionGatewayCsvPostResponse:
-      type: object
-      properties:
-        bwusageCsvDetails:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
       additionalProperties: false
     v1BwtrackerRegionEdgeDetailsPostRequest:
       type: object
@@ -990,111 +1176,6 @@ components:
           minimum: 0
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerRegionEdgeSummaryPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerRegionSiteGatewayDetailsPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageBySite:
-      type: object
-      properties:
-        edgeCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        locationId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        locationName:
-          type: string
-          example: example string
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        siteName:
-          type: string
-          example: example string
-        usageKbps:
-          type: number
-          format: double
-          example: 123.45
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByTopRegions:
-      type: object
-      properties:
-        bwusageRoleSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRoleSummary'
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        regionName:
-          type: string
-          example: example string
-      additionalProperties: false
-    v1BwtrackerRegionGatewayChartPostResponse:
-      type: object
-      properties:
-        bwusageChart:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
-      additionalProperties: false
-    v1BwtrackerRegionEdgeChartPostResponse:
-      type: object
-      properties:
-        bwusageChart:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByRegion:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        regionName:
-          type: string
-          example: example string
-        siteCount:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        usageKbps:
-          type: number
-          format: double
-          example: 123.45
       additionalProperties: false
     statsmonBandwidthtrackerBwUsageBySiteProvider:
       type: object
@@ -1118,7 +1199,7 @@ components:
         bwusageCsvDetails:
           $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageCsvDetails'
       additionalProperties: false
-    v1BwtrackerRegionSiteSummaryPostRequest:
+    v1BwtrackerRegionGatewayDetailsPostRequest:
       type: object
       properties:
         regionId:
@@ -1126,69 +1207,8 @@ components:
           format: int64
           example: 12345678910
           minimum: 0
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    v1BwtrackerEnterpriseSummaryPostRequest:
-      type: object
-      properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageBySiteDetails:
-      type: object
-      properties:
-        bwuageEdgeProvider:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteEdgeProvider'
-        bwuageProvider:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySiteProvider'
-      additionalProperties: false
-    v1BwtrackerRegionSiteGatewayChartPostResponse:
-      type: object
-      properties:
-        bwusageChart:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
-      additionalProperties: false
-    v1BwtrackerRegionSiteGatewayChartPostRequest:
-      type: object
-      properties:
-        regionId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        siteId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByRoleSummary:
-      type: object
-      properties:
-        roleId:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
-        roleName:
-          type: string
-          example: example string
-        usageKbps:
-          type: number
-          format: double
-          example: 123.45
       additionalProperties: false
     statsmonBandwidthtrackerBwUsageByRegionEdgeSummary:
       type: object
@@ -1215,29 +1235,23 @@ components:
           format: double
           example: 123.45
       additionalProperties: false
-    statsmonBandwidthtrackerBwUsageBySiteSummary:
+    v1BwtrackerRegionSiteGatewayDetailsPostRequest:
       type: object
       properties:
-        bwuageRegion:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByRegion'
-        edgeCount:
+        regionId:
           type: integer
           format: int64
           example: 12345678910
           minimum: 0
-        providerCount:
+        siteId:
           type: integer
           format: int64
           example: 12345678910
           minimum: 0
-        usageKbps:
-          type: number
-          format: double
-          example: 123.45
+        timeWindow:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
-    v1BwtrackerRegionEdgeCsvPostRequest:
+    v1BwtrackerRegionEdgeChartPostRequest:
       type: object
       properties:
         regionId:
@@ -1248,19 +1262,17 @@ components:
         timeWindow:
           $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
       additionalProperties: false
-    statsmonBandwidthtrackerBwUsageByRegionEdgeDetails:
+    v1BwtrackerRegionSiteChartPostResponse:
       type: object
       properties:
-        bwuageSites:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageBySite'
+        bwusageChart:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChart'
       additionalProperties: false
-    v1BwtrackerEnterpriseCsvPostRequest:
+    v1BwtrackerEnterpriseDetailsPostResponse:
       type: object
       properties:
-        timeWindow:
-          $ref: '#/components/schemas/statsmonBandwidthtrackerTimeWindow'
+        bwusageDetails:
+          $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageByEnterpriseDetails'
       additionalProperties: false
     googleProtobufTimestamp:
       type: object
@@ -1273,18 +1285,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    statsmonBandwidthtrackerBwUsageChart:
-      type: object
-      properties:
-        bwusageChart:
-          type: array
-          items:
-            $ref: '#/components/schemas/statsmonBandwidthtrackerBwUsageChartValue'
-        percentileUsageKbps:
-          type: number
-          format: double
-          example: 123.45
       additionalProperties: false
   securitySchemes:
     jwtAuth:

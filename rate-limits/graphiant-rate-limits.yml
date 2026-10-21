@@ -1,0 +1,9 @@
+name: Graphiant rate limits
+generated: '2026-10-20'
+method: none
+limit_count: 0
+limits: []
+checked:
+- https://docs.graphiant.com/llms.txt
+- openapi/_original/graphiant-portal-openapi-original.json
+note: Neither the 689-page docs llms.txt index nor the 460-path OpenAPI mentions rate limits, 429 responses or rate-limit headers.

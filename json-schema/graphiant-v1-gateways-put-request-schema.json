@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-gateways-put-request-schema.json",
+  "title": "v1GatewaysPutRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-gateways-api-openapi.yml#/components/schemas/v1GatewaysPutRequest",
+  "type": "object",
+  "properties": {
+    "details": {
+      "$ref": "#/$defs/manaV2GatewayDetails"
+    },
+    "id": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "manaV2AWSGatewayDetailsTransitConnection": {
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/$defs/manaV2AwsCredentials"
+        },
+        "customerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "gateway": {
+          "$ref": "#/$defs/manaV2AwsDirectConnectGateway"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AWSTransitGatewayVpc": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2Subnet"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AwsAdvanceSettings": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "allowedPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "amazonBgpRouterIp": {
+          "type": "string"
+        },
+        "bgpAuthKey": {
+          "type": "string"
+        },
+        "customerBgpRouterIp": {
+          "type": "string"
+        },
+        "isJumbo": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AwsCredentials": {
+      "type": "object",
+      "properties": {
+        "accessKeyId": {
+          "type": "string"
+        },
+        "secretAccessKey": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AwsDirectConnectGateway": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "transitGateways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2AwsTransitGateway"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AwsGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "advanceSettings": {
+          "$ref": "#/$defs/manaV2AwsAdvanceSettings"
+        },
+        "transitConnection": {
+          "$ref": "#/$defs/manaV2AWSGatewayDetailsTransitConnection"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AwsTransitGateway": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "id": {
+          "type": "string"
+        },
+        "vpcs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2AWSTransitGatewayVpc"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2AzureGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "msPeeringVlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "routingPolicy": {
+          "type": "string"
+        },
+        "serviceKey": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2BgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamily": {
+          "type": "string"
+        },
+        "inboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        },
+        "outboundPolicy": {
+          "$ref": "#/$defs/manaV2NullablePolicyName"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2GatewayDetails": {
+      "type": "object",
+      "properties": {
+        "aws": {
+          "$ref": "#/$defs/manaV2AwsGatewayDetails"
+        },
+        "azure": {
+          "$ref": "#/$defs/manaV2AzureGatewayDetails"
+        },
+        "description": {
+          "type": "string"
+        },
+        "gcp": {
+          "$ref": "#/$defs/manaV2GcpGatewayDetails"
+        },
+        "ipsecGateway": {
+          "$ref": "#/$defs/manaV2IPsecGatewayDetails"
+        },
+        "ipsecGatewayPeers": {
+          "$ref": "#/$defs/manaV2IPsecGatewayPeersConfig"
+        },
+        "oci": {
+          "$ref": "#/$defs/manaV2OciGatewayDetails"
+        },
+        "regionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "speed": {
+          "type": "string"
+        },
+        "vrfId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2GcpGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "pairingKey": {
+          "type": "string"
+        },
+        "routingPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecBgpRouteConfig": {
+      "type": "object",
+      "properties": {
+        "addressFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/manaV2NullableBgpNeighborAddressFamilyConfig"
+          }
+        },
+        "holdTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "keepaliveTimer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "md5Password": {
+          "$ref": "#/$defs/manaV2NullableMd5Password"
+        },
+        "peerAsn": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "sendCommunity": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "ikeInitiator": {
+          "type": "boolean"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string"
+        },
+        "routing": {
+          "$ref": "#/$defs/manaV2IpsecRoutingConfig"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tunnel1": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "tunnel2": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "vpnProfile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayPeersConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the IPsec gateway service"
+        },
+        "remotePeers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manaV2IPsecGatewayRemotePeer"
+          }
+        },
+        "routing": {
+          "$ref": "#/$defs/manaV2IpsecRoutingConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayRemotePeer": {
+      "type": "object",
+      "properties": {
+        "destinationAddress": {
+          "type": "string"
+        },
+        "ikeInitiator": {
+          "type": "boolean",
+          "description": "When true, Graphiant initiates IKE for this peer"
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional display name or label for this peer; used when generating tunnel names"
+        },
+        "remoteIkePeerIdentity": {
+          "type": "string",
+          "description": "IKE identity of the remote peer"
+        },
+        "tcpMss": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "tunnel1": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "tunnel2": {
+          "$ref": "#/$defs/manaV2IPsecGatewayTunnelDetails"
+        },
+        "vpnProfile": {
+          "type": "string",
+          "description": "Enterprise IPsec VPN profile name for this peer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecGatewayTunnelDetails": {
+      "type": "object",
+      "properties": {
+        "insideIpv4Cidr": {
+          "type": "string"
+        },
+        "insideIpv6Cidr": {
+          "type": "string"
+        },
+        "localIkePeerIdentity": {
+          "type": "string"
+        },
+        "psk": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IPsecStaticRouteConfig": {
+      "type": "object",
+      "properties": {
+        "destinationPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2IpsecRoutingConfig": {
+      "type": "object",
+      "properties": {
+        "bgp": {
+          "$ref": "#/$defs/manaV2IPsecBgpRouteConfig"
+        },
+        "static": {
+          "$ref": "#/$defs/manaV2IPsecStaticRouteConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableBgpNeighborAddressFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/manaV2BgpNeighborAddressFamilyConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullableMd5Password": {
+      "type": "object",
+      "properties": {
+        "md5Password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2NullablePolicyName": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2OciGatewayDetails": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "fastConnectOcid": {
+          "type": "string"
+        },
+        "routingPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "manaV2Subnet": {
+      "type": "object",
+      "properties": {
+        "cidr": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

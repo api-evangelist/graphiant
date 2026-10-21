@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-software-running-summary-get-response-schema.json",
+  "title": "v1SoftwareRunningSummaryGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-software-api-openapi.yml#/components/schemas/v1SoftwareRunningSummaryGetResponse",
+  "type": "object",
+  "properties": {
+    "versions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1SoftwareRunningSummaryGetResponseVersionSummary"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "v1SoftwareRunningSummaryGetResponseVersionSummary": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

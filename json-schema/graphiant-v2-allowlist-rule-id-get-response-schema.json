@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-allowlist-rule-id-get-response-schema.json",
+  "title": "v2AllowlistRuleIdGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-allowlist-api-openapi.yml#/components/schemas/v2AllowlistRuleIdGetResponse",
+  "type": "object",
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alertserviceAllowAlertNotifcationListRecord"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "alertserviceAllowAlertNotifcationListRecord": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deviceInterface": {
+          "type": "string"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "enterpriseName": {
+          "type": "string"
+        },
+        "entityId": {
+          "type": "string"
+        },
+        "isWanCircuit": {
+          "type": "boolean"
+        },
+        "noteText": {
+          "type": "string"
+        },
+        "peerDeviceInterface": {
+          "type": "string"
+        },
+        "peerDeviceName": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleName": {
+          "type": "string"
+        },
+        "siteName": {
+          "type": "string"
+        },
+        "vrfId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -42,6 +42,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1LogsPostResponse:
+      type: object
+      properties:
+        cursorRef:
+          type: string
+          example: example string
+        histogram:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonHistogram'
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/syslogmonLog'
+        totalLogs:
+          type: integer
+          format: int64
+          example: 12345678910
+          minimum: 0
+      additionalProperties: false
     v1LogsPostRequest:
       type: object
       properties:
@@ -77,6 +97,18 @@ components:
           items:
             $ref: '#/components/schemas/syslogmonSyslogsSelector'
       additionalProperties: false
+    syslogmonSyslogsSelector:
+      type: object
+      properties:
+        field:
+          type: string
+          example: ENUM_VALUE
+        values:
+          type: array
+          items:
+            type: string
+            example: example string
+      additionalProperties: false
     syslogmonLog:
       type: object
       properties:
@@ -111,18 +143,6 @@ components:
         ts:
           $ref: '#/components/schemas/googleProtobufTimestamp'
       additionalProperties: false
-    syslogmonSyslogsSelector:
-      type: object
-      properties:
-        field:
-          type: string
-          example: ENUM_VALUE
-        values:
-          type: array
-          items:
-            type: string
-            example: example string
-      additionalProperties: false
     googleProtobufTimestamp:
       type: object
       properties:
@@ -134,26 +154,6 @@ components:
           type: integer
           format: int64
           example: 1234567891011
-      additionalProperties: false
-    v1LogsPostResponse:
-      type: object
-      properties:
-        cursorRef:
-          type: string
-          example: example string
-        histogram:
-          type: array
-          items:
-            $ref: '#/components/schemas/syslogmonHistogram'
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/syslogmonLog'
-        totalLogs:
-          type: integer
-          format: int64
-          example: 12345678910
-          minimum: 0
       additionalProperties: false
   securitySchemes:
     jwtAuth:

@@ -74,6 +74,57 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v1FlowsFlowTablePostRequest:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: the app ID in the question from overall visuals view
+        appName:
+          type: string
+          example: example string
+        cursorRef:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+        deviceId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        isDia:
+          type: boolean
+          example: true
+        numFlowRecords:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+          description: Number of app flow records requested by UI.
+        selector:
+          $ref: '#/components/schemas/ipfixAppFlowTableSelector'
+        timeWindow:
+          $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    manaV2ConnectivityGraphEdge:
+      type: object
+      properties:
+        a:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        b:
+          type: integer
+          format: int32
+          example: 123
+          minimum: 0
+        connections:
+          $ref: '#/components/schemas/manaV2GraphiantConnections'
+        quality:
+          type: string
+          example: ENUM_VALUE
+      additionalProperties: false
     ipfixNetworkTopology:
       type: object
       properties:
@@ -102,6 +153,14 @@ components:
             $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
         timeWindow:
           $ref: '#/components/schemas/statsmonTimeWindow'
+      additionalProperties: false
+    v1FlowsTopologyPostResponse:
+      type: object
+      properties:
+        networkTopology:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixNetworkTopology'
       additionalProperties: false
     ipfixAppFlowTableSelector:
       type: object
@@ -144,130 +203,27 @@ components:
           example: 123
           minimum: 0
       additionalProperties: false
-    ipfixAppTopologySelector:
+    v1FlowsFlowTablePostResponse:
       type: object
       properties:
-        appId:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: Filter by app ID
-        appName:
-          type: string
-          example: example string
-          description: Filter by application name
-        slaClass:
-          type: string
-          example: ENUM_VALUE
-          description: Filter by SLA class
-      additionalProperties: false
-    v1FlowsTopologyPostResponse:
-      type: object
-      properties:
-        networkTopology:
-          type: array
-          items:
-            $ref: '#/components/schemas/ipfixNetworkTopology'
-      additionalProperties: false
-    manaV2GraphiantConnections:
-      type: object
-      properties:
-        controlConnection:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpsecConnection'
-        coreConnection:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpsecConnection'
-        managementConnection:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2IpsecConnection'
-      additionalProperties: false
-    manaV2ConnectivityGraphEdge:
-      type: object
-      properties:
-        a:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        b:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-        connections:
-          $ref: '#/components/schemas/manaV2GraphiantConnections'
-        quality:
-          type: string
-          example: ENUM_VALUE
-      additionalProperties: false
-    v1FlowsFlowTablePostRequest:
-      type: object
-      properties:
-        appId:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: the app ID in the question from overall visuals view
-        appName:
-          type: string
-          example: example string
         cursorRef:
           $ref: '#/components/schemas/googleProtobufTimestamp'
+        flowTable:
+          type: array
+          items:
+            $ref: '#/components/schemas/ipfixAppFlowTable'
+      additionalProperties: false
+    v1FlowsTopologyPostRequest:
+      type: object
+      properties:
+        appSelector:
+          $ref: '#/components/schemas/ipfixAppTopologySelector'
         deviceId:
           type: integer
           format: int64
           example: 1234567891011
-        isDia:
-          type: boolean
-          example: true
-        numFlowRecords:
-          type: integer
-          format: int32
-          example: 123
-          minimum: 0
-          description: Number of app flow records requested by UI.
-        selector:
-          $ref: '#/components/schemas/ipfixAppFlowTableSelector'
         timeWindow:
           $ref: '#/components/schemas/statsmonTimeWindow'
-      additionalProperties: false
-    googleProtobufTimestamp:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          format: int32
-          example: 123
-        seconds:
-          type: integer
-          format: int64
-          example: 1234567891011
-      additionalProperties: false
-    ipfixNetworkTopologyDelta:
-      type: object
-      properties:
-        edgesAdded:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
-        edgesDeleted:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
-        nodesAdded:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
-        nodesDeleted:
-          type: array
-          items:
-            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
       additionalProperties: false
     manaV2ConnectivityGraphNode:
       type: object
@@ -292,27 +248,75 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v1FlowsFlowTablePostResponse:
+    statsmonTimeWindow:
       type: object
       properties:
-        cursorRef:
+        bucketSizeSec:
+          type: integer
+          format: int32
+          example: 300
+          minimum: 0
+          description: the size of the time window in seconds (required)
+        oldTs:
           $ref: '#/components/schemas/googleProtobufTimestamp'
-        flowTable:
+        recentTs:
+          $ref: '#/components/schemas/googleProtobufTimestamp'
+      additionalProperties: false
+      required:
+      - bucketSizeSec
+    ipfixNetworkTopologyDelta:
+      type: object
+      properties:
+        edgesAdded:
           type: array
           items:
-            $ref: '#/components/schemas/ipfixAppFlowTable'
+            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
+        edgesDeleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphEdge'
+        nodesAdded:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
+        nodesDeleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2ConnectivityGraphNode'
       additionalProperties: false
-    v1FlowsTopologyPostRequest:
+    manaV2GraphiantConnections:
       type: object
       properties:
-        appSelector:
-          $ref: '#/components/schemas/ipfixAppTopologySelector'
-        deviceId:
+        controlConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+        coreConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+        managementConnection:
+          type: array
+          items:
+            $ref: '#/components/schemas/manaV2IpsecConnection'
+      additionalProperties: false
+    ipfixAppTopologySelector:
+      type: object
+      properties:
+        appId:
           type: integer
-          format: int64
-          example: 1234567891011
-        timeWindow:
-          $ref: '#/components/schemas/statsmonTimeWindow'
+          format: int32
+          example: 123
+          minimum: 0
+          description: Filter by app ID
+        appName:
+          type: string
+          example: example string
+          description: Filter by application name
+        slaClass:
+          type: string
+          example: ENUM_VALUE
+          description: Filter by SLA class
       additionalProperties: false
     ipfixAppFlowTable:
       type: object
@@ -370,22 +374,18 @@ components:
           example: 123.45
           description: Up link application usage in MB
       additionalProperties: false
-    statsmonTimeWindow:
+    googleProtobufTimestamp:
       type: object
       properties:
-        bucketSizeSec:
+        nanos:
           type: integer
           format: int32
-          example: 300
-          minimum: 0
-          description: the size of the time window in seconds (required)
-        oldTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
-        recentTs:
-          $ref: '#/components/schemas/googleProtobufTimestamp'
+          example: 123
+        seconds:
+          type: integer
+          format: int64
+          example: 1234567891011
       additionalProperties: false
-      required:
-      - bucketSizeSec
   securitySchemes:
     jwtAuth:
       type: apiKey

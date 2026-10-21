@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-enterprises-managed-get-response-schema.json",
+  "title": "v1EnterprisesManagedGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-enterprises-api-openapi.yml#/components/schemas/v1EnterprisesManagedGetResponse",
+  "type": "object",
+  "properties": {
+    "counts": {
+      "$ref": "#/$defs/iamCounts"
+    },
+    "enterprises": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/iamEnterprise"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "iamCounts": {
+      "type": "object",
+      "properties": {
+        "activeDownCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "activeUpCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deactivatedDownCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "downSitesCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "emptySitesCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "impairedSitesCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "stagingDownCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "stagingUpCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalCustomers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalEdges": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalMsps": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalSites": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upSitesCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "iamCustomer": {
+      "type": "object",
+      "properties": {
+        "adminEmail": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "counts": {
+          "$ref": "#/$defs/iamCounts"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "impersonationEnabled": {
+          "type": "boolean"
+        },
+        "marketplaceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "iamEnterprise": {
+      "type": "object",
+      "properties": {
+        "acceptEula": {
+          "type": "boolean"
+        },
+        "accountType": {
+          "type": "string"
+        },
+        "adminEmail": {
+          "type": "string"
+        },
+        "cloudProvider": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "counts": {
+          "$ref": "#/$defs/iamCounts"
+        },
+        "creditLimit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/iamCustomer"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "eulaAgreementDate": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "impersonationEnabled": {
+          "type": "boolean"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "marketplaceId": {
+          "type": "string"
+        },
+        "parentCompanyName": {
+          "type": "string"
+        },
+        "parentEnterpriseId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "portalBanner": {
+          "type": "string"
+        },
+        "proxyTenantId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "smallLogo": {
+          "type": "string"
+        },
+        "tokenExpiry": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

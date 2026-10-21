@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v2-assistant-update-conversation-name-post-request-schema.json",
+  "title": "v2AssistantUpdateConversationNamePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-assistant-api-openapi.yml#/components/schemas/v2AssistantUpdateConversationNamePostRequest",
+  "type": "object",
+  "properties": {
+    "conversationHeader": {
+      "type": "string"
+    },
+    "conversationId": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

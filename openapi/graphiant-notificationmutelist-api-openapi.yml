@@ -135,6 +135,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v2NotificationmutelistCreatePostResponse:
+      type: object
+      properties: {}
+      additionalProperties: false
+    v2NotificationmutelistCreatePostRequest:
+      type: object
+      properties:
+        alertId:
+          type: string
+          example: example string
+          description: Alert id of the alert to create allowlist/mutelist for (required)
+        noteText:
+          type: string
+          example: example string
+          description: Optional note
+      additionalProperties: false
+      required:
+      - alertId
     v2NotificationmutelistRuleIdGetResponse:
       type: object
       properties:
@@ -144,14 +162,6 @@ components:
             $ref: '#/components/schemas/alertserviceAllowAlertNotifcationListRecord'
       additionalProperties: false
     v2NotificationmutelistDeletebyentityidEntityIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
-      type: object
-      properties: {}
-      additionalProperties: false
-    v2NotificationmutelistCreatePostResponse:
       type: object
       properties: {}
       additionalProperties: false
@@ -199,20 +209,10 @@ components:
           type: string
           example: example string
       additionalProperties: false
-    v2NotificationmutelistCreatePostRequest:
+    v2NotificationmutelistDeletebyalertidAlertIdDeleteResponse:
       type: object
-      properties:
-        alertId:
-          type: string
-          example: example string
-          description: Alert id of the alert to create allowlist/mutelist for (required)
-        noteText:
-          type: string
-          example: example string
-          description: Optional note
+      properties: {}
       additionalProperties: false
-      required:
-      - alertId
   securitySchemes:
     jwtAuth:
       type: apiKey

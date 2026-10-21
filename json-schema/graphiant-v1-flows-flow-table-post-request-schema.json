@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/graphiant/main/json-schema/graphiant-v1-flows-flow-table-post-request-schema.json",
+  "title": "v1FlowsFlowTablePostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/graphiant-flows-api-openapi.yml#/components/schemas/v1FlowsFlowTablePostRequest",
+  "type": "object",
+  "properties": {
+    "appId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "the app ID in the question from overall visuals view"
+    },
+    "appName": {
+      "type": "string"
+    },
+    "cursorRef": {
+      "$ref": "#/$defs/googleProtobufTimestamp"
+    },
+    "deviceId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "isDia": {
+      "type": "boolean"
+    },
+    "numFlowRecords": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Number of app flow records requested by UI."
+    },
+    "selector": {
+      "$ref": "#/$defs/ipfixAppFlowTableSelector"
+    },
+    "timeWindow": {
+      "$ref": "#/$defs/statsmonTimeWindow"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "googleProtobufTimestamp": {
+      "type": "object",
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipfixAppFlowTableSelector": {
+      "type": "object",
+      "properties": {
+        "circuitName": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Filter by circuit name(s)"
+          }
+        },
+        "slaClass": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Filter by SLA class(es)"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statsmonTimeWindow": {
+      "type": "object",
+      "properties": {
+        "bucketSizeSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the size of the time window in seconds (required)"
+        },
+        "oldTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        },
+        "recentTs": {
+          "$ref": "#/$defs/googleProtobufTimestamp"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bucketSizeSec"
+      ]
+    }
+  }
+}

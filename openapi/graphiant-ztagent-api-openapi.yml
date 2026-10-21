@@ -182,19 +182,17 @@ components:
       type: object
       properties: {}
       additionalProperties: false
-    v1ZtagentBindingsPutRequest:
+    v1ZtagentAgentsGetResponse:
       type: object
       properties:
-        customerId:
-          type: string
-          example: example string
-        enterpriseId:
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/concealAgent'
+        count:
           type: integer
-          format: int64
-          example: 1234567891011
-        siteId:
-          type: string
-          example: example string
+          format: int32
+          example: 123
       additionalProperties: false
     v1ZtagentBindingsGetResponse:
       type: object
@@ -209,18 +207,6 @@ components:
         siteId:
           type: string
           example: example string
-      additionalProperties: false
-    v1ZtagentAgentsGetResponse:
-      type: object
-      properties:
-        agents:
-          type: array
-          items:
-            $ref: '#/components/schemas/concealAgent'
-        count:
-          type: integer
-          format: int32
-          example: 123
       additionalProperties: false
     concealAgent:
       type: object
@@ -241,6 +227,20 @@ components:
           type: string
           example: example string
         machine:
+          type: string
+          example: example string
+      additionalProperties: false
+    v1ZtagentBindingsPutRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: example string
+        enterpriseId:
+          type: integer
+          format: int64
+          example: 1234567891011
+        siteId:
           type: string
           example: example string
       additionalProperties: false
