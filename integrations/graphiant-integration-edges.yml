@@ -37,6 +37,7 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- ansible/integrations/ansible-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -133,23 +134,6 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-network-edge.py
   first_seen: '2026-10-20'
-- partner_name: Terraform (terraform-registry)
-  partner: terraform
-  partner_match: mirror
-  mirror_match: register
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: terraform-registry
-  evidence: https://registry.terraform.io/providers/Graphiant-Inc/graphiant
-  mirror_of: terraform/integrations/terraform-integration-edges.yml
-  apps:
-  - Graphiant-Inc/graphiant
-  listing_count: 1
-  detected: '2026-10-21'
-  detected_by: mirror-platform-listings.py
-  category: infrastructure-as-code provider registry listing
 - partner_name: Sequoia Capital
   partner: sequoia-capital
   partner_match: register
@@ -176,4 +160,38 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Terraform (terraform-registry)
+  partner: terraform
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: terraform-registry
+  evidence: https://registry.terraform.io/providers/Graphiant-Inc/graphiant
+  mirror_of: terraform/integrations/terraform-integration-edges.yml
+  apps:
+  - Graphiant-Inc/graphiant
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: infrastructure-as-code provider registry listing
+- partner_name: Ansible (ansible-galaxy)
+  partner: ansible
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: ansible-galaxy
+  evidence: https://galaxy.ansible.com/ui/repo/published/graphiant/naas/
+  mirror_of: ansible/integrations/ansible-integration-edges.yml
+  apps:
+  - graphiant.naas
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: configuration-management content listing (Ansible collection)
 templates: []

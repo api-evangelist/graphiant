@@ -87,19 +87,6 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
-- slug: graphiant-terraform-terraform-registry
-  label: Terraform (terraform-registry)
-  partner: terraform
-  partner_name: Terraform (terraform-registry)
-  category: infrastructure-as-code provider registry listing
-  type: marketplace
-  marketplace: terraform-registry
-  channel: partner-built
-  evidence: https://registry.terraform.io/providers/Graphiant-Inc/graphiant
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: graphiant-sequoia-capital
   label: Sequoia Capital
   partner: sequoia-capital
@@ -125,5 +112,31 @@
       an ownership and participation record, not conformance or certification'
     detected_by: sweep-vc-portfolios.py
     detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: graphiant-terraform-terraform-registry
+  label: Terraform (terraform-registry)
+  partner: terraform
+  partner_name: Terraform (terraform-registry)
+  category: infrastructure-as-code provider registry listing
+  type: marketplace
+  marketplace: terraform-registry
+  channel: partner-built
+  evidence: https://registry.terraform.io/providers/Graphiant-Inc/graphiant
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: graphiant-ansible-ansible-galaxy
+  label: Ansible (ansible-galaxy)
+  partner: ansible
+  partner_name: Ansible (ansible-galaxy)
+  category: configuration-management content listing (Ansible collection)
+  type: marketplace
+  marketplace: ansible-galaxy
+  channel: partner-built
+  evidence: https://galaxy.ansible.com/ui/repo/published/graphiant/naas/
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
